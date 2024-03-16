@@ -1,6 +1,7 @@
 :root {
-  --main-bg-color: black;
-  --main-text-color: white;
+  --main-bg-color: #f2f2f2;
+  --main-text-color: black;
+  --module-bg-color: white;
 }
 
 html {
@@ -8,8 +9,20 @@ html {
   color: var(--main-text-color);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li {
+  font-family: serif;
+}
+
 .content {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -18,6 +31,7 @@ header .content {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
+  border-bottom: 3px solid var(--main-text-color);
 }
 
 header .content nav ul {
@@ -32,4 +46,14 @@ header .content nav ul li {
 header a {
   text-decoration: none;
   color: var(--main-text-color);
+}
+
+.module {
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: var(--module-bg-color);
+}
+
+.module .welcome h2 {
+  text-align: center;
 }

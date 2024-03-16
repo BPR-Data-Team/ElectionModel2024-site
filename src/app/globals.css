@@ -50,8 +50,12 @@ header a {
 
 .module {
   padding: 1rem;
-  margin: 1rem 0;
   background-color: var(--module-bg-color);
+  border-radius: 3px;
+}
+
+.half {
+  flex: 1;
 }
 
 .module .welcome h2 {

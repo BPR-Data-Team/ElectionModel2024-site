@@ -1,5 +1,9 @@
 import Module from "../Module";
 
+/**
+ * The welcome module. This is the module that appears on the home page explaining the purpose of the site.
+ * @returns {JSX.Element} The welcome module.
+ */
 export default function WelcomeModule(): JSX.Element {
   return (
     <Module

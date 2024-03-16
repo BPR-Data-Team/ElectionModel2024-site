@@ -1,5 +1,9 @@
 import Nav from "./Nav";
 
+/**
+ * The header component. This is the header at the top of every page. It contains the site title and the navigation.
+ * @returns {JSX.Element} The header component.
+ */
 export default function Header(): JSX.Element {
   return (
     <header>

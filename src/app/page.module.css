@@ -1,7 +1,7 @@
 .main {
   margin-top: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1rem;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 10px;
+  margin: 0 auto;
+  padding: 10px;
 }

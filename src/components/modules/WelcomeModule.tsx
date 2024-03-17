@@ -1,5 +1,4 @@
-import Module from "../Module";
-import { ModuleWidth } from "../Module";
+import Module, { ModuleWidth } from "../Module";
 
 interface WelcomeModuleProps {
   width: ModuleWidth;

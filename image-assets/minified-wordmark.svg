@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Gelica-Bold, Gelica;
+        font-weight: 700;
+      }
+
+      .cls-2 {
+        font-size: 640.71px;
+      }
+
+      .cls-3 {
+        letter-spacing: 0em;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5 {
+        font-size: 415.9px;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(159.9 554.19)"><tspan class="cls-2"><tspan class="cls-3" x="0" y="0">2</tspan><tspan class="cls-6" x="372.26" y="0">4</tspan></tspan><tspan class="cls-5"><tspan x="-17.28" y="361.7">c</tspan><tspan class="cls-4" x="192.74" y="361.7">a</tspan><tspan class="cls-7" x="419.83" y="361.7">s</tspan><tspan x="614.26" y="361.7">t</tspan></tspan></text>
+</svg>

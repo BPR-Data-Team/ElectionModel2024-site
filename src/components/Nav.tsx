@@ -1,3 +1,5 @@
+import styles from "./Nav.module.css";
+
 /**
  * The nav component. This is the navigation bar at the top of the page.
  * TODO: Format for mobile. This will involve a hamburger menu.

@@ -1,7 +1,14 @@
 :root {
-  --main-bg-color: #f2f2f2;
-  --main-text-color: black;
-  --module-bg-color: white;
+  --bemocrat-blue: #595d9a;
+  --republican-red: #b83c2b;
+  --gradient-descent-gray: #f2f2f2;
+  --washington-white: #ffffff;
+  --basic-black: #000000;
+  --gubernatorial-gray: #505050;
+
+  --main-bg-color: var(--gradient-descent-gray);
+  --main-text-color: var(--basic-black);
+  --module-bg-color: var(--washington-white);
 }
 
 html {
@@ -21,6 +28,14 @@ li {
   font-family: serif;
 }
 
+.red {
+  color: var(--republican-red);
+}
+
+.blue {
+  color: var(--bemocrat-blue);
+}
+
 .content {
   max-width: 1400px;
   margin: 0 auto;
@@ -32,6 +47,12 @@ header .content {
   align-items: center;
   padding: 1rem 0;
   border-bottom: 3px solid var(--main-text-color);
+  width: 95%;
+}
+
+header .content h1 {
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 header .content nav ul {
@@ -49,9 +70,16 @@ header a {
 }
 
 .module {
+  margin: 1rem 0;
   padding: 1rem;
   background-color: var(--module-bg-color);
   border-radius: 3px;
+}
+
+@media only screen and (min-width: 768px) {
+  .module {
+    margin: 0;
+  }
 }
 
 .half {

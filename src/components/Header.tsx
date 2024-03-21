@@ -1,3 +1,4 @@
+import styles from "./Header.module.css";
 import Nav from "./Nav";
 
 /**
@@ -9,7 +10,10 @@ export default function Header(): JSX.Element {
     <header>
       <div className="content">
         <h1>
-          <a href="/">24cast</a>
+          <a href="/">
+            <span className="red">2</span>
+            <span className="blue">4</span>cast
+          </a>
         </h1>
         <Nav />
       </div>

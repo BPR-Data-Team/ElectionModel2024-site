@@ -1,7 +1,10 @@
 .main {
   margin-top: 1rem;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: 10px;
-  margin: 0 auto;
-  padding: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }

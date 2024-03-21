@@ -1,3 +1,5 @@
+import styles from "./Module.module.css";
+
 /**
  * The width of the module.
  */

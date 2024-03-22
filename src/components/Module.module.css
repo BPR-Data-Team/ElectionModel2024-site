@@ -1,0 +1,20 @@
+.module {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--module-bg-color);
+  border-radius: 3px;
+}
+
+@media only screen and (min-width: 768px) {
+  .module {
+    margin: 0.5rem;
+  }
+}
+
+.half {
+  grid-column: span 1;
+}
+
+.full {
+  grid-column: span 2;
+}

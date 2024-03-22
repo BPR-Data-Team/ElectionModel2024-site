@@ -13,6 +13,7 @@ export enum ModuleWidth {
  */
 interface ModuleProps {
   width: ModuleWidth;
+  gridRowSpan: number; // The number of rows the module should span in the grid (1-14) at desktop size
   children: JSX.Element;
 }
 
@@ -24,5 +25,15 @@ interface ModuleProps {
  * @returns {JSX.Element} The module component.
  */
 export default function Module(props: ModuleProps): JSX.Element {
-  return <div className={`module ${props.width}`}>{props.children}</div>;
+  return (
+    <div
+      className={
+        styles.module +
+        ` ${props.width == ModuleWidth.HALF ? styles.half : styles.full}`
+      }
+      style={{ gridRow: `span ${props.gridRowSpan}` }}
+    >
+      {props.children}
+    </div>
+  );
 }

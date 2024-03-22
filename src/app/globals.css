@@ -68,24 +68,3 @@ header a {
   text-decoration: none;
   color: var(--main-text-color);
 }
-
-.module {
-  margin: 1rem 0;
-  padding: 1rem;
-  background-color: var(--module-bg-color);
-  border-radius: 3px;
-}
-
-@media only screen and (min-width: 768px) {
-  .module {
-    margin: 0;
-  }
-}
-
-.half {
-  flex: 1;
-}
-
-.module .welcome h2 {
-  text-align: center;
-}

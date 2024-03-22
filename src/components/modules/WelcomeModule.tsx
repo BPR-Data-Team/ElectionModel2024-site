@@ -1,4 +1,5 @@
 import Module, { ModuleWidth } from "../Module";
+import styles from "./WelcomeModule.module.css";
 
 interface WelcomeModuleProps {
   width: ModuleWidth;
@@ -11,7 +12,7 @@ interface WelcomeModuleProps {
 export default function WelcomeModule(props: WelcomeModuleProps): JSX.Element {
   return (
     <Module width={props.width}>
-      <div className="welcome">
+      <div className={styles.welcome}>
         <h2>Welcome to 24cast</h2>
         <p>
           This isn&apos;t your typical election prediction—we use an all-new

@@ -1,13 +1,10 @@
-import Module, { ModuleWidth } from "../Module";
+import Module, { ModuleProps } from "../Module";
+import styles from "./SHAPModule.module.css";
 
-interface SHAPModuleProps {
-  width: ModuleWidth;
-}
-
-export default function SHAPModule(props: SHAPModuleProps): JSX.Element {
+export default function SHAPModule(props: ModuleProps): JSX.Element {
   return (
-    <Module width={props.width}>
-      <div className="shap">
+    <Module width={props.width} gridArea={props.gridArea}>
+      <div className={styles.shap}>
         <h2>SHAP</h2>
         <p>
           SHAP is a method to explain the output of any machine learning model.

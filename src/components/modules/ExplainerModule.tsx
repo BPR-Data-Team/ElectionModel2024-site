@@ -1,15 +1,10 @@
-import Module, { ModuleWidth } from "../Module";
+import Module, { ModuleProps } from "../Module";
+import styles from "./ExplainerModule.module.css";
 
-interface ExplainerModuleProps {
-  width: ModuleWidth;
-}
-
-export default function ExplainerModule(
-  props: ExplainerModuleProps
-): JSX.Element {
+export default function ExplainerModule(props: ModuleProps): JSX.Element {
   return (
-    <Module width={props.width}>
-      <div className="explainer">
+    <Module width={props.width} gridArea={props.gridArea}>
+      <div className={styles.explainer}>
         <h2>Explainer</h2>
         <p>This is the explainer module. It explains things.</p>
       </div>

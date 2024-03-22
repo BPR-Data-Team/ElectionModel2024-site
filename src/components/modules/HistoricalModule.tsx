@@ -1,15 +1,10 @@
-import Module, { ModuleWidth } from "../Module";
+import Module, { ModuleProps } from "../Module";
+import styles from "./HistoricalModule.module.css";
 
-interface HistoricalModuleProps {
-  width: ModuleWidth;
-}
-
-export default function HistoricalModule(
-  props: HistoricalModuleProps
-): JSX.Element {
+export default function HistoricalModule(props: ModuleProps): JSX.Element {
   return (
-    <Module width={props.width}>
-      <div className="historical">
+    <Module width={props.width} gridArea={props.gridArea}>
+      <div className={styles.historical}>
         <h2>Historical</h2>
         <p>This is the historical module. It shows historical predictions.</p>
       </div>

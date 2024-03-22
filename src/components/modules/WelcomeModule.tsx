@@ -1,17 +1,13 @@
-import Module, { ModuleWidth } from "../Module";
+import Module, { ModuleProps } from "../Module";
 import styles from "./WelcomeModule.module.css";
-
-interface WelcomeModuleProps {
-  width: ModuleWidth;
-}
 
 /**
  * The welcome module. This is the module that appears on the home page explaining the purpose of the site.
  * @returns {JSX.Element} The welcome module.
  */
-export default function WelcomeModule(props: WelcomeModuleProps): JSX.Element {
+export default function WelcomeModule(props: ModuleProps): JSX.Element {
   return (
-    <Module width={props.width}>
+    <Module width={props.width} gridArea={props.gridArea}>
       <div className={styles.welcome}>
         <h2>Welcome to 24cast</h2>
         <p>

@@ -16,14 +16,14 @@ import KeyRacesModule from "@/components/modules/KeyRacesModule";
 export default function Home(): JSX.Element {
   return (
     <main className={styles.main}>
-      <WelcomeModule width={ModuleWidth.FULL} />
-      <PredictionModule width={ModuleWidth.HALF} />
-      <MapModule width={ModuleWidth.HALF} />
-      <SimulationsModule width={ModuleWidth.HALF} />
-      <ExplainerModule width={ModuleWidth.HALF} />
-      <SHAPModule width={ModuleWidth.HALF} />
-      <HistoricalModule width={ModuleWidth.HALF} />
-      <KeyRacesModule width={ModuleWidth.HALF} />
+      <WelcomeModule width={ModuleWidth.FULL} gridArea={"1 / 1 / 4 / 3"} />
+      <PredictionModule width={ModuleWidth.HALF} gridArea={"4 / 1 / 8 / 2"} />
+      <MapModule width={ModuleWidth.HALF} gridArea={"4 / 2 / 10 / 3"} />
+      <SimulationsModule width={ModuleWidth.HALF} gridArea={"8 / 1 / 13 / 2"} />
+      <ExplainerModule width={ModuleWidth.HALF} gridArea={"10 / 2 / 14 / 3"} />
+      <SHAPModule width={ModuleWidth.HALF} gridArea={"13 / 1 / 17 / 2"} />
+      <HistoricalModule width={ModuleWidth.HALF} gridArea={"14 / 2 / 19 / 3"} />
+      <KeyRacesModule width={ModuleWidth.HALF} gridArea={"17 / 1 / 19 / 2"} />
     </main>
   );
 }

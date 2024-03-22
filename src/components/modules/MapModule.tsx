@@ -1,13 +1,10 @@
-import Module, { ModuleWidth } from "../Module";
+import Module, { ModuleProps } from "../Module";
+import styles from "./MapModule.module.css";
 
-interface MapModuleProps {
-  width: ModuleWidth;
-}
-
-export default function MapModule(props: MapModuleProps): JSX.Element {
+export default function MapModule(props: ModuleProps): JSX.Element {
   return (
-    <Module width={props.width}>
-      <div className="map">Map</div>
+    <Module width={props.width} gridArea={props.gridArea}>
+      <div className={styles.map}>Map</div>
     </Module>
   );
 }

@@ -1,15 +1,9 @@
-import Module, { ModuleWidth } from "../Module";
+import Module, { ModuleProps } from "../Module";
 import styles from "./PredictionModule.module.css";
 
-interface PredictionModuleProps {
-  width: ModuleWidth;
-}
-
-export default function PredictionModule(
-  props: PredictionModuleProps
-): JSX.Element {
+export default function PredictionModule(props: ModuleProps): JSX.Element {
   return (
-    <Module width={props.width}>
+    <Module width={props.width} gridArea={props.gridArea}>
       <div className={styles.prediction}>
         <h2>Prediction</h2>
         <p>

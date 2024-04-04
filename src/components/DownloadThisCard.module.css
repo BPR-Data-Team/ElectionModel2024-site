@@ -1,0 +1,10 @@
+.downloadThisCard {
+  text-align: right;
+  margin: 1rem 0;
+}
+
+.downloadThisCard a {
+  font-style: normal;
+  color: var(--main-text-color);
+  text-decoration: none;
+}

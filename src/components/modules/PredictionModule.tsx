@@ -1,10 +1,9 @@
 import DemocratD from "../svgs/DemocratD";
 import Module, { ModuleProps } from "../Module";
 import styles from "./PredictionModule.module.css";
-import RepublicanR from "../svgs/RepublicanR";
 import Trophy from "../svgs/Trophy";
 import RingChart from "../svgs/RingChart";
-import Download from "../svgs/Download";
+import DownloadThisCard from "../DownloadThisCard";
 
 /**
  *
@@ -52,11 +51,7 @@ export default function PredictionModule(props: ModuleProps): JSX.Element {
           </div>
         </div>
 
-        <div className={styles.downloadThisCard}>
-          <a href="#">
-            Download this card <Download />
-          </a>
-        </div>
+        <DownloadThisCard />
       </div>
     </Module>
   );

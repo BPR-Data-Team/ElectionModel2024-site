@@ -4,3 +4,9 @@
 .welcome h2 {
   text-align: center;
 }
+
+.lastDataUpdate {
+  text-align: right;
+  font-style: italic;
+  font-weight: 300;
+}

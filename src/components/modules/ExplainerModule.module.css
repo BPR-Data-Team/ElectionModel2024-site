@@ -1,2 +1,10 @@
 .explainer {
 }
+
+.explainer p {
+  font-weight: 500;
+}
+
+.methodologyLink {
+  color: var(--main-text-color);
+}

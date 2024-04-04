@@ -6,10 +6,7 @@ export default function MapModule(props: ModuleProps): JSX.Element {
     <Module width={props.width} gridArea={props.gridArea}>
       <div className={styles.map}>
         <h3>24cast Prediction Map:</h3>
-        <p>
-          The map shows the results of the 2024 election. The Whigs won in a
-          landslide victory, securing 90% of the electoral votes.
-        </p>
+        <p>Click on a state to see more information.</p>
       </div>
     </Module>
   );

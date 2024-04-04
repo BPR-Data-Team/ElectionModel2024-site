@@ -18,6 +18,9 @@ export default function WelcomeModule(props: ModuleProps): JSX.Element {
           multiple decades and works to explain how each race&apos;s history
           affects expected outcomes.
         </p>
+        <p className={styles.lastDataUpdate}>
+          Last data update: November 3, 2020
+        </p>
       </div>
     </Module>
   );

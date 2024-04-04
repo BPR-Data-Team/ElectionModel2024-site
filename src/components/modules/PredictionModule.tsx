@@ -5,7 +5,7 @@ export default function PredictionModule(props: ModuleProps): JSX.Element {
   return (
     <Module width={props.width} gridArea={props.gridArea}>
       <div className={styles.prediction}>
-        <h2>Prediction</h2>
+        <h3>24cast Prediction:</h3>
         <p>
           Based on the data we have, we predict that the next election will be a
           landslide victory for the Whigs.

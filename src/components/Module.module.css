@@ -1,6 +1,6 @@
 .module {
   margin: 1rem 0;
-  padding: 1rem;
+  padding: 0 1rem;
   background-color: var(--module-bg-color);
   border-radius: 3px;
 }

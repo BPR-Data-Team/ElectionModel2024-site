@@ -9,7 +9,7 @@ export default function WelcomeModule(props: ModuleProps): JSX.Element {
   return (
     <Module width={props.width} gridArea={props.gridArea}>
       <div className={styles.welcome}>
-        <h2>Welcome to 24cast</h2>
+        <h2>Welcome to 24cast!</h2>
         <p>
           This isn&apos;t your typical election prediction—we use an all-new
           method to determine the outcomes of races down to the margin and break

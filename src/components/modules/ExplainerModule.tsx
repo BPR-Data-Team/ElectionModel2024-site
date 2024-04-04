@@ -5,7 +5,7 @@ export default function ExplainerModule(props: ModuleProps): JSX.Element {
   return (
     <Module width={props.width} gridArea={props.gridArea}>
       <div className={styles.explainer}>
-        <h2>Explainer</h2>
+        <h2>How 24cast Predicted This Race</h2>
         <p>This is the explainer module. It explains things.</p>
       </div>
     </Module>

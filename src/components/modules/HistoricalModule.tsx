@@ -5,8 +5,8 @@ export default function HistoricalModule(props: ModuleProps): JSX.Element {
   return (
     <Module width={props.width} gridArea={props.gridArea}>
       <div className={styles.historical}>
-        <h3>Historical Predictions</h3>
-        <p>This module is not used (yet)</p>
+        <h3>24casts Prediction Over Time</h3>
+        <p>To be removed?</p>
       </div>
     </Module>
   );

@@ -6,10 +6,6 @@ export default function SimulationsModule(props: ModuleProps): JSX.Element {
     <Module width={props.width} gridArea={props.gridArea}>
       <div className={styles.simulations}>
         <h3>Margin Simulations</h3>
-        <p>
-          We simulate the election 10,000 times to determine the probability of
-          each party winning the election.
-        </p>
       </div>
     </Module>
   );

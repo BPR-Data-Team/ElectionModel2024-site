@@ -1,2 +1,53 @@
 .prediction {
 }
+
+.mainPrediction {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+
+.mainPredictionIcon {
+  flex-shrink: 0;
+}
+
+.mainPredictionText {
+  font-size: 1.625rem;
+  font-weight: 600;
+}
+
+.predictionInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.predictionInfoItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.predictionInfoItemHeader {
+  margin: 0.25rem 0;
+}
+
+.predictionInfoItemContent {
+  font-size: 1.875rem;
+  font-weight: 500;
+}
+
+.downloadThisCard {
+  text-align: right;
+  margin: 1rem 0;
+}
+
+.downloadThisCard a {
+  font-style: normal;
+  color: var(--main-text-color);
+  text-decoration: none;
+}

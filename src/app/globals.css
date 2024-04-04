@@ -26,7 +26,8 @@ h5,
 h6,
 p,
 a,
-li {
+li,
+span {
   font-family: gelica, serif;
 }
 
@@ -43,6 +44,11 @@ h2 {
 h3 {
   font-size: 1rem;
   font-weight: 600;
+}
+
+h4 {
+  font-size: 1.125rem;
+  font-weight: 500;
 }
 
 @media only screen and (min-width: 768px) {

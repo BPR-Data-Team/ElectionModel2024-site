@@ -1,9 +1,9 @@
-import Module, { ModuleProps } from "../Module";
+import Module from "../Module";
 import styles from "./SHAPModule.module.css";
 
-export default function SHAPModule(props: ModuleProps): JSX.Element {
+export default function SHAPModule(): JSX.Element {
   return (
-    <Module width={props.width} gridArea={props.gridArea}>
+    <Module>
       <div className={styles.shap}>
         <h3>This Race&apos;s Most Predictive Factors</h3>
       </div>

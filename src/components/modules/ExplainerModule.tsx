@@ -1,10 +1,10 @@
 import DownloadThisCard from "../DownloadThisCard";
-import Module, { ModuleProps } from "../Module";
+import Module from "../Module";
 import styles from "./ExplainerModule.module.css";
 
-export default function ExplainerModule(props: ModuleProps): JSX.Element {
+export default function ExplainerModule(): JSX.Element {
   return (
-    <Module width={props.width} gridArea={props.gridArea}>
+    <Module>
       <div className={styles.explainer}>
         <h2>How 24cast Predicted This Race</h2>
         <p>

@@ -1,9 +1,9 @@
-import Module, { ModuleProps } from "../Module";
+import Module from "../Module";
 import styles from "./SimulationsModule.module.css";
 
-export default function SimulationsModule(props: ModuleProps): JSX.Element {
+export default function SimulationsModule(): JSX.Element {
   return (
-    <Module width={props.width} gridArea={props.gridArea}>
+    <Module>
       <div className={styles.simulations}>
         <h3>Margin Simulations</h3>
       </div>

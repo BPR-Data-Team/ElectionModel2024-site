@@ -1,5 +1,5 @@
 import DemocratD from "../svgs/DemocratD";
-import Module, { ModuleProps } from "../Module";
+import Module from "../Module";
 import styles from "./PredictionModule.module.css";
 import Trophy from "../svgs/Trophy";
 import RingChart from "../svgs/RingChart";
@@ -7,12 +7,11 @@ import DownloadThisCard from "../DownloadThisCard";
 
 /**
  *
- * @param {ModuleProps} props The properties for the PredictionModule component.
  * @returns {JSX.Element} The PredictionModule component.
  */
-export default function PredictionModule(props: ModuleProps): JSX.Element {
+export default function PredictionModule(): JSX.Element {
   return (
-    <Module width={props.width} gridArea={props.gridArea}>
+    <Module>
       <div className={styles.prediction}>
         <h3>24cast Prediction:</h3>
 

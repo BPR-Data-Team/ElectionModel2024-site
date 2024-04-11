@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/modules/Dropdown/Dropdown.jsx", "src/components/modules/Dropdown/DropdownButton.jsx", "src/components/modules/Dropdown/DropdownContent.jsx", "src/components/modules/Dropdown/DropdownItem.jsx", "src/components/modules/SearchModule.tsx"],
   "exclude": ["node_modules"]
 }

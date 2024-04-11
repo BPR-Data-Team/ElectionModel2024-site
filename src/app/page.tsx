@@ -1,3 +1,4 @@
+'use client';
 import PredictionModule from "@/components/modules/PredictionModule";
 import styles from "./page.module.css";
 import WelcomeModule from "@/components/modules/WelcomeModule";
@@ -6,6 +7,8 @@ import SimulationsModule from "@/components/modules/SimulationsModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
+import SearchModule from "@/components/modules/SearchModule";
+
 
 /**
  * The home page. This is the main page of the site, and is the first page that users see when they visit the site.
@@ -15,6 +18,7 @@ export default function Home(): JSX.Element {
   return (
     <main className={styles.main}>
       <WelcomeModule />
+      <SearchModule/>
       <PredictionModule />
       <div className={styles.mapAndSims}>
         <MapModule />

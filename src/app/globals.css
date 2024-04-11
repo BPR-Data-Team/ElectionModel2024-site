@@ -27,6 +27,8 @@ h6,
 p,
 a,
 li,
+select,
+option,
 span {
   font-family: gelica, serif;
 }

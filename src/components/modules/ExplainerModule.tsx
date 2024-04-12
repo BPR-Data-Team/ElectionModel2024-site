@@ -6,7 +6,7 @@ export default function ExplainerModule(): JSX.Element {
   return (
     <Module>
       <div className={styles.explainer}>
-        <h2>How 24cast Predicted This Race</h2>
+        <h3>How 24cast Predicted This Race</h3>
         <p>
           We ran <b>10,000</b> simulations predicting election margins using a
           machine learning model trained on data across multiple decades.

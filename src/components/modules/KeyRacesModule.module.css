@@ -1,2 +1,21 @@
-.keyraces {
-}
+/* KeyRacesModule.module.css */
+
+.keyRaces {
+    padding: 5px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 300px); /* Ensure only three columns per row */
+    gap: 5px;
+  }
+  
+  .race {
+    display: flex;
+    align-items: center;
+  }
+  
+  .race p {
+    margin-left: 10px;
+  }
+  

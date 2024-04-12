@@ -1,7 +1,7 @@
 import Module from "../Module";
 import styles from "./KeyRacesModule.module.css";
 import Image from "next/image";
-import bulletPoint from "/Users/johnhuang/Desktop/coding/ElectionModel2024-site/image-assets/ballot-sequence/ballot-anim00.png";
+import bulletPoint from "image-assets/ballot-sequence/ballot-anim00.png";
 
 const races = [
   'Georgia Presidential',

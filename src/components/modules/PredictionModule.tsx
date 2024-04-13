@@ -12,9 +12,10 @@ import DownloadThisCard from "../DownloadThisCard";
 export default function PredictionModule(): JSX.Element {
   return (
     <Module>
-      <div className={styles.prediction}>
+      <div>
         <h3>24cast Prediction:</h3>
-
+      </div>
+      <div className={styles.prediction}>
         <div className={styles.mainPrediction}>
           <span className={styles.mainPredictionIcon}>
             <DemocratD />

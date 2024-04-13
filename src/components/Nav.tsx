@@ -10,22 +10,10 @@ export default function Nav(): JSX.Element {
     <nav>
       <ul>
         <li>
-          <a href="#">Presidential</a>
+          <a href="/methodology">Methodology</a>
         </li>
         <li>
-          <a href="/senate">Senate</a>
-        </li>
-        <li>
-          <a href="/house">House</a>
-        </li>
-        <li>
-          <a href="#">Governor</a>
-        </li>
-        <li>
-          <a href="#">Methodology</a>
-        </li>
-        <li>
-          <a href="#">About</a>
+          <a href="/about">About</a>
         </li>
       </ul>
     </nav>

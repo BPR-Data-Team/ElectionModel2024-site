@@ -1,9 +1,12 @@
-.prediction {
+/* CSS Format for Large Screens */
+/* Democrat image and prediction text, TODO: Format for small and medium */
+  .prediction {
   display: flex;
   flex-direction: column; 
   align-items: left;
   justify-content: center; 
 }
+
 .mainPrediction {
   display: flex;
   justify-content: left;
@@ -22,7 +25,7 @@
   font-size: 1.625rem;
   font-weight: 600;
 }
-
+/* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
 .predictionInfo {
   display: flex;
   justify-content: space-around;
@@ -46,4 +49,111 @@
 .predictionInfoItemContent {
   font-size: 1.875rem;
   font-weight: 500;
+}
+/* CSS Format for Medium Screens (ie iPad Screens) */
+@media (max-width: 850px){
+.prediction {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center; 
+}
+
+.mainPrediction {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.mainPredictionIcon {
+  flex-shrink: 0;
+  transform: scale(1.0);
+  margin-bottom: auto;
+  align-self: flex-start;
+}
+
+.mainPredictionText {
+  font-size: 1.625rem;
+  font-weight: 600;
+}
+/* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
+.predictionInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  margin-top: 20px;
+}
+
+.predictionInfoItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.predictionInfoItemHeader {
+  margin: 0.25rem 0;
+}
+
+.predictionInfoItemContent {
+  font-size: 1.875rem;
+  font-weight: 500;
+}
+}
+/* CSS Format for Small Screens */
+@media (max-width: 450px) {
+    /* Democrat image and prediction text, TODO: Format for small and medium */
+  .prediction {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center; 
+}
+
+.mainPrediction {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.mainPredictionIcon {
+  flex-shrink: 0;
+  transform: scale(1.0);
+  margin-bottom: auto;
+  align-self: flex-start;
+}
+
+.mainPredictionText {
+  font-size: 1.625rem;
+  font-weight: 600;
+}
+/* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
+.predictionInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  margin-top: 20px;
+}
+
+.predictionInfoItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.predictionInfoItemHeader {
+  margin: 0.25rem 0;
+}
+
+.predictionInfoItemContent {
+  font-size: 1.875rem;
+  font-weight: 500;
+}
 }

@@ -1,8 +1,8 @@
 import React, { useState, ChangeEvent } from "react";
 import Module from "../Module";
 import styles from "./SearchModule.module.css";
-import { RaceType, raceOptions } from "@/types/RaceType";
-import { State, stateOptions } from "@/types/State";
+import { RaceType } from "@/types/RaceType";
+import { State } from "@/types/State";
 
 export interface SearchModuleProps {
   raceType: RaceType;
@@ -13,10 +13,23 @@ export interface SearchModuleProps {
 
 export default function SearchModule(props: SearchModuleProps): JSX.Element {
   const handleRaceChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-    props.setRaceType(event.target.value);
+    const raceTypeKey = event.target.value as keyof typeof RaceType;
+    if (RaceType[raceTypeKey]) {
+      props.setRaceType(RaceType[raceTypeKey]);
+    } else {
+      console.error("Invalid race type selected");
+    }
   };
   const handleStateChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-    props.setState(event.target.value);
+    const stateValue = event.target.value.replace(
+      /\s/g,
+      ""
+    ) as keyof typeof State;
+    if (State[stateValue]) {
+      props.setState(State[stateValue]);
+    } else {
+      console.error("Invalid state selected");
+    }
   };
 
   return (
@@ -25,7 +38,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
         <p>
           I want to see
           <select value={props.raceType} onChange={handleRaceChange}>
-            {raceOptions.map((race, index) => (
+            {Object.values(RaceType).map((race, index) => (
               <option key={index} value={race}>
                 {race}
               </option>
@@ -34,7 +47,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           races in
           <select value={props.state} onChange={handleStateChange}>
             <option value="">Select State</option>
-            {stateOptions.map((state, index) => (
+            {Object.values(State).map((state, index) => (
               <option key={index} value={state}>
                 {state}
               </option>

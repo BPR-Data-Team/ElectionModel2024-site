@@ -1,13 +1,6 @@
 export enum RaceType {
-  Presidential = "presidential",
-  Senate = "senate",
-  House = "house",
-  Governor = "governor",
+  Presidential = "Presidential",
+  Senate = "Senate",
+  House = "House",
+  Governor = "Governor",
 }
-
-export const raceOptions: Array<string> = [
-  "Presidential",
-  "Senate",
-  "House",
-  "Governor",
-];

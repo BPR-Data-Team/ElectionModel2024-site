@@ -27,6 +27,11 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     ) as keyof typeof State;
     if (State[stateValue]) {
       props.setState(State[stateValue]);
+      if (props.state === State.National) {
+        if (props.raceType === RaceType.Governor) {
+          props.setRaceType(RaceType.Presidential);
+        }
+      }
     } else {
       console.error("Invalid state selected");
     }
@@ -46,10 +51,9 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           </select>
           races in
           <select value={props.state} onChange={handleStateChange}>
-            <option value="">Select State</option>
             {Object.values(State).map((state, index) => (
               <option key={index} value={state}>
-                {state}
+                {state === State.National ? "Select State" : state}
               </option>
             ))}
           </select>

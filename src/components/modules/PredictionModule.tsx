@@ -1,15 +1,72 @@
 import DemocratD from "../svgs/DemocratD";
+import RepublicanR from "../svgs/RepublicanR";
 import Module from "../Module";
 import styles from "./PredictionModule.module.css";
 import Trophy from "../svgs/Trophy";
 import RingChart from "../svgs/RingChart";
 import DownloadThisCard from "../DownloadThisCard";
+import { Party } from "@/types/Party";
+import { RaceType } from "@/types/RaceType";
+import { State } from "@/types/State";
+
+export interface PredictionModuleProps {
+  winner: Party;
+  likelihood: number;
+  margin: number;
+  raceType: RaceType;
+  state: State;
+}
 
 /**
  *
  * @returns {JSX.Element} The PredictionModule component.
  */
-export default function PredictionModule(): JSX.Element {
+export default function PredictionModule(
+  props: PredictionModuleProps
+): JSX.Element {
+  const getMessage = (): string => {
+    let message: string = "";
+
+    if (props.winner === Party.Democrat) {
+      if (props.raceType === RaceType.Presidential) {
+        message = "Joe Biden is";
+      } else {
+        message = "Democrats are";
+      }
+    } else {
+      if (props.raceType === RaceType.Presidential) {
+        message = "Donald Trump is";
+      } else {
+        message = "Republicans are";
+      }
+    }
+
+    message += " favored to win the";
+
+    switch (props.raceType) {
+      case RaceType.Governor:
+        message += " gubernatorial election";
+        break;
+      case RaceType.House:
+        message += " House";
+        break;
+      case RaceType.Senate:
+        message += " Senate";
+        break;
+      case RaceType.Presidential:
+        message += " presidency";
+        break;
+    }
+
+    if (props.state !== State.National) {
+      message += ` in ${props.state}.`;
+    } else {
+      message += ".";
+    }
+
+    return message;
+  };
+
   return (
     <Module>
       <div>
@@ -18,11 +75,9 @@ export default function PredictionModule(): JSX.Element {
       <div className={styles.prediction}>
         <div className={styles.mainPrediction}>
           <span className={styles.mainPredictionIcon}>
-            <DemocratD />
+            {props.winner === Party.Democrat ? <DemocratD /> : <RepublicanR />}
           </span>
-          <span className={styles.mainPredictionText}>
-            Joe Biden is favored to win the presidency in North Dakota.
-          </span>
+          <span className={styles.mainPredictionText}>{getMessage()}</span>
         </div>
 
         <div className={styles.predictionInfo}>
@@ -34,7 +89,9 @@ export default function PredictionModule(): JSX.Element {
               <h4 className={styles.predictionInfoItemHeader}>
                 Outcome Likelihood:
               </h4>
-              <span className={styles.predictionInfoItemContent}>78%</span>
+              <span className={styles.predictionInfoItemContent}>
+                {props.likelihood}%
+              </span>
             </div>
           </div>
 
@@ -46,7 +103,9 @@ export default function PredictionModule(): JSX.Element {
               <h4 className={styles.predictionInfoItemHeader}>
                 Predicted Margin:
               </h4>
-              <span className={styles.predictionInfoItemContent}>+3.43</span>
+              <span className={styles.predictionInfoItemContent}>
+                +{props.margin}
+              </span>
             </div>
           </div>
         </div>

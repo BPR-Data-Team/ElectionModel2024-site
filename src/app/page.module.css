@@ -13,7 +13,24 @@
   .mapAndSims {
     display: flex;
     flex-direction: column;
-    /* Adjust styles for mobile screens */
-    /* Optionally, you can add additional styles here */
+    
+  }
+}
+.stickySearch {
+  position: sticky;
+  top: 0;
+  z-index: 1000; 
+  background-color: #ffffff; 
+}
+.main {
+  margin-right: 200px;
+  margin-left: 200px; /* Default margin for larger screens */
+}
+
+/* Adjust margin for smaller screens */
+@media (max-width: 768px) {
+  .main {
+    margin-left: 10px;
+    margin-right: 10px; 
   }
 }

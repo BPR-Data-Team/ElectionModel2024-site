@@ -17,7 +17,9 @@ export default function Home(): JSX.Element {
   return (
     <main className={styles.main}>
       <WelcomeModule />
-      <SearchModule />
+      <div className={styles.stickySearch}>
+        <SearchModule />
+      </div>
       <PredictionModule />
       <div className={styles.mapAndSims}>
         <MapModule />

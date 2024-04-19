@@ -10,6 +10,7 @@
 .search p {
   margin-bottom: 10px; /* Add margin to separate paragraphs */
   width: 100%; 
+  font-size: inherit;
 }
 .search select:focus {
   outline: none;

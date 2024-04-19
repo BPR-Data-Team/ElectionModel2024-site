@@ -18,7 +18,7 @@ import { Party } from "@/types/Party";
  * @returns {JSX.Element} The home page.
  */
 export default function Home(): JSX.Element {
-  const [raceType, setRaceType] = useState<RaceType>(RaceType.Governor);
+  const [raceType, setRaceType] = useState<RaceType>(RaceType.gubernational);
   const [state, setState] = useState<State>(State.Vermont);
   const [winner, setWinner] = useState<Party>(Party.Democrat);
   const [likelihood, setLikelihood] = useState<number>(50);
@@ -26,12 +26,14 @@ export default function Home(): JSX.Element {
   return (
     <main className={styles.main}>
       <WelcomeModule />
-      <SearchModule
-        raceType={raceType}
-        state={state}
-        setRaceType={setRaceType}
-        setState={setState}
-      />
+      <div className={styles.stickySearch}>
+        <SearchModule
+          raceType={raceType}
+          state={state}
+          setRaceType={setRaceType}
+          setState={setState}
+        />
+      </div>
       <PredictionModule
         winner={winner}
         likelihood={likelihood}

@@ -1,6 +1,6 @@
 export enum RaceType {
-  Presidential = "Presidential",
+  presidential = "presidential",
   Senate = "Senate",
   House = "House",
-  Governor = "Governor",
+  gubernational = "gubernational",
 }

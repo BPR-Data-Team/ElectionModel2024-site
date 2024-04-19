@@ -9,13 +9,7 @@
   display: flex;
   gap: 1rem;
 }
-@media (max-width: 450px) {
-  .mapAndSims {
-    display: flex;
-    flex-direction: column;
-    
-  }
-}
+
 .stickySearch {
   position: sticky;
   top: 0;
@@ -24,10 +18,16 @@
 }
 .main {
   margin-right: 200px;
-  margin-left: 200px; /* Default margin for larger screens */
+  margin-left: 200px; 
+}
+@media (max-width: 450px) {
+  .mapAndSims {
+    display: flex;
+    flex-direction: column;
+    
+  }
 }
 
-/* Adjust margin for smaller screens */
 @media (max-width: 768px) {
   .main {
     margin-left: 10px;

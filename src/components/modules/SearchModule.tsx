@@ -28,8 +28,8 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     if (State[stateValue]) {
       props.setState(State[stateValue]);
       if (props.state === State.National) {
-        if (props.raceType === RaceType.Governor) {
-          props.setRaceType(RaceType.Presidential);
+        if (props.raceType === RaceType.gubernational) {
+          props.setRaceType(RaceType.presidential);
         }
       }
     } else {

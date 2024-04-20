@@ -9,11 +9,28 @@
   display: flex;
   gap: 1rem;
 }
+
+.stickySearch {
+  position: sticky;
+  top: 0;
+  z-index: 1000; 
+  background-color: #ffffff; 
+}
+.main {
+  margin-right: 200px;
+  margin-left: 200px; 
+}
 @media (max-width: 450px) {
   .mapAndSims {
     display: flex;
     flex-direction: column;
-    /* Adjust styles for mobile screens */
-    /* Optionally, you can add additional styles here */
+    
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 10px;
+    margin-right: 10px; 
   }
 }

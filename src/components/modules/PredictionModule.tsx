@@ -28,13 +28,13 @@ export default function PredictionModule(
     let message: string = "";
 
     if (props.winner === Party.Democrat) {
-      if (props.raceType === RaceType.Presidential) {
+      if (props.raceType === RaceType.presidential) {
         message = "Joe Biden is";
       } else {
         message = "Democrats are";
       }
     } else {
-      if (props.raceType === RaceType.Presidential) {
+      if (props.raceType === RaceType.presidential) {
         message = "Donald Trump is";
       } else {
         message = "Republicans are";
@@ -44,7 +44,7 @@ export default function PredictionModule(
     message += " favored to win the";
 
     switch (props.raceType) {
-      case RaceType.Governor:
+      case RaceType.gubernational:
         message += " gubernatorial election";
         break;
       case RaceType.House:
@@ -53,7 +53,7 @@ export default function PredictionModule(
       case RaceType.Senate:
         message += " Senate";
         break;
-      case RaceType.Presidential:
+      case RaceType.presidential:
         message += " presidency";
         break;
     }

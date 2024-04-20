@@ -10,6 +10,7 @@
 .search p {
   margin-bottom: 10px; /* Add margin to separate paragraphs */
   width: 100%; 
+  font-size: inherit;
 }
 .search select:focus {
   outline: none;
@@ -23,6 +24,16 @@
   background-color: #F2F2F2;
   border-radius: 2px;
 }
+/* SearchModule.module.css */
+
+.searchText {
+  font-size: 16px; /* Adjust the font size as needed */
+}
+
+.dropdown {
+  font-size: inherit; /* Inherit the font size from the parent */
+}
+
 
 /* Media query for screens smaller than 768px (typical mobile screens) */
 @media screen and (max-width: 767px) {

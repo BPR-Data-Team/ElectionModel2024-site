@@ -53,7 +53,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           <select value={props.state} onChange={handleStateChange}>
             {Object.values(State).map((state, index) => (
               <option key={index} value={state}>
-                {state === State.National ? "Select State" : state}
+                {state === State.National ? "the nation" : state}
               </option>
             ))}
           </select>

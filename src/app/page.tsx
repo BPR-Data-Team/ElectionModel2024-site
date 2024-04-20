@@ -43,9 +43,9 @@ export default function Home(): JSX.Element {
       />
       <div className={styles.mapAndSims}>
         <MapModule />
-        <SimulationsModule />
+        <ExplainerModule />
       </div>
-      <ExplainerModule />
+      <SimulationsModule />
       <SHAPModule />
       <KeyRacesModule />
     </main>

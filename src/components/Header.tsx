@@ -14,6 +14,14 @@ export default function Header(): JSX.Element {
             <span className="red">2</span>
             <span className="blue">4</span>cast
           </a>
+          <div className={styles.byContainer}>
+            <div className={styles.byText}>By the </div>
+            <img
+              className={styles.bprImage}
+              src="../image-assets/bpr-long-logo.png"
+              alt="Brown Political Review"
+            />
+          </div>
         </h1>
         <Nav />
       </div>

@@ -1,0 +1,13 @@
+.byContainer {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.byText {
+  margin-right: 5px;
+  font-size: medium;
+}
+
+.bprImage {
+  font-size: medium
+}

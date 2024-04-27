@@ -18,15 +18,16 @@ export default function Header(): JSX.Element {
           </a>
           <div className={styles.byContainer}>
             <div className={styles.byText}>By the </div>
-            <Image src={Logo}
-            width={230}
-            height={11.8}
-             />
+            <Image
+              src={Logo}
+              width={230}
+              height={11.8}
+              alt={"Brown Political Review"}
+            />
           </div>
         </h1>
         <Nav />
       </div>
-      
     </header>
   );
 }

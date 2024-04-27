@@ -1,9 +1,10 @@
+"use client";
 import styles from "./page.module.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: '404',
-};
+    title: '404 | 24cast',
+  };
 
 const NotFoundPage: React.FC = () => {
     return (

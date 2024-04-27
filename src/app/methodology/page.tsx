@@ -1,8 +1,9 @@
+"use client";
 import styles from "./page.module.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Methodology',
+  title: 'Methodology | 24cast',
 };
 
 export default function Methodology(): JSX.Element {

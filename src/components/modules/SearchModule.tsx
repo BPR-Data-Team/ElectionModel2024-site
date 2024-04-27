@@ -1,8 +1,12 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import Module from "../Module";
 import styles from "./SearchModule.module.css";
 import { RaceType } from "@/types/RaceType";
-import { State } from "@/types/State";
+import {
+  State,
+  getGubernatorialRaceStates,
+  getSenateRaceStates,
+} from "@/types/State";
 
 export interface SearchModuleProps {
   raceType: RaceType;
@@ -12,6 +16,28 @@ export interface SearchModuleProps {
 }
 
 export default function SearchModule(props: SearchModuleProps): JSX.Element {
+  const [filteredStates, setFilteredStates] = useState<State[]>([]);
+
+  useEffect(() => {
+    switch (props.raceType) {
+      case RaceType.Senate:
+        setFilteredStates(getSenateRaceStates());
+        break;
+      case RaceType.gubernational:
+        setFilteredStates(getGubernatorialRaceStates());
+        break;
+      default:
+        setFilteredStates(Object.values(State));
+        break;
+    }
+  }, [props.raceType]);
+
+  useEffect(() => {
+    if (!filteredStates.includes(props.state)) {
+      props.setState(filteredStates[0]);
+    }
+  }, [filteredStates]);
+
   const handleRaceChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const raceTypeKey = event.target.value as keyof typeof RaceType;
     if (RaceType[raceTypeKey]) {
@@ -20,22 +46,29 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       console.error("Invalid race type selected");
     }
   };
+
   const handleStateChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const stateValue = event.target.value.replace(
       /\s/g,
       ""
-    ) as keyof typeof State;
+    ) as keyof typeof State; // Removes whitespace from state value (e.g. "New York" => "NewYork")
+
     if (State[stateValue]) {
       props.setState(State[stateValue]);
-      if (props.state === State.National) {
-        if (props.raceType === RaceType.gubernational) {
-          props.setRaceType(RaceType.presidential);
-        }
-      }
     } else {
       console.error("Invalid state selected");
     }
   };
+
+  // If the user changes the state to "the nation" while viewing gubernatorial predictions, switch to presidential predictions
+  useEffect(() => {
+    if (
+      props.state === State.National &&
+      props.raceType === RaceType.gubernational
+    ) {
+      props.setRaceType(RaceType.presidential);
+    }
+  }, [props.state, props.raceType]);
 
   return (
     <Module>
@@ -51,9 +84,9 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           </select>
           races in
           <select value={props.state} onChange={handleStateChange}>
-            {Object.values(State).map((state, index) => (
+            {filteredStates.map((state, index) => (
               <option key={index} value={state}>
-                {state === State.National ? "Select State" : state}
+                {state === State.National ? "the nation" : state}
               </option>
             ))}
           </select>

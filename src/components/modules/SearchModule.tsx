@@ -2,7 +2,11 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import Module from "../Module";
 import styles from "./SearchModule.module.css";
 import { RaceType } from "@/types/RaceType";
-import { State } from "@/types/State";
+import {
+  State,
+  getGubernatorialRaceStates,
+  getSenateRaceStates,
+} from "@/types/State";
 
 export interface SearchModuleProps {
   raceType: RaceType;
@@ -12,6 +16,22 @@ export interface SearchModuleProps {
 }
 
 export default function SearchModule(props: SearchModuleProps): JSX.Element {
+  const [filteredStates, setFilteredStates] = useState<State[]>([]);
+
+  useEffect(() => {
+    switch (props.raceType) {
+      case RaceType.Senate:
+        setFilteredStates(getSenateRaceStates());
+        break;
+      case RaceType.gubernational:
+        setFilteredStates(getGubernatorialRaceStates());
+        break;
+      default:
+        setFilteredStates(Object.values(State));
+        break;
+    }
+  }, [props.raceType]);
+
   const handleRaceChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const raceTypeKey = event.target.value as keyof typeof RaceType;
     if (RaceType[raceTypeKey]) {
@@ -58,7 +78,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           </select>
           races in
           <select value={props.state} onChange={handleStateChange}>
-            {Object.values(State).map((state, index) => (
+            {filteredStates.map((state, index) => (
               <option key={index} value={state}>
                 {state === State.National ? "the nation" : state}
               </option>

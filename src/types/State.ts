@@ -51,3 +51,63 @@ export enum State {
   Wisconsin = "Wisconsin",
   Wyoming = "Wyoming",
 }
+
+/**
+ * @returns {State[]} An array of states that have Senate races
+ */
+export const getSenateRaceStates = () => {
+  return [
+    State.National,
+    State.California,
+    State.Connecticut,
+    State.Delaware,
+    State.Florida,
+    State.Hawaii,
+    State.Indiana,
+    State.Maine,
+    State.Maryland,
+    State.Massachusetts,
+    State.Michigan,
+    State.Minnesota,
+    State.Mississippi,
+    State.Missouri,
+    State.Montana,
+    State.Nebraska,
+    State.Nevada,
+    State.NewJersey,
+    State.NewMexico,
+    State.NewYork,
+    State.NorthDakota,
+    State.Ohio,
+    State.Pennsylvania,
+    State.RhodeIsland,
+    State.Tennessee,
+    State.Texas,
+    State.Utah,
+    State.Vermont,
+    State.Virginia,
+    State.Washington,
+    State.WestVirginia,
+    State.Wisconsin,
+    State.Wyoming,
+  ];
+};
+
+/**
+ * @returns {State[]} An array of states that have gubernatorial races
+ */
+export const getGubernatorialRaceStates = () => {
+  return [
+    State.Delaware,
+    State.Indiana,
+    State.Missouri,
+    State.Montana,
+    State.NewHampshire,
+    State.NorthCarolina,
+    State.NorthDakota,
+    State.Utah,
+    State.Vermont,
+    State.Washington,
+    State.WestVirginia,
+  ];
+};

@@ -17,8 +17,7 @@
   background-color: #ffffff; 
 }
 .main {
-  margin-right: 200px;
-  margin-left: 200px; 
+  margin: 10%;
 }
 @media (max-width: 450px) {
   .mapAndSims {
@@ -26,11 +25,9 @@
     flex-direction: column;
     
   }
+  /* .main{
+    margin: 10px;
+  } */
 }
 
-@media (max-width: 768px) {
-  .main {
-    margin-left: 10px;
-    margin-right: 10px; 
-  }
-}
+

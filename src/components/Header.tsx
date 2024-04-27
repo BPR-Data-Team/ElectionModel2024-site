@@ -17,6 +17,7 @@ export default function Header(): JSX.Element {
         </h1>
         <Nav />
       </div>
+      
     </header>
   );
 }

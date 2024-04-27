@@ -5,18 +5,28 @@ import { RaceType } from "@/types/RaceType";
 import {
   State,
   getGubernatorialRaceStates,
+  getNumDistricts,
   getSenateRaceStates,
 } from "@/types/State";
 
 export interface SearchModuleProps {
   raceType: RaceType;
   state: State;
+  district: number;
   setRaceType: (raceType: RaceType) => void;
   setState: (state: State) => void;
+  setDistrict: (district: number) => void;
 }
 
 export default function SearchModule(props: SearchModuleProps): JSX.Element {
   const [filteredStates, setFilteredStates] = useState<State[]>([]);
+  const [maxDistricts, setMaxDistricts] = useState<number>(0);
+
+  useEffect(() => {
+    if (!filteredStates.includes(props.state)) {
+      props.setState(filteredStates[0]);
+    }
+  }, [filteredStates]);
 
   useEffect(() => {
     switch (props.raceType) {
@@ -32,18 +42,32 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     }
   }, [props.raceType]);
 
+  // If the user changes the state to "the nation" while viewing gubernatorial predictions, switch to presidential predictions
   useEffect(() => {
-    if (!filteredStates.includes(props.state)) {
-      props.setState(filteredStates[0]);
+    if (
+      props.state === State.National &&
+      props.raceType === RaceType.gubernational
+    ) {
+      props.setRaceType(RaceType.presidential);
     }
-  }, [filteredStates]);
+  }, [props.state, props.raceType]);
+
+  useEffect(() => {
+    setMaxDistricts(getNumDistricts(props.state));
+  }, [props.state]);
+
+  useEffect(() => {
+    if (props.district > maxDistricts || props.district === 0) {
+      props.setDistrict(maxDistricts);
+    }
+  }, [props.district, maxDistricts]);
 
   const handleRaceChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const raceTypeKey = event.target.value as keyof typeof RaceType;
     if (RaceType[raceTypeKey]) {
       props.setRaceType(RaceType[raceTypeKey]);
     } else {
-      console.error("Invalid race type selected");
+      console.error(`Invalid race type selected: ${event.target.value}`);
     }
   };
 
@@ -56,19 +80,20 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     if (State[stateValue]) {
       props.setState(State[stateValue]);
     } else {
-      console.error("Invalid state selected");
+      console.error(`Invalid state selected: ${event.target.value}`);
     }
   };
 
-  // If the user changes the state to "the nation" while viewing gubernatorial predictions, switch to presidential predictions
-  useEffect(() => {
-    if (
-      props.state === State.National &&
-      props.raceType === RaceType.gubernational
-    ) {
-      props.setRaceType(RaceType.presidential);
+  const handleDistrictChange = (
+    event: ChangeEvent<HTMLSelectElement>
+  ): void => {
+    const district = parseInt(event.target.value);
+    if (district >= 0) {
+      props.setDistrict(district);
+    } else {
+      console.error(`Invalid district number: ${event.target.value}`);
     }
-  }, [props.state, props.raceType]);
+  };
 
   return (
     <Module>
@@ -90,6 +115,24 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
               </option>
             ))}
           </select>
+          {props.raceType === RaceType.House &&
+            props.state !== State.National && (
+              <select
+                value={props.district}
+                onChange={handleDistrictChange}
+                disabled={maxDistricts === 1}
+              >
+                {Array.from({ length: maxDistricts }, (_, i) => i + 1).map(
+                  (district) => (
+                    <option key={district} value={district}>
+                      {maxDistricts === 1
+                        ? "at-large district"
+                        : `District ${district}`}
+                    </option>
+                  )
+                )}
+              </select>
+            )}
         </p>
       </div>
     </Module>

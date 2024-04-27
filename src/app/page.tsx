@@ -20,6 +20,7 @@ import { Party } from "@/types/Party";
 export default function Home(): JSX.Element {
   const [raceType, setRaceType] = useState<RaceType>(RaceType.gubernational);
   const [state, setState] = useState<State>(State.Vermont);
+  const [district, setDistrict] = useState<number>(0);
   const [winner, setWinner] = useState<Party>(Party.Democrat);
   const [likelihood, setLikelihood] = useState<number>(50);
   const [margin, setMargin] = useState<number>(50);
@@ -30,8 +31,10 @@ export default function Home(): JSX.Element {
         <SearchModule
           raceType={raceType}
           state={state}
+          district={district}
           setRaceType={setRaceType}
           setState={setState}
+          setDistrict={setDistrict}
         />
       </div>
       <PredictionModule
@@ -40,6 +43,7 @@ export default function Home(): JSX.Element {
         margin={margin}
         raceType={raceType}
         state={state}
+        district={district}
       />
       <div className={styles.mapAndSims}>
         <MapModule />

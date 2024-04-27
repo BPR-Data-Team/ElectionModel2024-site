@@ -6,8 +6,11 @@ import Header from "@/components/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "24cast",
-  description: "2024 Election Forecast by Brown Political Review",
+  title: {
+    template: '%s | 24cast',
+    default: '24cast by BPR',
+  },
+  description: "Innovative election predictions with in-depth explanations by the Brown Political Review.",
 };
 
 export default function RootLayout({

@@ -10,6 +10,9 @@ export default function Nav(): JSX.Element {
     <nav>
       <ul>
         <li>
+          <a href="/">Predictions</a>
+        </li>
+        <li>
           <a href="/methodology">Methodology</a>
         </li>
         <li>

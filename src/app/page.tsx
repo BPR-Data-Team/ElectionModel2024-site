@@ -8,7 +8,7 @@ import ExplainerModule from "@/components/modules/ExplainerModule";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
-import { useState } from "react";
+import { use, useState } from "react";
 import { RaceType } from "@/types/RaceType";
 import { State } from "@/types/State";
 import { Party } from "@/types/Party";
@@ -20,9 +20,16 @@ import { Party } from "@/types/Party";
 export default function Home(): JSX.Element {
   const [raceType, setRaceType] = useState<RaceType>(RaceType.gubernational);
   const [state, setState] = useState<State>(State.Vermont);
+  const [district, setDistrict] = useState<number>(0);
   const [winner, setWinner] = useState<Party>(Party.Democrat);
   const [likelihood, setLikelihood] = useState<number>(50);
   const [margin, setMargin] = useState<number>(50);
+
+  // WIP
+  // useEffect(() => {
+  //   fetch("https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=TX22House")
+  // }, [raceType, state, district]);
+
   return (
     <main className={styles.main}>
       <WelcomeModule />
@@ -30,8 +37,10 @@ export default function Home(): JSX.Element {
         <SearchModule
           raceType={raceType}
           state={state}
+          district={district}
           setRaceType={setRaceType}
           setState={setState}
+          setDistrict={setDistrict}
         />
       </div>
       <PredictionModule
@@ -40,6 +49,7 @@ export default function Home(): JSX.Element {
         margin={margin}
         raceType={raceType}
         state={state}
+        district={district}
       />
       <div className={styles.mapAndSims}>
         <MapModule />

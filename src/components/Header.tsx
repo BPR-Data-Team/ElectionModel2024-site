@@ -1,4 +1,6 @@
 import styles from "./Header.module.css";
+import Image from "next/image";
+import Logo from "image-assets/bpr-long-logo.png";
 import Nav from "./Nav";
 
 /**
@@ -16,11 +18,10 @@ export default function Header(): JSX.Element {
           </a>
           <div className={styles.byContainer}>
             <div className={styles.byText}>By the </div>
-            <img
-              className={styles.bprImage}
-              src="../image-assets/bpr-long-logo.png"
-              alt="Brown Political Review"
-            />
+            <Image src={Logo}
+            width={230}
+            height={11.8}
+             />
           </div>
         </h1>
         <Nav />

@@ -8,7 +8,7 @@ import ExplainerModule from "@/components/modules/ExplainerModule";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
-import { useState } from "react";
+import { use, useState } from "react";
 import { RaceType } from "@/types/RaceType";
 import { State } from "@/types/State";
 import { Party } from "@/types/Party";
@@ -24,6 +24,12 @@ export default function Home(): JSX.Element {
   const [winner, setWinner] = useState<Party>(Party.Democrat);
   const [likelihood, setLikelihood] = useState<number>(50);
   const [margin, setMargin] = useState<number>(50);
+
+  // WIP
+  // useEffect(() => {
+  //   fetch("https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=TX22House")
+  // }, [raceType, state, district]);
+
   return (
     <main className={styles.main}>
       <WelcomeModule />

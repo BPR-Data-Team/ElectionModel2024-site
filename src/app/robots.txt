@@ -1,0 +1,5 @@
+User-agent: googlebot-image
+Disallow:/
+User-agent: *
+Disallow: 
+Sitemap: https://24cast.org/sitemap.xml

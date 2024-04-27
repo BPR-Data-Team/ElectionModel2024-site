@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import Module from "../Module";
 import styles from "./SearchModule.module.css";
 import { RaceType } from "@/types/RaceType";
@@ -25,21 +25,24 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     const stateValue = event.target.value.replace(
       /\s/g,
       ""
-    ) as keyof typeof State;
+    ) as keyof typeof State; // Removes whitespace from state value (e.g. "New York" => "NewYork")
 
     if (State[stateValue]) {
       props.setState(State[stateValue]);
-
-      if (
-        props.state === State.National &&
-        props.raceType == RaceType.gubernational
-      ) {
-        props.setRaceType(RaceType.presidential);
-      }
     } else {
       console.error("Invalid state selected");
     }
   };
+
+  // If the user changes the state to "the nation" while viewing gubernatorial predictions, switch to presidential predictions
+  useEffect(() => {
+    if (
+      props.state === State.National &&
+      props.raceType === RaceType.gubernational
+    ) {
+      props.setRaceType(RaceType.presidential);
+    }
+  }, [props.state, props.raceType]);
 
   return (
     <Module>

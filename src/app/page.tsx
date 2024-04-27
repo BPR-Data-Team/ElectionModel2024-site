@@ -8,10 +8,61 @@ import ExplainerModule from "@/components/modules/ExplainerModule";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { RaceType } from "@/types/RaceType";
-import { State } from "@/types/State";
+import { State, getStateAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
+
+interface RaceData {
+  winner: Party;
+  likelihood: number;
+  margin: number;
+}
+
+async function fetchRaceData(
+  raceType: RaceType,
+  state: State,
+  district: number
+): Promise<RaceData> {
+  const stateArg: string = getStateAbbreviation(state);
+  const districtArg: string =
+    raceType !== RaceType.House || state === State.National
+      ? "0"
+      : district.toString();
+  let raceTypeArg = "";
+  switch (raceType) {
+    case RaceType.gubernational:
+      raceTypeArg = "Governor";
+      break;
+    case RaceType.House:
+      raceTypeArg = "House";
+      break;
+    case RaceType.Senate:
+      raceTypeArg = "Senate";
+      break;
+    case RaceType.presidential:
+      raceTypeArg = "President";
+      break;
+  }
+  const raceArg = `${stateArg}${districtArg}${raceTypeArg}`;
+
+  fetch(
+    `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${raceArg}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error("Failed to fetch API", error);
+    });
+
+  return {
+    winner: Party.Democrat,
+    likelihood: 70,
+    margin: 70,
+  };
+}
 
 /**
  * The home page. This is the main page of the site, and is the first page that users see when they visit the site.
@@ -25,10 +76,13 @@ export default function Home(): JSX.Element {
   const [likelihood, setLikelihood] = useState<number>(50);
   const [margin, setMargin] = useState<number>(50);
 
-  // WIP
-  // useEffect(() => {
-  //   fetch("https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=TX22House")
-  // }, [raceType, state, district]);
+  useEffect(() => {
+    fetchRaceData(raceType, state, district).then((data: RaceData) => {
+      setWinner(data.winner);
+      setLikelihood(data.likelihood);
+      setMargin(data.margin);
+    });
+  }, [raceType, state, district]);
 
   return (
     <main className={styles.main}>

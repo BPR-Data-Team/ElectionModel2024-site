@@ -20,17 +20,21 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       console.error("Invalid race type selected");
     }
   };
+
   const handleStateChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const stateValue = event.target.value.replace(
       /\s/g,
       ""
     ) as keyof typeof State;
+
     if (State[stateValue]) {
       props.setState(State[stateValue]);
-      if (props.state === State.National) {
-        if (props.raceType === RaceType.gubernational) {
-          props.setRaceType(RaceType.presidential);
-        }
+
+      if (
+        props.state === State.National &&
+        props.raceType == RaceType.gubernational
+      ) {
+        props.setRaceType(RaceType.presidential);
       }
     } else {
       console.error("Invalid state selected");

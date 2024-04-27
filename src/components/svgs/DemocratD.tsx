@@ -10,17 +10,17 @@ export default function DemocratD(): JSX.Element {
         cy="50"
         r="43.5"
         stroke="#595d9a"
-        stroke-width="13"
+        strokeWidth="13"
         fill="none"
       />
       <text
         x="50%"
         y="54.5%"
-        dominant-baseline="middle"
-        text-anchor="middle"
-        font-size="3.5rem"
-        font-family="gelica"
-        font-weight="700"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        fontSize="3.5rem"
+        fontFamily="gelica"
+        fontWeight="700"
         fill="#595d9a"
         pointerEvents="none"
         style={{ userSelect: "none" }}

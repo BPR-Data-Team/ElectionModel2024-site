@@ -32,6 +32,12 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     }
   }, [props.raceType]);
 
+  useEffect(() => {
+    if (!filteredStates.includes(props.state)) {
+      props.setState(filteredStates[0]);
+    }
+  }, [filteredStates]);
+
   const handleRaceChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const raceTypeKey = event.target.value as keyof typeof RaceType;
     if (RaceType[raceTypeKey]) {

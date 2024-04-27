@@ -30,4 +30,9 @@
   } */
 }
 
-
+@media (max-width: 853px) {
+  .main {
+    margin-left: 20px;
+    margin-right: 20px; 
+  }
+}

@@ -8,6 +8,7 @@ import ExplainerModule from "@/components/modules/ExplainerModule";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
+import Footer from "@/components/Footer";
 import { useState } from "react";
 import { RaceType } from "@/types/RaceType";
 import { State } from "@/types/State";
@@ -48,6 +49,7 @@ export default function Home(): JSX.Element {
       <SimulationsModule />
       <SHAPModule />
       <KeyRacesModule />
+      <Footer />
     </main>
   );
 }

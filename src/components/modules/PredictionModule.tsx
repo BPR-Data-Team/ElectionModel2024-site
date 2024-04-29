@@ -7,7 +7,8 @@ import RingChart from "../svgs/RingChart";
 import DownloadThisCard from "../DownloadThisCard";
 import { Party } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
-import { State } from "@/types/State";
+import { State, getNumDistricts } from "@/types/State";
+import { get } from "http";
 
 export interface PredictionModuleProps {
   winner: Party;
@@ -15,6 +16,7 @@ export interface PredictionModuleProps {
   margin: number;
   raceType: RaceType;
   state: State;
+  district: number;
 }
 
 /**
@@ -59,10 +61,44 @@ export default function PredictionModule(
     }
 
     if (props.state !== State.National) {
-      message += ` in ${props.state}.`;
-    } else {
-      message += ".";
+      message += ` in ${props.state}`;
+      if (props.raceType == RaceType.House && props.district > 0) {
+        message += `'s `;
+        if (getNumDistricts(props.state) === 1) {
+          message += "at-large";
+        } else {
+          message += ` ${props.district}`;
+          switch (props.district) {
+            case 1:
+            case 21:
+            case 31:
+            case 41:
+            case 51:
+              message += "st";
+              break;
+            case 2:
+            case 22:
+            case 32:
+            case 42:
+            case 52:
+              message += "nd";
+              break;
+            case 3:
+            case 23:
+            case 33:
+            case 43:
+            case 53:
+              message += "rd";
+              break;
+            default:
+              message += "th";
+              break;
+          }
+        }
+        message += " district";
+      }
     }
+    message += ".";
 
     return message;
   };

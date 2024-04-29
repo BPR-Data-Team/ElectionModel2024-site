@@ -1,36 +1,27 @@
 .main {
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 95%;
+  max-width: 62.5rem;
+  margin: 1rem auto;
+}
+
+.mapAndSims {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.mapAndSims {
-  display: flex;
-  gap: 1rem;
+@media (min-width: 768px) {
+  .mapAndSims {
+    flex-direction: row;
+  }
 }
 
 .stickySearch {
   position: sticky;
   top: 0;
-  z-index: 1000; 
-  background-color: #ffffff; 
-}
-.main {
-  margin-right: 200px;
-  margin-left: 200px; 
-}
-@media (max-width: 450px) {
-  .mapAndSims {
-    display: flex;
-    flex-direction: column;
-    
-  }
-}
-
-@media (max-width: 768px) {
-  .main {
-    margin-left: 10px;
-    margin-right: 10px; 
-  }
+  z-index: 1000;
+  background-color: #ffffff;
 }

@@ -20,6 +20,79 @@ interface RaceData {
   margin: number;
 }
 
+interface StringValue {
+  S: string;
+}
+
+interface ApiResponse {
+  margins: StringValue;
+  expert_ratings: StringValue;
+  rep_name: StringValue;
+  dem_name: StringValue;
+  poll: StringValue;
+  voting_regulations: StringValue;
+  avg_margin: StringValue;
+  consumer_confidence_index: StringValue;
+  other: StringValue;
+  ind_name: StringValue;
+  campaign_finance: StringValue;
+  unemployment_and_inflation: StringValue;
+  state_district_office: StringValue;
+  demographics: StringValue;
+  composition_of_congress_and_presidency: StringValue;
+  weird: StringValue;
+  gas_prices: StringValue;
+  past_elections: StringValue;
+}
+
+interface ConvertedApiResponse {
+  margins: number[];
+  expert_ratings: number;
+  rep_name: string;
+  dem_name: string;
+  poll: number;
+  voting_regulations: number;
+  avg_margin: number;
+  consumer_confidence_index: number;
+  other: number;
+  ind_name: string;
+  campaign_finance: number;
+  unemployment_and_inflation: number;
+  state_district_office: string;
+  demographics: number;
+  composition_of_congress_and_presidency: number;
+  weird: string;
+  gas_prices: number;
+  past_elections: number;
+}
+
+function convertApiResponse(response: ApiResponse): ConvertedApiResponse {
+  return {
+    margins: JSON.parse(response.margins.S),
+    expert_ratings: parseFloat(response.expert_ratings.S),
+    rep_name: response.rep_name.S,
+    dem_name: response.dem_name.S,
+    poll: parseFloat(response.poll.S),
+    voting_regulations: parseFloat(response.voting_regulations.S),
+    avg_margin: parseFloat(response.avg_margin.S),
+    consumer_confidence_index: parseFloat(response.consumer_confidence_index.S),
+    other: parseFloat(response.other.S),
+    ind_name: response.ind_name.S,
+    campaign_finance: parseFloat(response.campaign_finance.S),
+    unemployment_and_inflation: parseFloat(
+      response.unemployment_and_inflation.S
+    ),
+    state_district_office: response.state_district_office.S,
+    demographics: parseFloat(response.demographics.S),
+    composition_of_congress_and_presidency: parseFloat(
+      response.composition_of_congress_and_presidency.S
+    ),
+    weird: response.weird.S,
+    gas_prices: parseFloat(response.gas_prices.S),
+    past_elections: parseFloat(response.past_elections.S),
+  };
+}
+
 async function fetchRaceData(
   raceType: RaceType,
   state: State,
@@ -52,7 +125,9 @@ async function fetchRaceData(
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      const item: ApiResponse = data.Item;
+      const results: ConvertedApiResponse = convertApiResponse(item);
+      console.log(results);
     })
     .catch((error) => {
       console.error("Failed to fetch API", error);

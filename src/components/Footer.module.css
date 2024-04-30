@@ -1,0 +1,11 @@
+.footerText{
+    font-size: small;
+}
+.linkText{
+    text-decoration: underline;
+    font-size: small;
+    margin-right: 5px;
+}
+.betweenText{
+    margin-right: 5px;
+}

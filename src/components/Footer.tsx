@@ -9,8 +9,7 @@ export default function Footer(): JSX.Element {
         </div>
         <div>
           <span className={styles.footerText}>
-            An MIT License Applies to this website, its underlying prediction
-            model, and some of its underlying data. See more information at our
+            A CC BY-SA 4.0 license applies to this website, and an MIT license applies to this website and some of its underlying data. See more information at our
             <span> </span>
             <a
               className={styles.linkText}

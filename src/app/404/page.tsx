@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const NotFoundPage: React.FC = () => {
   return (
     <div className={styles.center}>
-      <h1>404</h1>
+      <h1 className={styles.heading}>404</h1>
       <p>
         <b>The page you are looking for does not exist.</b>
       </p>

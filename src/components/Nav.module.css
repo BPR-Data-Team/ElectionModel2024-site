@@ -1,0 +1,6 @@
+.ballotItemU::before{
+    content: "⬭ ";
+}
+.ballotItemS::before{
+    content: "⬬ ";
+}

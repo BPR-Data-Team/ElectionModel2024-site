@@ -13,7 +13,7 @@ const NotFoundPage: React.FC = () => {
         <b>The page you are looking for does not exist.</b>
       </p>
       <p>
-        Check the URL for typos or return <a href="/#">home</a>.
+        Check the URL for typos or return <a href="/">home</a>.
       </p>
     </div>
   );

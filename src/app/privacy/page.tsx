@@ -11,14 +11,14 @@ const PrivacyPage: React.FC = () => {
             <h2>Privacy Policy</h2>
             <p>Last Updated: May 1, 2024</p>
             <div className={styles.main}>
-                <p>These terms and conditions (the "Terms and Conditions") govern the use of https://24cast.org ("24cast", the “Site”). This Site is owned and operated by The Brown Political Review (“BPR”). </p>
+                <p>These terms and conditions (the &quot;Terms and Conditions&quot;) govern the use of https://24cast.org (&quot;24cast&quot;, the &quot;Site&quot;). This Site is owned and operated by The Brown Political Review (&quot;BPR&quot;). </p>
                 <p>By using this Site, you indicate that you have read and understand these Terms and Conditions and agree to abide by them at all times.</p>
                 <p>24cast creates predictions for races in the 2024 general US election using an open-source machine learning model. The predictions on this site are created solely for entertainment purposes in an effort to demonstrate how elections can be modeled and what factors are most crucial to predicting an election.</p>
-                <p>24cast’s webmaster can be contacted at ariel[underscore]shifrin[at]brown[dot]edu. Please request a mailing address by email if needed.</p>
+                <p>24cast&apos;s webmaster can be contacted at ariel[underscore]shifrin[at]brown[dot]edu. Please request a mailing address by email if needed.</p>
             </div>
             <div className={styles.main}>
                 <p><b>Intellectual Property</b></p>
-                <p>All content published and made available on our Site is under the copyright of The Brown Political Review and the Site's creators. This includes, but is not limited to images, text, logos, documents, downloadable files, and anything that contributes to the composition of our Site. The Site’s underlying codebase is open-source and is subject to a CC BY-SA 4.0 license.</p>
+                <p>All content published and made available on our Site is under the copyright of The Brown Political Review and the Site&apos;s creators. This includes, but is not limited to images, text, logos, documents, downloadable files, and anything that contributes to the composition of our Site. The Site’s underlying codebase is open-source and is subject to a CC BY-SA 4.0 license.</p>
             </div>
             <div className={styles.main}>
                 <p><b>Acceptable Use</b></p>

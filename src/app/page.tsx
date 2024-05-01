@@ -13,6 +13,7 @@ import { use, useEffect, useState } from "react";
 import { RaceType } from "@/types/RaceType";
 import { State, getStateAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
+import { ResponseItem, parseItem } from "@/types/APIResponse";
 
 interface RaceData {
   winner: Party;
@@ -20,79 +21,25 @@ interface RaceData {
   margin: number;
 }
 
-interface StringValue {
-  S: string;
+function calculateLikelihood(avg_margin: number, margins: number[]): number {
+  const avgMarginSign = Math.sign(avg_margin);
+
+  const matchingSignCount = margins.reduce((count, margin) => {
+    return count + (Math.sign(margin) === avgMarginSign ? 1 : 0);
+  }, 0);
+
+  if (margins.length === 0) return 0; // Prevent division by zero
+  return Math.round((matchingSignCount / margins.length) * 100);
 }
 
-interface ApiResponse {
-  margins: StringValue;
-  expert_ratings: StringValue;
-  rep_name: StringValue;
-  dem_name: StringValue;
-  poll: StringValue;
-  voting_regulations: StringValue;
-  avg_margin: StringValue;
-  consumer_confidence_index: StringValue;
-  other: StringValue;
-  ind_name: StringValue;
-  campaign_finance: StringValue;
-  unemployment_and_inflation: StringValue;
-  state_district_office: StringValue;
-  demographics: StringValue;
-  composition_of_congress_and_presidency: StringValue;
-  weird: StringValue;
-  gas_prices: StringValue;
-  past_elections: StringValue;
-}
-
-interface ConvertedApiResponse {
-  margins: number[];
-  expert_ratings: number;
-  rep_name: string;
-  dem_name: string;
-  poll: number;
-  voting_regulations: number;
-  avg_margin: number;
-  consumer_confidence_index: number;
-  other: number;
-  ind_name: string;
-  campaign_finance: number;
-  unemployment_and_inflation: number;
-  state_district_office: string;
-  demographics: number;
-  composition_of_congress_and_presidency: number;
-  weird: string;
-  gas_prices: number;
-  past_elections: number;
-}
-
-function convertApiResponse(response: ApiResponse): ConvertedApiResponse {
-  return {
-    margins: JSON.parse(response.margins.S),
-    expert_ratings: parseFloat(response.expert_ratings.S),
-    rep_name: response.rep_name.S,
-    dem_name: response.dem_name.S,
-    poll: parseFloat(response.poll.S),
-    voting_regulations: parseFloat(response.voting_regulations.S),
-    avg_margin: parseFloat(response.avg_margin.S),
-    consumer_confidence_index: parseFloat(response.consumer_confidence_index.S),
-    other: parseFloat(response.other.S),
-    ind_name: response.ind_name.S,
-    campaign_finance: parseFloat(response.campaign_finance.S),
-    unemployment_and_inflation: parseFloat(
-      response.unemployment_and_inflation.S
-    ),
-    state_district_office: response.state_district_office.S,
-    demographics: parseFloat(response.demographics.S),
-    composition_of_congress_and_presidency: parseFloat(
-      response.composition_of_congress_and_presidency.S
-    ),
-    weird: response.weird.S,
-    gas_prices: parseFloat(response.gas_prices.S),
-    past_elections: parseFloat(response.past_elections.S),
-  };
-}
-
+/**
+ *
+ * @param raceType The race type
+ * @param state The state
+ * @param district The district (0 if not applicable)
+ * @returns  The predicted winner, likelihood, and margin of the race.
+ * @throws {Error} If the API request fails.
+ */
 async function fetchRaceData(
   raceType: RaceType,
   state: State,
@@ -120,24 +67,30 @@ async function fetchRaceData(
   }
   const raceArg = `${stateArg}${districtArg}${raceTypeArg}`;
 
-  fetch(
+  return fetch(
     `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${raceArg}`
   )
     .then((response) => response.json())
     .then((data) => {
-      const item: ApiResponse = data.Item;
-      const results: ConvertedApiResponse = convertApiResponse(item);
-      console.log(results);
+      const responseItem: ResponseItem = parseItem(data);
+      const winner: Party =
+        responseItem.avg_margin > 0 ? Party.Democrat : Party.Republican;
+      const likelihood: number = calculateLikelihood(
+        responseItem.avg_margin,
+        responseItem.margins
+      );
+      const margin: number = Math.round(responseItem.avg_margin * 10) / 10;
+      const predictions: RaceData = {
+        winner: winner,
+        likelihood: likelihood,
+        margin: margin,
+      };
+      console.log("In fetchRaceData: ", predictions);
+      return predictions;
     })
     .catch((error) => {
-      console.error("Failed to fetch API", error);
+      throw new Error("Failed to fetch API");
     });
-
-  return {
-    winner: Party.Democrat,
-    likelihood: 70,
-    margin: 70,
-  };
 }
 
 /**
@@ -153,11 +106,16 @@ export default function Home(): JSX.Element {
   const [margin, setMargin] = useState<number>(50);
 
   useEffect(() => {
-    fetchRaceData(raceType, state, district).then((data: RaceData) => {
-      setWinner(data.winner);
-      setLikelihood(data.likelihood);
-      setMargin(data.margin);
-    });
+    try {
+      fetchRaceData(raceType, state, district).then((data: RaceData) => {
+        console.log("In useEffect: ", data);
+        setWinner(data.winner);
+        setLikelihood(data.likelihood);
+        setMargin(data.margin);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }, [raceType, state, district]);
 
   return (

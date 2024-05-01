@@ -2,13 +2,13 @@ import styles from "./page.module.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Terms of Service | 24cast',
+    title: 'Privacy Policy | 24cast',
   };
 
-const TOSPage: React.FC = () => {
+const PrivacyPage: React.FC = () => {
     return (
         <div className={styles.main}>
-            <h2>Terms of Use</h2>
+            <h2>Privacy Policy</h2>
             <p>Last Updated: May 1, 2024</p>
             <div className={styles.main}>
                 <p>These terms and conditions (the &quot;Terms and Conditions&quot;) govern the use of https://24cast.org (&quot;24cast&quot;, the &quot;Site&quot;). This Site is owned and operated by The Brown Political Review (&quot;BPR&quot;). </p>
@@ -53,4 +53,4 @@ const TOSPage: React.FC = () => {
 };
 
 
-export default TOSPage;
+export default PrivacyPage;

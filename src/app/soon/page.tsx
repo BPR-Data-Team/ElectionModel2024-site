@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Construction from "@/components/svgs/Construction";
 
 export const metadata: Metadata = {
-  title: "Coming Soon | 24cast",
+  title: "Coming Soon | 24cast.org",
 };
 
 const ComingSoonPage: React.FC = () => {

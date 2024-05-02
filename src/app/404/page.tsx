@@ -2,7 +2,7 @@ import styles from "./page.module.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "404 | 24cast",
+  title: "404 | 24cast.org",
 };
 
 const NotFoundPage: React.FC = () => {

@@ -11,3 +11,8 @@
   .bprImage {
     font-size: medium
   }
+  @media screen and (max-width: 768px){
+    .byContainer{
+      display: none;
+    }
+  }

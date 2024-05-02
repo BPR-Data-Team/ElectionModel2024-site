@@ -33,7 +33,6 @@
   align-items: center;
   gap: 1rem;
   margin: 0.5rem 0;
-  margin-top: -70px;
 }
 
 .predictionInfoItem {
@@ -111,14 +110,13 @@
   .prediction {
   display: flex;
   flex-direction: column; 
-  align-items: center;
   justify-content: center; 
 }
 
 .mainPrediction {
   display: flex;
-  justify-content: left;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   gap: 2rem;
 }
 
@@ -130,25 +128,31 @@
 }
 
 .mainPredictionText {
-  font-size: 1.625rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
 .predictionInfo {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   gap: 1rem;
   margin: 0.5rem 0;
-  margin-top: 20px;
+  margin-top: -50px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
 }
 
 .predictionInfoItem {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
   gap: 0.875rem;
-  margin-top: -80px;
+  margin-top: -10px;
+  margin-right: 52px;
+  margin-left: 10px;
+}
+
+.predictionInfoItemIcon {
+  margin-right: 10px;
 }
 
 .predictionInfoItemHeader {

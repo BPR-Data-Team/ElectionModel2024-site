@@ -8,7 +8,6 @@ import DownloadThisCard from "../DownloadThisCard";
 import { Party } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
 import { State, getNumDistricts } from "@/types/State";
-import { get } from "http";
 
 export interface PredictionModuleProps {
   winner: Party;
@@ -140,7 +139,8 @@ export default function PredictionModule(
                 Predicted Margin:
               </h4>
               <span className={styles.predictionInfoItemContent}>
-                +{props.margin}
+                {props.margin >= 0 ? "+" : ""}
+                {props.margin}
               </span>
             </div>
           </div>

@@ -14,6 +14,7 @@ import { RaceType } from "@/types/RaceType";
 import { State, getStateAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
+import { SHAPFactors } from "@/types/SHAPFactors";
 
 interface RaceData {
   winner: Party;
@@ -141,7 +142,17 @@ export default function Home(): JSX.Element {
       />
       <div className={styles.mapAndSims}>
         <MapModule />
-        <ExplainerModule />
+        <ExplainerModule
+          winner={winner}
+          numSimulations={1000}
+          numWins={700}
+          numLosses={300}
+          mostPredictiveFactors={[
+            SHAPFactors.VotingRegulations,
+            SHAPFactors.ConsumerConfidenceIndex,
+            SHAPFactors.Other,
+          ]}
+        />
       </div>
       <SimulationsModule />
       <SHAPModule />

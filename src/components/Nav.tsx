@@ -55,8 +55,9 @@ export default function Nav() {
             </a>
           </h1>
         </div>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
         <div className={styles.page}>
-          <h1>Pages:</h1>
+          <h2>Pages:</h2>
         </div>
         <div className={styles.mobileLinks}>
           <Link href="/" passHref onClick={() => setDisplayMenu(!displayMenu)}
@@ -71,6 +72,7 @@ export default function Nav() {
           className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>
             About
           </Link>
+        </div>
         </div>
       </div>
     </nav>

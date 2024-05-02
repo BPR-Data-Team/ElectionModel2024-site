@@ -1,34 +1,81 @@
 "use client"
+import {useState } from 'react';
+import Link from 'next/link';
 import styles from "./Nav.module.css";
-import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import menu from 'image-assets/menu.svg';
+import closemenu from 'image-assets/menu_open.svg'
+import Image from 'next/image';
 
-/**
- * The nav component. This is the navigation bar at the top of the page.
- * TODO: Format for mobile. This will involve a hamburger menu.
- * @returns {JSX.Element} The nav component.
- */
-export default function Nav(): JSX.Element {
-  
-  const [currentPath, setCurrentPath] = useState<string>('');
+export default function Nav() {
 
-  useEffect(() => {
-    setCurrentPath(window.location.pathname);
-  }, []);
-  
-  
+  const currentPath = usePathname();
+
+  const [displayMenu, setDisplayMenu] = useState<boolean>(false);
+
   return (
     <nav>
-      <ul>
-        <li>
-          <a href="/" className={currentPath === '/' ? styles.ballotItemS : styles.ballotItemU}>Predictions</a>
-        </li>
-        <li>
-          <a href="/methodology" className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>Methodology</a>
-        </li>
-        <li>
-          <a href="/about" className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>About</a>
-        </li>
-      </ul>
+      <div className={styles.navContainer}>
+        <div className={styles.navBar}>
+          <ul>
+            <li>
+              <Link href="/" className={currentPath === '/' ? styles.ballotItemS : styles.ballotItemU}>Predictions</Link>
+            </li>
+            <li>
+              <Link href="/methodology" className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>Methodology</Link>
+            </li>
+            <li>
+              <Link href="/about" className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>About</Link>
+            </li>
+          </ul>
+        </div>
+        <div className={displayMenu ? styles.openButton : styles.huh}>
+          <button
+            aria-label="Open Menu"
+            className={styles.hamburgerButton}
+            onClick={() => setDisplayMenu(!displayMenu)}
+          >
+            <Image src={menu} alt='hamburger menu'/>
+          </button>
+        </div>
+      </div>
+
+      <div className={displayMenu ? styles.mobileMenu : styles.hideMenu}>
+        <div className={styles.closeMenu}>
+          <button className={styles.closeButton}
+          onClick={() => setDisplayMenu(!displayMenu)}>
+            <Image src={closemenu} alt='close button'/>
+          </button>
+        </div>
+        <div className={styles.logo}>
+          <h1>
+            <a href="/">
+              <span className="red">2</span>
+              <span className="blue">4</span>cast
+            </a>
+          </h1>
+        </div>
+        <div className={styles.page}>
+          <h1>Pages:</h1>
+        </div>
+        <div className={styles.mobileLinks}>
+          <Link href="/" passHref onClick={() => setDisplayMenu(!displayMenu)}
+          className={currentPath === '/' ? styles.ballotItemS : styles.ballotItemU}>
+            Predictions
+          </Link>
+          <Link href="/methodology" passHref onClick={() => setDisplayMenu(!displayMenu)}
+          className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>
+            Methodology
+          </Link>
+          <Link href="/about" passHref onClick={() => setDisplayMenu(!displayMenu)}
+          className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>
+            About
+          </Link>
+        </div>
+      </div>
     </nav>
+    
   );
 }
+
+

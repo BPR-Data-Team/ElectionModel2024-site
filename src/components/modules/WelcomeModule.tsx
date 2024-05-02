@@ -9,7 +9,7 @@ export default function WelcomeModule(): JSX.Element {
   return (
     <Module>
       <div className={styles.welcome}>
-        <h2>A note on 24cast.org's predictions:</h2>
+        <h2>A note on 24cast.org&apos;s predictions:</h2>
         <p>
           Text coming soon.
         </p>

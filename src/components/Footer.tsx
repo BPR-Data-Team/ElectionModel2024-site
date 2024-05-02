@@ -24,7 +24,7 @@ export default function Footer(): JSX.Element {
           {/** TODO: Link to Terms of Use, Privacy Policy, and Sitemap when they are finished. */}
           <a className={styles.linkText} href="/tos">Terms of Use</a>
           <span className={styles.betweenText}> | </span>
-          <a className={styles.linkText} href="/privacy">Privacy Policy</a>
+          <a className={styles.linkText} href="/soon">Privacy Policy</a>
           <span className={styles.betweenText}> | </span>
           <a className={styles.linkText} href="/map">Sitemap</a>
         </div>

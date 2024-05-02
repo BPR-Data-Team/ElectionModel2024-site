@@ -22,10 +22,10 @@ export default function Nav() {
               <Link href="/" className={currentPath === '/' ? styles.ballotItemS : styles.ballotItemU}>Predictions</Link>
             </li>
             <li>
-              <Link href="/methodology" className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>Methodology</Link>
+              <Link href="/soon" className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>Methodology</Link>
             </li>
             <li>
-              <Link href="/about" className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>About</Link>
+              <Link href="/soon" className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>About</Link>
             </li>
           </ul>
         </div>
@@ -64,11 +64,11 @@ export default function Nav() {
           className={currentPath === '/' ? styles.ballotItemS : styles.ballotItemU}>
             Predictions
           </Link>
-          <Link href="/methodology" passHref onClick={() => setDisplayMenu(!displayMenu)}
+          <Link href="/soon" passHref onClick={() => setDisplayMenu(!displayMenu)}
           className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>
             Methodology
           </Link>
-          <Link href="/about" passHref onClick={() => setDisplayMenu(!displayMenu)}
+          <Link href="/soon" passHref onClick={() => setDisplayMenu(!displayMenu)}
           className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>
             About
           </Link>

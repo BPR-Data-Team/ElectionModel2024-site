@@ -11,10 +11,10 @@ const SitemapPage: React.FC = () => {
             <h2>Sitemap</h2>
             <ul>
                 <li><a className={styles.linkText} href="/">Predictions</a></li>
-                <li><a className={styles.linkText} href="/methodology">Methodology</a></li>
-                <li><a className={styles.linkText} href="/about">About</a></li>
+                <li><a className={styles.linkText} href="/soon">Methodology</a></li>
+                <li><a className={styles.linkText} href="/soon">About</a></li>
                 <li><a className={styles.linkText} href="/tos">Terms of Use</a></li>
-                <li><a className={styles.linkText} href="/privacy">Privacy Policy</a></li>
+                <li><a className={styles.linkText} href="/soon">Privacy Policy</a></li>
             </ul>
         </div>
 

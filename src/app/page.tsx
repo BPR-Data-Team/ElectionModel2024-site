@@ -181,7 +181,7 @@ export default function Home(): JSX.Element {
         />
       </div>
       <SimulationsModule simulations={simulations} />
-      <SHAPModule />
+      <SHAPModule SHAPPredictions={SHAPFactors} />
       <KeyRacesModule />
       <Footer />
     </main>

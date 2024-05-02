@@ -3,7 +3,7 @@ import Module from "../Module";
 import styles from "./SHAPModule.module.css";
 
 export interface SHAPModuleProps {
-  SHAPPredictions: Record<SHAPFactor, number>;
+  SHAPPredictions: Record<SHAPFactor, number> | undefined;
 }
 
 export default function SHAPModule(props: SHAPModuleProps): JSX.Element {

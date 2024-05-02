@@ -3,7 +3,6 @@ import styles from "./Footer.module.css";
 export default function Footer(): JSX.Element {
   return (
     <footer>
-      <hr></hr>
       <div className={styles.footerContainer}>
         <div>
           <a className={styles.footerText}>© 2024 Brown Political Review</a>

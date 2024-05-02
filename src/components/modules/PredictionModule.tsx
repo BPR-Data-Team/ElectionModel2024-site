@@ -106,7 +106,7 @@ export default function PredictionModule(
   return (
     <Module>
       <div>
-        <h3>24cast Prediction:</h3>
+        <h3>24cast.org Prediction:</h3>
       </div>
       <div className={styles.prediction}>
         <div className={styles.mainPrediction}>
@@ -145,7 +145,9 @@ export default function PredictionModule(
             </div>
           </div>
         </div>
-
+        <p className={styles.lastDataUpdate}>
+          Last data update: November 3, 2020
+        </p>
         <DownloadThisCard />
       </div>
     </Module>

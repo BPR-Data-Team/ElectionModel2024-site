@@ -9,17 +9,11 @@ export default function WelcomeModule(): JSX.Element {
   return (
     <Module>
       <div className={styles.welcome}>
-        <h2>Welcome to 24cast!</h2>
+        <h2>A note on 24cast.org&apos;s predictions:</h2>
         <p>
-          This isn&apos;t your typical election prediction—we use an all-new
-          method to determine the outcomes of races down to the margin and break
-          down exactly how our model made those conclusions. Produced by the Ivy
-          League&apos;s largest political journal, this model takes data across
-          multiple decades and works to explain how each race&apos;s history
-          affects expected outcomes.
-        </p>
-        <p className={styles.lastDataUpdate}>
-          Last data update: November 3, 2020
+        The predictions below are based on our machine-learning model. While our predictive accuracy is high for past elections, these predictions are based on data that is expected to change greatly before election day. Our &quot;outcome likelihood&quot; represents the probability of an outcome based on our current information&mdash;not a guarantee. Ultimately, the outcome of the 2024 election will depend on how the American people vote, so please <a href="https://turbovote.org/" className={styles.voteLink}>
+            click here
+          </a> to ensure your registration.
         </p>
       </div>
     </Module>

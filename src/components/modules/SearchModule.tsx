@@ -100,7 +100,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       <div className={styles.search}>
         <p>
           I want to see
-          <select value={props.raceType} onChange={handleRaceChange}>
+          <select value={props.raceType} onChange={handleRaceChange} className={styles.drops}>
             {Object.values(RaceType).map((race, index) => (
               <option key={index} value={race}>
                 {race}
@@ -108,7 +108,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
             ))}
           </select>
           races in
-          <select value={props.state} onChange={handleStateChange}>
+          <select value={props.state} onChange={handleStateChange} className={styles.drops}>
             {filteredStates.map((state, index) => (
               <option key={index} value={state}>
                 {state === State.National ? "the nation" : state}
@@ -118,6 +118,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           {props.raceType === RaceType.House &&
             props.state !== State.National && (
               <select
+                className={styles.drops}
                 value={props.district}
                 onChange={handleDistrictChange}
                 disabled={maxDistricts === 1}

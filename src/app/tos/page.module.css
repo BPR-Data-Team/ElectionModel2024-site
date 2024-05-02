@@ -1,0 +1,28 @@
+.main {
+    margin-top: 1rem;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .mapAndSims {
+    display: flex;
+    gap: 1rem;
+  }
+  @media (max-width: 450px) {
+    .mapAndSims {
+      display: flex;
+      flex-direction: column;
+      /* Adjust styles for mobile screens */
+      /* Optionally, you can add additional styles here */
+    }
+  }
+
+  /* center text */
+  .center {
+    text-align: center;
+    /* font-size: 1.5rem; */
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    /* gap: 1rem; */
+  }

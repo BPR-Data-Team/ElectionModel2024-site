@@ -13,6 +13,7 @@ import { use, useEffect, useState } from "react";
 import { RaceType } from "@/types/RaceType";
 import { State, getStateAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
+import { ResponseItem, parseItem } from "@/types/APIResponse";
 
 interface RaceData {
   winner: Party;
@@ -20,6 +21,25 @@ interface RaceData {
   margin: number;
 }
 
+function calculateLikelihood(avg_margin: number, margins: number[]): number {
+  const avgMarginSign = Math.sign(avg_margin);
+
+  const matchingSignCount = margins.reduce((count, margin) => {
+    return count + (Math.sign(margin) === avgMarginSign ? 1 : 0);
+  }, 0);
+
+  if (margins.length === 0) return 0; // Prevent division by zero
+  return Math.round((matchingSignCount / margins.length) * 100);
+}
+
+/**
+ *
+ * @param raceType The race type
+ * @param state The state
+ * @param district The district (0 if not applicable)
+ * @returns  The predicted winner, likelihood, and margin of the race.
+ * @throws {Error} If the API request fails.
+ */
 async function fetchRaceData(
   raceType: RaceType,
   state: State,
@@ -47,22 +67,30 @@ async function fetchRaceData(
   }
   const raceArg = `${stateArg}${districtArg}${raceTypeArg}`;
 
-  fetch(
+  return fetch(
     `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${raceArg}`
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      const responseItem: ResponseItem = parseItem(data);
+      const winner: Party =
+        responseItem.avg_margin > 0 ? Party.Democrat : Party.Republican;
+      const likelihood: number = calculateLikelihood(
+        responseItem.avg_margin,
+        responseItem.margins
+      );
+      const margin: number = Math.round(responseItem.avg_margin * 10) / 10;
+      const predictions: RaceData = {
+        winner: winner,
+        likelihood: likelihood,
+        margin: margin,
+      };
+      console.log("In fetchRaceData: ", predictions);
+      return predictions;
     })
     .catch((error) => {
-      console.error("Failed to fetch API", error);
+      throw new Error("Failed to fetch API");
     });
-
-  return {
-    winner: Party.Democrat,
-    likelihood: 70,
-    margin: 70,
-  };
 }
 
 /**
@@ -78,11 +106,16 @@ export default function Home(): JSX.Element {
   const [margin, setMargin] = useState<number>(50);
 
   useEffect(() => {
-    fetchRaceData(raceType, state, district).then((data: RaceData) => {
-      setWinner(data.winner);
-      setLikelihood(data.likelihood);
-      setMargin(data.margin);
-    });
+    try {
+      fetchRaceData(raceType, state, district).then((data: RaceData) => {
+        console.log("In useEffect: ", data);
+        setWinner(data.winner);
+        setLikelihood(data.likelihood);
+        setMargin(data.margin);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }, [raceType, state, district]);
 
   return (

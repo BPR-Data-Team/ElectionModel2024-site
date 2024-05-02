@@ -14,7 +14,7 @@ export default function Header(): JSX.Element {
         <h1>
           <a href="/">
             <span className="red">2</span>
-            <span className="blue">4</span>cast
+            <span className="blue">4</span>cast.org
           </a>
           <div className={styles.byContainer}>
             <div className={styles.byText}>By the </div>

@@ -1,11 +1,18 @@
-
 .byContainer {
-  display: flex; /* Use flexbox to align items horizontally */
-  align-items: center; /* Align items vertically */
+    display: flex;
+    align-items: center; /* Align items vertically */
+  }
   
-}
-
-.byText {
-  margin-right: 5px; /* Add some space between "By the" text and the image */
-  font-size: 1.1rem;
-}
+  .byText {
+    margin-right: 5px;
+    font-size: medium;
+  }
+  
+  .bprImage {
+    font-size: medium
+  }
+  @media screen and (max-width: 768px){
+    .byContainer{
+      display: none;
+    }
+  }

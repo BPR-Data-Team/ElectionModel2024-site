@@ -4,12 +4,11 @@ import Image from "next/image";
 import bulletPoint from "image-assets/ballot-sequence/ballot-anim00.png";
 
 const races = [
-  'Georgia Presidential',
-  'North Dakota Senate',
-  'California Gubernational',
-  'Ohio Presidential',
-  'Texas Senate',
-  'Iowa Gubernational'
+  'Washington District 3',
+  'North Carolina Gubernatorial',
+  'New Hampshire Gubernational',
+  'Ohio Senate',
+  'Montana Senate'
   // Add more key races as needed
 ];
 

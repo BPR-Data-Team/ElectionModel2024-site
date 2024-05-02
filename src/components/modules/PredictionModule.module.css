@@ -160,3 +160,9 @@
   font-weight: 500;
 }
 }
+
+.lastDataUpdate {
+  text-align: right;
+  font-style: italic;
+  font-weight: 300;
+}

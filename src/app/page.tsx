@@ -21,6 +21,7 @@ interface RaceData {
   likelihood: number;
   margin: number;
   SHAPFactors: Record<SHAPFactor, number>;
+  simulations: number[];
 }
 
 function calculateLikelihood(avg_margin: number, margins: number[]): number {
@@ -102,6 +103,7 @@ async function fetchRaceData(
         likelihood: likelihood,
         margin: margin,
         SHAPFactors: SHAPFactors,
+        simulations: responseItem.margins,
       };
       console.log("In fetchRaceData: ", predictions);
       return predictions;
@@ -123,6 +125,7 @@ export default function Home(): JSX.Element {
   const [likelihood, setLikelihood] = useState<number>(50);
   const [margin, setMargin] = useState<number>(50);
   const [SHAPFactors, setSHAPFactors] = useState<Record<SHAPFactor, number>>();
+  const [simulations, setSimulations] = useState<number[]>([]);
 
   useEffect(() => {
     try {
@@ -163,13 +166,21 @@ export default function Home(): JSX.Element {
         <MapModule />
         <ExplainerModule
           winner={winner}
-          numSimulations={1000}
-          numWins={700}
-          numLosses={300}
+          numSimulations={simulations.length}
+          numWins={
+            winner === Party.Democrat
+              ? simulations.filter((sim) => sim > 0).length
+              : simulations.filter((sim) => sim < 0).length
+          }
+          numLosses={
+            winner === Party.Democrat
+              ? simulations.filter((sim) => sim < 0).length
+              : simulations.filter((sim) => sim > 0).length
+          }
           SHAPFactors={SHAPFactors}
         />
       </div>
-      <SimulationsModule />
+      <SimulationsModule simulations={simulations} />
       <SHAPModule />
       <KeyRacesModule />
       <Footer />

@@ -51,7 +51,7 @@ export default function Nav() {
           <h1>
             <a href="/">
               <span className="red">2</span>
-              <span className="blue">4</span>cast
+              <span className="blue">4</span>cast.org
             </a>
           </h1>
         </div>

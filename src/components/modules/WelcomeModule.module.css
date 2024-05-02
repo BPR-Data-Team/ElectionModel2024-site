@@ -1,5 +1,4 @@
-.welcome {
-}
+
 
 .welcome h2 {
   text-align: center;
@@ -9,4 +8,8 @@
   text-align: right;
   font-style: italic;
   font-weight: 300;
+}
+
+.voteLink {
+  color: var(--main-text-color);
 }

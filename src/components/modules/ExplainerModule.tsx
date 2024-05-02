@@ -19,7 +19,7 @@ export default function ExplainerModule(): JSX.Element {
           the most predictive factors in this race.
         </p>
         <p>
-          <a href="/methodology" className={styles.methodologyLink}>
+          <a href="/soon" className={styles.methodologyLink}>
             Look through our full methodology!
           </a>
         </p>

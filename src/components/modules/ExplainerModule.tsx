@@ -1,21 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DownloadThisCard from "../DownloadThisCard";
 import Module from "../Module";
 import styles from "./ExplainerModule.module.css";
 import { Party } from "@/types/Party";
-import { SHAPFactors } from "@/types/SHAPFactors";
+import { SHAPFactor } from "@/types/SHAPFactor";
 
 export interface ExplainerModuleProps {
   winner: Party;
   numSimulations: number;
   numWins: number;
   numLosses: number;
-  mostPredictiveFactors: SHAPFactors[];
+  SHAPFactors: Record<SHAPFactor, number> | undefined;
 }
 
 export default function ExplainerModule(
   props: ExplainerModuleProps
 ): JSX.Element {
+  const [mostPredictiveFactors, setMostPredictiveFactors] = useState<
+    SHAPFactor[]
+  >([]);
   const formatStringList = (strings: string[]): React.JSX.Element | null => {
     if (strings.length === 0) return null; // No strings in the array
     // Map each string to a span element
@@ -49,6 +52,20 @@ export default function ExplainerModule(
     );
   };
 
+  useEffect(() => {
+    // Get the three highest SHAP factors
+    if (props.SHAPFactors === undefined) {
+      setMostPredictiveFactors([]);
+      return;
+    }
+    setMostPredictiveFactors(
+      Object.entries(props.SHAPFactors)
+        .sort((a, b) => b[1] - a[1]) // Sort by value in descending order
+        .slice(0, 3) // Get the top 3
+        .map(([factor]) => factor as SHAPFactor) // Get the factor name
+    );
+  }, [props.SHAPFactors]);
+
   return (
     <Module>
       <div className={styles.explainer}>
@@ -63,12 +80,20 @@ export default function ExplainerModule(
           <span className={styles.boldText}>{props.numWins}</span> simulations
           and lost <span className={styles.boldText}>{props.numLosses}</span>.
         </p>
-        <p>
-          By running simulations with varied input data, we determined that{" "}
-          {formatStringList(props.mostPredictiveFactors)}{" "}
-          {props.mostPredictiveFactors.length > 1 ? "were" : "was"} the most
-          predictive factors in this race.
-        </p>
+        {mostPredictiveFactors.length > 0 && (
+          <p>
+            By running simulations with varied input data, we determined that{" "}
+            {formatStringList(mostPredictiveFactors)}{" "}
+            {mostPredictiveFactors.length > 1 ? "were" : "was"} the most
+            predictive factors in this race.
+          </p>
+        )}
+        {mostPredictiveFactors.length === 0 && (
+          <p>
+            Unfortunately, we were unable to determine the most predictive
+            factors for this race.
+          </p>
+        )}
         <p>
           <a href="/soon" className={styles.methodologyLink}>
             Look through our full methodology!

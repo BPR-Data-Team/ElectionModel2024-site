@@ -1,4 +1,5 @@
-export enum SHAPFactors {
+export enum SHAPFactor {
+  ExpertRatings = "expert ratings",
   VotingRegulations = "voting regulations",
   ConsumerConfidenceIndex = "Consumer Confidence Index",
   Other = "other factors",

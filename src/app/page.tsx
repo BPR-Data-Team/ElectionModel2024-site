@@ -14,12 +14,13 @@ import { RaceType } from "@/types/RaceType";
 import { State, getStateAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
-import { SHAPFactors } from "@/types/SHAPFactors";
+import { SHAPFactor } from "@/types/SHAPFactor";
 
 interface RaceData {
   winner: Party;
   likelihood: number;
   margin: number;
+  SHAPFactors: Record<SHAPFactor, number>;
 }
 
 function calculateLikelihood(avg_margin: number, margins: number[]): number {
@@ -81,10 +82,26 @@ async function fetchRaceData(
         responseItem.margins
       );
       const margin: number = Math.round(responseItem.avg_margin * 10) / 10;
+      const SHAPFactors: Record<SHAPFactor, number> = {
+        [SHAPFactor.ExpertRatings]: responseItem.expert_ratings,
+        [SHAPFactor.VotingRegulations]: responseItem.voting_regulations,
+        [SHAPFactor.ConsumerConfidenceIndex]:
+          responseItem.consumer_confidence_index,
+        [SHAPFactor.Other]: responseItem.other,
+        [SHAPFactor.CampaignFinance]: responseItem.campaign_finance,
+        [SHAPFactor.UnemploymentAndInflation]:
+          responseItem.unemployment_and_inflation,
+        [SHAPFactor.Demographics]: responseItem.demographics,
+        [SHAPFactor.CompositionOfCongressAndPresidency]:
+          responseItem.composition_of_congress_and_presidency,
+        [SHAPFactor.GasPrices]: responseItem.gas_prices,
+        [SHAPFactor.PastElections]: responseItem.past_elections,
+      };
       const predictions: RaceData = {
         winner: winner,
         likelihood: likelihood,
         margin: margin,
+        SHAPFactors: SHAPFactors,
       };
       console.log("In fetchRaceData: ", predictions);
       return predictions;
@@ -105,6 +122,7 @@ export default function Home(): JSX.Element {
   const [winner, setWinner] = useState<Party>(Party.Democrat);
   const [likelihood, setLikelihood] = useState<number>(50);
   const [margin, setMargin] = useState<number>(50);
+  const [SHAPFactors, setSHAPFactors] = useState<Record<SHAPFactor, number>>();
 
   useEffect(() => {
     try {
@@ -113,6 +131,7 @@ export default function Home(): JSX.Element {
         setWinner(data.winner);
         setLikelihood(data.likelihood);
         setMargin(data.margin);
+        setSHAPFactors(data.SHAPFactors);
       });
     } catch (error) {
       console.error(error);
@@ -147,11 +166,7 @@ export default function Home(): JSX.Element {
           numSimulations={1000}
           numWins={700}
           numLosses={300}
-          mostPredictiveFactors={[
-            SHAPFactors.VotingRegulations,
-            SHAPFactors.ConsumerConfidenceIndex,
-            SHAPFactors.Other,
-          ]}
+          SHAPFactors={SHAPFactors}
         />
       </div>
       <SimulationsModule />

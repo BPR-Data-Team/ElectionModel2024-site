@@ -54,14 +54,14 @@ export default function ExplainerModule(
       <div className={styles.explainer}>
         <h3>How 24cast.org Predicted This Race</h3>
         <p>
-          We ran <span className={styles.boldtext}>{props.numSimulations}</span>{" "}
+          We ran <span className={styles.boldText}>{props.numSimulations}</span>{" "}
           simulations predicting election margins using a machine learning model
           trained on data across multiple decades.
         </p>
         <p>
           {props.winner}s won in{" "}
-          <span className={styles.boldtext}>{props.numWins}</span> simulations
-          and lost <span className={styles.boldtext}>{props.numLosses}</span>.
+          <span className={styles.boldText}>{props.numWins}</span> simulations
+          and lost <span className={styles.boldText}>{props.numLosses}</span>.
         </p>
         <p>
           By running simulations with varied input data, we determined that{" "}

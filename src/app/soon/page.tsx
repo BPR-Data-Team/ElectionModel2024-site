@@ -14,7 +14,7 @@ const ComingSoonPage: React.FC = () => {
         This page is coming soon.
       </h1>
       <p>
-        In the meantime, check out <a href="/">our predictions</a>.
+        In the meantime, check out <a href="/" className={styles.linkText}>our predictions</a>.
       </p>
     </div>
   );

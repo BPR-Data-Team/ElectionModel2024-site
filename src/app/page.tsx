@@ -183,7 +183,6 @@ export default function Home(): JSX.Element {
       <SimulationsModule simulations={simulations} />
       <SHAPModule SHAPPredictions={SHAPFactors} />
       <KeyRacesModule />
-      <Footer />
     </main>
   );
 }

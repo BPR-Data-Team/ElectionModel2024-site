@@ -1,11 +1,17 @@
-.footerText{
-    font-size: small;
+.footerContainer {
+  width: 95%;
+  max-width: 62.5rem;
+  margin: 1rem auto;
 }
-.linkText{
-    text-decoration: underline;
-    font-size: small;
-    margin-right: 5px;
+
+.footerText {
+  font-size: small;
 }
-.betweenText{
-    margin-right: 5px;
+.linkText {
+  text-decoration: underline;
+  font-size: small;
+  margin-right: 5px;
+}
+.betweenText {
+  margin-right: 5px;
 }

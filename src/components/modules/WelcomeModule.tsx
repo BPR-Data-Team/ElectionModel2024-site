@@ -9,17 +9,9 @@ export default function WelcomeModule(): JSX.Element {
   return (
     <Module>
       <div className={styles.welcome}>
-        <h2>Welcome to 24cast!</h2>
+        <h2>A note on 24cast.org's predictions:</h2>
         <p>
-          This isn&apos;t your typical election prediction—we use an all-new
-          method to determine the outcomes of races down to the margin and break
-          down exactly how our model made those conclusions. Produced by the Ivy
-          League&apos;s largest political journal, this model takes data across
-          multiple decades and works to explain how each race&apos;s history
-          affects expected outcomes.
-        </p>
-        <p className={styles.lastDataUpdate}>
-          Last data update: November 3, 2020
+          Text coming soon.
         </p>
       </div>
     </Module>

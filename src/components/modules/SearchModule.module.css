@@ -47,3 +47,8 @@
     font-size: 12px;
   }
 }
+
+.drops {
+  /* appearance: none; */
+  background-color: transparent !important;
+}

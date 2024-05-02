@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: '24cast by BPR',
+  title: '24cast.org by BPR',
   description: "Innovative election predictions with in-depth explanations by the Brown Political Review.",
 };
 

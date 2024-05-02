@@ -2,7 +2,7 @@ import styles from "./page.module.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Privacy Policy | 24cast',
+    title: 'Privacy Policy | 24cast.org',
   };
 
 const PrivacyPage: React.FC = () => {

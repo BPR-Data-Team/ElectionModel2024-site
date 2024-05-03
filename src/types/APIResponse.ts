@@ -13,10 +13,12 @@ export interface ItemJSON {
   avg_margin: { S: string };
   consumer_confidence_index: { S: string };
   other: { S: string };
-  ind_name: { S: string };
   campaign_finance: { S: string };
   unemployment_and_inflation: { S: string };
   state_district_office: { S: string };
+  state: { S: string };
+  district: { S: string };
+  office_type: { S: string };
   demographics: { S: string };
   composition_of_congress_and_presidency: { S: string };
   weird: { S: string };
@@ -49,10 +51,12 @@ export interface ResponseItem {
   avg_margin: number;
   consumer_confidence_index: number;
   other: number;
-  ind_name: string;
   campaign_finance: number;
   unemployment_and_inflation: number;
   state_district_office: string;
+  state: string;
+  district: number;
+  office_type: string;
   demographics: number;
   composition_of_congress_and_presidency: number;
   weird: string;
@@ -61,6 +65,38 @@ export interface ResponseItem {
 }
 
 export function parseItem(apiResponse: APIResponse): ResponseItem {
+  if (!apiResponse.Item) {
+    throw new Error(
+      `API response with status code ${apiResponse.ResponseMetadata.HTTPStatusCode} is missing Item field`
+    );
+  }
+  const requiredFields: string[] = [
+    "margins",
+    "expert_ratings",
+    "rep_name",
+    "dem_name",
+    "poll",
+    "voting_regulations",
+    "avg_margin",
+    "consumer_confidence_index",
+    "other",
+    "campaign_finance",
+    "unemployment_and_inflation",
+    "state_district_office",
+    "state",
+    "district",
+    "office_type",
+    "demographics",
+    "composition_of_congress_and_presidency",
+    "weird",
+    "gas_prices",
+    "past_elections",
+  ];
+  for (const field of requiredFields) {
+    if (!apiResponse.Item.hasOwnProperty(field)) {
+      throw new Error(`API response is missing required field: ${field}`);
+    }
+  }
   return {
     margins: JSON.parse(apiResponse.Item.margins.S),
     expert_ratings: parseFloat(apiResponse.Item.expert_ratings.S),
@@ -73,12 +109,14 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
       apiResponse.Item.consumer_confidence_index.S
     ),
     other: parseFloat(apiResponse.Item.other.S),
-    ind_name: apiResponse.Item.ind_name.S,
     campaign_finance: parseFloat(apiResponse.Item.campaign_finance.S),
     unemployment_and_inflation: parseFloat(
       apiResponse.Item.unemployment_and_inflation.S
     ),
     state_district_office: apiResponse.Item.state_district_office.S,
+    state: apiResponse.Item.state.S,
+    district: parseFloat(apiResponse.Item.district.S),
+    office_type: apiResponse.Item.office_type.S,
     demographics: parseFloat(apiResponse.Item.demographics.S),
     composition_of_congress_and_presidency: parseFloat(
       apiResponse.Item.composition_of_congress_and_presidency.S

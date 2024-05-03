@@ -68,13 +68,12 @@ async function fetchRaceData(
       raceTypeArg = "President";
       break;
   }
-  const raceArg = `${stateArg}${districtArg}${raceTypeArg}`;
-
-  return fetch(
-    `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${raceArg}`
-  )
+  const raceArg: string = `${stateArg}${districtArg}${raceTypeArg}`;
+  const fetchInput: string = `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${raceArg}`;
+  return fetch(fetchInput)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       const responseItem: ResponseItem = parseItem(data);
       const winner: Party =
         responseItem.avg_margin > 0 ? Party.Democrat : Party.Republican;
@@ -105,11 +104,10 @@ async function fetchRaceData(
         SHAPFactors: SHAPFactors,
         simulations: responseItem.margins,
       };
-      console.log("In fetchRaceData: ", predictions);
       return predictions;
     })
     .catch((error) => {
-      throw new Error("Failed to fetch API");
+      throw new Error(`fetch(${fetchInput}) threw an error: ${error}`);
     });
 }
 
@@ -118,19 +116,18 @@ async function fetchRaceData(
  * @returns {JSX.Element} The home page.
  */
 export default function Home(): JSX.Element {
-  const [raceType, setRaceType] = useState<RaceType>(RaceType.gubernational);
-  const [state, setState] = useState<State>(State.Vermont);
+  const [raceType, setRaceType] = useState<RaceType>(RaceType.presidential);
+  const [state, setState] = useState<State>(State.National);
   const [district, setDistrict] = useState<number>(0);
   const [winner, setWinner] = useState<Party>(Party.Democrat);
-  const [likelihood, setLikelihood] = useState<number>(50);
-  const [margin, setMargin] = useState<number>(50);
+  const [likelihood, setLikelihood] = useState<number>(0);
+  const [margin, setMargin] = useState<number>(0);
   const [SHAPFactors, setSHAPFactors] = useState<Record<SHAPFactor, number>>();
   const [simulations, setSimulations] = useState<number[]>([]);
 
   useEffect(() => {
     try {
       fetchRaceData(raceType, state, district).then((data: RaceData) => {
-        console.log("In useEffect: ", data);
         setWinner(data.winner);
         setLikelihood(data.likelihood);
         setMargin(data.margin);

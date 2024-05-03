@@ -10,10 +10,8 @@ export const metadata: Metadata = {
   title: "Coming Soon | 24cast.org",
 };
 
-const ComingSoonPage = (props: SoonProps) => {
+const ComingSoonPage = () => {
 
-  
-  
   return (
     <div className={styles.center}>
       <h1 className={styles.heading}>

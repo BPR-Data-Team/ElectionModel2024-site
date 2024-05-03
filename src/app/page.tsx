@@ -23,15 +23,31 @@ interface RaceData {
   simulations: number[];
 }
 
-function calculateLikelihood(avg_margin: number, margins: number[]): number {
-  const avgMarginSign = Math.sign(avg_margin);
+function calculateLikelihood(
+  avg_margin: number,
+  margins: number[],
+  deciding_margin: number
+): number {
+  const winner: Party =
+    avg_margin > deciding_margin ? Party.Democrat : Party.Republican;
 
-  const matchingSignCount = margins.reduce((count, margin) => {
-    return count + (Math.sign(margin) === avgMarginSign ? 1 : 0);
+  // if dem, count number of margins above deciding_margin
+  // if rep, count number of margins below deciding_margin
+  const matchingWinnerCount = margins.reduce((count, margin) => {
+    return (
+      count +
+      (winner === Party.Democrat
+        ? margin > deciding_margin
+          ? 1
+          : 0
+        : margin < deciding_margin
+        ? 1
+        : 0)
+    );
   }, 0);
 
   if (margins.length === 0) return 0; // Prevent division by zero
-  return Math.round((matchingSignCount / margins.length) * 100);
+  return Math.round((matchingWinnerCount / margins.length) * 100);
 }
 
 /**
@@ -74,13 +90,49 @@ async function fetchRaceData(
     .then((data) => {
       console.log(data);
       const responseItem: ResponseItem = parseItem(data);
-      const winner: Party =
+      let winner: Party =
         responseItem.avg_margin > 0 ? Party.Democrat : Party.Republican;
-      const likelihood: number = calculateLikelihood(
+      let likelihood: number = calculateLikelihood(
         responseItem.avg_margin,
-        responseItem.margins
+        responseItem.margins,
+        0
       );
-      const margin: number = Math.round(responseItem.avg_margin * 10) / 10;
+      if (state === State.National) {
+        switch (raceType) {
+          case RaceType.presidential:
+            winner =
+              responseItem.avg_margin > 270 ? Party.Democrat : Party.Republican;
+            likelihood = calculateLikelihood(
+              responseItem.avg_margin,
+              responseItem.margins,
+              270
+            );
+            break;
+          case RaceType.Senate:
+            winner =
+              responseItem.avg_margin > 50 ? Party.Democrat : Party.Republican;
+            likelihood = calculateLikelihood(
+              responseItem.avg_margin,
+              responseItem.margins,
+              50
+            );
+            break;
+          case RaceType.House:
+            winner =
+              responseItem.avg_margin > 218 ? Party.Democrat : Party.Republican;
+            likelihood = calculateLikelihood(
+              responseItem.avg_margin,
+              responseItem.margins,
+              218
+            );
+            break;
+          default:
+            break;
+        }
+      }
+      const margin: number = Math.abs(
+        Math.round(responseItem.avg_margin * 10) / 10
+      );
       const SHAPFactors: Record<SHAPFactor, number> = {
         [SHAPFactor.ExpertRatings]: responseItem.expert_ratings,
         [SHAPFactor.VotingRegulations]: responseItem.voting_regulations,

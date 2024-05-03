@@ -37,10 +37,20 @@ export const metadata: Metadata = {
 // }
 
 const people = [
-  { id: "Asher", name: 'Asher Labovich', image: 'person.jpg', bio: 'R is Asher"s true love.'},
-  { id: "Ariel", name: 'Ariel Shifrin', image: 'person.jpg', bio: 'Ariel was the headshot photographer.'},
-  { id: "Javier", name: 'Javier Niño-Sears', image: 'headshots/headshot12.png',
+  { id: "Asher", name: 'Asher Labovich, Founder', image: 'person.jpg', bio: "R is Asher's true love."},
+  { id: "Ariel", name: 'Ariel Shifrin, Project Manager', image: 'person.jpg', bio: 'Ariel was the headshot photographer.'},
+  { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: 'headshots/headshot12.png',
   bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
+  { id: "Alex", name: "Alex Wick, Frontend Lead", image: '', bio: "Alex is getting kind of alright at playing drums."},
+  { id: "Akshay", name: 'Akshay Mehta, Backend Lead', image: '', bio: ''},
+  { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: '', bio: ''},
+  { id: "Amy", name: "Amy Qiao, Data Contributor", image: '', bio: ''},
+  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: '', bio: ''},
+  { id: 'Devon', name: 'Devon Kear-Leng, Web Developer', image: '', bio: ''},
+  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: '', bio: 'Jed is concentrating in IAPA at Brown with a focus on national security'},
+  { id: "John", name: 'John Huang, Web Developer', image: '', bio: ''},
+  { id: "Logan", name: 'Logan Rabe, Political Specialist', image: '', bio: ''},
+  { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: '', bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},
 ]
 
 const AboutPage: React.FC = () => {
@@ -62,7 +72,7 @@ const AboutPage: React.FC = () => {
         featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/">methodology</a> page!)
       </p>
       <p>
-        <b>Please contact us with any questions, ideas, or press inquiries at <a className={styles.linkText} href="mailto: asher_labovich@brown.edu">this email</a>.</b>
+        <b>Please contact us with any questions, ideas, or press inquiries at <u>24castbpr@gmail.com</u>.</b>
       </p>
       {/* consider adding email address straight in here instead of linking it */}
       <p>
@@ -80,7 +90,7 @@ const AboutPage: React.FC = () => {
       </div> */}
       <div className={styles.grid}>
         {people.map((person) => (
-          <Person key={person.id} {...person} />
+          <Person key={person.id} name={person.name} image={person.image} bio={person.bio} />
         ))}
         </div>
     </div>

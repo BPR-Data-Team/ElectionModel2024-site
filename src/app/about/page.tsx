@@ -47,7 +47,7 @@ const people = [
   { id: "Amy", name: "Amy Qiao, Data Contributor", image: '', bio: ''},
   { id: "Chai", name: 'Chai Harsha, Data Contributor', image: '', bio: ''},
   { id: 'Devon', name: 'Devon Kear-Leng, Web Developer', image: '', bio: ''},
-  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: "./headshot5.JPG", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security'},
+  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: "../headshot5.JPG", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security'},
   { id: "John", name: 'John Huang, Web Developer', image: '', bio: ''},
   { id: "Logan", name: 'Logan Rabe, Political Specialist', image: '', bio: ''},
   { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: '', bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},

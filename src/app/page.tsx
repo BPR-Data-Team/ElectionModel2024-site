@@ -101,16 +101,24 @@ async function fetchRaceData(
         switch (raceType) {
           case RaceType.presidential:
             winner =
-              responseItem.avg_margin > 270 ? Party.Democrat : Party.Republican;
+              responseItem.avg_margin > 269
+                ? Party.Democrat
+                : responseItem.avg_margin < 269
+                ? Party.Republican
+                : Party.Tie;
             likelihood = calculateLikelihood(
               responseItem.avg_margin,
               responseItem.margins,
-              270
+              269
             );
             break;
           case RaceType.Senate:
             winner =
-              responseItem.avg_margin > 50 ? Party.Democrat : Party.Republican;
+              responseItem.avg_margin > 50
+                ? Party.Democrat
+                : responseItem.avg_margin < 50
+                ? Party.Republican
+                : Party.Tie;
             likelihood = calculateLikelihood(
               responseItem.avg_margin,
               responseItem.margins,

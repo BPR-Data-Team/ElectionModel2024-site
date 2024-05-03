@@ -8,7 +8,7 @@ import DownloadThisCard from "../DownloadThisCard";
 import { Party } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
 import { State, getNumDistricts } from "@/types/State";
-import { useEffect, useState } from "react";
+import TiedRace from "../svgs/TiedRace";
 
 export interface PredictionModuleProps {
   winner: Party;
@@ -139,7 +139,13 @@ export default function PredictionModule(
       <div className={styles.prediction}>
         <div className={styles.mainPrediction}>
           <span className={styles.mainPredictionIcon}>
-            {props.winner === Party.Democrat ? <DemocratD /> : <RepublicanR />}
+            {props.winner === Party.Democrat ? (
+              <DemocratD />
+            ) : props.winner === Party.Republican ? (
+              <RepublicanR />
+            ) : (
+              <TiedRace />
+            )}
           </span>
           <span className={styles.mainPredictionText}>{getMessage()}</span>
         </div>

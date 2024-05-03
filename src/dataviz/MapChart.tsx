@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
-import { ColorString } from "highcharts";
 
 if (typeof Highcharts === "object") {
   HighchartsMap(Highcharts);
@@ -30,10 +29,10 @@ const colorAxis: Highcharts.ColorAxisOptions = {
   visible: false,
 };
 
-const MapChart: React.FC<MapProps> = ({ stateData }) => {
+const MapChart: React.FC<MapProps> = (props: MapProps) => {
   useEffect(() => {
-    fetchMapDataAndInitializeMap(stateData);
-  }, [stateData]);
+    fetchMapDataAndInitializeMap(props.stateData);
+  }, [props.stateData]);
 
   const fetchMapDataAndInitializeMap = async (stateData: StateData[]) => {
     try {
@@ -50,7 +49,7 @@ const MapChart: React.FC<MapProps> = ({ stateData }) => {
   };
 
   const initializeMap = (stateData: StateData[], mapData: JSON) => {
-    var mapOptions: Highcharts.Options = {
+    const mapOptions: Highcharts.Options = {
       chart: {
         type: "map",
         map: mapData,

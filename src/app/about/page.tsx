@@ -1,5 +1,8 @@
+
 import styles from "./page.module.css";
 import type { Metadata } from "next";
+import React from 'react';
+import Card from './card';
 
 export function About(): JSX.Element {
   return <main className={styles.main}>About</main>;
@@ -9,12 +12,41 @@ export const metadata: Metadata = {
   title: 'About | 24cast.org',
 };
 
+// class Grid extends React.Component {
+//   render() {
+//     const layout = [
+//       { i: "Javier", x: 0, y: 0, w: 1, h: 2, static: true},
+//       { i: "Asher", x: 1, y: 0, w: 3, h: 2, static: true},
+//       { i: "Ariel", x: 4, y: 0, w: 1, h: 2, static: true}
+//     ];
+//     return(
+//       <GridLayout
+//         className="Layout"
+//         layout={layout}
+//         cols={12}
+//         rowHeight={30}
+//         width={1200}
+//       >
+//         <div key="a">a</div>
+//         <div key="b">b</div>
+//         <div key="c">c</div>
+//       </GridLayout>
+//     );
+//   };
+// }
+
+const People = [
+  { id: "Asher", image: 'person.jpg', bio: 'bio'},
+  { id: "Javier", image: 'person.jpg', bio: 'bio'},
+  { id: "Ariel", image: 'person.jpg', bio: 'bio'},
+]
+
 const AboutPage: React.FC = () => {
   return (
     <div className={styles.center}>
       <h1>About 24cast</h1>
       <p>
-        This isn't your typical election prediction—we use an all-new method to determine the outcomes
+        <b>This isn't your typical election prediction</b>—we use new methods to determine the outcomes
           of races down to the margin and break down <i>exactly</i> how each race's history
           affects expected outcomes.
       </p>
@@ -35,14 +67,17 @@ const AboutPage: React.FC = () => {
         Spearheaded by founder Asher Labovich, 24cast is the product of months of effort
         by a team of Brown students, who we wish to highlight below:
       </p>
-      <p>
-      </p>
-      <p>
-      </p>
-
-      
+      <br></br>
+      <br></br>
+      <h1><b>Our Team</b></h1>
+      <br></br>
+      <div className={styles.grid}>
+        {People.map((person) => (
+          <Card key={person.id} image={person.image} bio={person.bio} />
+        ))}
+      </div>
     </div>
-  );
+  )
 };
 
 

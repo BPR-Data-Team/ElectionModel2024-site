@@ -63,7 +63,7 @@ export default function MapModule(): JSX.Element {
     <Module className="mapModule">
       <div className={styles.map}>
         <h3>24cast.org Prediction Map:</h3>
-        <p>Click on a state to see more information.</p>
+        <p>Hover over a state to see more information.</p>
         <MapChart stateData={getTestData()} />
       </div>
     </Module>

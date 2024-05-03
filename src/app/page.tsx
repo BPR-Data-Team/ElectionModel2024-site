@@ -145,7 +145,14 @@ export default function Home(): JSX.Element {
       </div>
       <SimulationsModule />
       <SHAPModule />
-      <KeyRacesModule />
+      <KeyRacesModule
+        raceType={raceType}
+        state={state}
+        district={district}
+        setRaceType={setRaceType}
+        setState={setState}
+        setDistrict={setDistrict}
+      />
       <Footer />
     </main>
   );

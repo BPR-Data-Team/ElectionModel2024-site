@@ -2,7 +2,8 @@
 import styles from "./page.module.css";
 import type { Metadata } from "next";
 import React from 'react';
-import Card from './card';
+// import Card from './card';
+import Person from './person';
 
 export function About(): JSX.Element {
   return <main className={styles.main}>About</main>;
@@ -35,10 +36,11 @@ export const metadata: Metadata = {
 //   };
 // }
 
-const People = [
-  { id: "Asher", image: 'person.jpg', bio: 'bio'},
-  { id: "Javier", image: 'person.jpg', bio: 'bio'},
-  { id: "Ariel", image: 'person.jpg', bio: 'bio'},
+const people = [
+  { id: "Asher", name: 'Asher Labovich', image: 'person.jpg', bio: 'R is Asher"s true love.'},
+  { id: "Ariel", name: 'Ariel Shifrin', image: 'person.jpg', bio: 'Ariel was the headshot photographer.'},
+  { id: "Javier", name: 'Javier Niño-Sears', image: 'headshots/headshot12.png',
+  bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
 ]
 
 const AboutPage: React.FC = () => {
@@ -71,11 +73,16 @@ const AboutPage: React.FC = () => {
       <br></br>
       <h1><b>Our Team</b></h1>
       <br></br>
-      <div className={styles.grid}>
+      {/* <div className={styles.grid}>
         {People.map((person) => (
-          <Card key={person.id} image={person.image} bio={person.bio} />
+          <Card key={person.id} image={person.image} bio={person.bio} name={person.name}/>
         ))}
-      </div>
+      </div> */}
+      <div className={styles.grid}>
+        {people.map((person) => (
+          <Person key={person.id} {...person} />
+        ))}
+        </div>
     </div>
   )
 };

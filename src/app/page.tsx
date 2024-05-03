@@ -269,7 +269,6 @@ export default function Home(): JSX.Element {
         setState={setState}
         setDistrict={setDistrict}
       />
-      <Footer />
     </main>
   );
 }

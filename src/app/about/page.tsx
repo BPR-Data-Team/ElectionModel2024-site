@@ -39,15 +39,15 @@ export const metadata: Metadata = {
 const people = [
   { id: "Asher", name: 'Asher Labovich, Founder', image: 'person.jpg', bio: "R is Asher's true love."},
   { id: "Ariel", name: 'Ariel Shifrin, Project Manager', image: 'person.jpg', bio: 'Ariel was the headshot photographer.'},
-  { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: 'headshots/headshot12.png',
-  bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
   { id: "Alex", name: "Alex Wick, Frontend Lead", image: '', bio: "Alex is getting kind of alright at playing drums."},
   { id: "Akshay", name: 'Akshay Mehta, Backend Lead', image: '', bio: ''},
   { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: '', bio: ''},
+  { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: 'headshots/headshot12.png',
+  bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
   { id: "Amy", name: "Amy Qiao, Data Contributor", image: '', bio: ''},
   { id: "Chai", name: 'Chai Harsha, Data Contributor', image: '', bio: ''},
   { id: 'Devon', name: 'Devon Kear-Leng, Web Developer', image: '', bio: ''},
-  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: '', bio: 'Jed is concentrating in IAPA at Brown with a focus on national security'},
+  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: "./headshot5.JPG", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security'},
   { id: "John", name: 'John Huang, Web Developer', image: '', bio: ''},
   { id: "Logan", name: 'Logan Rabe, Political Specialist', image: '', bio: ''},
   { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: '', bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},
@@ -90,7 +90,7 @@ const AboutPage: React.FC = () => {
       </div> */}
       <div className={styles.grid}>
         {people.map((person) => (
-          <Person key={person.id} name={person.name} image={person.image} bio={person.bio} />
+          <Person key={person.id} {...person} />
         ))}
         </div>
     </div>

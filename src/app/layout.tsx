@@ -23,8 +23,10 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/dze2nzm.css" />
       </head>
       <body className={inter.className}>
-        <Header />
-        <div className="content">{children}</div>
+        <div className="wrapper">
+          <Header />
+          <div className="content">{children}</div>
+        </div>
         <Footer />
       </body>
     </html>

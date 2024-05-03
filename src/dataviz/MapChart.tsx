@@ -62,7 +62,7 @@ const MapChart: React.FC<MapProps> = ({ stateData }) => {
         max: 3,
         stops: colorAxisStops,
         visible: false,
-      },
+      } as Highcharts.ColorAxisOptions,
       tooltip: {
         style: {
           fontFamily: "gelica, book antiqua, georgia, times new roman, serif",

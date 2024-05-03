@@ -34,3 +34,18 @@
   .linkText {
     color: var(--main-text-color);
   }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 250px); 
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+   .race {
+    display: flex;
+    align-items: center;
+  }
+  
+  .race p {
+    margin-left: 10px;
+  }

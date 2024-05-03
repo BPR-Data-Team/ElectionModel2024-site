@@ -17,8 +17,7 @@ interface MapProps {
 
 const colorAxisStops: [number, string][] = [
   [0, "#B83C2B"], // Republican red
-  [0.49999999, "#DB9D95"], // WIP
-  [0.5, "#ACAECC"],
+  [0.5, "#EAEAEA"],
   [1, "#595D9A"], // Democrat blue
 ];
 

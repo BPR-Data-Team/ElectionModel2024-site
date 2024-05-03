@@ -3,7 +3,9 @@ import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
 import { ColorString } from "highcharts";
 
-HighchartsMap(Highcharts);
+if (typeof Highcharts === "object") {
+  HighchartsMap(Highcharts);
+}
 
 interface StateData {
   "hc-key": string;

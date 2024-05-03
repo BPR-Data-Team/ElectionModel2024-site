@@ -183,6 +183,7 @@ export default function Home(): JSX.Element {
   const [margin, setMargin] = useState<number>(0);
   const [SHAPFactors, setSHAPFactors] = useState<Record<SHAPFactor, number>>();
   const [simulations, setSimulations] = useState<number[]>([]);
+  const [decidingMargin, setDecidingMargin] = useState<number>(0);
 
   useEffect(() => {
     try {
@@ -191,11 +192,33 @@ export default function Home(): JSX.Element {
         setLikelihood(data.likelihood);
         setMargin(data.margin);
         setSHAPFactors(data.SHAPFactors);
+        setSimulations(data.simulations);
       });
     } catch (error) {
       console.error(error);
     }
   }, [raceType, state, district]);
+
+  useEffect(() => {
+    if (state === State.National) {
+      switch (raceType) {
+        case RaceType.presidential:
+          setDecidingMargin(269);
+          break;
+        case RaceType.Senate:
+          setDecidingMargin(50);
+          break;
+        case RaceType.House:
+          setDecidingMargin(218);
+          break;
+        default:
+          setDecidingMargin(0);
+          break;
+      }
+    } else {
+      setDecidingMargin(0);
+    }
+  }, [raceType, state]);
 
   return (
     <main className={styles.main}>
@@ -225,13 +248,13 @@ export default function Home(): JSX.Element {
           numSimulations={simulations.length}
           numWins={
             winner === Party.Democrat
-              ? simulations.filter((sim) => sim > 0).length
-              : simulations.filter((sim) => sim < 0).length
+              ? simulations.filter((sim) => sim > decidingMargin).length
+              : simulations.filter((sim) => sim < decidingMargin).length
           }
           numLosses={
             winner === Party.Democrat
-              ? simulations.filter((sim) => sim < 0).length
-              : simulations.filter((sim) => sim > 0).length
+              ? simulations.filter((sim) => sim < decidingMargin).length
+              : simulations.filter((sim) => sim > decidingMargin).length
           }
           SHAPFactors={SHAPFactors}
         />

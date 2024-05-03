@@ -17,7 +17,7 @@ export default function KeyRacesModule(): JSX.Element {
   return (
     <Module>
       <div className={styles.keyRaces}>
-        <h3>Explore Key Races</h3>
+        <h3 className={styles.exploreText}>Explore Key Races</h3>
         <div className={styles.grid}>
           {races.map((race, index) => (
             <div key={index} className={styles.race}>

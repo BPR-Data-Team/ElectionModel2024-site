@@ -100,3 +100,8 @@ header a {
   text-decoration: none;
   color: var(--main-text-color);
 }
+
+footer a {
+  text-decoration: none;
+  color: var(--main-text-color);
+}

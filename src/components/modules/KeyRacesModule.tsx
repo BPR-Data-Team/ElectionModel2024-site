@@ -3,7 +3,7 @@ import styles from "./KeyRacesModule.module.css";
 import Image from "next/image";
 import bulletPoint from "image-assets/ballot-sequence/ballot-anim00.png";
 
-const races = [
+export const races = [
   'Washington District 3',
   'North Carolina Gubernatorial',
   'New Hampshire Gubernational',

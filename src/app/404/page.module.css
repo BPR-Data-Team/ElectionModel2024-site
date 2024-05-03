@@ -30,3 +30,20 @@
     font-size: 3rem;
     margin-block: inherit;
   }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 250px); 
+    gap: 2px;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+
+  .race {
+    display: flex;
+    align-items: center;
+  }
+  
+  .race p {
+    margin-left: 10px;
+  }

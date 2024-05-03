@@ -261,7 +261,15 @@ export default function Home(): JSX.Element {
       </div>
       <SimulationsModule simulations={simulations} />
       <SHAPModule SHAPPredictions={SHAPFactors} />
-      <KeyRacesModule />
+      <KeyRacesModule
+        raceType={raceType}
+        state={state}
+        district={district}
+        setRaceType={setRaceType}
+        setState={setState}
+        setDistrict={setDistrict}
+      />
+      <Footer />
     </main>
   );
 }

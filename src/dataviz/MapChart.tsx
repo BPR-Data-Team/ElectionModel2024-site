@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
+import { ColorString } from "highcharts";
 
-HighchartsMap(Highcharts);
+if (typeof Highcharts === "object") {
+  HighchartsMap(Highcharts);
+}
 
 export interface StateData {
   "hc-key": string;
@@ -12,6 +15,20 @@ export interface StateData {
 interface MapProps {
   stateData: StateData[];
 }
+
+const colorAxisStops: [number, string][] = [
+  [0, "#B83C2B"], // Republican red
+  [0.49999999, "#DB9D95"], // WIP
+  [0.5, "#ACAECC"],
+  [1, "#595D9A"], // Democrat blue
+];
+
+const colorAxis: Highcharts.ColorAxisOptions = {
+  min: -3,
+  max: 3,
+  stops: colorAxisStops,
+  visible: false,
+};
 
 const MapChart: React.FC<MapProps> = ({ stateData }) => {
   useEffect(() => {
@@ -69,19 +86,7 @@ const MapChart: React.FC<MapProps> = ({ stateData }) => {
         enabled: false,
         enableButtons: false,
       },
-      colorAxis: {
-        min: getMinState(stateData),
-        max: getMaxState(stateData),
-        stops: [
-          [0, "#B83C2B"], // Republican red
-          // [0.49, "#DB9D95"], // WIP
-          [0.5, "#EAEAEA"],
-          // [0.50000001, "#ACAECC"],
-          [1, "#595D9A"], // Democrat blue
-        ],
-        // hide the color axis
-        visible: false,
-      },
+      colorAxis: colorAxis,
       tooltip: {
         style: {
           fontFamily: "gelica, book antiqua, georgia, times new roman, serif",

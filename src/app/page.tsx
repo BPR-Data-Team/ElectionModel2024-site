@@ -105,8 +105,8 @@ async function fetchRaceData(
       };
       return predictions;
     })
-    .catch((error) => {
-      throw new Error(`fetch(${fetchInput}) threw an error: ${error}`);
+    .catch((error: Error) => {
+      return Promise.reject(error);
     });
 }
 

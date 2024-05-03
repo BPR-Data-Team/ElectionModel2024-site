@@ -42,6 +42,12 @@ export default function PredictionModule(
       }
     }
 
+    if (props.likelihood < 60) {
+      message += " slightly";
+    } else if (props.likelihood > 80) {
+      message += " heavily";
+    }
+
     message += " favored to win the";
 
     switch (props.raceType) {

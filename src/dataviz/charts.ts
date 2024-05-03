@@ -1,6 +1,6 @@
 import Highcharts from "highcharts";
 
-function getTestData() {
+export function getTestData() {
   const testData = [
     { "hc-key": "us-al", value: 0.5 },
     { "hc-key": "us-ak", value: -0.2 },
@@ -56,7 +56,7 @@ function getTestData() {
   return testData;
 }
 
-function initializeMap(stateData: any) {
+export function initializeMap(stateData: any) {
   var mapData;
   var mapOptions;
   var xhr = new XMLHttpRequest();

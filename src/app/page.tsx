@@ -118,7 +118,7 @@ async function fetchRaceData(
  * @returns {JSX.Element} The home page.
  */
 export default function Home(): JSX.Element {
-  const [raceType, setRaceType] = useState<RaceType>(RaceType.gubernational);
+  const [raceType, setRaceType] = useState<RaceType>(RaceType.presidential);
   const [state, setState] = useState<State>(State.Vermont);
   const [district, setDistrict] = useState<number>(0);
   const [winner, setWinner] = useState<Party>(Party.Democrat);

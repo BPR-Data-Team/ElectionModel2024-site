@@ -8,7 +8,7 @@ import DownloadThisCard from "../DownloadThisCard";
 import { Party } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
 import { State, getNumDistricts } from "@/types/State";
-import { get } from "http";
+import TiedRace from "../svgs/TiedRace";
 
 export interface PredictionModuleProps {
   winner: Party;
@@ -27,6 +27,14 @@ export default function PredictionModule(
   props: PredictionModuleProps
 ): JSX.Element {
   const getMessage = (): string => {
+    if (
+      props.raceType === RaceType.Senate &&
+      props.state === State.National &&
+      props.margin === 50
+    ) {
+      return "The Senate predicted to be a 50-50 split.";
+    }
+
     let message: string = "";
 
     if (props.winner === Party.Democrat) {
@@ -41,6 +49,12 @@ export default function PredictionModule(
       } else {
         message = "Republicans are";
       }
+    }
+
+    if (props.likelihood < 60) {
+      message += " slightly";
+    } else if (props.likelihood > 80) {
+      message += " heavily";
     }
 
     message += " favored to win the";
@@ -103,6 +117,20 @@ export default function PredictionModule(
     return message;
   };
 
+  const getMargin = (): number => {
+    if (props.state !== State.National || props.winner === Party.Democrat)
+      return props.margin;
+    switch (props.raceType) {
+      case RaceType.presidential:
+        return 538 - props.margin;
+      case RaceType.Senate:
+        return 100 - props.margin;
+      case RaceType.House:
+        return 435 - props.margin;
+      default:
+        return props.margin;
+    }
+  };
   return (
     <Module>
       <div>
@@ -111,7 +139,13 @@ export default function PredictionModule(
       <div className={styles.prediction}>
         <div className={styles.mainPrediction}>
           <span className={styles.mainPredictionIcon}>
-            {props.winner === Party.Democrat ? <DemocratD /> : <RepublicanR />}
+            {props.winner === Party.Democrat ? (
+              <DemocratD />
+            ) : props.winner === Party.Republican ? (
+              <RepublicanR />
+            ) : (
+              <TiedRace />
+            )}
           </span>
           <span className={styles.mainPredictionText}>{getMessage()}</span>
         </div>
@@ -126,7 +160,7 @@ export default function PredictionModule(
                 Outcome Likelihood:
               </h4>
               <span className={styles.predictionInfoItemContent}>
-                {props.likelihood}%
+                {props.likelihood === 100 ? ">99" : props.likelihood}%
               </span>
             </div>
           </div>
@@ -137,16 +171,23 @@ export default function PredictionModule(
             </div>
             <div className={styles.predictionInfoItemText}>
               <h4 className={styles.predictionInfoItemHeader}>
-                Predicted Margin:
+                {props.state === State.National
+                  ? props.raceType === RaceType.presidential
+                    ? "Electoral Votes"
+                    : "Seats"
+                  : "Margin"}
+                :
               </h4>
               <span className={styles.predictionInfoItemContent}>
-                +{props.margin}
+                {props.state !== State.National ? "+" : ""}
+                {getMargin()}
               </span>
             </div>
           </div>
         </div>
         <p className={styles.lastDataUpdate}>
-          Last data update: November 3, 2020
+          Last data update: {`${new Date().toLocaleDateString()}`}{" "}
+          {/*TODO: make this real */}
         </p>
         <DownloadThisCard />
       </div>

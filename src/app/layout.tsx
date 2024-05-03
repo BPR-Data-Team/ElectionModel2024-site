@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: '24cast.org by BPR',
-  description: "Innovative election predictions with in-depth explanations by the Brown Political Review.",
+  title: "24cast.org by BPR",
+  description:
+    "Innovative election predictions with in-depth explanations by the Brown Political Review.",
 };
 
 export default function RootLayout({
@@ -21,8 +23,11 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/dze2nzm.css" />
       </head>
       <body className={inter.className}>
-        <Header />
-        <div className="content">{children}</div>
+        <div className="wrapper">
+          <Header />
+          <div className="content">{children}</div>
+        </div>
+        <Footer />
       </body>
     </html>
   );

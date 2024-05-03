@@ -1,4 +1,5 @@
 export enum Party {
-  Democrat = "democrat",
-  Republican = "republican",
+  Democrat = "Democrat",
+  Republican = "Republican",
+  Tie = "Tie",
 }

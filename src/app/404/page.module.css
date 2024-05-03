@@ -25,6 +25,10 @@
     transform: translate(-50%, -50%);
   }
 
+  .linkText {
+    color: var(--main-text-color);
+  }
+
   .heading {
     font-weight: 700;
     font-size: 3rem;

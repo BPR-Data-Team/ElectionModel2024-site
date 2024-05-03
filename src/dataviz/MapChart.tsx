@@ -6,7 +6,7 @@ if (typeof Highcharts === "object") {
   HighchartsMap(Highcharts);
 }
 
-interface StateData {
+export interface StateData {
   "hc-key": string;
   value: number;
 }
@@ -47,6 +47,26 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       console.error("Error fetching map data:", error);
     }
   };
+
+  function getMaxState(stateData: StateData[]): number {
+    var max = stateData[0].value;
+    for (var i = 1; i < stateData.length; i++) {
+      if (stateData[i].value > max) {
+        max = stateData[i].value;
+      }
+    }
+    return max;
+  }
+
+  function getMinState(stateData: StateData[]): number {
+    var min = stateData[0].value;
+    for (var i = 1; i < stateData.length; i++) {
+      if (stateData[i].value < min) {
+        min = stateData[i].value;
+      }
+    }
+    return min;
+  }
 
   const initializeMap = (stateData: StateData[], mapData: JSON) => {
     const mapOptions: Highcharts.Options = {

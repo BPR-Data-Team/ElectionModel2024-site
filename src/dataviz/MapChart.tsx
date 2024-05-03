@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
+import { ColorString } from "highcharts";
 
 HighchartsMap(Highcharts);
 
@@ -12,6 +13,13 @@ interface StateData {
 interface MapProps {
   stateData: StateData[];
 }
+
+const colorAxisStops: Array<[number, ColorString]> = [
+  [0, "#B83C2B"], // Republican red
+  [0.49999999, "#DB9D95"], // WIP
+  [0.5, "#ACAECC"],
+  [1, "#595D9A"], // Democrat blue
+];
 
 const MapChart: React.FC<MapProps> = ({ stateData }) => {
   useEffect(() => {
@@ -52,13 +60,7 @@ const MapChart: React.FC<MapProps> = ({ stateData }) => {
       colorAxis: {
         min: -3,
         max: 3,
-        stops: [
-          [0, "#B83C2B"], // Republican red
-          [0.49999999, "#DB9D95"], // WIP
-          [0.5, "#ACAECC"],
-          [1, "#595D9A"], // Democrat blue
-        ],
-        // hide the color axis
+        stops: colorAxisStops,
         visible: false,
       },
       tooltip: {

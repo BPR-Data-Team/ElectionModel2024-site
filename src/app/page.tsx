@@ -242,7 +242,7 @@ export default function Home(): JSX.Element {
         district={district}
       />
       <div className={styles.mapAndSims}>
-        <MapModule />
+        <MapModule type={raceType} />
         <ExplainerModule
           winner={winner}
           numSimulations={simulations.length}

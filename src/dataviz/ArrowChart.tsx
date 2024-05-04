@@ -33,6 +33,9 @@ function arrows(categories: string[], data: number[]) {
       borderRadius: 5,
       type: "bar",
     },
+    credits: {
+      enabled: false
+    },
     title: {
       text: "",
       style: {

@@ -78,6 +78,9 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
         type: "map",
         map: mapData,
       },
+      credits: {
+        enabled: false
+      },
       accessibility: {
         description:
           "Map of the United States showing the average predicted margin by state.",

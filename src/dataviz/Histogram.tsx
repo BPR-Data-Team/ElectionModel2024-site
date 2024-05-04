@@ -99,6 +99,9 @@ function MarginHistogram(input_data: number[]) {
     title: {
       text: "",
     },
+    credits: {
+      enabled: false
+    },
     xAxis: {
       title: {
         text: "Margin",

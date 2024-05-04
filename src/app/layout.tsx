@@ -21,6 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/dze2nzm.css" />
+        <meta name="keywords" content="election, politics, AI" />
+        <meta name="author" content="24cast by the Brown Political Review" />
+        <meta name="robots" content="index, follow" />
+        <meta name="theme-color" content="#F2F2F2" />
       </head>
       <body className={inter.className}>
         <div className="wrapper">

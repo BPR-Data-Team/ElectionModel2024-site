@@ -71,14 +71,14 @@ const AboutPage: React.FC = () => {
     <div className={styles.center}>
       <h1>About 24cast</h1>
       <p>
-        This isn't your typical election prediction model—we use new methods to determine the outcomes
-          of races down to the margin and break down <i>exactly</i> how each race's history
+        This isn&apos;t your typical election prediction model—we use new methods to determine the outcomes
+          of races down to the margin and break down <i>exactly</i> how each race&apos;s history
           affects expected outcomes.
       </p>
       <p>
-        24cast is produced by the Brown Political Review's Data Board. When the Data Board isn't innovating
+        24cast is produced by the Brown Political Review&apos;s Data Board. When the Data Board isn&apos;t innovating
         election predictions, our team writes <a className={styles.linkText} href='https://brownpoliticalreview.org/category/data/'>data-driven articles</a> for BPR
-        and creates data visualizations for <a className={styles.linkText} href='https://brownpoliticalreview.org/'>articles</a> written by BPR's Editorial Board.
+        and creates data visualizations for <a className={styles.linkText} href='https://brownpoliticalreview.org/'>articles</a> written by BPR&apos;s Editorial Board.
       </p>
       <p>
         24cast is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle

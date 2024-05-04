@@ -116,6 +116,12 @@
     font-weight: 500;
   }
 }
+
+@media (max-width: 440px) {
+  .mainPredictionIcon {
+    display: none;
+  }
+}
 /* CSS Format for Small Screens */
 @media (max-width: 450px) {
   /* Democrat image and prediction text, TODO: Format for small and medium */

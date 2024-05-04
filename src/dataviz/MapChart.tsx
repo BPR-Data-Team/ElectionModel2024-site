@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
-import { ColorString } from "highcharts";
 
 if (typeof Highcharts === "object") {
   HighchartsMap(Highcharts);
 }
 
-interface StateData {
+export interface StateData {
   "hc-key": string;
   value: number;
 }
@@ -18,8 +17,7 @@ interface MapProps {
 
 const colorAxisStops: [number, string][] = [
   [0, "#B83C2B"], // Republican red
-  [0.49999999, "#DB9D95"], // WIP
-  [0.5, "#ACAECC"],
+  [0.5, "#EAEAEA"],
   [1, "#595D9A"], // Democrat blue
 ];
 
@@ -30,10 +28,10 @@ const colorAxis: Highcharts.ColorAxisOptions = {
   visible: false,
 };
 
-const MapChart: React.FC<MapProps> = ({ stateData }) => {
+const MapChart: React.FC<MapProps> = (props: MapProps) => {
   useEffect(() => {
-    fetchMapDataAndInitializeMap(stateData);
-  }, [stateData]);
+    fetchMapDataAndInitializeMap(props.stateData);
+  }, [props.stateData]);
 
   const fetchMapDataAndInitializeMap = async (stateData: StateData[]) => {
     try {
@@ -49,8 +47,28 @@ const MapChart: React.FC<MapProps> = ({ stateData }) => {
     }
   };
 
+  function getMaxState(stateData: StateData[]): number {
+    var max = stateData[0].value;
+    for (var i = 1; i < stateData.length; i++) {
+      if (stateData[i].value > max) {
+        max = stateData[i].value;
+      }
+    }
+    return max;
+  }
+
+  function getMinState(stateData: StateData[]): number {
+    var min = stateData[0].value;
+    for (var i = 1; i < stateData.length; i++) {
+      if (stateData[i].value < min) {
+        min = stateData[i].value;
+      }
+    }
+    return min;
+  }
+
   const initializeMap = (stateData: StateData[], mapData: JSON) => {
-    var mapOptions: Highcharts.Options = {
+    const mapOptions: Highcharts.Options = {
       chart: {
         type: "map",
         map: mapData,

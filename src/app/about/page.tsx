@@ -1,9 +1,22 @@
-
 import styles from "./page.module.css";
 import type { Metadata } from "next";
-import React from 'react';
-// import Card from './card';
 import Person from './person';
+import Image from "next/image";
+import akshay from "image-assets/headshots/headshot1.jpg";
+import amy from "image-assets/headshots/headshot2.png";
+import sita from "image-assets/headshots/headshot3.jpg";
+import logan from "image-assets/headshots/headshot4.png";
+import jed from "image-assets/headshots/headshot5.jpg";
+import alex from "image-assets/headshots/headshot6.png";
+import asher from "image-assets/headshots/headshot7.png";
+import devon from "image-assets/headshots/headshot8.png";
+import nikhil from "image-assets/headshots/headshot9.png";
+import chai from "image-assets/headshots/headshot10.png";
+import john from "image-assets/headshots/headshot11.png";
+import javier from "image-assets/headshots/headshot12.png";
+import blank from "image-assets/headshots/headshot13.png";
+
+
 
 export function About(): JSX.Element {
   return <main className={styles.main}>About</main>;
@@ -37,20 +50,20 @@ export const metadata: Metadata = {
 // }
 
 const people = [
-  { id: "Asher", name: 'Asher Labovich, Founder', image: 'person.jpg', bio: "R is Asher's true love."},
-  { id: "Ariel", name: 'Ariel Shifrin, Project Manager', image: 'person.jpg', bio: 'Ariel was the headshot photographer.'},
-  { id: "Alex", name: "Alex Wick, Frontend Lead", image: '', bio: "Alex is getting kind of alright at playing drums."},
-  { id: "Akshay", name: 'Akshay Mehta, Backend Lead', image: '', bio: ''},
-  { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: '', bio: ''},
-  { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: 'headshots/headshot12.png',
+  { id: "Asher", name: 'Asher Labovich, Founder', image: asher, year: "Brown '26", bio: "R is Asher's true love."},
+  { id: "Ariel", name: 'Ariel Shifrin, Project Manager', image: blank, year: "Brown '27", bio: 'Ariel was the headshot photographer.'},
+  { id: "Alex", name: "Alex Wick, Frontend Lead", image: alex, year: "Brown '25", bio: "Alex is getting kind of alright at playing drums."},
+  { id: "Akshay", name: 'Akshay Mehta, Backend Lead', image: akshay, year: "Brown '26", bio: ''},
+  { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: ''},
+  { id: "Amy", name: "Amy Qiao, Data Contributor", image: amy, year: "Brown '26", bio: ''},
+  { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: javier, year: "Brown '25",
   bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
-  { id: "Amy", name: "Amy Qiao, Data Contributor", image: '', bio: ''},
-  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: '', bio: ''},
-  { id: 'Devon', name: 'Devon Kear-Leng, Web Developer', image: '', bio: ''},
-  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: "../headshot5.JPG", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security'},
-  { id: "John", name: 'John Huang, Web Developer', image: '', bio: ''},
-  { id: "Logan", name: 'Logan Rabe, Political Specialist', image: '', bio: ''},
-  { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: '', bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},
+  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: chai, year: "Brown '26", bio: ''},
+  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: jed, year: "Brown '27", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security.'},
+  { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: nikhil, year: "Brown '27", bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},
+  { id: "John", name: 'John Huang, Web Developer', image: john, year: "Brown '27", bio: ''},
+  { id: 'Devon', name: 'Devon Kear-Leng, Web Developer', image: devon, year: "Brown '26", bio: ''},
+  { id: "Logan", name: 'Logan Rabe, Political Specialist', image: logan, year: "Brown '26", bio: ''},
 ]
 
 const AboutPage: React.FC = () => {
@@ -88,11 +101,30 @@ const AboutPage: React.FC = () => {
           <Card key={person.id} image={person.image} bio={person.bio} name={person.name}/>
         ))}
       </div> */}
-      <div className={styles.grid}>
+      {/* <div className={styles.grid}>
         {people.map((person) => (
           <Person key={person.id} {...person} />
         ))}
-        </div>
+        </div> */}
+
+      <div className={styles.grid}>
+        {people.map((person) => (
+          <div key={person.name} className={styles.person}>
+            <div className={styles.image}>
+              <Image
+                src={person.image}
+                width={100}
+                height={100}
+                // border-radius="50%"
+                alt="person"
+              />
+            </div>
+          <h3 className={styles.name}>{person.name}</h3>
+          <p className={styles.bio}> {person.year}</p>
+          <p className={styles.bio}> {person.bio}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 };

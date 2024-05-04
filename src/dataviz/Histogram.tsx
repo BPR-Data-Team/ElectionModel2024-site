@@ -144,9 +144,6 @@ function MarginHistogram(input_data: number[]) {
         borderRadius: 7,
       },
     },
-    credits: {
-      enabled: false,
-    },
     tooltip: {
       style: {
         fontSize: "12px",

@@ -17,11 +17,6 @@ import javier from "image-assets/headshots/headshot12.png";
 import blank from "image-assets/icon-set/num-icon256.png";
 
 
-
-export function About(): JSX.Element {
-  return <main className={styles.main}>About</main>;
-}
-
 export const metadata: Metadata = {
   title: 'About | 24cast.org',
 };

@@ -14,7 +14,7 @@ import nikhil from "image-assets/headshots/headshot9.png";
 import chai from "image-assets/headshots/headshot10.png";
 import john from "image-assets/headshots/headshot11.png";
 import javier from "image-assets/headshots/headshot12.png";
-import blank from "image-assets/headshots/headshot13.png";
+import blank from "image-assets/icon-set/num-icon256.png";
 
 
 

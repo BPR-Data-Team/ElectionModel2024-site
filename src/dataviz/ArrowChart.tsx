@@ -1,12 +1,40 @@
+import { SHAPFactor } from "@/types/SHAPFactor";
+import Highcharts from "highcharts";
+import { useLayoutEffect } from "react";
 
+interface ArrowProps {
+  SHAP: Record<SHAPFactor, number> | undefined;
+}
+
+const ArrowChart = (props: ArrowProps) => {
+  useLayoutEffect(() => {
+    if (props.SHAP == undefined) {
+    } else {
+      var categories: string[] = [];
+      var data: number[] = [];
+      for (const factor in props.SHAP) {
+        if (Object.prototype.hasOwnProperty.call(props.SHAP, factor)) {
+          categories.push(factor);
+          data.push(parseFloat(props.SHAP[factor as SHAPFactor].toFixed(1)));
+        }
+      }
+      arrows(categories, data);
+    }
+  });
+
+  return <div id="container4"></div>;
+};
+
+export default ArrowChart;
 
 function arrows(categories: string[], data: number[]) {
   Highcharts.chart("container4", {
     chart: {
+      borderRadius: 5,
       type: "bar",
     },
     title: {
-      text: "Arrows Chart",
+      text: "",
       style: {
         color: "black",
         fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
@@ -19,7 +47,7 @@ function arrows(categories: string[], data: number[]) {
       title: {
         //   text: 'Arrows Chart'
       },
-      categories: ["Polls", "Economic", "Past Elections", "Cost of Voting"],
+      categories: categories,
       labels: {
         style: {
           color: "black",
@@ -56,7 +84,7 @@ function arrows(categories: string[], data: number[]) {
     series: [
       {
         name: "Impact",
-        data: [-5, 3, -7, 2],
+        data: data,
         threshold: 0,
       },
     ],

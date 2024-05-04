@@ -32,7 +32,7 @@ export default function PredictionModule(
       props.state === State.National &&
       props.margin === 50
     ) {
-      return "The Senate predicted to be a 50-50 split.";
+      return "The Senate is predicted to be a 50-50 split.";
     }
 
     let message: string = "";
@@ -74,9 +74,18 @@ export default function PredictionModule(
         break;
     }
 
+    if (props.state === State.Nebraska && props.raceType === RaceType.Senate) {
+      message += " special election";
+    }
+
     if (props.state !== State.National) {
       message += ` in ${props.state}`;
-      if (props.raceType == RaceType.House && props.district > 0) {
+      if (
+        (props.raceType == RaceType.House ||
+          (props.raceType == RaceType.presidential &&
+            (props.state === State.Nebraska || props.state === State.Maine))) &&
+        props.district > 0
+      ) {
         message += `'s `;
         if (getNumDistricts(props.state) === 1) {
           message += "at-large";
@@ -113,6 +122,9 @@ export default function PredictionModule(
       }
     }
     message += ".";
+    if (props.state === State.Nebraska && props.raceType === RaceType.Senate) {
+      message += "*";
+    }
 
     return message;
   };
@@ -189,6 +201,13 @@ export default function PredictionModule(
           Last data update: {`${new Date().toLocaleDateString()}`}{" "}
           {/*TODO: make this real */}
         </p>
+        {props.state === State.Nebraska &&
+        props.raceType === RaceType.Senate ? (
+          <p className={styles.note}>
+            *We are not predicting Nebraska&apos;s regular Senate election because
+            there is no Democratic candidate.
+          </p>
+        ) : null}
         <DownloadThisCard />
       </div>
     </Module>

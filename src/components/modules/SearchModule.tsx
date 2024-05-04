@@ -5,6 +5,7 @@ import { RaceType } from "@/types/RaceType";
 import {
   State,
   getGubernatorialRaceStates,
+  getHouseRaceStates,
   getNumDistricts,
   getSenateRaceStates,
 } from "@/types/State";
@@ -21,6 +22,10 @@ export interface SearchModuleProps {
 export default function SearchModule(props: SearchModuleProps): JSX.Element {
   const [filteredStates, setFilteredStates] = useState<State[]>([]);
   const [maxDistricts, setMaxDistricts] = useState<number>(0);
+  const [
+    isMaineOrNebraskaAndPresidential,
+    setIsMaineOrNebraskaAndPresidential,
+  ] = useState<boolean>(false);
 
   useEffect(() => {
     if (!filteredStates.includes(props.state)) {
@@ -36,6 +41,8 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       case RaceType.gubernational:
         setFilteredStates(getGubernatorialRaceStates());
         break;
+      case RaceType.House:
+        setFilteredStates(getHouseRaceStates());
       default:
         setFilteredStates(Object.values(State));
         break;
@@ -50,6 +57,14 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     ) {
       props.setRaceType(RaceType.presidential);
     }
+    if (
+      props.raceType === RaceType.presidential &&
+      (props.state === State.Maine || props.state === State.Nebraska)
+    ) {
+      setIsMaineOrNebraskaAndPresidential(true);
+    } else {
+      setIsMaineOrNebraskaAndPresidential(false);
+    }
   }, [props.state, props.raceType]);
 
   useEffect(() => {
@@ -57,8 +72,15 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   }, [props.state]);
 
   useEffect(() => {
-    if (props.district > maxDistricts || props.district === 0) {
-      props.setDistrict(maxDistricts);
+    if (
+      props.district > maxDistricts ||
+      (props.district === 0 && !isMaineOrNebraskaAndPresidential)
+    ) {
+      if (isMaineOrNebraskaAndPresidential) {
+        props.setDistrict(0);
+      } else {
+        props.setDistrict(maxDistricts);
+      }
     }
   }, [props.district, maxDistricts]);
 
@@ -95,12 +117,81 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     }
   };
 
+  const showDistrictDropdown = (): boolean => {
+    if (
+      props.raceType === RaceType.House &&
+      props.state !== State.National &&
+      maxDistricts > 1
+    )
+      return true;
+    if (
+      props.raceType === RaceType.presidential &&
+      (props.state === State.Maine || props.state === State.Nebraska)
+    )
+      // Maine and Nebraska award electoral votes by congressional district and statewide
+      return true;
+    return false;
+  };
+
+  const getDistrictDropdownOptions = (): JSX.Element[] => {
+    if (props.raceType === RaceType.presidential) {
+      // Maine and Nebraska award electoral votes by congressional district and statewide
+      if (props.state === State.Maine) {
+        return [
+          <option key={0} value={0}>
+            statewide
+          </option>,
+          <option key={1} value={1}>
+            District 1
+          </option>,
+          <option key={2} value={2} disabled={true}>
+            District 2
+          </option>,
+        ];
+      }
+      if (props.state === State.Nebraska) {
+        return [
+          <option key={0} value={0}>
+            statewide
+          </option>,
+          <option key={1} value={1}>
+            District 1
+          </option>,
+          <option key={2} value={2}>
+            District 2
+          </option>,
+          <option key={3} value={3}>
+            District 3
+          </option>,
+        ];
+      }
+    }
+    if (maxDistricts === 1) {
+      return [
+        <option key={1} value={1}>
+          at-large district
+        </option>,
+      ];
+    }
+    return Array.from({ length: maxDistricts }, (_, i) => i + 1).map(
+      (district) => (
+        <option key={district} value={district}>
+          {`District ${district}`}
+        </option>
+      )
+    );
+  };
+
   return (
     <Module>
       <div className={styles.search}>
         <p>
           I want to see
-          <select value={props.raceType} onChange={handleRaceChange} className={styles.drops}>
+          <select
+            value={props.raceType}
+            onChange={handleRaceChange}
+            className={styles.drops}
+          >
             {Object.values(RaceType).map((race, index) => (
               <option key={index} value={race}>
                 {race}
@@ -108,32 +199,27 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
             ))}
           </select>
           races in
-          <select value={props.state} onChange={handleStateChange} className={styles.drops}>
+          <select
+            value={props.state}
+            onChange={handleStateChange}
+            className={styles.drops}
+          >
             {filteredStates.map((state, index) => (
               <option key={index} value={state}>
                 {state === State.National ? "the nation" : state}
               </option>
             ))}
           </select>
-          {props.raceType === RaceType.House &&
-            props.state !== State.National && (
-              <select
-                className={styles.drops}
-                value={props.district}
-                onChange={handleDistrictChange}
-                disabled={maxDistricts === 1}
-              >
-                {Array.from({ length: maxDistricts }, (_, i) => i + 1).map(
-                  (district) => (
-                    <option key={district} value={district}>
-                      {maxDistricts === 1
-                        ? "at-large district"
-                        : `District ${district}`}
-                    </option>
-                  )
-                )}
-              </select>
-            )}
+          {showDistrictDropdown() && (
+            <select
+              className={styles.drops}
+              value={props.district}
+              onChange={handleDistrictChange}
+              disabled={maxDistricts === 1}
+            >
+              {getDistrictDropdownOptions()}
+            </select>
+          )}
         </p>
       </div>
     </Module>

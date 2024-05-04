@@ -41,6 +41,34 @@
     gap: 2px;
     flex-wrap: wrap;
   }
+
+  @media screen and (max-width: 1280px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr); 
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .keyRaces{
+      max-width:90%;
+    }
+    .race p {
+      font-size: 16px;
+    }
+    .grid {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+  }
+  
+  /* For Galaxy Fold */
+  @media screen and (max-width: 370px){
+    .keyRaces{
+      max-width: 100%;
+    }
+    .grid {
+      grid-template-columns: repeat(1, 1fr); 
+    }
+  }
+
    .race {
     display: flex;
     align-items: center;

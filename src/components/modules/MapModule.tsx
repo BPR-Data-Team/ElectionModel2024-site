@@ -27,7 +27,6 @@ async function fetchMapData(race: string): Promise<StateData[]> {
       for (var i = 0; i < items.length; i++) {
         result.push(parseMapItem(items[i]));
       }
-      console.log(result);
       return result;
     })
     .catch((error) => {
@@ -62,7 +61,7 @@ export default function MapModule(props: mapProps): JSX.Element {
     <Module className="mapModule">
       <div className={styles.map}>
         <h3>24cast.org Prediction Map:</h3>
-        <p>Click on a state to see more information.</p>
+        <p>Hover over a state to see more information.</p>
         <MapChart stateData={mapData} />
       </div>
     </Module>

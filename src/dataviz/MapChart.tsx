@@ -37,7 +37,6 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       const mapData: JSON = await mapDataResponse.json();
 
       initializeMap(stateData, mapData);
-      console.log("Map data: ", mapData);
     } catch (error) {
       console.error("Error fetching map data:", error);
     }

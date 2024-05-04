@@ -41,9 +41,9 @@ interface HistogramProps {
 export const Histogram = (props: HistogramProps) => {
   useLayoutEffect(() => {
     if (props.race == RaceType.House && props.state == State.National) {
-      HouseHistogram(props.simulations);
+      HouseHistogram(props.simulations, props.winner);
     } else if (props.race == RaceType.Senate && props.state == State.National) {
-      SenateHistogram(props.simulations);
+      SenateHistogram(props.simulations, props.winner);
     } else if (
       props.race == RaceType.presidential &&
       props.state == State.National
@@ -159,21 +159,17 @@ function MarginHistogram(input_data: number[]) {
   } as any);
 }
 
-function SenateHistogram(input_data: number[]) {
+function SenateHistogram(input_data: number[], winner: Party) {
   const data: number[] = input_data;
 
-  const binCount: number = 30; // Define the number of bins to cover numbers -10 to 10
-  const totalRange: number = 100; // Adjust the total range to 20 for numbers -10 to 10
+  const binCount: number = 21; // 40 seats to 60 seats
 
-  // Calculate the size of each bin to evenly split the range from -10 to 10
-  const binSize: number = totalRange / (binCount - 1);
-
-  // Calculate the starting point for the bins to start from -10
-  const startBin: number = -10;
+  // Calculate the starting point for the bins to start from 40
+  const startBin: number = 40;
 
   const bins: number[] = Array.from(
     { length: binCount },
-    (_, i) => startBin + i * binSize
+    (_, i) => startBin + i
   );
 
   const histogramData: number[] = Array(bins.length - 1).fill(0);
@@ -187,15 +183,30 @@ function SenateHistogram(input_data: number[]) {
     }
   });
 
+  const getBinColor = (bin_val: number): string => {
+    if (winner === Party.Tie) {
+      if (bin_val > 50) {
+        return getPartyColor(Party.Democrat);
+      } else if (bin_val < 50) {
+        return getPartyColor(Party.Republican);
+      } else {
+        return getPartyColor(Party.Tie);
+      }
+    } else {
+      if (bin_val > 50) {
+        return getPartyColor(winner);
+      } else if (bin_val < 50) {
+        return getPartyColor(getOppositeParty(winner));
+      } else {
+        return getPartyColor(Party.Tie);
+      }
+    }
+  };
+
   const histogramSeries: any = histogramData.map((frequency, index) => ({
-    x: bins[index], // Place each bar on a specific number from -10 to 10
+    x: bins[index],
     y: frequency,
-    color:
-      bins[index] >= 49 && bins[index] <= 51
-        ? "#505050"
-        : bins[index] < 50
-        ? "#B83C2B"
-        : "#595D9A",
+    color: getBinColor(bins[index]),
   }));
 
   Highcharts.chart("container1", {
@@ -212,8 +223,8 @@ function SenateHistogram(input_data: number[]) {
       },
     },
     xAxis: {
-      min: 0,
-      max: 100,
+      min: 40,
+      max: 60,
       title: {
         text: "Seats",
         style: {
@@ -273,7 +284,7 @@ function SenateHistogram(input_data: number[]) {
   } as any);
 }
 
-function HouseHistogram(input_data: number[]) {
+function HouseHistogram(input_data: number[], winner: Party) {
   const data: number[] = input_data;
 
   const binCount: number = 33; // Define the number of bins

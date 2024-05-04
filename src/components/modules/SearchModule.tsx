@@ -22,6 +22,10 @@ export interface SearchModuleProps {
 export default function SearchModule(props: SearchModuleProps): JSX.Element {
   const [filteredStates, setFilteredStates] = useState<State[]>([]);
   const [maxDistricts, setMaxDistricts] = useState<number>(0);
+  const [
+    isMaineOrNebraskaAndPresidential,
+    setIsMaineOrNebraskaAndPresidential,
+  ] = useState<boolean>(false);
 
   useEffect(() => {
     if (!filteredStates.includes(props.state)) {
@@ -53,14 +57,39 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     ) {
       props.setRaceType(RaceType.presidential);
     }
+    if (
+      props.raceType === RaceType.presidential &&
+      (props.state === State.Maine || props.state === State.Nebraska)
+    ) {
+      setIsMaineOrNebraskaAndPresidential(true);
+    } else {
+      setIsMaineOrNebraskaAndPresidential(false);
+    }
   }, [props.state, props.raceType]);
 
   useEffect(() => {
-    setMaxDistricts(getNumDistricts(props.state));
+    if (
+      props.raceType === RaceType.presidential &&
+      props.state === State.Maine
+    ) {
+      // Maine's 2 individual electors + at-large for presidential election
+      setMaxDistricts(2);
+    } else if (
+      props.raceType === RaceType.presidential &&
+      props.state === State.Nebraska
+    ) {
+      // Nebraska's 3 individual electors + at-large for presidential election
+      setMaxDistricts(3);
+    } else {
+      setMaxDistricts(getNumDistricts(props.state));
+    }
   }, [props.state]);
 
   useEffect(() => {
-    if (props.district > maxDistricts || props.district === 0) {
+    if (
+      props.district > maxDistricts ||
+      (props.district === 0 && !isMaineOrNebraskaAndPresidential)
+    ) {
       props.setDistrict(maxDistricts);
     }
   }, [props.district, maxDistricts]);
@@ -98,6 +127,70 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     }
   };
 
+  const showDistrictDropdown = (): boolean => {
+    if (
+      props.raceType === RaceType.House &&
+      props.state !== State.National &&
+      maxDistricts > 1
+    )
+      return true;
+    if (
+      props.raceType === RaceType.presidential &&
+      (props.state === State.Maine || props.state === State.Nebraska)
+    )
+      // Maine and Nebraska have individual electors + at-large for presidential elections
+      return true;
+    return false;
+  };
+
+  const getDistrictDropdownOptions = (): JSX.Element[] => {
+    if (props.raceType === RaceType.presidential) {
+      if (props.state === State.Maine) {
+        return [
+          <option key={0} value={0}>
+            at-large
+          </option>,
+          <option key={1} value={1}>
+            Elector 1
+          </option>,
+          <option key={2} value={2}>
+            Elector 2
+          </option>,
+        ];
+      }
+      if (props.state === State.Nebraska) {
+        return [
+          <option key={0} value={0}>
+            at-large
+          </option>,
+          <option key={1} value={1}>
+            Elector 1
+          </option>,
+          <option key={2} value={2}>
+            Elector 2
+          </option>,
+          <option key={3} value={3}>
+            Elector 3
+          </option>,
+        ];
+      }
+    }
+    if (maxDistricts === 1) {
+      return [
+        <option key={1} value={1}>
+          at-large district
+        </option>,
+      ];
+    }
+    return Array.from({ length: maxDistricts }, (_, i) => i + 1).map(
+      (district) => (
+        <option key={district} value={district}>
+          {`District ${district}`}
+        </option>
+      )
+    );
+  };
+
   return (
     <Module>
       <div className={styles.search}>
@@ -126,25 +219,16 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
               </option>
             ))}
           </select>
-          {props.raceType === RaceType.House &&
-            props.state !== State.National && (
-              <select
-                className={styles.drops}
-                value={props.district}
-                onChange={handleDistrictChange}
-                disabled={maxDistricts === 1}
-              >
-                {Array.from({ length: maxDistricts }, (_, i) => i + 1).map(
-                  (district) => (
-                    <option key={district} value={district}>
-                      {maxDistricts === 1
-                        ? "at-large district"
-                        : `District ${district}`}
-                    </option>
-                  )
-                )}
-              </select>
-            )}
+          {showDistrictDropdown() && (
+            <select
+              className={styles.drops}
+              value={props.district}
+              onChange={handleDistrictChange}
+              disabled={maxDistricts === 1}
+            >
+              {getDistrictDropdownOptions()}
+            </select>
+          )}
         </p>
       </div>
     </Module>

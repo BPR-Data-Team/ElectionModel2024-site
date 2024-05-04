@@ -25,7 +25,7 @@ export default function Nav() {
               <Link href="/soon" className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>Methodology</Link>
             </li>
             <li>
-              <Link href="/soon" className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>About</Link>
+              <Link href="/about" className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>About</Link>
             </li>
           </ul>
         </div>
@@ -68,7 +68,7 @@ export default function Nav() {
           className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>
             Methodology
           </Link>
-          <Link href="/soon" passHref onClick={() => setDisplayMenu(!displayMenu)}
+          <Link href="/about" passHref onClick={() => setDisplayMenu(!displayMenu)}
           className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>
             About
           </Link>

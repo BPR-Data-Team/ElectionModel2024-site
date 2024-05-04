@@ -199,7 +199,7 @@ export default function PredictionModule(
         {props.state === State.Nebraska &&
         props.raceType === RaceType.Senate ? (
           <p className={styles.note}>
-            *We are not predicting Nebraska's regular Senate election because
+            *We are not predicting Nebraska&apos;s regular Senate election because
             there is no Democratic candidate.
           </p>
         ) : null}

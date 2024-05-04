@@ -71,7 +71,7 @@ const AboutPage: React.FC = () => {
     <div className={styles.center}>
       <h1>About 24cast</h1>
       <p>
-        <b>This isn't your typical election prediction</b>—we use new methods to determine the outcomes
+        This isn't your typical election prediction model—we use new methods to determine the outcomes
           of races down to the margin and break down <i>exactly</i> how each race's history
           affects expected outcomes.
       </p>
@@ -82,10 +82,10 @@ const AboutPage: React.FC = () => {
       </p>
       <p>
         24cast is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
-        featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/">methodology</a> page!)
+        featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/soon">methodology</a> page!)
       </p>
       <p>
-        <b>Please contact us with any questions, ideas, or press inquiries at <u>24castbpr@gmail.com</u>.</b>
+        <b>Please <a className={styles.linkText} href='mailto:asher_labovich@brown.edu'>contact us</a> with any questions, ideas, or press inquiries.</b>
       </p>
       {/* consider adding email address straight in here instead of linking it */}
       <p>

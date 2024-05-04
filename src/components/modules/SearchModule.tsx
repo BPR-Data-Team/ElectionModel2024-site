@@ -5,6 +5,7 @@ import { RaceType } from "@/types/RaceType";
 import {
   State,
   getGubernatorialRaceStates,
+  getHouseRaceStates,
   getNumDistricts,
   getSenateRaceStates,
 } from "@/types/State";
@@ -36,6 +37,8 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       case RaceType.gubernational:
         setFilteredStates(getGubernatorialRaceStates());
         break;
+      case RaceType.House:
+        setFilteredStates(getHouseRaceStates());
       default:
         setFilteredStates(Object.values(State));
         break;
@@ -100,7 +103,11 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       <div className={styles.search}>
         <p>
           I want to see
-          <select value={props.raceType} onChange={handleRaceChange} className={styles.drops}>
+          <select
+            value={props.raceType}
+            onChange={handleRaceChange}
+            className={styles.drops}
+          >
             {Object.values(RaceType).map((race, index) => (
               <option key={index} value={race}>
                 {race}
@@ -108,7 +115,11 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
             ))}
           </select>
           races in
-          <select value={props.state} onChange={handleStateChange} className={styles.drops}>
+          <select
+            value={props.state}
+            onChange={handleStateChange}
+            className={styles.drops}
+          >
             {filteredStates.map((state, index) => (
               <option key={index} value={state}>
                 {state === State.National ? "the nation" : state}

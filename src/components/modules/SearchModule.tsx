@@ -68,21 +68,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   }, [props.state, props.raceType]);
 
   useEffect(() => {
-    if (
-      props.raceType === RaceType.presidential &&
-      props.state === State.Maine
-    ) {
-      // Maine's 2 individual electors + at-large for presidential election
-      setMaxDistricts(2);
-    } else if (
-      props.raceType === RaceType.presidential &&
-      props.state === State.Nebraska
-    ) {
-      // Nebraska's 3 individual electors + at-large for presidential election
-      setMaxDistricts(3);
-    } else {
-      setMaxDistricts(getNumDistricts(props.state));
-    }
+    setMaxDistricts(getNumDistricts(props.state));
   }, [props.state]);
 
   useEffect(() => {
@@ -90,7 +76,11 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       props.district > maxDistricts ||
       (props.district === 0 && !isMaineOrNebraskaAndPresidential)
     ) {
-      props.setDistrict(maxDistricts);
+      if (isMaineOrNebraskaAndPresidential) {
+        props.setDistrict(0);
+      } else {
+        props.setDistrict(maxDistricts);
+      }
     }
   }, [props.district, maxDistricts]);
 
@@ -138,39 +128,40 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       props.raceType === RaceType.presidential &&
       (props.state === State.Maine || props.state === State.Nebraska)
     )
-      // Maine and Nebraska have individual electors + at-large for presidential elections
+      // Maine and Nebraska award electoral votes by congressional district and statewide
       return true;
     return false;
   };
 
   const getDistrictDropdownOptions = (): JSX.Element[] => {
     if (props.raceType === RaceType.presidential) {
+      // Maine and Nebraska award electoral votes by congressional district and statewide
       if (props.state === State.Maine) {
         return [
           <option key={0} value={0}>
-            at-large
+            statewide
           </option>,
           <option key={1} value={1}>
-            Elector 1
+            District 1
           </option>,
-          <option key={2} value={2}>
-            Elector 2
+          <option key={2} value={2} disabled={true}>
+            District 2
           </option>,
         ];
       }
       if (props.state === State.Nebraska) {
         return [
           <option key={0} value={0}>
-            at-large
+            statewide
           </option>,
           <option key={1} value={1}>
-            Elector 1
+            District 1
           </option>,
           <option key={2} value={2}>
-            Elector 2
+            District 2
           </option>,
           <option key={3} value={3}>
-            Elector 3
+            District 3
           </option>,
         ];
       }

@@ -80,7 +80,12 @@ export default function PredictionModule(
 
     if (props.state !== State.National) {
       message += ` in ${props.state}`;
-      if (props.raceType == RaceType.House && props.district > 0) {
+      if (
+        (props.raceType == RaceType.House ||
+          (props.raceType == RaceType.presidential &&
+            (props.state === State.Nebraska || props.state === State.Maine))) &&
+        props.district > 0
+      ) {
         message += `'s `;
         if (getNumDistricts(props.state) === 1) {
           message += "at-large";

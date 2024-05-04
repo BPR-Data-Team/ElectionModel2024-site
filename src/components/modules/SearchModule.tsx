@@ -55,7 +55,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       props.state === State.National &&
       props.raceType === RaceType.gubernatorial
     ) {
-      props.setRaceType(RaceType.presidential);
+      props.setState(State.Delaware);
     }
     if (
       props.raceType === RaceType.presidential &&

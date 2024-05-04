@@ -81,7 +81,7 @@ const AboutPage: React.FC = () => {
         featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/soon">methodology</a> page!)
       </p>
       <p>
-        <b>Please <a className={styles.linkText} href='mailto:asher_labovich@brown.edu'>contact us</a> with any questions, ideas, or press inquiries.</b>
+        <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b>
       </p>
       {/* consider adding email address straight in here instead of linking it */}
       <p>

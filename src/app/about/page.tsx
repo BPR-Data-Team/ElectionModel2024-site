@@ -53,7 +53,8 @@ const people = [
   { id: "Amy", name: "Amy Qiao, Data Contributor", image: amy, year: "Brown '26", bio: ''},
   { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: javier, year: "Brown '25",
   bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
-  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: chai, year: "Brown '26", bio: ''},
+  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: chai, year: "Brown '26", bio: 
+  "Don't tell Asher what Chai did to his model when he wasn't looking."},
   { id: "Jed", name: 'Jed Morgan, Data Contributor', image: jed, year: "Brown '27", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security.'},
   { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: nikhil, year: "Brown '27", bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},
   { id: "John", name: 'John Huang, Web Developer', image: john, year: "Brown '27", bio: ''},

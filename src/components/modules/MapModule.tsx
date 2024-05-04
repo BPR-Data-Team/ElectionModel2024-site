@@ -27,7 +27,6 @@ async function fetchMapData(race: string): Promise<StateData[]> {
       for (var i = 0; i < items.length; i++) {
         result.push(parseMapItem(items[i]));
       }
-      console.log(result);
       return result;
     })
     .catch((error) => {

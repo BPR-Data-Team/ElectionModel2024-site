@@ -65,7 +65,11 @@ async function fetchRaceData(
 ): Promise<RaceData> {
   const stateArg: string = getStateAbbreviation(state);
   const districtArg: string =
-    raceType !== RaceType.House || state === State.National
+    (raceType !== RaceType.House || state === State.National) &&
+    !(
+      raceType === RaceType.presidential &&
+      (state === State.Maine || state === State.Nebraska)
+    ) // Maine and Nebraska have individual electors + at-large for presidential elections
       ? "0"
       : district.toString();
   let raceTypeArg = "";
@@ -88,7 +92,6 @@ async function fetchRaceData(
   return fetch(fetchInput)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       const responseItem: ResponseItem = parseItem(data);
       let winner: Party =
         responseItem.avg_margin > 0 ? Party.Democrat : Party.Republican;

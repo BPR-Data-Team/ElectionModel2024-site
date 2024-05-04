@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import Highcharts, { SeriesPieOptions } from "highcharts";
 import { SHAPFactor } from "@/types/SHAPFactor";
 
@@ -31,25 +31,30 @@ const series: SeriesPieOptions = {
 };
 
 const DonutChart: React.FC<DonutChartProps> = () => {
-  const options: Highcharts.Options = {
-    chart: {
-      type: "pie",
-    },
-    plotOptions: {
-      pie: {
-        innerSize: "50%",
-        dataLabels: {
-          enabled: true,
-          format: "<b>{point.name}</b>: {point.y}",
+  useLayoutEffect(() => {
+    const options: Highcharts.Options = {
+      title: {
+        text: "",
+      },
+      chart: {
+        type: "pie",
+      },
+      plotOptions: {
+        pie: {
+          innerSize: "50%",
+          dataLabels: {
+            enabled: true,
+            format: "<b>{point.name}</b>: {point.y}",
+          },
         },
       },
-    },
-    series: [series],
-  };
+      series: [series],
+    };
 
-  Highcharts.chart("container", options);
+    Highcharts.chart("container2", options);
+  });
 
-  return <div id="container"> </div>;
+  return <div id="container2"> </div>;
 };
 
 export default DonutChart;

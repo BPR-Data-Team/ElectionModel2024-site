@@ -5,6 +5,7 @@ import styles from "./ExplainerModule.module.css";
 import { Party } from "@/types/Party";
 import { SHAPFactor } from "@/types/SHAPFactor";
 import SHAPDonut from "@/dataviz/SHAPDonut";
+import DonutChart from "@/dataviz/SHAPDonut";
 
 export interface ExplainerModuleProps {
   winner: Party;

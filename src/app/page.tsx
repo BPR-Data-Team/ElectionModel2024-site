@@ -259,7 +259,12 @@ export default function Home(): JSX.Element {
           SHAPFactors={SHAPFactors}
         />
       </div>
-      <SimulationsModule simulations={simulations} />
+      <SimulationsModule
+        simulations={simulations}
+        raceType={raceType}
+        state={state}
+        winner={winner}
+      />
       <SHAPModule SHAPPredictions={SHAPFactors} />
       <KeyRacesModule
         raceType={raceType}

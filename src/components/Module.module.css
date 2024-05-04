@@ -4,3 +4,7 @@
   background-color: var(--module-bg-color);
   border-radius: 3px;
 }
+
+.map {
+  min-width: 60%;
+}

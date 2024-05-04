@@ -73,6 +73,11 @@ h4 {
   max-width: 1400px;
   margin: 0 auto;
 }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 85vh;
+}
 
 header .content {
   display: flex;
@@ -104,4 +109,8 @@ header a {
 footer a {
   text-decoration: none;
   color: var(--main-text-color);
+}
+
+.mapModule {
+  min-width: 60%;
 }

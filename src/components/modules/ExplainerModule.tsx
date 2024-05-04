@@ -4,6 +4,7 @@ import Module from "../Module";
 import styles from "./ExplainerModule.module.css";
 import { Party } from "@/types/Party";
 import { SHAPFactor } from "@/types/SHAPFactor";
+import SHAPDonut from "@/dataviz/SHAPDonut";
 
 export interface ExplainerModuleProps {
   winner: Party;
@@ -19,6 +20,7 @@ export default function ExplainerModule(
   const [mostPredictiveFactors, setMostPredictiveFactors] = useState<
     SHAPFactor[]
   >([]);
+
   const formatStringList = (strings: string[]): React.JSX.Element | null => {
     if (strings.length === 0) return null; // No strings in the array
     // Map each string to a span element
@@ -99,6 +101,7 @@ export default function ExplainerModule(
             Look through our full methodology!
           </a>
         </p>
+        {/* <SHAPDonut SHAPFactors={props.SHAPFactors} /> */}
         <DownloadThisCard />
       </div>
     </Module>

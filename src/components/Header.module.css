@@ -4,7 +4,7 @@
   }
   
   .byText {
-    margin-right: 5px;
+    margin-right: 3px;
     font-size: medium;
   }
   
@@ -15,4 +15,9 @@
     .byContainer{
       display: none;
     }
+  }
+
+  .bprImage {
+    display: flex; /* Ensure the anchor tag behaves like a flex container */
+    align-items: center; /* Align items vertically */
   }

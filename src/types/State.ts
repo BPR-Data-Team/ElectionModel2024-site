@@ -7,6 +7,7 @@ export enum State {
   California = "California",
   Colorado = "Colorado",
   Connecticut = "Connecticut",
+  DC = "DC",
   Delaware = "Delaware",
   Florida = "Florida",
   Georgia = "Georgia",
@@ -109,6 +110,61 @@ export const getGubernatorialRaceStates = () => {
     State.Vermont,
     State.Washington,
     State.WestVirginia,
+  ];
+};
+
+export const getHouseRaceStates = () => {
+  return [
+    State.Alabama,
+    State.Alaska,
+    State.Arizona,
+    State.Arkansas,
+    State.California,
+    State.Colorado,
+    State.Connecticut,
+    State.Delaware,
+    State.Florida,
+    State.Georgia,
+    State.Hawaii,
+    State.Idaho,
+    State.Illinois,
+    State.Indiana,
+    State.Iowa,
+    State.Kansas,
+    State.Kentucky,
+    State.Louisiana,
+    State.Maine,
+    State.Maryland,
+    State.Massachusetts,
+    State.Michigan,
+    State.Minnesota,
+    State.Mississippi,
+    State.Missouri,
+    State.Montana,
+    State.Nebraska,
+    State.Nevada,
+    State.NewHampshire,
+    State.NewJersey,
+    State.NewMexico,
+    State.NewYork,
+    State.NorthCarolina,
+    State.NorthDakota,
+    State.Ohio,
+    State.Oklahoma,
+    State.Oregon,
+    State.Pennsylvania,
+    State.RhodeIsland,
+    State.SouthCarolina,
+    State.SouthDakota,
+    State.Tennessee,
+    State.Texas,
+    State.Utah,
+    State.Vermont,
+    State.Virginia,
+    State.Washington,
+    State.WestVirginia,
+    State.Wisconsin,
+    State.Wyoming,
   ];
 };
 
@@ -235,6 +291,8 @@ export const getStateAbbreviation = (state: State): string => {
       return "CO";
     case State.Connecticut:
       return "CT";
+    case State.DC:
+      return "DC";
     case State.Delaware:
       return "DE";
     case State.Florida:

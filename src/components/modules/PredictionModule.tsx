@@ -74,6 +74,10 @@ export default function PredictionModule(
         break;
     }
 
+    if (props.state === State.Nebraska && props.raceType === RaceType.Senate) {
+      message += " special election";
+    }
+
     if (props.state !== State.National) {
       message += ` in ${props.state}`;
       if (props.raceType == RaceType.House && props.district > 0) {
@@ -113,6 +117,9 @@ export default function PredictionModule(
       }
     }
     message += ".";
+    if (props.state === State.Nebraska && props.raceType === RaceType.Senate) {
+      message += "*";
+    }
 
     return message;
   };
@@ -189,6 +196,13 @@ export default function PredictionModule(
           Last data update: {`${new Date().toLocaleDateString()}`}{" "}
           {/*TODO: make this real */}
         </p>
+        {props.state === State.Nebraska &&
+        props.raceType === RaceType.Senate ? (
+          <p className={styles.note}>
+            *We are not predicting Nebraska's regular Senate election because
+            there is no Democratic candidate.
+          </p>
+        ) : null}
         <DownloadThisCard />
       </div>
     </Module>

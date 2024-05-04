@@ -14,6 +14,10 @@ import { State, getStateAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
 import { SHAPFactor } from "@/types/SHAPFactor";
+import ReactGA from 'react-ga'
+
+const TRACKING_ID = "G-QDEM59MHXZ"
+ReactGA.initialize(TRACKING_ID)
 
 interface RaceData {
   winner: Party;

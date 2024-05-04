@@ -38,7 +38,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       case RaceType.Senate:
         setFilteredStates(getSenateRaceStates());
         break;
-      case RaceType.gubernational:
+      case RaceType.gubernatorial:
         setFilteredStates(getGubernatorialRaceStates());
         break;
       case RaceType.House:
@@ -53,7 +53,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   useEffect(() => {
     if (
       props.state === State.National &&
-      props.raceType === RaceType.gubernational
+      props.raceType === RaceType.gubernatorial
     ) {
       props.setRaceType(RaceType.presidential);
     }

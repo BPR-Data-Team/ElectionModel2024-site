@@ -60,7 +60,7 @@ export default function PredictionModule(
     message += " favored to win the";
 
     switch (props.raceType) {
-      case RaceType.gubernational:
+      case RaceType.gubernatorial:
         message += " gubernatorial election";
         break;
       case RaceType.House:

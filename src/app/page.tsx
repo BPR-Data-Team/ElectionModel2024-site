@@ -78,7 +78,7 @@ async function fetchRaceData(
       : district.toString();
   let raceTypeArg = "";
   switch (raceType) {
-    case RaceType.gubernational:
+    case RaceType.gubernatorial:
       raceTypeArg = "Governor";
       break;
     case RaceType.House:

@@ -1,7 +1,8 @@
-import { Party } from "@/types/Party";
+import { Party, getOppositeParty, getPartyColor } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
 import { State } from "@/types/State";
 import * as Highcharts from "highcharts";
+import { get } from "http";
 import { useEffect, useLayoutEffect } from "react";
 
 function generateMarginsData(count: number): number[] {
@@ -382,22 +383,23 @@ function HouseHistogram(input_data: number[]) {
 }
 
 function PresidentHistogram(input_data: number[], winner: Party) {
-  var data: number[] = input_data;
+  const data: number[] = input_data;
   if (winner == Party.Republican) {
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       data[i] = 538 - data[i];
     }
   }
+  console.log(data);
   // Highcharts chart initialization code here
   // Make sure the chart is initialized after setting the dimensions
   const binCount: number = 25; // Define the number of bins
   const totalRange: number = 538; // Define the total range of the data
 
   // Calculate the size of each bin to evenly split the range around 0
-  const binSize: number = totalRange / (binCount - 1);
+  const binSize: number = Math.round(totalRange / (binCount - 1));
 
   // Calculate the starting point for the bins to center around 0
-  const startBin: number = -totalRange / 2;
+  const startBin: number = 0;
 
   const bins: number[] = Array.from(
     { length: binCount },
@@ -415,10 +417,24 @@ function PresidentHistogram(input_data: number[], winner: Party) {
     }
   });
 
+  const getBinColor = (bin_val: number): string => {
+    if (bin_val > 269) {
+      return getPartyColor(winner);
+    } else if (bin_val < 269) {
+      return getPartyColor(getOppositeParty(winner));
+    } else {
+      return getPartyColor(Party.Tie);
+    }
+  };
+
+  const getBinX = (index: number): number => {
+    return Math.round((bins[index] + bins[index + 1]) / 2);
+  };
+
   const histogramSeries: any = histogramData.map((frequency, index) => ({
-    x: (bins[index] + bins[index + 1]) / 2,
+    x: getBinX(index),
     y: frequency,
-    color: bins[index] < 269 ? "#B83C2B" : "#595D9A",
+    color: getBinColor(getBinX(index)),
   }));
 
   Highcharts.chart("container1", {

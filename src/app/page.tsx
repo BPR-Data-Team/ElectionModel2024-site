@@ -268,7 +268,7 @@ export default function Home(): JSX.Element {
         state={state}
         winner={winner}
       />
-      <SHAPModule SHAPPredictions={SHAPFactors} />
+      <SHAPModule SHAPPredictions={SHAPFactors} state={state} />
       <KeyRacesModule
         raceType={raceType}
         state={state}

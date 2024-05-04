@@ -86,7 +86,7 @@ function MarginHistogram(input_data: number[]) {
   });
 
   const histogramSeries: any = histogramData.map((frequency, index) => ({
-    x: (bins[index] + bins[index + 1]) / 2,
+    x: Math.round((bins[index] + bins[index + 1]) / 2),
     y: frequency,
     color: bins[index] < 0 ? "#B83C2B" : "#595D9A",
   }));
@@ -294,7 +294,7 @@ function HouseHistogram(input_data: number[], winner: Party) {
   const binSize: number = totalRange / (binCount - 1);
 
   // Calculate the starting point for the bins to center around 0
-  const startBin: number = -totalRange / 2;
+  const startBin: number = 0;
 
   const bins: number[] = Array.from(
     { length: binCount },
@@ -312,10 +312,21 @@ function HouseHistogram(input_data: number[], winner: Party) {
     }
   });
 
+  const getBinColor = (bin_val: number): string => {
+    if (bin_val >= 218) {
+      return getPartyColor(winner);
+    }
+    return getPartyColor(getOppositeParty(winner));
+  };
+
+  const getBinX = (index: number): number => {
+    return Math.round((bins[index] + bins[index + 1]) / 2);
+  };
+
   const histogramSeries: any = histogramData.map((frequency, index) => ({
-    x: (bins[index] + bins[index + 1]) / 2,
+    x: getBinX(index),
     y: frequency,
-    color: bins[index] < 217.5 ? "#B83C2B" : "#595D9A",
+    color: getBinColor(getBinX(index)),
   }));
 
   Highcharts.chart("container1", {

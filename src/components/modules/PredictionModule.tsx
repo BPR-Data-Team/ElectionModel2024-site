@@ -53,8 +53,10 @@ export default function PredictionModule(
 
     if (props.likelihood < 60) {
       message += " slightly";
-    } else if (props.likelihood > 80) {
+    } else if (props.likelihood > 80 && props.likelihood < 98) {
       message += " heavily";
+    } else if (props.likelihood >= 98) {
+      message += " overwhelmingly";
     }
 
     message += " favored to win the";

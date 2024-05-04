@@ -32,7 +32,7 @@ export default function PredictionModule(
       props.state === State.National &&
       props.margin === 50
     ) {
-      return "The Senate predicted to be a 50-50 split.";
+      return "The Senate is predicted to be a 50-50 split.";
     }
 
     let message: string = "";

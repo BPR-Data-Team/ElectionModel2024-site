@@ -34,7 +34,7 @@ function arrows(categories: string[], data: number[]) {
       type: "bar",
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
     title: {
       text: "",
@@ -87,7 +87,12 @@ function arrows(categories: string[], data: number[]) {
     series: [
       {
         name: "Impact",
-        data: data,
+        data: data.map((value) => {
+          return {
+            y: value,
+            color: value >= 0 ? "#595D9A " : "#B83C2B ",
+          };
+        }),
         threshold: 0,
       },
     ],

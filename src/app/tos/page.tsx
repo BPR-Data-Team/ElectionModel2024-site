@@ -7,9 +7,11 @@ export const metadata: Metadata = {
 
 const TOSPage: React.FC = () => {
     return (
-        <div className={styles.main}>
-            <h2>Terms of Use</h2>
-            <p>Last Updated: May 1, 2024</p>
+        <div className={styles.overall}>
+            <div className={styles.main}>
+                <h2>Terms of Use</h2>
+                <p>Last Updated: May 1, 2024</p>
+            </div>
             <div className={styles.main}>
                 <p>These terms and conditions (the &quot;Terms and Conditions&quot;) govern the use of https://24cast.org (&quot;24cast.org&quot;, the &quot;Site&quot;). This Site is owned and operated by The Brown Political Review (&quot;BPR&quot;). </p>
                 <p>By using this Site, you indicate that you have read and understand these Terms and Conditions and agree to abide by them at all times.</p>

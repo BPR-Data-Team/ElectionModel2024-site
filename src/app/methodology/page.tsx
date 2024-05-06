@@ -5,6 +5,20 @@ export const metadata: Metadata = {
   title: "Methodology | 24cast.org",
 };
 
-export default function Methodology(): JSX.Element {
-  return <main className={styles.main}>Methodology</main>;
-}
+const Methodology: React.FC = () => {
+  return (
+      <div className={styles.overall}>
+        <div className={styles.main}>
+              <h2>Methodology</h2>
+              <p>Last Updated: May 6, 2024</p>
+          </div>
+          <div className={styles.main}>
+              <p>Coming soon, we promise!</p>
+          </div>
+      </div>
+
+  );
+};
+
+
+export default Methodology;

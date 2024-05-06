@@ -115,6 +115,7 @@ async function fetchRaceData(
             [SHAPFactor.CompositionOfCongressAndPresidency]: 0,
             [SHAPFactor.GasPrices]: 0,
             [SHAPFactor.PastElections]: 0,
+            [SHAPFactor.Polls]: 0,
           },
           simulations: [],
           weird: responseItem.weird,
@@ -172,19 +173,20 @@ async function fetchRaceData(
         Math.round(responseItem.avg_margin * 10) / 10
       );
       const SHAPFactors: Record<SHAPFactor, number> = {
+        [SHAPFactor.PastElections]: responseItem.past_elections,
+        [SHAPFactor.Polls]: responseItem.poll,
         [SHAPFactor.ExpertRatings]: responseItem.expert_ratings,
-        [SHAPFactor.VotingRegulations]: responseItem.voting_regulations,
-        [SHAPFactor.ConsumerConfidenceIndex]:
-          responseItem.consumer_confidence_index,
-        [SHAPFactor.Other]: responseItem.other,
         [SHAPFactor.CampaignFinance]: responseItem.campaign_finance,
         [SHAPFactor.UnemploymentAndInflation]:
           responseItem.unemployment_and_inflation,
-        [SHAPFactor.Demographics]: responseItem.demographics,
+        [SHAPFactor.ConsumerConfidenceIndex]:
+          responseItem.consumer_confidence_index,
+        [SHAPFactor.GasPrices]: responseItem.gas_prices,
+        [SHAPFactor.VotingRegulations]: responseItem.voting_regulations,
         [SHAPFactor.CompositionOfCongressAndPresidency]:
           responseItem.composition_of_congress_and_presidency,
-        [SHAPFactor.GasPrices]: responseItem.gas_prices,
-        [SHAPFactor.PastElections]: responseItem.past_elections,
+        [SHAPFactor.Demographics]: responseItem.demographics,
+        [SHAPFactor.Other]: responseItem.other,
       };
       const predictions: RaceData = {
         winner: winner,

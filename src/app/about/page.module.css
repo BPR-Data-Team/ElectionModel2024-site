@@ -1,9 +1,17 @@
 .main {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.overall {
+  width: 95%;
+  margin-inline: auto;
+}
+
+.header {
+  text-align: center;
+}
+
   
   @media (max-width: 450px) {
     .mapAndSims {

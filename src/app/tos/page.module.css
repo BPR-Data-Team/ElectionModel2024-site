@@ -1,21 +1,12 @@
 .main {
     margin-top: 1rem;
-    flex-direction: column;
     text-align: left;
   }
   
-  .mapAndSims {
-    display: flex;
-    gap: 1rem;
-  }
-  @media (max-width: 450px) {
-    .mapAndSims {
-      display: flex;
-      flex-direction: column;
-      /* Adjust styles for mobile screens */
-      /* Optionally, you can add additional styles here */
-    }
-  }
+.overall {
+  width: 95%;
+  margin-inline: auto;
+}
 
   /* center text */
   .center {

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "24cast.org by BPR",
   description:
     "Innovative election predictions with in-depth explanations by the Brown Political Review.",
+  metadataBase: new URL('https://24cast.org'),
   openGraph: {
     title: "24cast.org by BPR",
     description: "Innovative election predictions with in-depth explanations by the Brown Political Review."  

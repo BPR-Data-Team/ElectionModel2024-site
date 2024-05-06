@@ -1,5 +1,5 @@
 .banner {
-  background-color: red;
+  background-color: #692e84;
   width: 100%;
 }
 
@@ -9,13 +9,12 @@
   padding: 10px;
   font-family: gelica, georgia, book antiqua, times new roman, serif;
   font-weight: 300;
-  font-style: normal; 
-  
+  font-style: normal;
 }
 
 .bannerText a {
   font-family: gelica, georgia, book antiqua, times new roman, serif;
   font-weight: 300;
-  font-style: normal;  
+  font-style: normal;
   color: white;
 }

@@ -14,10 +14,10 @@ import { State, getStateAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
 import { SHAPFactor } from "@/types/SHAPFactor";
-import ReactGA from 'react-ga4'
+import ReactGA from "react-ga4";
 
-const TRACKING_ID = "G-QDEM59MHXZ"
-ReactGA.initialize(TRACKING_ID)
+const TRACKING_ID = "G-QDEM59MHXZ";
+ReactGA.initialize(TRACKING_ID);
 
 interface RaceData {
   winner: Party;
@@ -25,6 +25,7 @@ interface RaceData {
   margin: number;
   SHAPFactors: Record<SHAPFactor, number>;
   simulations: number[];
+  weird?: string;
 }
 
 function calculateLikelihood(
@@ -96,7 +97,29 @@ async function fetchRaceData(
   return fetch(fetchInput)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       const responseItem: ResponseItem = parseItem(data);
+      if (responseItem.weird) {
+        return {
+          winner: Party.Democrat,
+          likelihood: 0,
+          margin: 0,
+          SHAPFactors: {
+            [SHAPFactor.ExpertRatings]: 0,
+            [SHAPFactor.VotingRegulations]: 0,
+            [SHAPFactor.ConsumerConfidenceIndex]: 0,
+            [SHAPFactor.Other]: 0,
+            [SHAPFactor.CampaignFinance]: 0,
+            [SHAPFactor.UnemploymentAndInflation]: 0,
+            [SHAPFactor.Demographics]: 0,
+            [SHAPFactor.CompositionOfCongressAndPresidency]: 0,
+            [SHAPFactor.GasPrices]: 0,
+            [SHAPFactor.PastElections]: 0,
+          },
+          simulations: [],
+          weird: responseItem.weird,
+        };
+      }
       let winner: Party =
         responseItem.avg_margin > 0 ? Party.Democrat : Party.Republican;
       let likelihood: number = calculateLikelihood(
@@ -191,6 +214,7 @@ export default function Home(): JSX.Element {
   const [SHAPFactors, setSHAPFactors] = useState<Record<SHAPFactor, number>>();
   const [simulations, setSimulations] = useState<number[]>([]);
   const [decidingMargin, setDecidingMargin] = useState<number>(0);
+  const [weird, setWeird] = useState<string>("");
 
   useEffect(() => {
     try {
@@ -200,6 +224,11 @@ export default function Home(): JSX.Element {
         setMargin(data.margin);
         setSHAPFactors(data.SHAPFactors);
         setSimulations(data.simulations);
+        if (data.weird) {
+          setWeird(data.weird);
+        } else {
+          setWeird("");
+        }
       });
     } catch (error) {
       console.error(error);
@@ -247,40 +276,49 @@ export default function Home(): JSX.Element {
         raceType={raceType}
         state={state}
         district={district}
+        weird={weird}
       />
-      <div className={styles.mapAndSims}>
-        <MapModule type={raceType} />
-        <ExplainerModule
+      {weird === "" && (
+        <div className={styles.mapAndSims}>
+          <MapModule type={raceType} />
+          <ExplainerModule
+            winner={winner}
+            numSimulations={simulations.length}
+            numWins={
+              winner === Party.Democrat
+                ? simulations.filter((sim) => sim > decidingMargin).length
+                : simulations.filter((sim) => sim < decidingMargin).length
+            }
+            numLosses={
+              winner === Party.Democrat
+                ? simulations.filter((sim) => sim < decidingMargin).length
+                : simulations.filter((sim) => sim > decidingMargin).length
+            }
+            SHAPFactors={SHAPFactors}
+          />
+        </div>
+      )}
+      {weird === "" && (
+        <SimulationsModule
+          simulations={simulations}
+          raceType={raceType}
+          state={state}
           winner={winner}
-          numSimulations={simulations.length}
-          numWins={
-            winner === Party.Democrat
-              ? simulations.filter((sim) => sim > decidingMargin).length
-              : simulations.filter((sim) => sim < decidingMargin).length
-          }
-          numLosses={
-            winner === Party.Democrat
-              ? simulations.filter((sim) => sim < decidingMargin).length
-              : simulations.filter((sim) => sim > decidingMargin).length
-          }
-          SHAPFactors={SHAPFactors}
         />
-      </div>
-      <SimulationsModule
-        simulations={simulations}
-        raceType={raceType}
-        state={state}
-        winner={winner}
-      />
-      <SHAPModule SHAPPredictions={SHAPFactors} state={state} />
-      <KeyRacesModule
-        raceType={raceType}
-        state={state}
-        district={district}
-        setRaceType={setRaceType}
-        setState={setState}
-        setDistrict={setDistrict}
-      />
+      )}
+      {weird === "" && state !== State.National && (
+        <SHAPModule SHAPPredictions={SHAPFactors} />
+      )}
+      {weird === "" && (
+        <KeyRacesModule
+          raceType={raceType}
+          state={state}
+          district={district}
+          setRaceType={setRaceType}
+          setState={setState}
+          setDistrict={setDistrict}
+        />
+      )}
     </main>
   );
 }

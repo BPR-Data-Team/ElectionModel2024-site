@@ -78,7 +78,7 @@ Here&apos;s a brief summary of how the 24cast.org model works:</p>
 </div>
 <div className={styles.main}>
 <h4>Updating Data</h4>
-Our model updates each day at midnight EDT with the latest data. Our predictions will constantly update as polls, campaign finance, and expert ratings change. Our model will finish updating on the day before the election. We use GitHub Actions and AWS with DynamoDB to gather new data and update our API, and R and Python to clean/analyze the incoming data while producing up-to-date predictions. 
+<p>Our model updates each day at midnight EDT with the latest data. Our predictions will constantly update as polls, campaign finance, and expert ratings change. Our model will finish updating on the day before the election. We use GitHub Actions and AWS with DynamoDB to gather new data and update our API, and R and Python to clean/analyze the incoming data while producing up-to-date predictions.</p>
 </div>
 <div className={styles.main}>
 <h4>Interpretation</h4>

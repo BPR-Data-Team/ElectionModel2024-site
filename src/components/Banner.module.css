@@ -1,0 +1,17 @@
+.banner {
+  background-color: red;
+  width: 100%;
+}
+
+.bannerText {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.bannerText a {
+  font-family: sans-serif;
+  color: white;
+}

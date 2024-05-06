@@ -22,7 +22,7 @@ export default function Nav() {
               <Link href="/" className={currentPath === '/' ? styles.ballotItemS : styles.ballotItemU}>Predictions</Link>
             </li>
             <li>
-              <Link href="/soon" className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>Methodology</Link>
+              <Link href="/methodology" className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>Methodology</Link>
             </li>
             <li>
               <Link href="/about" className={currentPath === '/about' ? styles.ballotItemS : styles.ballotItemU}>About</Link>
@@ -64,7 +64,7 @@ export default function Nav() {
           className={currentPath === '/' ? styles.ballotItemS : styles.ballotItemU}>
             Predictions
           </Link>
-          <Link href="/soon" passHref onClick={() => setDisplayMenu(!displayMenu)}
+          <Link href="/methodology" passHref onClick={() => setDisplayMenu(!displayMenu)}
           className={currentPath === '/methodology' ? styles.ballotItemS : styles.ballotItemU}>
             Methodology
           </Link>

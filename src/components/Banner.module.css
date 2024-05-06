@@ -7,11 +7,15 @@
   color: white;
   text-align: center;
   padding: 10px;
-  font-family: sans-serif;
-  font-weight: bold;
+  font-family: gelica, georgia, book antiqua, times new roman, serif;
+  font-weight: 300;
+  font-style: normal; 
+  
 }
 
 .bannerText a {
-  font-family: sans-serif;
+  font-family: gelica, georgia, book antiqua, times new roman, serif;
+  font-weight: 300;
+  font-style: normal;  
   color: white;
 }

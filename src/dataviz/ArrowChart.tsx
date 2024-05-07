@@ -8,16 +8,23 @@ interface ArrowProps {
 
 const ArrowChart = (props: ArrowProps) => {
   useLayoutEffect(() => {
-    if (props.SHAP == undefined) {
-    } else {
+    if (props.SHAP !== undefined) {
+      const customOrder = [
+        "Past Elections", "Polls", "Expert Ratings", "Campaign Finance",
+        "Unemployment/Inflation", "Consumer Confidence Index", "Gas Prices",
+        "Voting Regulations", "Composition of Congress and Presidency", "Demographics",
+        "Other Factors"
+      ];
+
       var categories: string[] = [];
       var data: number[] = [];
-      for (const factor in props.SHAP) {
-        if (Object.prototype.hasOwnProperty.call(props.SHAP, factor)) {
-          categories.push(factor);
-          data.push(parseFloat(props.SHAP[factor as SHAPFactor].toFixed(1)));
+      customOrder.forEach((category) => {
+        if ((props.SHAP ?? {})[category as SHAPFactor] !== undefined) {
+          categories.push(category);
+          data.push(parseFloat(((props.SHAP ?? {})[category as SHAPFactor] ?? 0).toFixed(1)));
         }
-      }
+      });
+
       arrows(categories, data);
     }
   });

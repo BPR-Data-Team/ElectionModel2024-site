@@ -78,11 +78,18 @@ export default function ExplainerModule(
           simulations predicting election margins using a machine learning model
           trained on data across multiple decades.
         </p>
+        {props.winner === "Tie" ? (
         <p>
-          {props.winner}s won in{" "}
-          <span className={styles.boldText}>{props.numWins}</span> simulations
+          <span className={styles.boldText}>{props.numSimulations - props.numWins - props.numLosses} simulations ended in a tie.{" "}</span>
+          <span className={styles.boldText}>Democrats won in {props.numLosses}, and </span>
+          <span className={styles.boldText}> Republicans won in {props.numWins}</span>.
+        </p>
+        ) : (
+        <p>
+          {props.winner}s won in <span className={styles.boldText}>{props.numWins}</span> simulations
           and lost <span className={styles.boldText}>{props.numLosses}</span>.
         </p>
+        )}
         {mostPredictiveFactors.length > 0 && (
           <p>
             By running simulations with varied input data, we determined that{" "}

@@ -60,7 +60,7 @@ function MarginHistogram(input_data: number[]) {
   // Highcharts chart initialization code here
   // Make sure the chart is initialized after setting the dimensions
   const data: number[] = input_data;
-  const binCount: number = 25; // Define the number of bins
+  const binCount: number = 100; // Define the number of bins
   const totalRange: number = 200; // Define the total range of the data
 
   // Calculate the size of each bin to evenly split the range around 0

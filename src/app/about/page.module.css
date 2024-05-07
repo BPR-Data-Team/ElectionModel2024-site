@@ -1,77 +1,70 @@
 .main {
-  margin-top: 1rem;
-  text-align: left;
-}
-
-.overall {
-  width: 95%;
-  margin-inline: auto;
-}
-
-.header {
-  text-align: center;
-}
-
-@media (max-width: 450px) {
-  .mapAndSims {
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    /* Adjust styles for mobile screens */
-    /* Optionally, you can add additional styles here */
+    gap: 1rem;
   }
-}
+  
+  @media (max-width: 450px) {
+    .mapAndSims {
+      display: flex;
+      flex-direction: column;
+      /* Adjust styles for mobile screens */
+      /* Optionally, you can add additional styles here */
+    }
+  }
 
-/* center text */
-.center {
-  text-align: center;
-  /* font-size: 1.5rem; */
-  margin-top: 1rem;
-  /* position: absolute; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
+  /* center text */
+  .center {
+    text-align: center;
+    /* font-size: 1.5rem; */
+    margin-top: 1rem;
+    /* position: absolute; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
 
-.linkText {
-  color: var(--main-text-color);
-}
+  .linkText {
+    color: var(--main-text-color);
+  }
 
-.heading {
-  font-weight: 700;
-  font-size: 3rem;
-  margin-block: inherit;
-}
+  .heading {
+    font-weight: 700;
+    font-size: 3rem;
+    margin-block: inherit;
+  }
 
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  max-width: 700px;
-  margin-inline: auto;
-}
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 
 .person {
   width: 30%;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-}
+  .image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
 
 .name {
-  margin-top: 10px;
+  margin-block-start: 10px;
+  margin-block-end: 0;
 }
 
 .bio {
-  margin-top: 10px;
+  margin-block-start: 10px;
+  margin-block-end: 2px;
 }

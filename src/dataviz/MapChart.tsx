@@ -17,16 +17,12 @@ interface MapProps {
 
 const colorAxisStops: [number, string][] = [
   [0, "#B83C2B"], // Republican red
-  [0.5, "#EAEAEA"],
+  [0.38, "#B83C2B"],
+  [0.47, "#EAEAEA"],
+  [0.53, "#EAEAEA"],
+  [0.62, "#595D9A"],
   [1, "#595D9A"], // Democrat blue
 ];
-
-const colorAxis: Highcharts.ColorAxisOptions = {
-  min: -3,
-  max: 3,
-  stops: colorAxisStops,
-  visible: false,
-};
 
 const MapChart: React.FC<MapProps> = (props: MapProps) => {
   useEffect(() => {
@@ -41,7 +37,6 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       const mapData: JSON = await mapDataResponse.json();
 
       initializeMap(stateData, mapData);
-      console.log("Map data: ", mapData);
     } catch (error) {
       console.error("Error fetching map data:", error);
     }
@@ -68,10 +63,23 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
   }
 
   const initializeMap = (stateData: StateData[], mapData: JSON) => {
+    const axisMax: number = Math.max(
+      Math.abs(getMinState(stateData)),
+      Math.abs(getMaxState(stateData))
+    );
+    const colorAxis: Highcharts.ColorAxisOptions = {
+      min: -axisMax,
+      max: axisMax,
+      stops: colorAxisStops,
+      visible: false,
+    };
     const mapOptions: Highcharts.Options = {
       chart: {
         type: "map",
         map: mapData,
+      },
+      credits: {
+        enabled: false
       },
       accessibility: {
         description:

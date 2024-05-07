@@ -1,0 +1,20 @@
+.banner {
+  background-color: #692e84;
+  width: 100%;
+}
+
+.bannerText {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-family: gelica, georgia, book antiqua, times new roman, serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.bannerText a {
+  font-family: gelica, georgia, book antiqua, times new roman, serif;
+  font-weight: 300;
+  font-style: normal;
+  color: white;
+}

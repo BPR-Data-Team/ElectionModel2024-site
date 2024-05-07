@@ -17,11 +17,6 @@ import javier from "image-assets/headshots/headshot12.webp";
 import blank from "image-assets/icon-set/num-icon256.png";
 
 
-
-export function About(): JSX.Element {
-  return <main className={styles.main}>About</main>;
-}
-
 export const metadata: Metadata = {
   title: 'About | 24cast.org',
 };
@@ -58,7 +53,8 @@ const people = [
   { id: "Amy", name: "Amy Qiao, Data Contributor", image: amy, year: "Brown '26", bio: ''},
   { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: javier, year: "Brown '25",
   bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
-  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: chai, year: "Brown '26", bio: ''},
+  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: chai, year: "Brown '26", bio: 
+  "Don't tell Asher what Chai did to his model when he wasn't looking."},
   { id: "Jed", name: 'Jed Morgan, Data Contributor', image: jed, year: "Brown '27", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security.'},
   { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: nikhil, year: "Brown '27", bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},
   { id: "John", name: 'John Huang, Web Developer', image: john, year: "Brown '27", bio: ''},
@@ -68,33 +64,35 @@ const people = [
 
 const AboutPage: React.FC = () => {
   return (
-    <div className={styles.center}>
-      <h1>About 24cast</h1>
-      <p>
-        <b>This isn't your typical election prediction</b>—we use new methods to determine the outcomes
-          of races down to the margin and break down <i>exactly</i> how each race's history
-          affects expected outcomes.
-      </p>
-      <p>
-        24cast is produced by the Brown Political Review's Data Board. When the Data Board isn't innovating
-        election predictions, our team writes <a className={styles.linkText} href='https://brownpoliticalreview.org/category/data/'>data-driven articles</a> for BPR
-        and creates data visualizations for <a className={styles.linkText} href='https://brownpoliticalreview.org/'>articles</a> written by BPR's Editorial Board.
-      </p>
-      <p>
-        24cast is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
-        featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/">methodology</a> page!)
-      </p>
-      <p>
-        <b>Please contact us with any questions, ideas, or press inquiries at <u>24castbpr@gmail.com</u>.</b>
-      </p>
-      {/* consider adding email address straight in here instead of linking it */}
-      <p>
-        Spearheaded by founder Asher Labovich, 24cast is the product of months of effort
-        by a team of Brown students, who we wish to highlight below:
-      </p>
+    <div className={styles.overall}>
+      <div className={styles.main}>
+        <h1 className={styles.header}>About 24cast</h1>
+        <p>
+          This isn&apos;t your typical election prediction model—we use new methods to determine the outcomes
+            of races down to the margin and break down <i>exactly</i> how each race&apos;s history
+            affects expected outcomes.
+        </p>
+        <p>
+          24cast is produced by the Brown Political Review&apos;s Data Board. When the Data Board isn&apos;t innovating
+          election predictions, our team writes <a className={styles.linkText} href='https://brownpoliticalreview.org/category/data/'>data-driven articles</a> for BPR
+          and creates data visualizations for <a className={styles.linkText} href='https://brownpoliticalreview.org/'>articles</a> written by BPR&apos;s Editorial Board.
+        </p>
+        <p>
+          24cast is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
+          featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/methodology">methodology</a> page!)
+        </p>
+        <p>
+          <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b>
+        </p>
+        {/* consider adding email address straight in here instead of linking it */}
+        <p>
+          Spearheaded by founder Asher Labovich, 24cast is the product of months of effort
+          by a team of Brown students, who we wish to highlight below:
+        </p>
+      </div>
       <br></br>
       <br></br>
-      <h1><b>Our Team</b></h1>
+      <h1 className={styles.header}><b>Our Team</b></h1>
       <br></br>
       {/* <div className={styles.grid}>
         {People.map((person) => (
@@ -124,6 +122,17 @@ const AboutPage: React.FC = () => {
           <p className={styles.bio}> {person.bio}</p>
           </div>
         ))}
+      </div>
+
+      <div className={styles.main}>
+        <p className={styles.header}>
+        <b>24cast wishes to thank the following organizations for their data:</b>
+<br />
+<i>(endorsement of 24cast is not implied through inclusion in this list)</i>
+<br /><br />
+Cook Political Report &bull; Cost of Voting Index &bull; FiveThirtyEight &bull;
+ FRED &bull; UVA Center for Politics
+        </p>
       </div>
     </div>
   )

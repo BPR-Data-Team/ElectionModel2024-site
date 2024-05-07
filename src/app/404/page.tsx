@@ -16,17 +16,17 @@ const NotFoundPage: React.FC = () => {
         <b>The page you are looking for does not exist.</b>
       </p>
       <p>
-        Check the URL for typos or take a look at one of these races:
-        <a href="/"></a>
+        Check the URL for typos or {""}
+        <a href="/" className={styles.linkText}>check out our predictions</a>.
       </p>
-      <div className={styles.grid}>
+      {/* <div className={styles.grid}>
         {races.map((race, index) => (
           <div key={index} className={styles.race}>
             <Image src={bulletPoint} width={15} alt="bullet point" />
             <p>{race}</p>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

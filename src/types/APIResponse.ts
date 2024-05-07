@@ -97,32 +97,86 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
       throw new Error(`API response is missing required field: ${field}`);
     }
   }
-  return {
-    margins: JSON.parse(apiResponse.Item.margins.S),
-    expert_ratings: parseFloat(apiResponse.Item.expert_ratings.S),
-    rep_name: apiResponse.Item.rep_name.S,
-    dem_name: apiResponse.Item.dem_name.S,
-    poll: parseFloat(apiResponse.Item.poll.S),
-    voting_regulations: parseFloat(apiResponse.Item.voting_regulations.S),
-    avg_margin: parseFloat(apiResponse.Item.avg_margin.S),
-    consumer_confidence_index: parseFloat(
-      apiResponse.Item.consumer_confidence_index.S
-    ),
-    other: parseFloat(apiResponse.Item.other.S),
-    campaign_finance: parseFloat(apiResponse.Item.campaign_finance.S),
-    unemployment_and_inflation: parseFloat(
-      apiResponse.Item.unemployment_and_inflation.S
-    ),
-    state_district_office: apiResponse.Item.state_district_office.S,
-    state: apiResponse.Item.state.S,
-    district: parseFloat(apiResponse.Item.district.S),
-    office_type: apiResponse.Item.office_type.S,
-    demographics: parseFloat(apiResponse.Item.demographics.S),
-    composition_of_congress_and_presidency: parseFloat(
-      apiResponse.Item.composition_of_congress_and_presidency.S
-    ),
-    weird: apiResponse.Item.weird.S == "nan" ? "" : apiResponse.Item.weird.S,
-    gas_prices: parseFloat(apiResponse.Item.gas_prices.S),
-    past_elections: parseFloat(apiResponse.Item.past_elections.S),
+  let responseItem: ResponseItem = {
+    margins: [],
+    expert_ratings: 0,
+    rep_name: "",
+    dem_name: "",
+    poll: 0,
+    voting_regulations: 0,
+    avg_margin: 0,
+    consumer_confidence_index: 0,
+    other: 0,
+    campaign_finance: 0,
+    unemployment_and_inflation: 0,
+    state_district_office: "",
+    state: "",
+    district: 0,
+    office_type: "",
+    demographics: 0,
+    composition_of_congress_and_presidency: 0,
+    weird: "",
+    gas_prices: 0,
+    past_elections: 0,
   };
+  if (apiResponse.Item.margins.S != "nan") {
+    responseItem.margins = JSON.parse(apiResponse.Item.margins.S);
+  }
+  if (apiResponse.Item.expert_ratings.S != "nan") {
+    responseItem.expert_ratings = parseFloat(apiResponse.Item.expert_ratings.S);
+  }
+  responseItem.rep_name = apiResponse.Item.rep_name.S;
+  responseItem.dem_name = apiResponse.Item.dem_name.S;
+  if (apiResponse.Item.poll.S != "nan") {
+    responseItem.poll = parseFloat(apiResponse.Item.poll.S);
+  }
+  if (apiResponse.Item.voting_regulations.S != "nan") {
+    responseItem.voting_regulations = parseFloat(
+      apiResponse.Item.voting_regulations.S
+    );
+  }
+  if (apiResponse.Item.avg_margin.S != "nan") {
+    responseItem.avg_margin = parseFloat(apiResponse.Item.avg_margin.S);
+  }
+  if (apiResponse.Item.consumer_confidence_index.S != "nan") {
+    responseItem.consumer_confidence_index = parseFloat(
+      apiResponse.Item.consumer_confidence_index.S
+    );
+  }
+  if (apiResponse.Item.other.S != "nan") {
+    responseItem.other = parseFloat(apiResponse.Item.other.S);
+  }
+  if (apiResponse.Item.campaign_finance.S != "nan") {
+    responseItem.campaign_finance = parseFloat(
+      apiResponse.Item.campaign_finance.S
+    );
+  }
+  if (apiResponse.Item.unemployment_and_inflation.S != "nan") {
+    responseItem.unemployment_and_inflation = parseFloat(
+      apiResponse.Item.unemployment_and_inflation.S
+    );
+  }
+  responseItem.state_district_office = apiResponse.Item.state_district_office.S;
+  responseItem.state = apiResponse.Item.state.S;
+  if (apiResponse.Item.district.S != "nan") {
+    responseItem.district = parseFloat(apiResponse.Item.district.S);
+  }
+  responseItem.office_type = apiResponse.Item.office_type.S;
+  if (apiResponse.Item.demographics.S != "nan") {
+    responseItem.demographics = parseFloat(apiResponse.Item.demographics.S);
+  }
+  if (apiResponse.Item.composition_of_congress_and_presidency.S != "nan") {
+    responseItem.composition_of_congress_and_presidency = parseFloat(
+      apiResponse.Item.composition_of_congress_and_presidency.S
+    );
+  }
+  responseItem.weird =
+    apiResponse.Item.weird.S == "nan" ? "" : apiResponse.Item.weird.S;
+  if (apiResponse.Item.gas_prices.S != "nan") {
+    responseItem.gas_prices = parseFloat(apiResponse.Item.gas_prices.S);
+  }
+  if (apiResponse.Item.past_elections.S != "nan") {
+    responseItem.past_elections = parseFloat(apiResponse.Item.past_elections.S);
+  }
+  return responseItem;
 }

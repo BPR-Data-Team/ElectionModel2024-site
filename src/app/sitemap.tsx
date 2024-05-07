@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://24cast.org',
+      url: 'https://24cast.org/',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,

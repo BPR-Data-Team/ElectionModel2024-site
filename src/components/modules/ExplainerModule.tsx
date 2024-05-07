@@ -5,6 +5,7 @@ import styles from "./ExplainerModule.module.css";
 import { Party } from "@/types/Party";
 import { SHAPFactor } from "@/types/SHAPFactor";
 import SHAPDonut from "@/dataviz/SHAPDonut";
+import DonutChart from "@/dataviz/SHAPDonut";
 
 export interface ExplainerModuleProps {
   winner: Party;
@@ -77,11 +78,18 @@ export default function ExplainerModule(
           simulations predicting election margins using a machine learning model
           trained on data across multiple decades.
         </p>
+        {props.winner === "Tie" ? (
         <p>
-          {props.winner}s won in{" "}
-          <span className={styles.boldText}>{props.numWins}</span> simulations
+          <span className={styles.boldText}>{props.numSimulations - props.numWins - props.numLosses} simulations ended in a tie.{" "}</span>
+          <span className={styles.boldText}>Democrats won in {props.numLosses}, and </span>
+          <span className={styles.boldText}> Republicans won in {props.numWins}</span>.
+        </p>
+        ) : (
+        <p>
+          {props.winner}s won in <span className={styles.boldText}>{props.numWins}</span> simulations
           and lost <span className={styles.boldText}>{props.numLosses}</span>.
         </p>
+        )}
         {mostPredictiveFactors.length > 0 && (
           <p>
             By running simulations with varied input data, we determined that{" "}
@@ -97,7 +105,7 @@ export default function ExplainerModule(
           </p>
         )}
         <p>
-          <a href="/soon" className={styles.methodologyLink}>
+          <a href="/methodology" className={styles.methodologyLink}>
             Look through our full methodology!
           </a>
         </p>

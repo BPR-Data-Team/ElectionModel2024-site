@@ -10,7 +10,7 @@ import {
 export const races = [
   'Washington District 3',
   'North Carolina Gubernatorial',
-  'New Hampshire Gubernational',
+  'New Hampshire Gubernatorial',
   'Ohio Senate',
   'Montana Senate'
   // Add more key races as needed
@@ -34,11 +34,11 @@ export default function KeyRacesModule(props: KeyRacesModuleProps): JSX.Element 
       props.setDistrict(3);
     }
     if (race === races[1]) {
-      props.setRaceType(RaceType.gubernational);
+      props.setRaceType(RaceType.gubernatorial);
       props.setState(State.NorthCarolina);
     }
     if (race === races[2]) {
-      props.setRaceType(RaceType.gubernational);
+      props.setRaceType(RaceType.gubernatorial);
       props.setState(State.NewHampshire);
     }
     if (race === races[3]) {

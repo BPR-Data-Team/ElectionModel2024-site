@@ -19,10 +19,10 @@ const ComingSoonPage = () => {
       </h1>
       <h1>This page is coming soon.</h1>
       <p>
-        In the meantime, take a look at one of these races:{" "}
-        <a href="/" className={styles.linkText}></a>
+        In the meantime,{" "}
+        <a href="/" className={styles.linkText}>check out our predictions</a>.
       </p>
-      <div className={styles.grid}>
+      {/* <div className={styles.grid}>
         {races.map((race, index) => (
           <div
             key={index}
@@ -34,7 +34,7 @@ const ComingSoonPage = () => {
             </Link>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

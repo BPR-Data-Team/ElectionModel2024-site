@@ -14,6 +14,10 @@ import { State, getStateAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
 import { SHAPFactor } from "@/types/SHAPFactor";
+import ReactGA from "react-ga4";
+
+const TRACKING_ID = "G-QDEM59MHXZ";
+ReactGA.initialize(TRACKING_ID);
 
 interface RaceData {
   winner: Party;
@@ -21,6 +25,7 @@ interface RaceData {
   margin: number;
   SHAPFactors: Record<SHAPFactor, number>;
   simulations: number[];
+  weird?: string;
 }
 
 function calculateLikelihood(
@@ -65,12 +70,16 @@ async function fetchRaceData(
 ): Promise<RaceData> {
   const stateArg: string = getStateAbbreviation(state);
   const districtArg: string =
-    raceType !== RaceType.House || state === State.National
+    (raceType !== RaceType.House || state === State.National) &&
+    !(
+      raceType === RaceType.presidential &&
+      (state === State.Maine || state === State.Nebraska)
+    ) // Maine and Nebraska have individual electors + at-large for presidential elections
       ? "0"
       : district.toString();
   let raceTypeArg = "";
   switch (raceType) {
-    case RaceType.gubernational:
+    case RaceType.gubernatorial:
       raceTypeArg = "Governor";
       break;
     case RaceType.House:
@@ -90,6 +99,28 @@ async function fetchRaceData(
     .then((data) => {
       console.log(data);
       const responseItem: ResponseItem = parseItem(data);
+      if (responseItem.weird) {
+        return {
+          winner: Party.Democrat,
+          likelihood: 0,
+          margin: 0,
+          SHAPFactors: {
+            [SHAPFactor.ExpertRatings]: 0,
+            [SHAPFactor.VotingRegulations]: 0,
+            [SHAPFactor.ConsumerConfidenceIndex]: 0,
+            [SHAPFactor.Other]: 0,
+            [SHAPFactor.CampaignFinance]: 0,
+            [SHAPFactor.UnemploymentAndInflation]: 0,
+            [SHAPFactor.Demographics]: 0,
+            [SHAPFactor.CompositionOfCongressAndPresidency]: 0,
+            [SHAPFactor.GasPrices]: 0,
+            [SHAPFactor.PastElections]: 0,
+            [SHAPFactor.Polls]: 0,
+          },
+          simulations: [],
+          weird: responseItem.weird,
+        };
+      }
       let winner: Party =
         responseItem.avg_margin > 0 ? Party.Democrat : Party.Republican;
       let likelihood: number = calculateLikelihood(
@@ -142,19 +173,20 @@ async function fetchRaceData(
         Math.round(responseItem.avg_margin * 10) / 10
       );
       const SHAPFactors: Record<SHAPFactor, number> = {
+        [SHAPFactor.PastElections]: responseItem.past_elections,
+        [SHAPFactor.Polls]: responseItem.poll,
         [SHAPFactor.ExpertRatings]: responseItem.expert_ratings,
-        [SHAPFactor.VotingRegulations]: responseItem.voting_regulations,
-        [SHAPFactor.ConsumerConfidenceIndex]:
-          responseItem.consumer_confidence_index,
-        [SHAPFactor.Other]: responseItem.other,
         [SHAPFactor.CampaignFinance]: responseItem.campaign_finance,
         [SHAPFactor.UnemploymentAndInflation]:
           responseItem.unemployment_and_inflation,
-        [SHAPFactor.Demographics]: responseItem.demographics,
+        [SHAPFactor.ConsumerConfidenceIndex]:
+          responseItem.consumer_confidence_index,
+        [SHAPFactor.GasPrices]: responseItem.gas_prices,
+        [SHAPFactor.VotingRegulations]: responseItem.voting_regulations,
         [SHAPFactor.CompositionOfCongressAndPresidency]:
           responseItem.composition_of_congress_and_presidency,
-        [SHAPFactor.GasPrices]: responseItem.gas_prices,
-        [SHAPFactor.PastElections]: responseItem.past_elections,
+        [SHAPFactor.Demographics]: responseItem.demographics,
+        [SHAPFactor.Other]: responseItem.other,
       };
       const predictions: RaceData = {
         winner: winner,
@@ -184,6 +216,7 @@ export default function Home(): JSX.Element {
   const [SHAPFactors, setSHAPFactors] = useState<Record<SHAPFactor, number>>();
   const [simulations, setSimulations] = useState<number[]>([]);
   const [decidingMargin, setDecidingMargin] = useState<number>(0);
+  const [weird, setWeird] = useState<string>("");
 
   useEffect(() => {
     try {
@@ -193,6 +226,11 @@ export default function Home(): JSX.Element {
         setMargin(data.margin);
         setSHAPFactors(data.SHAPFactors);
         setSimulations(data.simulations);
+        if (data.weird) {
+          setWeird(data.weird);
+        } else {
+          setWeird("");
+        }
       });
     } catch (error) {
       console.error(error);
@@ -240,35 +278,49 @@ export default function Home(): JSX.Element {
         raceType={raceType}
         state={state}
         district={district}
+        weird={weird}
       />
-      <div className={styles.mapAndSims}>
-        <MapModule type={raceType} />
-        <ExplainerModule
+      {weird === "" && (
+        <div className={styles.mapAndSims}>
+          <MapModule type={raceType} />
+          <ExplainerModule
+            winner={winner}
+            numSimulations={simulations.length}
+            numWins={
+              winner === Party.Democrat
+                ? simulations.filter((sim) => sim > decidingMargin).length
+                : simulations.filter((sim) => sim < decidingMargin).length
+            }
+            numLosses={
+              winner === Party.Democrat
+                ? simulations.filter((sim) => sim < decidingMargin).length
+                : simulations.filter((sim) => sim > decidingMargin).length
+            }
+            SHAPFactors={SHAPFactors}
+          />
+        </div>
+      )}
+      {weird === "" && (
+        <SimulationsModule
+          simulations={simulations}
+          raceType={raceType}
+          state={state}
           winner={winner}
-          numSimulations={simulations.length}
-          numWins={
-            winner === Party.Democrat
-              ? simulations.filter((sim) => sim > decidingMargin).length
-              : simulations.filter((sim) => sim < decidingMargin).length
-          }
-          numLosses={
-            winner === Party.Democrat
-              ? simulations.filter((sim) => sim < decidingMargin).length
-              : simulations.filter((sim) => sim > decidingMargin).length
-          }
-          SHAPFactors={SHAPFactors}
         />
-      </div>
-      <SimulationsModule simulations={simulations} />
-      <SHAPModule SHAPPredictions={SHAPFactors} />
-      <KeyRacesModule
-        raceType={raceType}
-        state={state}
-        district={district}
-        setRaceType={setRaceType}
-        setState={setState}
-        setDistrict={setDistrict}
-      />
+      )}
+      {weird === "" && state !== State.National && (
+        <SHAPModule SHAPPredictions={SHAPFactors} />
+      )}
+      {weird === "" && (
+        <KeyRacesModule
+          raceType={raceType}
+          state={state}
+          district={district}
+          setRaceType={setRaceType}
+          setState={setState}
+          setDistrict={setDistrict}
+        />
+      )}
     </main>
   );
 }

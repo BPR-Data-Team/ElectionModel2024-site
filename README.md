@@ -1,6 +1,15 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [24cast.org](https://24cast.org) Website Repository
 
-## Getting Started
+### The complete collection of code underlying [24cast.org](https://24cast.org). 
+
+*If you're looking for the codebase for our model, [click here](https://github.com/BPR-Data-Team/ElectionModel2024).*
+
+This site uses next.js and React. Our backend runs on AWS with DynamoDB.
+
+---
+
+<details>
+  <summary>How do I run a clone of this site on my system?</summary>summary>
 
 First, run the development server:
 
@@ -25,7 +34,9 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+</details>
+
+---
 
 ## License
 Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]

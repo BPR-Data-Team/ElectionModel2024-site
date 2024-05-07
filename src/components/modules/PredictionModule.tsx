@@ -9,6 +9,7 @@ import { Party } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
 import { State, getNumDistricts } from "@/types/State";
 import TiedRace from "../svgs/TiedRace";
+import ExclamationMark from "../svgs/ExclamationMark";
 
 export interface PredictionModuleProps {
   winner: Party;
@@ -17,6 +18,7 @@ export interface PredictionModuleProps {
   raceType: RaceType;
   state: State;
   district: number;
+  weird: string;
 }
 
 /**
@@ -27,6 +29,9 @@ export default function PredictionModule(
   props: PredictionModuleProps
 ): JSX.Element {
   const getMessage = (): string => {
+    if (props.weird != "") {
+      return props.weird;
+    }
     if (
       props.raceType === RaceType.Senate &&
       props.state === State.National &&
@@ -53,14 +58,16 @@ export default function PredictionModule(
 
     if (props.likelihood < 60) {
       message += " slightly";
-    } else if (props.likelihood > 80) {
+    } else if (props.likelihood > 80 && props.likelihood < 98) {
       message += " heavily";
+    } else if (props.likelihood >= 98) {
+      message += " overwhelmingly";
     }
 
     message += " favored to win the";
 
     switch (props.raceType) {
-      case RaceType.gubernational:
+      case RaceType.gubernatorial:
         message += " gubernatorial election";
         break;
       case RaceType.House:
@@ -74,9 +81,18 @@ export default function PredictionModule(
         break;
     }
 
+    if (props.state === State.Nebraska && props.raceType === RaceType.Senate) {
+      message += " special election";
+    }
+
     if (props.state !== State.National) {
       message += ` in ${props.state}`;
-      if (props.raceType == RaceType.House && props.district > 0) {
+      if (
+        (props.raceType == RaceType.House ||
+          (props.raceType == RaceType.presidential &&
+            (props.state === State.Nebraska || props.state === State.Maine))) &&
+        props.district > 0
+      ) {
         message += `'s `;
         if (getNumDistricts(props.state) === 1) {
           message += "at-large";
@@ -113,6 +129,9 @@ export default function PredictionModule(
       }
     }
     message += ".";
+    if (props.state === State.Nebraska && props.raceType === RaceType.Senate) {
+      message += "*";
+    }
 
     return message;
   };
@@ -139,7 +158,9 @@ export default function PredictionModule(
       <div className={styles.prediction}>
         <div className={styles.mainPrediction}>
           <span className={styles.mainPredictionIcon}>
-            {props.winner === Party.Democrat ? (
+            {props.weird != "" ? (
+              <ExclamationMark />
+            ) : props.winner === Party.Democrat ? (
               <DemocratD />
             ) : props.winner === Party.Republican ? (
               <RepublicanR />
@@ -150,45 +171,54 @@ export default function PredictionModule(
           <span className={styles.mainPredictionText}>{getMessage()}</span>
         </div>
 
-        <div className={styles.predictionInfo}>
-          <div className={styles.predictionInfoItem}>
-            <div className={styles.predictionInfoItemIcon}>
-              <Trophy />
+        {props.weird == "" ? (
+          <div className={styles.predictionInfo}>
+            <div className={styles.predictionInfoItem}>
+              <div className={styles.predictionInfoItemIcon}>
+                <Trophy />
+              </div>
+              <div className={styles.predictionInfoItemText}>
+                <h4 className={styles.predictionInfoItemHeader}>
+                  Outcome Likelihood:
+                </h4>
+                <span className={styles.predictionInfoItemContent}>
+                  {props.likelihood === 100 ? ">99" : props.likelihood}%
+                </span>
+              </div>
             </div>
-            <div className={styles.predictionInfoItemText}>
-              <h4 className={styles.predictionInfoItemHeader}>
-                Outcome Likelihood:
-              </h4>
-              <span className={styles.predictionInfoItemContent}>
-                {props.likelihood === 100 ? ">99" : props.likelihood}%
-              </span>
-            </div>
-          </div>
 
-          <div className={styles.predictionInfoItem}>
-            <div className={styles.predictionInfoItemIcon}>
-              <RingChart />
-            </div>
-            <div className={styles.predictionInfoItemText}>
-              <h4 className={styles.predictionInfoItemHeader}>
-                {props.state === State.National
-                  ? props.raceType === RaceType.presidential
-                    ? "Electoral Votes"
-                    : "Seats"
-                  : "Margin"}
-                :
-              </h4>
-              <span className={styles.predictionInfoItemContent}>
-                {props.state !== State.National ? "+" : ""}
-                {getMargin()}
-              </span>
+            <div className={styles.predictionInfoItem}>
+              <div className={styles.predictionInfoItemIcon}>
+                <RingChart />
+              </div>
+              <div className={styles.predictionInfoItemText}>
+                <h4 className={styles.predictionInfoItemHeader}>
+                  {props.state === State.National
+                    ? props.raceType === RaceType.presidential
+                      ? "Electoral Votes"
+                      : "Seats"
+                    : "Margin"}
+                  :
+                </h4>
+                <span className={styles.predictionInfoItemContent}>
+                  {props.state !== State.National ? "+" : ""}
+                  {getMargin()}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
         <p className={styles.lastDataUpdate}>
           Last data update: {`${new Date().toLocaleDateString()}`}{" "}
           {/*TODO: make this real */}
         </p>
+        {props.state === State.Nebraska &&
+        props.raceType === RaceType.Senate ? (
+          <p className={styles.note}>
+            *We are not predicting Nebraska&apos;s regular Senate election
+            because there is no Democratic candidate.
+          </p>
+        ) : null}
         <DownloadThisCard />
       </div>
     </Module>

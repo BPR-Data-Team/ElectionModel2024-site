@@ -79,7 +79,7 @@ const AboutPage: React.FC = () => {
         </p>
         <p>
           24cast is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
-          featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/soon">methodology</a> page!)
+          featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/methodology">methodology</a> page!)
         </p>
         <p>
           <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b>

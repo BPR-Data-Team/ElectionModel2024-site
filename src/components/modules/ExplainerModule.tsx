@@ -98,7 +98,7 @@ export default function ExplainerModule(
           </p>
         )}
         <p>
-          <a href="/soon" className={styles.methodologyLink}>
+          <a href="/methodology" className={styles.methodologyLink}>
             Look through our full methodology!
           </a>
         </p>

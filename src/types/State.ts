@@ -59,6 +59,7 @@ export enum State {
 export const getSenateRaceStates = () => {
   return [
     State.National,
+    State.Arizona,
     State.California,
     State.Connecticut,
     State.Delaware,

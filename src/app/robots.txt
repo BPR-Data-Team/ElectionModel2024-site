@@ -5,6 +5,7 @@ User-agent: *
 Disallow: /tos/
 Disallow: /privacy/
 Disallow: /soon/
+Disallow: /_next/
 Allow: /favicon.ico/
 
 Sitemap: https://24cast.org/sitemap.xml

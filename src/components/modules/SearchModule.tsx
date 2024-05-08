@@ -144,7 +144,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           <option key={1} value={1}>
             District 1
           </option>,
-          <option key={2} value={2} disabled={true}>
+          <option key={2} value={2}>
             District 2
           </option>,
         ];

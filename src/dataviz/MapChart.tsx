@@ -94,6 +94,10 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       },
       colorAxis: colorAxis,
       tooltip: {
+        formatter: function(this:any) {
+          let prefix = this.point.value >= 0 ? 'D ' : 'R ';
+          return '<b>' + this.point.name + '</b><br/>' + prefix + '+' + Math.abs(this.point.value);
+        },
         style: {
           fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
         },

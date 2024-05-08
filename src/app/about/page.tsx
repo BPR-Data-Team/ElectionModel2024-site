@@ -2,18 +2,18 @@ import styles from "./page.module.css";
 import type { Metadata } from "next";
 import Person from './person';
 import Image from "next/image";
-import akshay from "image-assets/headshots/headshot1.jpg";
-import amy from "image-assets/headshots/headshot2.png";
-import sita from "image-assets/headshots/headshot3.jpg";
-import logan from "image-assets/headshots/headshot4.png";
-import jed from "image-assets/headshots/headshot5.jpg";
-import alex from "image-assets/headshots/headshot6.png";
-import asher from "image-assets/headshots/headshot7.png";
-import devon from "image-assets/headshots/headshot8.png";
-import nikhil from "image-assets/headshots/headshot9.png";
-import chai from "image-assets/headshots/headshot10.png";
-import john from "image-assets/headshots/headshot11.png";
-import javier from "image-assets/headshots/headshot12.png";
+import akshay from "image-assets/headshots/headshot1.webp";
+import amy from "image-assets/headshots/headshot2.webp";
+import sita from "image-assets/headshots/headshot3.webp";
+import logan from "image-assets/headshots/headshot4.webp";
+import jed from "image-assets/headshots/headshot5.webp";
+import alex from "image-assets/headshots/headshot6.webp";
+import asher from "image-assets/headshots/headshot7.webp";
+import devon from "image-assets/headshots/headshot8.webp";
+import nikhil from "image-assets/headshots/headshot9.webp";
+import chai from "image-assets/headshots/headshot10.webp";
+import john from "image-assets/headshots/headshot11.webp";
+import javier from "image-assets/headshots/headshot12.webp";
 import blank from "image-assets/icon-set/num-icon256.png";
 
 
@@ -79,7 +79,7 @@ const AboutPage: React.FC = () => {
         </p>
         <p>
           24cast is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
-          featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/soon">methodology</a> page!)
+          featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/methodology">methodology</a> page!)
         </p>
         <p>
           <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b>

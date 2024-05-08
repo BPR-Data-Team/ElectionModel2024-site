@@ -34,7 +34,7 @@ function arrows(categories: string[], data: number[]) {
       type: "bar",
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
     title: {
       text: "",
@@ -56,6 +56,7 @@ function arrows(categories: string[], data: number[]) {
           color: "black",
           fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
         },
+        
       },
     },
     yAxis: {
@@ -67,6 +68,13 @@ function arrows(categories: string[], data: number[]) {
         },
       },
       labels: {
+        formatter: function(this:any) {
+          if (this.value >= 0) {
+              return 'D +' + Math.abs(this.value);
+          } else {
+              return 'R +' + Math.abs(this.value);
+          }
+      },
         style: {
           color: "black",
           fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
@@ -80,6 +88,10 @@ function arrows(categories: string[], data: number[]) {
       },
     },
     tooltip: {
+      formatter: function(this: any) {
+        let prefix = this.y >= 0 ? 'D ' : 'R ';
+        return '<b>' + this.series.name + '</b><br/>' + prefix +'+'+ Math.abs(this.y);
+    },
       style: {
         fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
       },
@@ -87,7 +99,12 @@ function arrows(categories: string[], data: number[]) {
     series: [
       {
         name: "Impact",
-        data: data,
+        data: data.map((value) => {
+          return {
+            y: value,
+            color: value >= 0 ? "#595D9A " : "#B83C2B ",
+          };
+        }),
         threshold: 0,
       },
     ],

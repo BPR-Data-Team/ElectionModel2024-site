@@ -15,9 +15,16 @@ import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
 import { SHAPFactor } from "@/types/SHAPFactor";
 import ReactGA from "react-ga4";
+import type { Metadata } from "next";
 
 const TRACKING_ID = "G-QDEM59MHXZ";
 ReactGA.initialize(TRACKING_ID);
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
 
 interface RaceData {
   winner: Party;

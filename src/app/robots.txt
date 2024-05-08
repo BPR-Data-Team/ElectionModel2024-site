@@ -1,12 +1,12 @@
 User-agent: googlebot-image
-Disallow:/
+Disallow: /
 
 User-agent: *
-Disallow: /tos/
-Disallow: /privacy/
-Disallow: /soon/
+Disallow: /tos
+Disallow: /privacy
+Disallow: /soon
 Disallow: /_next/
-Allow: /favicon.ico/
+Allow: /favicon.ico
 
 Sitemap: https://24cast.org/sitemap.xml
 Sitemap: https://www.24cast.org/sitemap.xml

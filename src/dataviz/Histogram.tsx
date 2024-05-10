@@ -56,6 +56,17 @@ export const Histogram = (props: HistogramProps) => {
   return <div id="container1"></div>;
 };
 
+const fake_min = -100;
+const fake_max = 100;
+const fake_bins = [
+  0, 0, 2, 8, 35, 145, 304, 831, 1682, 3396, 5769, 8447, 11373, 13475, 14085,
+  12625, 10577, 7383, 4832, 2751, 1380, 540, 260, 73, 18, 6, 2, 0, 1, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+];
+const fake_bin_edges = Array.from({ length: 47 }, (_, i) => (i - 23) * 4).map(
+  (x) => parseFloat(x.toFixed(2))
+);
+
 function MarginHistogram(input_data: number[]) {
   // Highcharts chart initialization code here
   // Make sure the chart is initialized after setting the dimensions
@@ -76,19 +87,10 @@ function MarginHistogram(input_data: number[]) {
 
   const histogramData: number[] = Array(bins.length - 1).fill(0);
 
-  data.forEach((margin: number) => {
-    for (let i = 1; i < bins.length; i++) {
-      if (margin >= bins[i - 1] && margin < bins[i]) {
-        histogramData[i - 1]++;
-        break;
-      }
-    }
-  });
-
-  const histogramSeries: any = histogramData.map((frequency, index) => ({
-    x: Math.round((bins[index] + bins[index + 1]) / 2),
+  const histogramSeries: any = fake_bins.map((frequency, index) => ({
+    x: Math.round((fake_bin_edges[index] + fake_bin_edges[index + 1]) / 2),
     y: frequency,
-    color: bins[index] < 0 ? "#B83C2B" : "#595D9A",
+    color: fake_bin_edges[index] < 0 ? "#B83C2B" : "#595D9A",
   }));
 
   Highcharts.chart("container1", {
@@ -100,9 +102,11 @@ function MarginHistogram(input_data: number[]) {
       text: "",
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
     xAxis: {
+      min: fake_min,
+      max: fake_max,
       title: {
         text: "Margin",
         style: {

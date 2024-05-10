@@ -1,6 +1,8 @@
 import { SHAPFactor } from "@/types/SHAPFactor";
 import Highcharts from "highcharts";
 import { useLayoutEffect } from "react";
+import highchartsAccessibility from "highcharts/modules/accessibility";
+highchartsAccessibility(Highcharts);
 
 interface ArrowProps {
   SHAP: Record<SHAPFactor, number> | undefined;

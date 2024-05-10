@@ -190,7 +190,6 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           <select
             value={props.raceType}
             onChange={handleRaceChange}
-            className={styles.drops}
           >
             {Object.values(RaceType).map((race, index) => (
               <option key={index} value={race}>

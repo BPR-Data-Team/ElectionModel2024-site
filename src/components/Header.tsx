@@ -21,7 +21,7 @@ export default function Header(): JSX.Element {
             <a href="https://brownpoliticalreview.org/" className={styles.bprImage}><Image
               src={Logo}
               width={230}
-              height={11.8}
+              height="auto"
               alt={"Brown Political Review"}
             /></a>
           </div>

@@ -43,13 +43,13 @@ export default function PredictionModule(
     let message: string = "";
 
     if (props.winner === Party.Democrat) {
-      if (props.raceType === RaceType.presidential) {
+      if (props.raceType === RaceType.Presidential) {
         message = "Joe Biden is";
       } else {
         message = "Democrats are";
       }
     } else {
-      if (props.raceType === RaceType.presidential) {
+      if (props.raceType === RaceType.Presidential) {
         message = "Donald Trump is";
       } else {
         message = "Republicans are";
@@ -67,7 +67,7 @@ export default function PredictionModule(
     message += " favored to win the";
 
     switch (props.raceType) {
-      case RaceType.gubernatorial:
+      case RaceType.Gubernatorial:
         message += " gubernatorial election";
         break;
       case RaceType.House:
@@ -76,7 +76,7 @@ export default function PredictionModule(
       case RaceType.Senate:
         message += " Senate";
         break;
-      case RaceType.presidential:
+      case RaceType.Presidential:
         message += " presidency";
         break;
     }
@@ -89,7 +89,7 @@ export default function PredictionModule(
       message += ` in ${props.state}`;
       if (
         (props.raceType == RaceType.House ||
-          (props.raceType == RaceType.presidential &&
+          (props.raceType == RaceType.Presidential &&
             (props.state === State.Nebraska || props.state === State.Maine))) &&
         props.district > 0
       ) {
@@ -140,7 +140,7 @@ export default function PredictionModule(
     if (props.state !== State.National || props.winner === Party.Democrat)
       return props.margin;
     switch (props.raceType) {
-      case RaceType.presidential:
+      case RaceType.Presidential:
         return 538 - props.margin;
       case RaceType.Senate:
         return 100 - props.margin;
@@ -194,7 +194,7 @@ export default function PredictionModule(
               <div className={styles.predictionInfoItemText}>
                 <h4 className={styles.predictionInfoItemHeader}>
                   {props.state === State.National
-                    ? props.raceType === RaceType.presidential
+                    ? props.raceType === RaceType.Presidential
                       ? "Electoral Votes"
                       : "Seats"
                     : "Margin"}

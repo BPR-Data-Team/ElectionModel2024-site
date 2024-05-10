@@ -72,14 +72,14 @@ async function fetchRaceData(
   const districtArg: string =
     (raceType !== RaceType.House || state === State.National) &&
     !(
-      raceType === RaceType.presidential &&
+      raceType === RaceType.Presidential &&
       (state === State.Maine || state === State.Nebraska)
     ) // Maine and Nebraska have individual electors + at-large for presidential elections
       ? "0"
       : district.toString();
   let raceTypeArg = "";
   switch (raceType) {
-    case RaceType.gubernatorial:
+    case RaceType.Gubernatorial:
       raceTypeArg = "Governor";
       break;
     case RaceType.House:
@@ -88,7 +88,7 @@ async function fetchRaceData(
     case RaceType.Senate:
       raceTypeArg = "Senate";
       break;
-    case RaceType.presidential:
+    case RaceType.Presidential:
       raceTypeArg = "President";
       break;
   }
@@ -130,7 +130,7 @@ async function fetchRaceData(
       );
       if (state === State.National) {
         switch (raceType) {
-          case RaceType.presidential:
+          case RaceType.Presidential:
             winner =
               responseItem.avg_margin > 269
                 ? Party.Democrat
@@ -207,7 +207,7 @@ async function fetchRaceData(
  * @returns {JSX.Element} The home page.
  */
 export default function Home(): JSX.Element {
-  const [raceType, setRaceType] = useState<RaceType>(RaceType.presidential);
+  const [raceType, setRaceType] = useState<RaceType>(RaceType.Presidential);
   const [state, setState] = useState<State>(State.National);
   const [district, setDistrict] = useState<number>(0);
   const [winner, setWinner] = useState<Party>(Party.Democrat);
@@ -240,7 +240,7 @@ export default function Home(): JSX.Element {
   useEffect(() => {
     if (state === State.National) {
       switch (raceType) {
-        case RaceType.presidential:
+        case RaceType.Presidential:
           setDecidingMargin(269);
           break;
         case RaceType.Senate:

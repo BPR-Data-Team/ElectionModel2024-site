@@ -45,7 +45,7 @@ export const Histogram = (props: HistogramProps) => {
     } else if (props.race == RaceType.Senate && props.state == State.National) {
       SenateHistogram(props.simulations, props.winner);
     } else if (
-      props.race == RaceType.presidential &&
+      props.race == RaceType.Presidential &&
       props.state == State.National
     ) {
       PresidentHistogram(props.simulations, props.winner);

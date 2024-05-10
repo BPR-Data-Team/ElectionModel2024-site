@@ -38,7 +38,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       case RaceType.Senate:
         setFilteredStates(getSenateRaceStates());
         break;
-      case RaceType.gubernatorial:
+      case RaceType.Gubernatorial:
         setFilteredStates(getGubernatorialRaceStates());
         break;
       case RaceType.House:
@@ -53,12 +53,12 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   useEffect(() => {
     if (
       props.state === State.National &&
-      props.raceType === RaceType.gubernatorial
+      props.raceType === RaceType.Gubernatorial
     ) {
       props.setState(State.Delaware);
     }
     if (
-      props.raceType === RaceType.presidential &&
+      props.raceType === RaceType.Presidential &&
       (props.state === State.Maine || props.state === State.Nebraska)
     ) {
       setIsMaineOrNebraskaAndPresidential(true);
@@ -125,7 +125,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     )
       return true;
     if (
-      props.raceType === RaceType.presidential &&
+      props.raceType === RaceType.Presidential &&
       (props.state === State.Maine || props.state === State.Nebraska)
     )
       // Maine and Nebraska award electoral votes by congressional district and statewide
@@ -134,7 +134,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   };
 
   const getDistrictDropdownOptions = (): JSX.Element[] => {
-    if (props.raceType === RaceType.presidential) {
+    if (props.raceType === RaceType.Presidential) {
       // Maine and Nebraska award electoral votes by congressional district and statewide
       if (props.state === State.Maine) {
         return [

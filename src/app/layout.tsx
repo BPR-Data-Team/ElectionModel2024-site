@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     description:
       "Innovative election predictions with in-depth explanations by the Brown Political Review.",
   },
+  alternates: {
+    canonical: "./"
+  },
 };
 
 export default function RootLayout({

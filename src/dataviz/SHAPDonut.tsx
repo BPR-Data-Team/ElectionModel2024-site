@@ -1,7 +1,8 @@
 import React, { useLayoutEffect } from "react";
 import Highcharts, { SeriesPieOptions } from "highcharts";
 import { SHAPFactor } from "@/types/SHAPFactor";
-
+import highchartsAccessibility from "highcharts/modules/accessibility";
+highchartsAccessibility(Highcharts);
 // WIP
 
 interface DonutChartProps {

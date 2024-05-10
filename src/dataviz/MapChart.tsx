@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
 import highchartsAccessibility from "highcharts/modules/accessibility";
-highchartsAccessibility(Highcharts);
+if (typeof window !== `undefined`) {
+  highchartsAccessibility(Highcharts);
+}
 
 if (typeof Highcharts === "object") {
   HighchartsMap(Highcharts);

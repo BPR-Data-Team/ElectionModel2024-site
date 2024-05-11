@@ -100,8 +100,6 @@ export default function ExplainerModule(
         )}
         {mostPredictiveFactors.length === 0 && (
           <p>
-            Unfortunately, we were unable to determine the most predictive
-            factors for this race.
           </p>
         )}
         <p>

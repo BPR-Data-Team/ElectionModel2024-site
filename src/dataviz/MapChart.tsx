@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
 import highchartsAccessibility from "highcharts/modules/accessibility";
@@ -29,17 +29,24 @@ const colorAxisStops: [number, string][] = [
 ];
 
 const MapChart: React.FC<MapProps> = (props: MapProps) => {
+  const [mapData, setMapData] = useState<JSON>(); // cache map data
+
   useEffect(() => {
     fetchMapDataAndInitializeMap(props.stateData);
   }, [props.stateData]);
 
   const fetchMapDataAndInitializeMap = async (stateData: StateData[]) => {
     try {
-      const mapDataResponse = await fetch(
-        "https://code.highcharts.com/mapdata/countries/us/us-all.topo.json"
-      );
-      const mapData: JSON = await mapDataResponse.json();
-
+      if (!mapData) {
+        const mapDataResponse = await fetch(
+          "https://code.highcharts.com/mapdata/countries/us/us-all.topo.json"
+        );
+        const fetchedMapData: JSON = await mapDataResponse.json();
+        setMapData(fetchedMapData);
+      }
+      if (!mapData) {
+        throw new Error("Failed to fetch map data");
+      }
       initializeMap(stateData, mapData);
     } catch (error) {
       console.error("Error fetching map data:", error);
@@ -83,7 +90,7 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
         map: mapData,
       },
       credits: {
-        enabled: false
+        enabled: false,
       },
       accessibility: {
         description:
@@ -98,9 +105,16 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       },
       colorAxis: colorAxis,
       tooltip: {
-        formatter: function(this:any) {
-          let prefix = this.point.value >= 0 ? 'D ' : 'R ';
-          return '<b>' + this.point.name + '</b><br/>' + prefix + '+' + Math.abs(this.point.value);
+        formatter: function (this: any) {
+          let prefix = this.point.value >= 0 ? "D " : "R ";
+          return (
+            "<b>" +
+            this.point.name +
+            "</b><br/>" +
+            prefix +
+            "+" +
+            Math.abs(this.point.value)
+          );
         },
         style: {
           fontFamily: "gelica, book antiqua, georgia, times new roman, serif",

@@ -34,7 +34,11 @@ function calculateLikelihood(
   deciding_margin: number
 ): number {
   const winner: Party =
-    avg_margin > deciding_margin ? Party.Democrat : avg_margin < deciding_margin ? Party.Republican : Party.Tie;
+    avg_margin > deciding_margin
+      ? Party.Democrat
+      : avg_margin < deciding_margin
+      ? Party.Republican
+      : Party.Tie;
 
   // if dem, count number of margins above deciding_margin
   // if rep, count number of margins below deciding_margin
@@ -44,11 +48,12 @@ function calculateLikelihood(
       return count + (margin > deciding_margin ? 1 : 0);
     } else if (winner === Party.Republican) {
       return count + (margin < deciding_margin ? 1 : 0);
-    } else { // Case when winner is Party.Tie
+    } else {
+      // Case when winner is Party.Tie
       return count + (margin === deciding_margin ? 1 : 0);
     }
   }, 0);
-  
+
   if (margins.length === 0) return 0; // Prevent division by zero
   return Math.round((matchingWinnerCount / margins.length) * 100);
 }
@@ -217,7 +222,8 @@ export default function Home(): JSX.Element {
   const [weird, setWeird] = useState<string>("");
 
   useEffect(() => {
-    debugger;
+    if (raceType == undefined || state == undefined || district == undefined)
+      return;
     try {
       fetchRaceData(raceType, state, district).then((data: RaceData) => {
         setWinner(data.winner);
@@ -295,11 +301,7 @@ export default function Home(): JSX.Element {
                 ? simulations.filter((sim) => sim < decidingMargin).length
                 : simulations.filter((sim) => sim > decidingMargin).length
             }
-            SHAPFactors={
-              state === State.National
-              ? undefined
-              : SHAPFactors
-            }
+            SHAPFactors={state === State.National ? undefined : SHAPFactors}
           />
         </div>
       )}

@@ -30,7 +30,6 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   useEffect(() => {
     if (filteredStates.length === 0) return;
     if (!filteredStates.includes(props.state)) {
-      debugger;
       props.setState(filteredStates[0]);
     }
   }, [filteredStates]);
@@ -57,7 +56,6 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       props.state === State.National &&
       props.raceType === RaceType.Gubernatorial
     ) {
-      debugger;
       props.setState(State.Delaware);
     }
     if (
@@ -76,20 +74,19 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
 
   useEffect(() => {
     if (
-      props.district > maxDistricts ||
-      (props.district === 0 && !isMaineOrNebraskaAndPresidential)
+      props.district > maxDistricts || // If the district number is greater than the max number of districts
+      (props.district === 0 && // Or if the district number is 0 and...
+        !(isMaineOrNebraskaAndPresidential || props.state === State.National)) // ...the state is not the nation or Maine/Nebraska for presidential races
     ) {
       if (isMaineOrNebraskaAndPresidential) {
         props.setDistrict(0);
       } else {
-        debugger;
         props.setDistrict(maxDistricts);
       }
     }
   }, [props.district, maxDistricts]);
 
   const handleRaceChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-    debugger;
     const raceTypeKey = event.target.value as keyof typeof RaceType;
     if (RaceType[raceTypeKey]) {
       props.setRaceType(RaceType[raceTypeKey]);
@@ -99,7 +96,6 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   };
 
   const handleStateChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-    debugger;
     const stateValue = event.target.value.replace(
       /\s/g,
       ""
@@ -115,7 +111,6 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   const handleDistrictChange = (
     event: ChangeEvent<HTMLSelectElement>
   ): void => {
-    debugger;
     const district = parseInt(event.target.value);
     if (district >= 0) {
       props.setDistrict(district);

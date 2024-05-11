@@ -180,7 +180,7 @@ export const getNumDistricts = (state: State): number => {
     case State.Arkansas:
       return 4;
     case State.California:
-      return 53;
+      return 52;
     case State.Colorado:
       return 7;
     case State.Connecticut:

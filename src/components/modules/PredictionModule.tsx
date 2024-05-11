@@ -93,7 +93,11 @@ export default function PredictionModule(
             (props.state === State.Nebraska || props.state === State.Maine))) &&
         props.district > 0
       ) {
-        message += `'s `;
+        if ([State.Arkansas, State.Illinois, State.Kansas, State.Massachusetts, State.Texas].includes(props.state)) {
+          message += `'`
+        } else {
+          message += `'s `;
+        }
         if (getNumDistricts(props.state) === 1) {
           message += "at-large";
         } else {

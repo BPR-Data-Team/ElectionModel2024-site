@@ -34,23 +34,21 @@ function calculateLikelihood(
   deciding_margin: number
 ): number {
   const winner: Party =
-    avg_margin > deciding_margin ? Party.Democrat : Party.Republican;
+    avg_margin > deciding_margin ? Party.Democrat : avg_margin < deciding_margin ? Party.Republican : Party.Tie;
 
   // if dem, count number of margins above deciding_margin
   // if rep, count number of margins below deciding_margin
+  // if tie, count number of margins at deciding_margin
   const matchingWinnerCount = margins.reduce((count, margin) => {
-    return (
-      count +
-      (winner === Party.Democrat
-        ? margin > deciding_margin
-          ? 1
-          : 0
-        : margin < deciding_margin
-        ? 1
-        : 0)
-    );
+    if (winner === Party.Democrat) {
+      return count + (margin > deciding_margin ? 1 : 0);
+    } else if (winner === Party.Republican) {
+      return count + (margin < deciding_margin ? 1 : 0);
+    } else { // Case when winner is Party.Tie
+      return count + (margin === deciding_margin ? 1 : 0);
+    }
   }, 0);
-
+  
   if (margins.length === 0) return 0; // Prevent division by zero
   return Math.round((matchingWinnerCount / margins.length) * 100);
 }
@@ -296,7 +294,11 @@ export default function Home(): JSX.Element {
                 ? simulations.filter((sim) => sim < decidingMargin).length
                 : simulations.filter((sim) => sim > decidingMargin).length
             }
-            SHAPFactors={SHAPFactors}
+            SHAPFactors={
+              state === State.National
+              ? undefined
+              : SHAPFactors
+            }
           />
         </div>
       )}

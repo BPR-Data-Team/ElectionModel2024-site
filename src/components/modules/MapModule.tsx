@@ -39,15 +39,15 @@ export async function getTestData(type: string) {
 }
 
 interface mapProps {
-  type: RaceType;
+  raceType: RaceType;
 }
 
 export default function MapModule(props: mapProps): JSX.Element {
   const [mapData, setMapData] = useState<StateData[]>([]);
   useEffect(() => {
     try {
-      var type = "USPresident";
-      if (props.type == RaceType.Senate) {
+      let type = "USPresident";
+      if (props.raceType == RaceType.Senate) {
         type = "USSenate";
       }
       getTestData(type).then((data: StateData[]) => {
@@ -56,7 +56,7 @@ export default function MapModule(props: mapProps): JSX.Element {
     } catch (error) {
       console.error(error);
     }
-  }, [props]);
+  }, [props.raceType]);
   return (
     <Module className="mapModule">
       <div className={styles.map}>

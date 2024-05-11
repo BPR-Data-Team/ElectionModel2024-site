@@ -28,7 +28,9 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   ] = useState<boolean>(false);
 
   useEffect(() => {
+    if (filteredStates.length === 0) return;
     if (!filteredStates.includes(props.state)) {
+      debugger;
       props.setState(filteredStates[0]);
     }
   }, [filteredStates]);
@@ -55,6 +57,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       props.state === State.National &&
       props.raceType === RaceType.Gubernatorial
     ) {
+      debugger;
       props.setState(State.Delaware);
     }
     if (
@@ -79,12 +82,14 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       if (isMaineOrNebraskaAndPresidential) {
         props.setDistrict(0);
       } else {
+        debugger;
         props.setDistrict(maxDistricts);
       }
     }
   }, [props.district, maxDistricts]);
 
   const handleRaceChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    debugger;
     const raceTypeKey = event.target.value as keyof typeof RaceType;
     if (RaceType[raceTypeKey]) {
       props.setRaceType(RaceType[raceTypeKey]);
@@ -94,6 +99,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   };
 
   const handleStateChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    debugger;
     const stateValue = event.target.value.replace(
       /\s/g,
       ""
@@ -109,6 +115,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   const handleDistrictChange = (
     event: ChangeEvent<HTMLSelectElement>
   ): void => {
+    debugger;
     const district = parseInt(event.target.value);
     if (district >= 0) {
       props.setDistrict(district);
@@ -187,10 +194,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       <div className={styles.search}>
         <p>
           I want to see
-          <select
-            value={props.raceType}
-            onChange={handleRaceChange}
-          >
+          <select value={props.raceType} onChange={handleRaceChange}>
             {Object.values(RaceType).map((race, index) => (
               <option key={index} value={race}>
                 {race}

@@ -219,6 +219,7 @@ export default function Home(): JSX.Element {
   const [weird, setWeird] = useState<string>("");
 
   useEffect(() => {
+    debugger;
     try {
       fetchRaceData(raceType, state, district).then((data: RaceData) => {
         setWinner(data.winner);
@@ -282,7 +283,7 @@ export default function Home(): JSX.Element {
       />
       {weird === "" && (
         <div className={styles.mapAndSims}>
-          <MapModule type={raceType} />
+          <MapModule raceType={raceType} />
           <ExplainerModule
             winner={winner}
             numSimulations={simulations.length}

@@ -2,8 +2,7 @@ import { Party, getOppositeParty, getPartyColor } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
 import { State } from "@/types/State";
 import * as Highcharts from "highcharts";
-import { get } from "http";
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 
 function generateMarginsData(count: number): number[] {
   const data: number[] = [];
@@ -100,7 +99,7 @@ function MarginHistogram(input_data: number[]) {
       text: "",
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
     xAxis: {
       title: {

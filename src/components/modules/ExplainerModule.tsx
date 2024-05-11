@@ -63,7 +63,7 @@ export default function ExplainerModule(
     }
     setMostPredictiveFactors(
       Object.entries(props.SHAPFactors)
-        .sort((a, b) => b[1] - a[1]) // Sort by value in descending order
+        .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])) // Sort by value in descending order
         .slice(0, 3) // Get the top 3
         .map(([factor]) => factor as SHAPFactor) // Get the factor name
     );

@@ -28,7 +28,9 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   ] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!filteredStates.includes(props.state)) {
+    console.log("Filtered state is " + filteredStates)
+    console.log("Filtered states length is " + filteredStates.length)
+    if (!filteredStates.includes(props.state) && filteredStates.length > 0) {
       props.setState(filteredStates[0]);
     }
   }, [filteredStates]);

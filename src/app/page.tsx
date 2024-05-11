@@ -296,7 +296,11 @@ export default function Home(): JSX.Element {
                 ? simulations.filter((sim) => sim < decidingMargin).length
                 : simulations.filter((sim) => sim > decidingMargin).length
             }
-            SHAPFactors={SHAPFactors}
+            SHAPFactors={
+              state === State.National
+              ? undefined
+              : SHAPFactors
+            }
           />
         </div>
       )}

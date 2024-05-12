@@ -228,10 +228,12 @@ export default function Home(): JSX.Element {
   const [simulations, setSimulations] = useState<number[]>([]);
   const [decidingMargin, setDecidingMargin] = useState<number>(0);
   const [weird, setWeird] = useState<string>("");
+  const [fetchComplete, setFetchComplete] = useState<boolean>(false);
 
   useEffect(() => {
     if (raceType == undefined || state == undefined || district == undefined)
       return;
+    setFetchComplete(false);
     fetchRaceData(raceType, state, district)
       .then((data: RaceData) => {
         setWinner(data.winner);
@@ -244,6 +246,7 @@ export default function Home(): JSX.Element {
         } else {
           setWeird("");
         }
+        setFetchComplete(true);
       })
       .catch((error: Error) => {
         console.error(error);
@@ -292,6 +295,7 @@ export default function Home(): JSX.Element {
         state={state}
         district={district}
         weird={weird}
+        fetchComplete={fetchComplete}
       />
       {weird === "" && (
         <div className={styles.mapAndSims}>

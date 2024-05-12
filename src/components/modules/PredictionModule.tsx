@@ -10,6 +10,7 @@ import { RaceType } from "@/types/RaceType";
 import { State, getNumDistricts } from "@/types/State";
 import TiedRace from "../svgs/TiedRace";
 import ExclamationMark from "../svgs/ExclamationMark";
+import { useEffect, useState } from "react";
 
 export interface PredictionModuleProps {
   winner: Party;
@@ -19,6 +20,7 @@ export interface PredictionModuleProps {
   state: State;
   district: number;
   weird: string;
+  fetchComplete: boolean;
 }
 
 /**
@@ -28,6 +30,33 @@ export interface PredictionModuleProps {
 export default function PredictionModule(
   props: PredictionModuleProps
 ): JSX.Element {
+  const [predictionMessage, setPredictionMessage] = useState<string>("");
+  const [likelihood, setLikelihood] = useState<number>(0);
+  const [margin, setMargin] = useState<number>(0);
+  const [icon, setIcon] = useState<JSX.Element>(<></>);
+
+  useEffect(() => {
+    if (props.fetchComplete) {
+      setPredictionMessage(getMessage());
+      setLikelihood(props.likelihood);
+      setMargin(getMargin());
+      setIcon(getIcon());
+    }
+  }, [props.fetchComplete]);
+
+  const getIcon = (): JSX.Element => {
+    if (props.weird != "") {
+      return <ExclamationMark />;
+    }
+    if (props.winner === Party.Democrat) {
+      return <DemocratD />;
+    } else if (props.winner === Party.Republican) {
+      return <RepublicanR />;
+    } else {
+      return <TiedRace />;
+    }
+  };
+
   const getMessage = (): string => {
     if (props.weird != "") {
       return props.weird;
@@ -93,8 +122,16 @@ export default function PredictionModule(
             (props.state === State.Nebraska || props.state === State.Maine))) &&
         props.district > 0
       ) {
-        if ([State.Arkansas, State.Illinois, State.Kansas, State.Massachusetts, State.Texas].includes(props.state)) {
-          message += `'`
+        if (
+          [
+            State.Arkansas,
+            State.Illinois,
+            State.Kansas,
+            State.Massachusetts,
+            State.Texas,
+          ].includes(props.state)
+        ) {
+          message += `'`;
         } else {
           message += `'s `;
         }
@@ -161,18 +198,8 @@ export default function PredictionModule(
       </div>
       <div className={styles.prediction}>
         <div className={styles.mainPrediction}>
-          <span className={styles.mainPredictionIcon}>
-            {props.weird != "" ? (
-              <ExclamationMark />
-            ) : props.winner === Party.Democrat ? (
-              <DemocratD />
-            ) : props.winner === Party.Republican ? (
-              <RepublicanR />
-            ) : (
-              <TiedRace />
-            )}
-          </span>
-          <span className={styles.mainPredictionText}>{getMessage()}</span>
+          <span className={styles.mainPredictionIcon}>{icon}</span>
+          <span className={styles.mainPredictionText}>{predictionMessage}</span>
         </div>
 
         {props.weird == "" ? (
@@ -186,7 +213,7 @@ export default function PredictionModule(
                   Outcome Likelihood:
                 </h4>
                 <span className={styles.predictionInfoItemContent}>
-                  {props.likelihood === 100 ? ">99" : props.likelihood}%
+                  {likelihood === 100 ? ">99" : likelihood}%
                 </span>
               </div>
             </div>
@@ -206,7 +233,7 @@ export default function PredictionModule(
                 </h4>
                 <span className={styles.predictionInfoItemContent}>
                   {props.state !== State.National ? "+" : ""}
-                  {getMargin()}
+                  {margin}
                 </span>
               </div>
             </div>

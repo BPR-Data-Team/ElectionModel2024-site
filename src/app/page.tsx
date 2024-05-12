@@ -98,9 +98,16 @@ async function fetchRaceData(
   const raceArg: string = `${stateArg}${districtArg}${raceTypeArg}`;
   const fetchInput: string = `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${raceArg}`;
   return fetch(fetchInput)
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch API");
+      }
+      return response.json();
+    })
+    .catch((error: Error) => {
+      return Promise.reject(error);
+    })
     .then((data) => {
-      console.log(data);
       const responseItem: ResponseItem = parseItem(data);
       if (responseItem.weird) {
         return {

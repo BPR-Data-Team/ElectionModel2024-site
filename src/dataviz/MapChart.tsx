@@ -32,25 +32,26 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
   const [mapData, setMapData] = useState<JSON>(); // cache map data
 
   useEffect(() => {
-    fetchMapDataAndInitializeMap(props.stateData);
+    if (props.stateData.length > 0)
+      fetchMapDataAndInitializeMap(props.stateData);
   }, [props.stateData]);
 
   const fetchMapDataAndInitializeMap = async (stateData: StateData[]) => {
-    try {
-      if (!mapData) {
-        const mapDataResponse = await fetch(
-          "https://code.highcharts.com/mapdata/countries/us/us-all.topo.json"
-        );
-        const fetchedMapData: JSON = await mapDataResponse.json();
-        setMapData(fetchedMapData);
-      }
-      if (!mapData) {
-        throw new Error("Failed to fetch map data");
-      }
+    if (mapData) {
       initializeMap(stateData, mapData);
-    } catch (error) {
-      console.error("Error fetching map data:", error);
+      return;
     }
+    fetch("https://code.highcharts.com/mapdata/countries/us/us-all.topo.json")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log(stateData);
+        setMapData(data);
+        initializeMap(stateData, data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   function getMaxState(stateData: StateData[]): number {

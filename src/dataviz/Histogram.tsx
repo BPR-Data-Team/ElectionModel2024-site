@@ -410,7 +410,6 @@ function PresidentHistogram(input_data: number[], winner: Party) {
       data[i] = 538 - data[i];
     }
   }
-  console.log(data);
   // Highcharts chart initialization code here
   // Make sure the chart is initialized after setting the dimensions
   const binCount: number = 25; // Define the number of bins

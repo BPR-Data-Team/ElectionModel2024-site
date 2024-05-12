@@ -14,16 +14,14 @@ export default function Footer(): JSX.Element {
             information at our
             <span> </span>
             <a
-              className={styles.linkText}
+              className={styles.linkTextAlt}
               href="https://github.com/BPR-Data-Team/ElectionModel2024"
             >
               Github
-            </a>
+            </a>.
           </span>
-          {/** TODO: Make sure this Github link is correct. */}
         </div>
         <div>
-          {/** TODO: Link to Terms of Use, Privacy Policy, and Sitemap when they are finished. */}
           <a className={styles.linkText} href="/tos">
             Terms of Use
           </a>

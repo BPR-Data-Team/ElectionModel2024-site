@@ -34,23 +34,34 @@ async function fetchMapData(race: string): Promise<StateData[]> {
     });
 }
 
-export async function getTestData(type: string) {
-  return await fetchMapData(type);
-}
-
 interface mapProps {
   raceType: RaceType;
 }
 
 export default function MapModule(props: mapProps): JSX.Element {
   const [mapData, setMapData] = useState<StateData[]>([]);
+  const [USPresidentMapData, setUSPresidentMapData] = useState<StateData[]>([]); // cache map data
+  const [USSenateMapData, setUSSenateMapData] = useState<StateData[]>([]); // cache map data
   useEffect(() => {
     try {
       let type = "USPresident";
       if (props.raceType == RaceType.Senate) {
         type = "USSenate";
       }
-      getTestData(type).then((data: StateData[]) => {
+      if (type == "USPresident" && USPresidentMapData.length > 0) {
+        setMapData(USPresidentMapData);
+        return;
+      }
+      if (type == "USSenate" && USSenateMapData.length > 0) {
+        setMapData(USSenateMapData);
+        return;
+      }
+      fetchMapData(type).then((data: StateData[]) => {
+        if (type == "USPresident") {
+          setUSPresidentMapData(data);
+        } else if (type == "USSenate") {
+          setUSSenateMapData(data);
+        }
         setMapData(data);
       });
     } catch (error) {

@@ -30,6 +30,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   useEffect(() => {
     if (filteredStates.length === 0) return;
     if (!filteredStates.includes(props.state)) {
+      // debugger;
       props.setState(filteredStates[0]);
     }
   }, [filteredStates]);
@@ -56,6 +57,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       props.state === State.National &&
       props.raceType === RaceType.Gubernatorial
     ) {
+      // debugger;
       props.setState(State.Delaware);
     }
     if (
@@ -79,8 +81,13 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
         !(isMaineOrNebraskaAndPresidential || props.state === State.National)) // ...the state is not the nation or Maine/Nebraska for presidential races
     ) {
       if (isMaineOrNebraskaAndPresidential) {
+        // debugger;
         props.setDistrict(0);
-      } else {
+      } else if (
+        props.raceType === RaceType.House &&
+        !(props.state === State.National)
+      ) {
+        // debugger;
         props.setDistrict(maxDistricts);
       }
     }
@@ -89,6 +96,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   const handleRaceChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const raceTypeKey = event.target.value as keyof typeof RaceType;
     if (RaceType[raceTypeKey]) {
+      // debugger;
       props.setRaceType(RaceType[raceTypeKey]);
     } else {
       console.error(`Invalid race type selected: ${event.target.value}`);
@@ -102,6 +110,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     ) as keyof typeof State; // Removes whitespace from state value (e.g. "New York" => "NewYork")
 
     if (State[stateValue]) {
+      // debugger;
       props.setState(State[stateValue]);
     } else {
       console.error(`Invalid state selected: ${event.target.value}`);
@@ -113,6 +122,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
   ): void => {
     const district = parseInt(event.target.value);
     if (district >= 0) {
+      // debugger;
       props.setDistrict(district);
     } else {
       console.error(`Invalid district number: ${event.target.value}`);

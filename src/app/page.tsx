@@ -225,6 +225,7 @@ export default function Home(): JSX.Element {
     if (raceType == undefined || state == undefined || district == undefined)
       return;
     try {
+      // debugger;
       fetchRaceData(raceType, state, district).then((data: RaceData) => {
         setWinner(data.winner);
         setLikelihood(data.likelihood);

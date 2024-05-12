@@ -44,8 +44,6 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
     fetch("https://code.highcharts.com/mapdata/countries/us/us-all.topo.json")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        console.log(stateData);
         setMapData(data);
         initializeMap(stateData, data);
       })

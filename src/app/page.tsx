@@ -100,12 +100,13 @@ async function fetchRaceData(
   return fetch(fetchInput)
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Failed to fetch API");
+        const status_code: number = response.status;
+        return Promise.reject(
+          "Failed to fetch API, server responded with status code " +
+            status_code
+        );
       }
       return response.json();
-    })
-    .catch((error: Error) => {
-      return Promise.reject(error);
     })
     .then((data) => {
       const responseItem: ResponseItem = parseItem(data);
@@ -231,8 +232,8 @@ export default function Home(): JSX.Element {
   useEffect(() => {
     if (raceType == undefined || state == undefined || district == undefined)
       return;
-    try {
-      fetchRaceData(raceType, state, district).then((data: RaceData) => {
+    fetchRaceData(raceType, state, district)
+      .then((data: RaceData) => {
         setWinner(data.winner);
         setLikelihood(data.likelihood);
         setMargin(data.margin);
@@ -243,10 +244,10 @@ export default function Home(): JSX.Element {
         } else {
           setWeird("");
         }
+      })
+      .catch((error: Error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   }, [raceType, state, district]);
 
   useEffect(() => {

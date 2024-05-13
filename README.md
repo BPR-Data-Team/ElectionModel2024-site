@@ -27,6 +27,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+If you're using GitHub pages to host your clone, you'll want to update next.config.js.
+Update the appropriate line with ```basePath: isProd ? "/<your subdirectory>" : "",```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

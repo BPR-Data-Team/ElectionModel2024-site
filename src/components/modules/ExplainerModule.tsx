@@ -4,14 +4,15 @@ import Module from "../Module";
 import styles from "./ExplainerModule.module.css";
 import { Party } from "@/types/Party";
 import { SHAPFactor } from "@/types/SHAPFactor";
-import SHAPDonut from "@/dataviz/SHAPDonut";
-import DonutChart from "@/dataviz/SHAPDonut";
+import SHAPDonut from "@/components/dataviz/SHAPDonut";
+import DonutChart from "@/components/dataviz/SHAPDonut";
+import { formatNumber } from "@/utils";
 
 export interface ExplainerModuleProps {
   winner: Party;
-  numSimulations: number;
-  numWins: number;
-  numLosses: number;
+  numDemWins: number;
+  numRepWins: number;
+  numTies: number;
   SHAPFactors: Record<SHAPFactor, number> | undefined;
 }
 
@@ -74,21 +75,88 @@ export default function ExplainerModule(
       <div className={styles.explainer}>
         <h3>How 24cast.org Predicted This Race</h3>
         <p>
-          We ran <span className={styles.boldText}>{props.numSimulations}</span>{" "}
+          We ran{" "}
+          <span className={styles.boldText}>
+            {formatNumber(props.numDemWins + props.numRepWins + props.numTies)}
+          </span>{" "}
           simulations predicting election margins using a machine learning model
           trained on data across multiple decades.
         </p>
         {props.winner === "Tie" ? (
-        <p>
-          <span className={styles.boldText}>{props.numSimulations - props.numWins - props.numLosses} simulations ended in a tie.{" "}</span>
-          <span className={styles.boldText}>Democrats won in {props.numLosses}, and </span>
-          <span className={styles.boldText}> Republicans won in {props.numWins}</span>.
-        </p>
+          <p>
+            <span className={styles.boldText}>
+              {formatNumber(props.numTies)}
+            </span>{" "}
+            simulations ended in a tie. Democrats won in{" "}
+            <span className={styles.boldText}>
+              {formatNumber(props.numDemWins)}
+            </span>
+            , and Republicans won in{" "}
+            <span className={styles.boldText}>
+              {formatNumber(props.numRepWins)}
+            </span>
+            .
+          </p>
+        ) : props.winner === "Democrat" ? (
+          <p>
+            Democrats won in{" "}
+            <span className={styles.boldText}>
+              {formatNumber(props.numDemWins)}
+            </span>{" "}
+            simulations
+            {props.numTies > 0 ? (
+              <>
+                , Republicans won in{" "}
+                <span className={styles.boldText}>
+                  {formatNumber(props.numRepWins)}
+                </span>{" "}
+                simulations, and the race was tied in{" "}
+                <span className={styles.boldText}>
+                  {formatNumber(props.numTies)}
+                </span>{" "}
+                simulations.
+              </>
+            ) : (
+              <>
+                {" "}
+                and lost in{" "}
+                <span className={styles.boldText}>
+                  {formatNumber(props.numRepWins)}
+                </span>{" "}
+                simulations.
+              </>
+            )}
+          </p>
         ) : (
-        <p>
-          {props.winner}s won in <span className={styles.boldText}>{props.numWins}</span> simulations
-          and lost <span className={styles.boldText}>{props.numLosses}</span>.
-        </p>
+          <p>
+            Republicans won in{" "}
+            <span className={styles.boldText}>
+              {formatNumber(props.numRepWins)}
+            </span>{" "}
+            simulations
+            {props.numTies > 0 ? (
+              <>
+                , Democrats won in{" "}
+                <span className={styles.boldText}>
+                  {formatNumber(props.numDemWins)}
+                </span>{" "}
+                simulations, and the race was tied in{" "}
+                <span className={styles.boldText}>
+                  {formatNumber(props.numTies)}
+                </span>{" "}
+                simulations.
+              </>
+            ) : (
+              <>
+                {" "}
+                and lost in{" "}
+                <span className={styles.boldText}>
+                  {formatNumber(props.numDemWins)}
+                </span>{" "}
+                simulations.
+              </>
+            )}
+          </p>
         )}
         {mostPredictiveFactors.length > 0 && (
           <p>
@@ -98,10 +166,7 @@ export default function ExplainerModule(
             predictive factors in this race.
           </p>
         )}
-        {mostPredictiveFactors.length === 0 && (
-          <p>
-          </p>
-        )}
+        {mostPredictiveFactors.length === 0 && <p></p>}
         <p>
           <a href="/methodology" className={styles.methodologyLink}>
             Look through our full methodology!

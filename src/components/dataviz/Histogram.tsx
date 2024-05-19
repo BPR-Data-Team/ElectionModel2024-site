@@ -1,6 +1,7 @@
 import { Party, getOppositeParty, getPartyColor } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
 import { State } from "@/types/State";
+import { formatNumber } from "@/utils";
 import * as Highcharts from "highcharts";
 import { useLayoutEffect } from "react";
 
@@ -126,10 +127,10 @@ function makeHistogram(
             return this.value;
           }
           if (this.value < 0) {
-            return `+${Math.abs(this.value)} R`;
+            return `R +${Math.abs(this.value)}`;
           }
           if (this.value > 0) {
-            return `+${Math.abs(this.value)} D`;
+            return `D +${Math.abs(this.value)}`;
           }
           return "Tie";
         },
@@ -171,19 +172,21 @@ function makeHistogram(
     tooltip: {
       formatter: function (this: any) {
         if (state === State.National) {
-          return `<b>${this.x}</b><br />Simulations: <b>${this.y}</b>`;
+          return `<b>${this.x}</b><br />Simulations: <b>${formatNumber(
+            this.y
+          )}</b>`;
         }
         if (this.x < 0) {
-          return `<b>+${Math.abs(this.x)} R</b><br />Simulations: <b>${
-            this.y
-          }</b>`;
+          return `<b>R +${Math.abs(
+            this.x
+          )}</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
         }
         if (this.x > 0) {
-          return `<b>+${Math.abs(this.x)} D</b><br />Simulations: <b>${
-            this.y
-          }</b>`;
+          return `<b>D +${Math.abs(
+            this.x
+          )}</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
         }
-        return `<b>Tie</b><br />Simulations: <b>${this.y}</b>`;
+        return `<b>Tie</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
       },
       style: {
         fontSize: "12px",

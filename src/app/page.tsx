@@ -267,14 +267,13 @@ export default function Home(): JSX.Element {
       {weird === "" && (
         <div className={styles.mapAndSims}>
           <MapModule raceType={raceType} />
-          {/* <ExplainerModule
+          <ExplainerModule
             winner={winner}
-            numSimulations={demWins + repWins + ties}
             numDemWins={numDemWins}
             numRepWins={numRepWins}
             numTies={numTies}
             SHAPFactors={state === State.National ? undefined : SHAPFactors}
-          /> */}
+          />
         </div>
       )}
       {weird === "" && (

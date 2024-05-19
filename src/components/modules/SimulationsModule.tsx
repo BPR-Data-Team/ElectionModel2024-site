@@ -1,4 +1,4 @@
-import { Histogram } from "@/dataviz/Histogram";
+import { Histogram } from "@/components/dataviz/Histogram";
 import Module from "../Module";
 import styles from "./SimulationsModule.module.css";
 import { RaceType } from "@/types/RaceType";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Module from "../Module";
 import styles from "./MapModule.module.css";
-import MapChart, { StateData } from "@/dataviz/MapChart";
+import MapChart, { StateData } from "@/components/dataviz/MapChart";
 import { RaceType } from "@/types/RaceType";
 
 interface MapItemJSON {

@@ -1,8 +1,8 @@
 import { SHAPFactor } from "@/types/SHAPFactor";
 import Module from "../Module";
 import styles from "./SHAPModule.module.css";
-import DonutChart from "@/dataviz/SHAPDonut";
-import ArrowChart from "@/dataviz/ArrowChart";
+import DonutChart from "@/components/dataviz/SHAPDonut";
+import ArrowChart from "@/components/dataviz/ArrowChart";
 
 export interface SHAPModuleProps {
   SHAPPredictions: Record<SHAPFactor, number> | undefined;

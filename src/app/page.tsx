@@ -23,39 +23,14 @@ interface RaceData {
   winner: Party;
   likelihood: number;
   margin: number;
+  numDemWins: number;
+  numRepWins: number;
+  numTies: number;
   SHAPFactors: Record<SHAPFactor, number>;
-  simulations: number[];
+  binBounds: [number, number];
+  binEdges: number[];
+  bins: number[];
   weird?: string;
-}
-
-function calculateLikelihood(
-  avg_margin: number,
-  margins: number[],
-  deciding_margin: number
-): number {
-  const winner: Party =
-    avg_margin > deciding_margin
-      ? Party.Democrat
-      : avg_margin < deciding_margin
-      ? Party.Republican
-      : Party.Tie;
-
-  // if dem, count number of margins above deciding_margin
-  // if rep, count number of margins below deciding_margin
-  // if tie, count number of margins at deciding_margin
-  const matchingWinnerCount = margins.reduce((count, margin) => {
-    if (winner === Party.Democrat) {
-      return count + (margin > deciding_margin ? 1 : 0);
-    } else if (winner === Party.Republican) {
-      return count + (margin < deciding_margin ? 1 : 0);
-    } else {
-      // Case when winner is Party.Tie
-      return count + (margin === deciding_margin ? 1 : 0);
-    }
-  }, 0);
-
-  if (margins.length === 0) return 0; // Prevent division by zero
-  return Math.round((matchingWinnerCount / margins.length) * 100);
 }
 
 /**
@@ -110,11 +85,15 @@ async function fetchRaceData(
     })
     .then((data) => {
       const responseItem: ResponseItem = parseItem(data);
+      console.log(responseItem);
       if (responseItem.weird) {
         return {
-          winner: Party.Democrat,
+          winner: Party.Tie,
           likelihood: 0,
           margin: 0,
+          numDemWins: 0,
+          numRepWins: 0,
+          numTies: 0,
           SHAPFactors: {
             [SHAPFactor.ExpertRatings]: 0,
             [SHAPFactor.VotingRegulations]: 0,
@@ -128,16 +107,26 @@ async function fetchRaceData(
             [SHAPFactor.PastElections]: 0,
             [SHAPFactor.Polls]: 0,
           },
-          simulations: [],
+          binBounds: [0, 0] as [number, number],
+          binEdges: [],
+          bins: [],
           weird: responseItem.weird,
         };
       }
       let winner: Party =
         responseItem.avg_margin > 0 ? Party.Democrat : Party.Republican;
-      let likelihood: number = calculateLikelihood(
-        responseItem.avg_margin,
-        responseItem.margins,
-        0
+      const numSimulations =
+        responseItem.democrat_winning_num +
+        responseItem.republican_winning_num +
+        responseItem.tie_num;
+      const likelihood: number = Math.round(
+        (Math.max(
+          responseItem.republican_winning_num,
+          responseItem.democrat_winning_num,
+          responseItem.tie_num
+        ) /
+          numSimulations) *
+          100
       );
       if (state === State.National) {
         switch (raceType) {
@@ -148,11 +137,6 @@ async function fetchRaceData(
                 : responseItem.avg_margin < 269
                 ? Party.Republican
                 : Party.Tie;
-            likelihood = calculateLikelihood(
-              responseItem.avg_margin,
-              responseItem.margins,
-              269
-            );
             break;
           case RaceType.Senate:
             winner =
@@ -161,20 +145,10 @@ async function fetchRaceData(
                 : responseItem.avg_margin < 50
                 ? Party.Republican
                 : Party.Tie;
-            likelihood = calculateLikelihood(
-              responseItem.avg_margin,
-              responseItem.margins,
-              50
-            );
             break;
           case RaceType.House:
             winner =
               responseItem.avg_margin > 218 ? Party.Democrat : Party.Republican;
-            likelihood = calculateLikelihood(
-              responseItem.avg_margin,
-              responseItem.margins,
-              218
-            );
             break;
           default:
             break;
@@ -203,8 +177,13 @@ async function fetchRaceData(
         winner: winner,
         likelihood: likelihood,
         margin: margin,
+        numDemWins: responseItem.democrat_winning_num,
+        numRepWins: responseItem.republican_winning_num,
+        numTies: responseItem.tie_num,
         SHAPFactors: SHAPFactors,
-        simulations: responseItem.margins,
+        binBounds: responseItem.bin_bounds,
+        binEdges: responseItem.bin_edges,
+        bins: responseItem.bins,
       };
       return predictions;
     })
@@ -225,8 +204,12 @@ export default function Home(): JSX.Element {
   const [likelihood, setLikelihood] = useState<number>(0);
   const [margin, setMargin] = useState<number>(0);
   const [SHAPFactors, setSHAPFactors] = useState<Record<SHAPFactor, number>>();
-  const [simulations, setSimulations] = useState<number[]>([]);
-  const [decidingMargin, setDecidingMargin] = useState<number>(0);
+  const [numDemWins, setNumDemWins] = useState<number>(0);
+  const [numRepWins, setNumRepWins] = useState<number>(0);
+  const [numTies, setNumTies] = useState<number>(0);
+  const [binBounds, setBinBounds] = useState<[number, number]>([0, 0]);
+  const [binEdges, setBinEdges] = useState<number[]>([]);
+  const [bins, setBins] = useState<number[]>([]);
   const [weird, setWeird] = useState<string>("");
   const [fetchComplete, setFetchComplete] = useState<boolean>(false);
 
@@ -239,8 +222,13 @@ export default function Home(): JSX.Element {
         setWinner(data.winner);
         setLikelihood(data.likelihood);
         setMargin(data.margin);
+        setNumDemWins(data.numDemWins);
+        setNumRepWins(data.numRepWins);
+        setNumTies(data.numTies);
         setSHAPFactors(data.SHAPFactors);
-        setSimulations(data.simulations);
+        setBinBounds(data.binBounds);
+        setBinEdges(data.binEdges);
+        setBins(data.bins);
         if (data.weird) {
           setWeird(data.weird);
         } else {
@@ -252,27 +240,6 @@ export default function Home(): JSX.Element {
         console.error(error);
       });
   }, [raceType, state, district]);
-
-  useEffect(() => {
-    if (state === State.National) {
-      switch (raceType) {
-        case RaceType.Presidential:
-          setDecidingMargin(269);
-          break;
-        case RaceType.Senate:
-          setDecidingMargin(50);
-          break;
-        case RaceType.House:
-          setDecidingMargin(218);
-          break;
-        default:
-          setDecidingMargin(0);
-          break;
-      }
-    } else {
-      setDecidingMargin(0);
-    }
-  }, [raceType, state]);
 
   return (
     <main className={styles.main}>
@@ -300,31 +267,26 @@ export default function Home(): JSX.Element {
       {weird === "" && (
         <div className={styles.mapAndSims}>
           <MapModule raceType={raceType} />
-          <ExplainerModule
+          {/* <ExplainerModule
             winner={winner}
-            numSimulations={simulations.length}
-            numWins={
-              winner === Party.Democrat
-                ? simulations.filter((sim) => sim > decidingMargin).length
-                : simulations.filter((sim) => sim < decidingMargin).length
-            }
-            numLosses={
-              winner === Party.Democrat
-                ? simulations.filter((sim) => sim < decidingMargin).length
-                : simulations.filter((sim) => sim > decidingMargin).length
-            }
+            numSimulations={demWins + repWins + ties}
+            numDemWins={numDemWins}
+            numRepWins={numRepWins}
+            numTies={numTies}
             SHAPFactors={state === State.National ? undefined : SHAPFactors}
-          />
+          /> */}
         </div>
       )}
-      {weird === "" && (
+      {/* {weird === "" && (
         <SimulationsModule
-          simulations={simulations}
+          binBounds={binBounds}
+          binEdges={binEdges}
+          bins={bins}
           raceType={raceType}
           state={state}
           winner={winner}
         />
-      )}
+      )} */}
       {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}

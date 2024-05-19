@@ -6,7 +6,9 @@ import { State } from "@/types/State";
 import { Party } from "@/types/Party";
 
 export interface SimulationsModuleProps {
-  simulations: number[];
+  binBounds: [number, number];
+  binEdges: number[];
+  bins: number[];
   raceType: RaceType;
   state: State;
   winner: Party;
@@ -20,8 +22,10 @@ export default function SimulationsModule(
       <div className={styles.simulations}>
         <h3>Margin Simulations</h3>
         <Histogram
-          race={props.raceType}
-          simulations={props.simulations}
+          binBounds={props.binBounds}
+          binEdges={props.binEdges}
+          bins={props.bins}
+          raceType={props.raceType}
           state={props.state}
           winner={props.winner}
         />

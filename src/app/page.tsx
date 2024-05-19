@@ -277,7 +277,7 @@ export default function Home(): JSX.Element {
           /> */}
         </div>
       )}
-      {/* {weird === "" && (
+      {weird === "" && (
         <SimulationsModule
           binBounds={binBounds}
           binEdges={binEdges}
@@ -286,7 +286,7 @@ export default function Home(): JSX.Element {
           state={state}
           winner={winner}
         />
-      )} */}
+      )}
       {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}

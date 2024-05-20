@@ -81,7 +81,7 @@ export default function MapModule(props: mapProps): JSX.Element {
     <Module className="mapModule">
       <div className={styles.map}>
         <h3>
-          24cast.org's Prediction Map:
+          24cast.org&apos;s Prediction Map:
         </h3>
         <p>Hover over a state to see more information.</p>
         <MapChart stateData={mapData} />

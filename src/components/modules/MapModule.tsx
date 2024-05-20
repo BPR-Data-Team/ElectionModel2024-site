@@ -71,7 +71,11 @@ export default function MapModule(props: mapProps): JSX.Element {
   return (
     <Module className="mapModule">
       <div className={styles.map}>
-        <h3>24cast.org Prediction Map:</h3>
+        <h3>
+          24cast.org {" "}
+          {props.raceType === RaceType.Senate ? "Senate " : "Presidential "}
+          Prediction Map:
+        </h3>
         <p>Hover over a state to see more information.</p>
         <MapChart stateData={mapData} />
       </div>

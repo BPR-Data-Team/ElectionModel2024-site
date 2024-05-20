@@ -42,11 +42,14 @@ export default function MapModule(props: mapProps): JSX.Element {
   const [mapData, setMapData] = useState<StateData[]>([]);
   const [USPresidentMapData, setUSPresidentMapData] = useState<StateData[]>([]); // cache map data
   const [USSenateMapData, setUSSenateMapData] = useState<StateData[]>([]); // cache map data
+  const [USGovernorMapData, setUSGovernorMapData] = useState<StateData[]>([]); // cache map data
   useEffect(() => {
     try {
       let type = "USPresident";
       if (props.raceType == RaceType.Senate) {
         type = "USSenate";
+      } else if (props.raceType == RaceType.Gubernatorial) {
+        type = "USGovernor";
       }
       if (type == "USPresident" && USPresidentMapData.length > 0) {
         setMapData(USPresidentMapData);
@@ -56,11 +59,17 @@ export default function MapModule(props: mapProps): JSX.Element {
         setMapData(USSenateMapData);
         return;
       }
+      if (type == "USGovernor" && USGovernorMapData.length > 0) {
+        setMapData(USGovernorMapData);
+        return;
+      }
       fetchMapData(type).then((data: StateData[]) => {
         if (type == "USPresident") {
           setUSPresidentMapData(data);
         } else if (type == "USSenate") {
           setUSSenateMapData(data);
+        } else if (type == "USGovernor") {
+          setUSGovernorMapData(data);
         }
         setMapData(data);
       });

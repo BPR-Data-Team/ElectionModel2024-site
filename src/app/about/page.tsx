@@ -1,6 +1,5 @@
 import styles from "./page.module.css";
 import type { Metadata } from "next";
-import Person from './person';
 import Image from "next/image";
 import akshay from "image-assets/headshots/headshot1.webp";
 import amy from "image-assets/headshots/headshot2.webp";
@@ -16,33 +15,9 @@ import john from "image-assets/headshots/headshot11.webp";
 import javier from "image-assets/headshots/headshot12.webp";
 import blank from "image-assets/icon-set/num-icon256.png";
 
-
 export const metadata: Metadata = {
   title: 'About | 24cast.org',
 };
-
-// class Grid extends React.Component {
-//   render() {
-//     const layout = [
-//       { i: "Javier", x: 0, y: 0, w: 1, h: 2, static: true},
-//       { i: "Asher", x: 1, y: 0, w: 3, h: 2, static: true},
-//       { i: "Ariel", x: 4, y: 0, w: 1, h: 2, static: true}
-//     ];
-//     return(
-//       <GridLayout
-//         className="Layout"
-//         layout={layout}
-//         cols={12}
-//         rowHeight={30}
-//         width={1200}
-//       >
-//         <div key="a">a</div>
-//         <div key="b">b</div>
-//         <div key="c">c</div>
-//       </GridLayout>
-//     );
-//   };
-// }
 
 const people = [
   { id: "Asher", name: 'Asher Labovich, Founder', image: asher, year: "Brown '26", bio: "R is Asher's true love."},
@@ -51,16 +26,43 @@ const people = [
   { id: "Akshay", name: 'Akshay Mehta, Backend Lead', image: akshay, year: "Brown '26", bio: ''},
   { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: ''},
   { id: "Amy", name: "Amy Qiao, Data Contributor", image: amy, year: "Brown '26", bio: ''},
-  { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: javier, year: "Brown '25",
-  bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
-  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: chai, year: "Brown '26", bio: 
-  "Don't tell Asher what Chai did to his model when he wasn't looking."},
-  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: jed, year: "Brown '27", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security.'},
+  { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: javier, year: "Brown '25", bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
+  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: chai, year: "Brown '26", bio: "Don't tell Asher what Chai did to his model when he wasn't looking."},
+  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: jed, year: "Brown '26", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security.'},
   { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: nikhil, year: "Brown '27", bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},
   { id: "John", name: 'John Huang, Web Developer', image: john, year: "Brown '27", bio: ''},
   { id: 'Devon', name: 'Devon Kear-Leng, Web Developer', image: devon, year: "Brown '26", bio: ''},
   { id: "Logan", name: 'Logan Rabe, Political Specialist', image: logan, year: "Brown '26", bio: ''},
 ]
+
+const allpeople = [
+  { id: "Ryan", name: 'Ryan Doherty', title: 'Data Director' },
+  { id: "Asher", name: 'Asher Labovich', title: 'Data Director' },
+  { id: "Aimee", name: 'Aimee Zhang', title: 'Data Associate' },
+  { id: "Alex", name: 'Alex Freehoff', title: 'Data Associate' },
+  { id: "AlexW", name: 'Alex Wick', title: 'Data Associate' },
+  { id: "Amanda", name: 'Amanda Sun', title: 'Data Associate' },
+  { id: "Amine", name: 'Amine Chajar', title: 'Data Associate' },
+  { id: "Amy", name: 'Amy Qiao', title: 'Data Associate' },
+  { id: "Ariel", name: 'Ariel Shifrin', title: 'Data Associate' },
+  { id: "Benjamin", name: 'Benjamin Buka', title: 'Data Associate' },
+  { id: "Casey", name: 'Casey Crockett', title: 'Data Associate' },
+  { id: "Chai", name: 'Chai Harsha', title: 'Data Associate' },
+  { id: "Gabi", name: 'Gabi Yuan', title: 'Data Associate' },
+  { id: "Irene", name: 'Irene Zhao', title: 'Data Associate' },
+  { id: "Jed", name: 'Jed Morgan', title: 'Data Associate' },
+  { id: "Jennifer", name: 'Jennifer Shim', title: 'Data Associate' },
+  { id: "Jester", name: 'Jester Abella', title: 'Data Associate' },
+  { id: "Jo", name: 'Jo Gasior-Kavishe', title: 'Data Associate' },
+  { id: "Logan", name: 'Logan Rabe', title: 'Data Associate' },
+  { id: "Nikhil", name: 'Nikhil Das', title: 'Data Associate' },
+  { id: "Sita", name: 'Sita Pawar', title: 'Data Associate' },
+  { id: "Sofia", name: 'Sofia Barnett', title: 'Data Associate' },
+  { id: "Tiffany", name: 'Tiffany Kuo', title: 'Data Associate' },
+  { id: "Titi", name: 'Titi Zhang', title: 'Data Associate' },
+  { id: "William", name: 'William Yu', title: 'Data Associate' },
+];
+
 
 const AboutPage: React.FC = () => {
   return (
@@ -69,8 +71,8 @@ const AboutPage: React.FC = () => {
         <h1 className={styles.header}>About 24cast</h1>
         <p>
           This isn&apos;t your typical election prediction model—we use new methods to determine the outcomes
-            of races down to the margin and break down <i>exactly</i> how each race&apos;s history
-            affects expected outcomes.
+          of races down to the margin and break down <i>exactly</i> how each race&apos;s history
+          affects expected outcomes.
         </p>
         <p>
           24cast is produced by the Brown Political Review&apos;s Data Board. When the Data Board isn&apos;t innovating
@@ -84,62 +86,66 @@ const AboutPage: React.FC = () => {
         <p>
           <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b>
         </p>
-        {/* consider adding email address straight in here instead of linking it */}
         <p>
           Spearheaded by founder Asher Labovich, 24cast is the product of months of effort
           by a team of Brown students, who we wish to highlight below:
         </p>
       </div>
-      <br></br>
-      <br></br>
-      <h1 className={styles.header}><b>Our Team</b></h1>
-      <br></br>
-      {/* <div className={styles.grid}>
-        {People.map((person) => (
-          <Card key={person.id} image={person.image} bio={person.bio} name={person.name}/>
-        ))}
-      </div> */}
-      {/* <div className={styles.grid}>
-        {people.map((person) => (
-          <Person key={person.id} {...person} />
-        ))}
-        </div> */}
-
+      <h2 className={styles.header}>24cast Primary Team</h2>
       <div className={styles.grid}>
         {people.map((person) => (
-          <div key={person.name} className={styles.person}>
-            <div className={styles.image}>
+          <div key={person.id} className={styles.person}>
+            <div>
               <Image
                 src={person.image}
-                width={100}
-                height={100}
-                // border-radius="50%"
+                width={80}
+                height={80}
                 alt="person"
+                className={styles.image}
               />
             </div>
-          <h3 className={styles.name}>{person.name}</h3>
-          <p className={styles.bio}> {person.year}</p>
-          <p className={styles.bio}> {person.bio}</p>
+            <div className={styles.info}>
+              <h3 className={styles.name}>{person.name}</h3>
+              <p className={styles.year}>{person.year}</p>
+              <p className={styles.bio}>{person.bio}</p>
+            </div>
           </div>
         ))}
       </div>
-
       <div className={styles.main}>
-        <p className={styles.header}>
-        <b>24cast wishes to thank the following organizations for their data:</b>
-<br />
-<i>(endorsement of 24cast is not implied through inclusion in this list)</i>
-<br /><br />
-Cook Political Report &bull; Cost of Voting Index &bull; FiveThirtyEight &bull;
- FRED &bull; UVA Center for Politics
+        <h2>
+          Brown Political Review Data Board:
+        </h2>
+        <div className={styles.minigrid}>
+        {allpeople.map((person) => (
+          <div key={person.id} className={styles.miniperson}>
+            <div className={styles.miniinfo}>
+              <h3 className={styles.name}>{person.name}</h3>
+              <p className={styles.bio}>{person.title}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      </div>
+      <div className={styles.main}>
+        <h3>
+          <br />
+          <a href="https://brownpoliticalreview.org/masthead/" className={styles.linkText}>Brown Political Review Masthead</a>
+        </h3>
+      </div>
+      <div className={styles.main}>
+        <h2 className={styles.header}>
+          24cast wishes to thank the following organizations for their data:
+        </h2>
+        <p>
+        <i>(endorsement of 24cast is not implied through inclusion in this list)</i>
+        </p>
+        <p>
+          Cook Political Report &bull; Cost of Voting Index &bull; FiveThirtyEight &bull;
+          FRED &bull; UVA Center for Politics
         </p>
       </div>
     </div>
   )
 };
-
-
-
-
-
 export default AboutPage;

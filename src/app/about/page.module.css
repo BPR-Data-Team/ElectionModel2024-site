@@ -1,6 +1,8 @@
 .main {
   margin-top: 1rem;
-  text-align: left;
+  text-align: center;
+  width: 70%;
+  margin-inline: auto;
 }
 
 .overall {
@@ -10,15 +12,7 @@
 
 .header {
   text-align: center;
-}
-
-@media (max-width: 450px) {
-  .mapAndSims {
-    display: flex;
-    flex-direction: column;
-    /* Adjust styles for mobile screens */
-    /* Optionally, you can add additional styles here */
-  }
+  margin-block-start: 3rem;
 }
 
 /* center text */
@@ -46,34 +40,98 @@
 
 .grid {
   display: flex;
+  flex-direction: row;
+  gap: 3.5rem 0.3rem;
+  margin: 2rem 7rem;
   flex-wrap: wrap;
+  align-content: center;
   justify-content: space-around;
-  max-width: 700px;
-  margin-inline: auto;
+  align-items: center;
 }
 
 .person {
-  width: 30%;
-  margin-bottom: 50px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
+  gap: 1rem;
+  width: 33%;
+}
+
+.minigrid {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem 2rem;
+  margin: 2rem;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.miniperson {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: auto;
+}
+
+@media (max-width: 1325px) {
+  .grid {
+    margin: 2rem 6rem;    
+  }
+  .person {
+    width: 30%;
+  }
+}
+
+@media (max-width: 1140px) {
+  .grid {
+    margin: 2rem 5rem;    
+  }
+  .person {
+    width: 40%;
+  }
+}
+
+@media (max-width: 850px) {
+  .grid {
+    margin: 2rem 4rem;    
+  }
+  .person {
+    width: 50%;
+  }
+}
+
+@media (max-width: 650px) {
+  .grid {
+    margin: 2rem;    
+  }
+  .person {
+    width: 50%;
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 .image {
-  width: 100px;
-  height: 100px;
   border-radius: 50%;
   overflow: hidden;
 }
 
+.info {
+  flex: 1;
+}
+
 .name {
-  margin-block-start: 10px;
-  margin-block-end: 0;
+  margin: 0;
+  font-weight: 600;
+}
+
+.year {
+  margin: 0.5rem 0;
+  font-style: italic;
 }
 
 .bio {
-  margin-block-start: 10px;
-  margin-block-end: 0;
+  margin: 0;
+  font-size: 0.9rem;
 }

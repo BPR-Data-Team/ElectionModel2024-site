@@ -1,4 +1,6 @@
 import styles from "./Footer.module.css";
+import Image from "next/image";
+import InstaIcon from "image-assets/Instagram_Glyph_Black.svg";
 
 export default function Footer(): JSX.Element {
   return (
@@ -32,6 +34,17 @@ export default function Footer(): JSX.Element {
           <span className={styles.betweenText}> | </span>
           <a className={styles.linkText} href="/map">
             Sitemap
+          </a>
+          <span className={styles.betweenText}> | </span>
+          <a className={styles.linkText} href="https://www.instagram.com/24castbrown/">
+          <Image
+              src={InstaIcon}
+              width={undefined}
+              height={13}
+              alt={"Instagram"}
+              priority={false}
+              className={styles.instaicon}
+            />
           </a>
         </div>
       </div>

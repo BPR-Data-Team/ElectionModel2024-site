@@ -85,7 +85,7 @@ async function fetchRaceData(
     })
     .then((data) => {
       const responseItem: ResponseItem = parseItem(data);
-      console.log(responseItem);
+      /* console.log(responseItem); */
       if (responseItem.weird) {
         return {
           winner: Party.Tie,

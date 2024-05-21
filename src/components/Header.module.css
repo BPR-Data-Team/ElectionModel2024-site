@@ -1,6 +1,6 @@
 .byContainer {
     display: flex;
-    align-items: center; /* Align items vertically */
+    align-items: baseline; /* Align items vertically */
   }
   
   .byText {
@@ -9,15 +9,28 @@
   }
   
   .bprImage {
-    font-size: medium
-  }
-  @media screen and (max-width: 768px){
-    .byContainer{
-      display: none;
-    }
-  }
-
-  .bprImage {
+    font-size: medium;
     display: flex; /* Ensure the anchor tag behaves like a flex container */
     align-items: center; /* Align items vertically */
+  }
+
+  .bprImageSmall {
+    font-size: medium;
+    display: none;
+  }
+
+  .byText::after {
+    content: " the ";
+  }
+
+  @media screen and (max-width: 768px){
+    .bprImage{
+      display: none;
+    }
+    .bprImageSmall {
+      display: flex;
+    }
+    .byText::after {
+      content: none;
+    }
   }

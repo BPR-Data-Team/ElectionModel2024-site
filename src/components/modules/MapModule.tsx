@@ -37,13 +37,14 @@ async function fetchMapData(race: string): Promise<StateData[]> {
     });
 }
 
-interface MapProps {
+interface mapProps {
   raceType: RaceType;
   setState: (state: State) => void;
   setDistrict: (district: number) => void;
 }
 
-const MapModule: React.FC<MapProps> = (props: MapProps) => {
+
+export default function MapModule(props: mapProps): JSX.Element {
   const [mapData, setMapData] = useState<StateData[]>([]);
   const [USPresidentMapData, setUSPresidentMapData] = useState<StateData[]>([]); // cache map data
   const [USSenateMapData, setUSSenateMapData] = useState<StateData[]>([]); // cache map data
@@ -105,5 +106,3 @@ const MapModule: React.FC<MapProps> = (props: MapProps) => {
     </Module>
   );
 }
-
-export default MapModule;

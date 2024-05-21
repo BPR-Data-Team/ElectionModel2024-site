@@ -85,7 +85,6 @@ export default function MapModule(props: mapProps): JSX.Element {
   }, [props.raceType]);
 
   const handleStateClick = (hcKey: string) => {
-    console.log(props.raceType)
     const stateAbbrev = hcKey.replace("us-", "").toUpperCase();
     const state = getStateFromAbbreviation(stateAbbrev);
     props.setState(state);

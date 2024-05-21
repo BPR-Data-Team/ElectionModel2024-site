@@ -17,6 +17,7 @@ export interface StateData {
 
 interface MapProps {
   stateData: StateData[];
+  onStateClick: (hcKey: string) => void;
 }
 
 const colorAxisStops: [number, string][] = [
@@ -135,6 +136,11 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
             style: {
               fontFamily:
                 "gelica, book antiqua, georgia, times new roman, serif",
+            },
+          },
+          events: {
+            click: function (event: any) {
+              props.onStateClick(event.point["hc-key"]);
             },
           },
         },

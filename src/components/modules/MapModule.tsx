@@ -3,6 +3,9 @@ import Module from "../Module";
 import styles from "./MapModule.module.css";
 import MapChart, { StateData } from "@/components/dataviz/MapChart";
 import { RaceType } from "@/types/RaceType";
+import { State, getStateFromAbbreviation } from "@/types/State";
+
+
 
 interface MapItemJSON {
   avg_margin: { S: string };
@@ -36,7 +39,10 @@ async function fetchMapData(race: string): Promise<StateData[]> {
 
 interface mapProps {
   raceType: RaceType;
+  setState: (state: State) => void;
+  setDistrict: (district: number) => void;
 }
+
 
 export default function MapModule(props: mapProps): JSX.Element {
   const [mapData, setMapData] = useState<StateData[]>([]);
@@ -77,14 +83,24 @@ export default function MapModule(props: mapProps): JSX.Element {
       console.error(error);
     }
   }, [props.raceType]);
+
+  const handleStateClick = (hcKey: string) => {
+    const stateAbbrev = hcKey.replace("us-", "").toUpperCase();
+    const state = getStateFromAbbreviation(stateAbbrev);
+    props.setState(state);
+    props.setDistrict(0); // default value for district
+  };
+
   return (
     <Module className="mapModule">
       <div className={styles.map}>
         <h3>
           24cast.org&apos;s Prediction Map:
         </h3>
-        <p>Hover over a state to see more information.</p>
-        <MapChart stateData={mapData} />
+        <p>
+          Click on a state to switch views.
+        </p>  
+        <MapChart stateData={mapData} onStateClick={handleStateClick}/>
       </div>
     </Module>
   );

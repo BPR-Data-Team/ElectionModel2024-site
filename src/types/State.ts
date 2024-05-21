@@ -386,3 +386,114 @@ export const getStateAbbreviation = (state: State): string => {
       return "";
   }
 };
+export const getStateFromAbbreviation = (abbreviation: string): State => {
+  switch (abbreviation.toUpperCase()) {
+    case "AL":
+      return State.Alabama;
+    case "AK":
+      return State.Alaska;
+    case "AZ":
+      return State.Arizona;
+    case "AR":
+      return State.Arkansas;
+    case "CA":
+      return State.California;
+    case "CO":
+      return State.Colorado;
+    case "CT":
+      return State.Connecticut;
+    case "DC":
+      return State.DC;
+    case "DE":
+      return State.Delaware;
+    case "FL":
+      return State.Florida;
+    case "GA":
+      return State.Georgia;
+    case "HI":
+      return State.Hawaii;
+    case "ID":
+      return State.Idaho;
+    case "IL":
+      return State.Illinois;
+    case "IN":
+      return State.Indiana;
+    case "IA":
+      return State.Iowa;
+    case "KS":
+      return State.Kansas;
+    case "KY":
+      return State.Kentucky;
+    case "LA":
+      return State.Louisiana;
+    case "ME":
+      return State.Maine;
+    case "MD":
+      return State.Maryland;
+    case "MA":
+      return State.Massachusetts;
+    case "MI":
+      return State.Michigan;
+    case "MN":
+      return State.Minnesota;
+    case "MS":
+      return State.Mississippi;
+    case "MO":
+      return State.Missouri;
+    case "MT":
+      return State.Montana;
+    case "NE":
+      return State.Nebraska;
+    case "NV":
+      return State.Nevada;
+    case "NH":
+      return State.NewHampshire;
+    case "NJ":
+      return State.NewJersey;
+    case "NM":
+      return State.NewMexico;
+    case "NY":
+      return State.NewYork;
+    case "NC":
+      return State.NorthCarolina;
+    case "ND":
+      return State.NorthDakota;
+    case "OH":
+      return State.Ohio;
+    case "OK":
+      return State.Oklahoma;
+    case "OR":
+      return State.Oregon;
+    case "PA":
+      return State.Pennsylvania;
+    case "RI":
+      return State.RhodeIsland;
+    case "SC":
+      return State.SouthCarolina;
+    case "SD":
+      return State.SouthDakota;
+    case "TN":
+      return State.Tennessee;
+    case "TX":
+      return State.Texas;
+    case "UT":
+      return State.Utah;
+    case "VT":
+      return State.Vermont;
+    case "VA":
+      return State.Virginia;
+    case "WA":
+      return State.Washington;
+    case "WV":
+      return State.WestVirginia;
+    case "WI":
+      return State.Wisconsin;
+    case "WY":
+      return State.Wyoming;
+    case "US":
+      return State.National;
+    default:
+      throw new Error("Invalid state abbreviation");
+  }
+};
+

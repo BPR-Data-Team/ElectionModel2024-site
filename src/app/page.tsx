@@ -10,7 +10,7 @@ import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
 import { useEffect, useState } from "react";
 import { RaceType } from "@/types/RaceType";
-import { State, getStateAbbreviation } from "@/types/State";
+import { State, getStateAbbreviation, getStateFromAbbreviation } from "@/types/State";
 import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
 import { SHAPFactor } from "@/types/SHAPFactor";
@@ -46,6 +46,10 @@ async function fetchRaceData(
   state: State,
   district: number
 ): Promise<RaceData> {
+  if (typeof state === "string" && state.includes("US-")) {
+    let state_abbrev = state.substring(3);
+    state = getStateFromAbbreviation(state_abbrev);
+  }
   const stateArg: string = getStateAbbreviation(state);
   const districtArg: string =
     (raceType !== RaceType.House || state === State.National) &&
@@ -266,7 +270,7 @@ export default function Home(): JSX.Element {
       />
       {weird === "" && (
         <div className={styles.mapAndSims}>
-          <MapModule raceType={raceType} />
+        <MapModule raceType={raceType} setState={setState} setDistrict={setDistrict} />
           <ExplainerModule
             winner={winner}
             numDemWins={numDemWins}

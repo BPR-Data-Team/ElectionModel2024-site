@@ -270,7 +270,9 @@ export default function Home(): JSX.Element {
       />
       {weird === "" && (
         <div className={styles.mapAndSims}>
-        <MapModule raceType={raceType} setState={setState} setDistrict={setDistrict} />
+          {raceType !== RaceType.House && (
+            <MapModule raceType={raceType} setState={setState} setDistrict={setDistrict} />
+          )}          
           <ExplainerModule
             winner={winner}
             numDemWins={numDemWins}

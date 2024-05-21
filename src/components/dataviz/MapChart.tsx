@@ -140,7 +140,6 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
           },
           events: {
             click: function (event: any) {
-              console.log("Map clicked: ", event.point["hc-key"]); // Add a console log to verify the function is called
               props.onStateClick(event.point["hc-key"]);
             },
           },

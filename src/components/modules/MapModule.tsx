@@ -84,6 +84,7 @@ const MapModule: React.FC<MapProps> = (props: MapProps) => {
   }, [props.raceType]);
 
   const handleStateClick = (hcKey: string) => {
+    console.log(props.raceType)
     const stateAbbrev = hcKey.replace("us-", "").toUpperCase();
     const state = getStateFromAbbreviation(stateAbbrev);
     props.setState(state);
@@ -99,7 +100,7 @@ const MapModule: React.FC<MapProps> = (props: MapProps) => {
         <p>
           {props.raceType === RaceType.House ? "Hover over a state to see more information." : "Hover over a state or click to see more information."}
         </p>  
-        <MapChart stateData={mapData} onStateClick={handleStateClick} />
+        <MapChart stateData={mapData} onStateClick={handleStateClick}/>
       </div>
     </Module>
   );

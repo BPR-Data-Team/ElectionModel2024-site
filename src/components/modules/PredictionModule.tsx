@@ -232,8 +232,8 @@ export default function PredictionModule(
                   :
                 </h4>
                 <span className={styles.predictionInfoItemContent}>
-                  {props.state !== State.National ? "+" : ""}
-                  {margin}
+                  {props.state !== State.National && margin > 0.1 ? "+" : ""}
+                  {margin < 0.1 ? "<0.1" : margin}
                 </span>
               </div>
             </div>

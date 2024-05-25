@@ -245,13 +245,18 @@ export default function Home(): JSX.Element {
     const updateSearchParams = (newParams: { [key: string]: string }) => {
       const newSearchParams = new URLSearchParams(window.location.search);
       Object.entries(newParams).forEach(([key, value]) => {
-        if (key === "raceType" && value === "Presidential") {
-          newSearchParams.delete("raceType");
-        }
-        if (key === "state" && value === "National") {
-          newSearchParams.delete("state");
-        }
-        if (key === "district" && value === "0") {
+        if (
+          key === "district" && // Only show district param when relevant. The reason we have to handle this here is because the district value isn't changed when the user navigates to a race without a district to increase speed.
+          (value === "0" ||
+            (raceType !== RaceType.House && // Only House races have districts (except for the Maine and Nebraska presidential handled below)
+              !(
+                (
+                  raceType === RaceType.Presidential &&
+                  (state === State.Maine || state === State.Nebraska)
+                ) // Maine and Nebraska have individual electors + at-large for presidential elections
+              )) ||
+            state === State.National) // National House race doesn't have a district
+        ) {
           newSearchParams.delete("district");
         } else {
           newSearchParams.set(key, value);

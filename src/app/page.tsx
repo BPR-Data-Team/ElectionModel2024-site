@@ -10,10 +10,16 @@ import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
 import { useEffect, useState } from "react";
 import { RaceType } from "@/types/RaceType";
-import { State, getStateAbbreviation, getStateFromAbbreviation } from "@/types/State";
+import {
+  State,
+  getStateAbbreviation,
+  getStateFromAbbreviation,
+} from "@/types/State";
 import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
 import { SHAPFactor } from "@/types/SHAPFactor";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 import ReactGA from "react-ga4";
 
 const TRACKING_ID = "G-QDEM59MHXZ";
@@ -218,8 +224,45 @@ export default function Home(): JSX.Element {
   const [fetchComplete, setFetchComplete] = useState<boolean>(false);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      setRaceType(
+        (searchParams.get("raceType") as RaceType) ?? RaceType.Presidential
+      );
+      setState((searchParams.get("state") as State) ?? State.National);
+      setDistrict(
+        searchParams.get("district")
+          ? parseInt(searchParams.get("district") as string)
+          : 0
+      );
+    }
+  }, []); // Only run on first render
+
+  useEffect(() => {
     if (raceType == undefined || state == undefined || district == undefined)
       return;
+
+    const updateSearchParams = (newParams: { [key: string]: string }) => {
+      const newSearchParams = new URLSearchParams(window.location.search);
+      Object.entries(newParams).forEach(([key, value]) => {
+        if (key === "raceType" && value === "Presidential") {
+          newSearchParams.delete("raceType");
+        }
+        if (key === "state" && value === "National") {
+          newSearchParams.delete("state");
+        }
+        if (key === "district" && value === "0") {
+          newSearchParams.delete("district");
+        } else {
+          newSearchParams.set(key, value);
+        }
+      });
+      const newUrl = `${
+        window.location.pathname
+      }?${newSearchParams.toString()}`;
+      window.history.pushState({ path: newUrl }, "", newUrl);
+    };
+
     setFetchComplete(false);
     fetchRaceData(raceType, state, district)
       .then((data: RaceData) => {
@@ -238,6 +281,12 @@ export default function Home(): JSX.Element {
         } else {
           setWeird("");
         }
+        console.log(raceType, state, district);
+        updateSearchParams({
+          raceType: raceType,
+          state: state,
+          district: district.toString(),
+        });
         setFetchComplete(true);
       })
       .catch((error: Error) => {
@@ -271,8 +320,12 @@ export default function Home(): JSX.Element {
       {weird === "" && (
         <div className={styles.mapAndSims}>
           {raceType !== RaceType.House && (
-            <MapModule raceType={raceType} setState={setState} setDistrict={setDistrict} />
-          )}          
+            <MapModule
+              raceType={raceType}
+              setState={setState}
+              setDistrict={setDistrict}
+            />
+          )}
           <ExplainerModule
             winner={winner}
             numDemWins={numDemWins}

@@ -63,7 +63,7 @@ export default function KeyRacesModule(props: KeyRacesModuleProps): JSX.Element 
                 width={15}
                 alt="bullet point"
               />
-              <p>{race}</p>
+              <a href="" className={styles.linkText}>{race}</a>
             </div>
           ))}
         </div>

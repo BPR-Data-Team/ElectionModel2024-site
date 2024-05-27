@@ -1,12 +1,19 @@
 
 .keyRaces {
     max-width: 70%;
+    margin-block-end: 16px;
   }
   
   .grid {
     display: flex;
     flex-wrap: wrap;
-    
+    row-gap: 10px;
+  }
+
+  .linkText {
+    color: var(--main-text-color);
+    text-decoration: none;
+    margin-left: 5px;
   }
   
   .race {
@@ -16,10 +23,6 @@
     cursor: pointer;
   }
   
-  .race p {
-    margin-left: 5px;
-    font-size: 13px;
-  }
   @media screen and (max-width: 1280px) {
     .grid {
       grid-template-columns: repeat(3, 1fr); 
@@ -29,9 +32,7 @@
     .keyRaces{
       max-width:90%;
     }
-    .race p {
-      font-size: 16px;
-    }
+
     .grid {
       grid-template-columns: repeat(2, 1fr); 
     }

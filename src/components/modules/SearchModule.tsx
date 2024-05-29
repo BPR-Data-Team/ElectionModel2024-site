@@ -195,7 +195,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       <div className={styles.search}>
         <p>
           I want to see
-          <select value={props.raceType} onChange={handleRaceChange}>
+          <select value={props.raceType} onChange={handleRaceChange} aria-label="Race Selection">
             {Object.values(RaceType).map((race, index) => (
               <option key={index} value={race}>
                 {race}
@@ -207,6 +207,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
             value={props.state}
             onChange={handleStateChange}
             className={styles.drops}
+            aria-label="Locale Selection"
           >
             {filteredStates.map((state, index) => (
               <option key={index} value={state}>
@@ -220,6 +221,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
               value={props.district}
               onChange={handleDistrictChange}
               disabled={maxDistricts === 1}
+              aria-label="District Selection"
             >
               {getDistrictDropdownOptions()}
             </select>

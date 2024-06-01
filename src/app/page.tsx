@@ -24,8 +24,10 @@ import ReactGA from "react-ga4";
 import { clarity } from "react-microsoft-clarity"
 
 const TRACKING_ID = "G-QDEM59MHXZ";
-if (process.env.NODE_ENV === 'production') ReactGA.initialize(TRACKING_ID);
-if (process.env.NODE_ENV === 'production') clarity.init('mlah1s1plh');
+if (typeof window !== `undefined`) {
+  if (process.env.NODE_ENV === 'production') ReactGA.initialize(TRACKING_ID);
+  if (process.env.NODE_ENV === 'production') clarity.init('mlah1s1plh');
+}
 
 interface RaceData {
   winner: Party;

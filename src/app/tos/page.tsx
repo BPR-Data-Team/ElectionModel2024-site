@@ -10,7 +10,7 @@ const TOSPage: React.FC = () => {
         <div className={styles.overall}>
             <div className={styles.main}>
                 <h2>Terms of Use</h2>
-                <p>Last Updated: May 1, 2024</p>
+                <p>Last Updated: June 1, 2024</p>
             </div>
             <div className={styles.main}>
                 <p>These terms and conditions (the &quot;Terms and Conditions&quot;) govern the use of https://24cast.org (&quot;24cast.org&quot;, the &quot;Site&quot;). This Site is owned and operated by The Brown Political Review (&quot;BPR&quot;). </p>
@@ -34,7 +34,7 @@ const TOSPage: React.FC = () => {
             </div>
             <div className={styles.main}>
                 <p><b>Third-Party Content</b></p>
-                <p>By using the Site, you agree to have demographic and usage information collected through Google Analytics. You consent to the use of third-party cookies to collect this information and consent to the transmission of such data to third-party servers, as outlined in our Privacy Policy.</p>
+                <p>By using the Site, you agree to have demographic and usage information collected through Google Analytics and Microsoft Clarity. You consent to the use of third-party cookies to collect this information and consent to the transmission of such data to third-party servers, as outlined in our Privacy Policy.</p>
                 <p>Any links to third-party services do not constitute endorsements of their content. 24cast.org is not responsible for any content linked on domains other than this one.</p>
             </div>
             <div className={styles.main}>

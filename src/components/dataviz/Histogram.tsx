@@ -40,16 +40,16 @@ function makeHistogram(
     if (state === State.National) {
       if (raceType === RaceType.Presidential) {
         if (bin_val > 269) {
-          return getPartyColor(winner);
+          return getPartyColor(Party.Democrat);
         } else if (bin_val < 269) {
-          return getPartyColor(getOppositeParty(winner));
+          return getPartyColor(Party.Republican);
         }
         return getPartyColor(Party.Tie);
       } else if (raceType === RaceType.House) {
         if (bin_val >= 218) {
-          return getPartyColor(winner);
+          return getPartyColor(Party.Democrat);
         }
-        return getPartyColor(getOppositeParty(winner));
+        return getPartyColor(Party.Republican);
       } else if (raceType === RaceType.Senate) {
         if (winner === Party.Tie) {
           if (bin_val > 50) {
@@ -60,9 +60,9 @@ function makeHistogram(
           return getPartyColor(Party.Tie);
         } else {
           if (bin_val > 50) {
-            return getPartyColor(winner);
+            return getPartyColor(Party.Democrat);
           } else if (bin_val < 50) {
-            return getPartyColor(getOppositeParty(winner));
+            return getPartyColor(Party.Republican);
           }
           return getPartyColor(Party.Tie);
         }
@@ -76,27 +76,26 @@ function makeHistogram(
   const getBinX = (index: number): number => {
     return Math.round((binEdges[index] + binEdges[index + 1]) / 2);
   };
+  
+  const getWidthX = (index: number): number => {
+    return Math.round((binEdges[index + 1] - binEdges[index]) / 2)
+  };
 
   const histogramSeries: any = bins.map((frequency, index) => ({
     x: getBinX(index),
     y: frequency,
+    width: getWidthX(index),
     color: getBinColor(getBinX(index)),
   }));
 
   const xAxisTitle: string = (() => {
     if (state === State.National) {
       if (raceType === RaceType.Presidential) {
-        return winner === Party.Tie
-          ? `${Party.Democrat} Electoral Votes`
-          : `${winner} Electoral Votes`;
+        return `${Party.Democrat} Electoral Votes`
       } else if (raceType === RaceType.House) {
-        return winner === Party.Tie
-          ? `${Party.Democrat} Seats`
-          : `${winner} Seats`;
+        return `${Party.Democrat} Seats`
       } else if (raceType === RaceType.Senate) {
-        return winner === Party.Tie
-          ? `${Party.Democrat} Seats`
-          : `${winner} Seats`;
+        return `${Party.Democrat} Seats`
       }
     }
     return "Margin";
@@ -171,20 +170,23 @@ function makeHistogram(
     },
     tooltip: {
       formatter: function (this: any) {
-        if (state === State.National) {
-          return `<b>${this.x}</b><br />Simulations: <b>${formatNumber(
-            this.y
-          )}</b>`;
+        const point = this.point; // Access the point object
+        const width = point.width; // Now you can use the width from the point
+
+        if (state === State.National && raceType === RaceType.Presidential) {
+          return `<b>${point.x - width + 1}-${point.x + width - 1}</b><br />Simulations: <b>${formatNumber(point.y)}</b>`;
+        }
+        if (state === State.National && raceType === RaceType.Senate) {
+          return `<b>${point.x}</b><br />Simulations: <b>${formatNumber(point.y)}</b>`;
+        }
+        if (state == State.National && raceType === RaceType.House) {
+          return `<b>${point.x - width}</b><br />Simulations: <b>${formatNumber(point.y) + width}</b>`;
         }
         if (this.x < 0) {
-          return `<b>R +${Math.abs(
-            this.x
-          )}</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
+          return `<b>R+${Math.abs(this.x) - width} - R+${Math.abs(this.x) + width}</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
         }
         if (this.x > 0) {
-          return `<b>D +${Math.abs(
-            this.x
-          )}</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
+          return `<b>D+${Math.abs(this.x) - width} - D+${Math.abs(this.x) + width}</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
         }
         return `<b>Tie</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
       },

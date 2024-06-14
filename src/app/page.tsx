@@ -359,9 +359,6 @@ export default function Home(): JSX.Element {
       )}
       {weird === "" && (
         <KeyRacesModule
-          raceType={raceType}
-          state={state}
-          district={district}
           setRaceType={setRaceType}
           setState={setState}
           setDistrict={setDistrict}

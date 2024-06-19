@@ -19,14 +19,14 @@ import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
 import { SHAPFactor } from "@/types/SHAPFactor";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import ReactGA from "react-ga4";
-import { clarity } from "react-microsoft-clarity"
+import { clarity } from "react-microsoft-clarity";
 
 const TRACKING_ID = "G-QDEM59MHXZ";
 if (typeof window !== `undefined`) {
-  if (process.env.NODE_ENV === 'production') ReactGA.initialize(TRACKING_ID);
-  if (process.env.NODE_ENV === 'production') clarity.init('mlah1s1plh');
+  if (process.env.NODE_ENV === "production") ReactGA.initialize(TRACKING_ID);
+  if (process.env.NODE_ENV === "production") clarity.init("mlah1s1plh");
 }
 
 interface RaceData {
@@ -211,6 +211,7 @@ async function fetchRaceData(
  * @returns {JSX.Element} The home page.
  */
 export default function Home(): JSX.Element {
+  const router = useRouter();
   const [raceType, setRaceType] = useState<RaceType>(RaceType.Presidential);
   const [state, setState] = useState<State>(State.National);
   const [district, setDistrict] = useState<number>(0);
@@ -240,7 +241,7 @@ export default function Home(): JSX.Element {
           : 0
       );
     }
-  }, []); // Only run on first render
+  }, [router.isReady]); // Only run on first render
 
   useEffect(() => {
     if (raceType == undefined || state == undefined || district == undefined)

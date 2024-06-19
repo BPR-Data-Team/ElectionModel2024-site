@@ -74,6 +74,8 @@ export interface ResponseItem {
   demographics: number;
   bin_bounds: [number, number];
   gas_prices: number;
+  dates: string[];
+  winMargins: number[];
 }
 
 export function parseItem(apiResponse: APIResponse): ResponseItem {
@@ -202,6 +204,8 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
       apiResponse.Item.gas_prices.S === "nan"
         ? 0
         : parseFloat(apiResponse.Item.gas_prices.S),
+    dates: [], 
+    winMargins: [],
   };
 
   return responseItem;

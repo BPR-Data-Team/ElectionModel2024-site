@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import WelcomeModule from "@/components/modules/WelcomeModule";
 import MapModule from "@/components/modules/MapModule";
 import SimulationsModule from "@/components/modules/SimulationsModule";
+import HistoricalModule from "@/components/modules/HistoricalModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
@@ -40,6 +41,8 @@ interface RaceData {
   binBounds: [number, number];
   binEdges: number[];
   bins: number[];
+  dates: string[];
+  winMargins: number[];
   weird?: string;
 }
 
@@ -197,6 +200,8 @@ async function fetchRaceData(
         SHAPFactors: SHAPFactors,
         binBounds: responseItem.bin_bounds,
         binEdges: responseItem.bin_edges,
+        dates: responseItem.dates,
+        winMargins: responseItem.winMargins,
         bins: responseItem.bins,
       };
       return predictions;
@@ -223,6 +228,8 @@ export default function Home(): JSX.Element {
   const [numTies, setNumTies] = useState<number>(0);
   const [binBounds, setBinBounds] = useState<[number, number]>([0, 0]);
   const [binEdges, setBinEdges] = useState<number[]>([]);
+  const [dates, setDates] = useState<string[]>([]);
+  const [winMargins, setWinMargins] = useState<number[]>([]);
   const [bins, setBins] = useState<number[]>([]);
   const [weird, setWeird] = useState<string>("");
   const [fetchComplete, setFetchComplete] = useState<boolean>(false);
@@ -353,6 +360,14 @@ export default function Home(): JSX.Element {
           state={state}
           winner={winner}
         />
+      )}
+      {weird === "" && (
+        <HistoricalModule
+          raceType={raceType}
+          dates={dates}
+          winMargins={winMargins}
+          state={state}
+          />
       )}
       {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />

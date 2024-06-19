@@ -19,7 +19,6 @@ import { Party } from "@/types/Party";
 import { ResponseItem, parseItem } from "@/types/APIResponse";
 import { SHAPFactor } from "@/types/SHAPFactor";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 import ReactGA from "react-ga4";
 import { clarity } from "react-microsoft-clarity";
 
@@ -211,7 +210,6 @@ async function fetchRaceData(
  * @returns {JSX.Element} The home page.
  */
 export default function Home(): JSX.Element {
-  const router = useRouter();
   const [raceType, setRaceType] = useState<RaceType>(RaceType.Presidential);
   const [state, setState] = useState<State>(State.National);
   const [district, setDistrict] = useState<number>(0);
@@ -241,7 +239,7 @@ export default function Home(): JSX.Element {
           : 0
       );
     }
-  }, [router.isReady]); // Only run on first render
+  }, []); // Only run on first render
 
   useEffect(() => {
     if (raceType == undefined || state == undefined || district == undefined)

@@ -228,6 +228,7 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      console.log("Use Effect 1: " + raceType + state + district + "\n");
       const searchParams = new URLSearchParams(window.location.search);
       setRaceType(
         (searchParams.get("raceType") as RaceType) ?? RaceType.Presidential
@@ -242,6 +243,7 @@ export default function Home(): JSX.Element {
   }, []); // Only run on first render
 
   useEffect(() => {
+    console.log("Use Effect 2 Begin: " + raceType + state + district + "\n");
     if (raceType == undefined || state == undefined || district == undefined)
       return;
 
@@ -270,7 +272,7 @@ export default function Home(): JSX.Element {
       }?${newSearchParams.toString()}`;
       window.history.pushState({ path: newUrl }, "", newUrl);
     };
-
+    console.log("Use Effect 2 Middle: " + raceType + state + district + "\n");
     setFetchComplete(false);
     fetchRaceData(raceType, state, district)
       .then((data: RaceData) => {
@@ -289,7 +291,7 @@ export default function Home(): JSX.Element {
         } else {
           setWeird("");
         }
-        console.log(raceType, state, district);
+        console.log("Use Effect 2 End: " + raceType + state + district + "\n");
         updateSearchParams({
           raceType: raceType,
           state: state,

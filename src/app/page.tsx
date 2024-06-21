@@ -53,7 +53,8 @@ interface RaceData {
 async function fetchRaceData(
   raceType: RaceType,
   state: State,
-  district: number
+  district: number,
+  retries: number = 3
 ): Promise<RaceData> {
   if (typeof state === "string" && state.includes("US-")) {
     let state_abbrev = state.substring(3);
@@ -65,7 +66,7 @@ async function fetchRaceData(
     !(
       raceType === RaceType.Presidential &&
       (state === State.Maine || state === State.Nebraska)
-    ) // Maine and Nebraska have individual electors + at-large for presidential elections
+    )
       ? "0"
       : district.toString();
   let raceTypeArg = "";
@@ -85,20 +86,19 @@ async function fetchRaceData(
   }
   const raceArg: string = `${stateArg}${districtArg}${raceTypeArg}`;
   const fetchInput: string = `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${raceArg}`;
-  return fetch(fetchInput)
-    .then((response) => {
+
+  for (let attempt = 0; attempt < retries; attempt++) {
+    try {
+      const response = await fetch(fetchInput);
       if (!response.ok) {
         const status_code: number = response.status;
-        return Promise.reject(
+        throw new Error(
           "Failed to fetch API, server responded with status code " +
             status_code
         );
       }
-      return response.json();
-    })
-    .then((data) => {
+      const data = await response.json();
       const responseItem: ResponseItem = parseItem(data);
-      /* console.log(responseItem); */
       if (responseItem.weird) {
         return {
           winner: Party.Tie,
@@ -199,10 +199,16 @@ async function fetchRaceData(
         bins: responseItem.bins,
       };
       return predictions;
-    })
-    .catch((error: Error) => {
-      return Promise.reject(error);
-    });
+    } catch (error) {
+      if (attempt < retries - 1) {
+        console.warn(`Attempt ${attempt + 1} failed. Retrying...`);
+      } else {
+        console.error("All attempts failed.");
+        throw error;
+      }
+    }
+  }
+  throw new Error("Failed to fetch data after all retries.");
 }
 
 /**
@@ -210,9 +216,9 @@ async function fetchRaceData(
  * @returns {JSX.Element} The home page.
  */
 export default function Home(): JSX.Element {
-  const [raceType, setRaceType] = useState<RaceType>(RaceType.Presidential);
-  const [state, setState] = useState<State>(State.National);
-  const [district, setDistrict] = useState<number>(0);
+  const [raceType, setRaceType] = useState<RaceType>();
+  const [state, setState] = useState<State>();
+  const [district, setDistrict] = useState<number>();
   const [winner, setWinner] = useState<Party>(Party.Democrat);
   const [likelihood, setLikelihood] = useState<number>(0);
   const [margin, setMargin] = useState<number>(0);
@@ -230,7 +236,6 @@ export default function Home(): JSX.Element {
     let active = true;
     if (firstRun) {
       if (typeof window !== "undefined") {
-        console.log("Use Effect 1: " + raceType + state + district + "\n");
         const searchParams = new URLSearchParams(window.location.search);
         if (active) {
           setRaceType(
@@ -244,6 +249,7 @@ export default function Home(): JSX.Element {
           );
         }
       }
+      console.log("Use Effect 1: " + raceType + state + district + "\n");
       setFirstRun(false);
     } else {
       console.log("Use Effect 2 Begin: " + raceType + state + district + "\n");

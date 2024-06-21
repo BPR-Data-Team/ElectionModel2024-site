@@ -66,7 +66,7 @@ export default function MapModule(props: mapProps): JSX.Element {
   const [USSenateMapData, setUSSenateMapData] = useState<StateData[]>([]); // cache map data
   const [USGovernorMapData, setUSGovernorMapData] = useState<StateData[]>([]); // cache map data
   useEffect(() => {
-    if (props.raceType == undefined) return;
+    if (props.raceType == RaceType.Unset) return;
     let active = true;
     if (active) {
       try {

@@ -56,6 +56,9 @@ async function fetchRaceData(
   district: number,
   retries: number = 3
 ): Promise<RaceData> {
+  if (raceType == RaceType.Unset) {
+    throw new Error("Race type is unset");
+  }
   if (typeof state === "string" && state.includes("US-")) {
     let state_abbrev = state.substring(3);
     state = getStateFromAbbreviation(state_abbrev);
@@ -216,9 +219,9 @@ async function fetchRaceData(
  * @returns {JSX.Element} The home page.
  */
 export default function Home(): JSX.Element {
-  const [raceType, setRaceType] = useState<RaceType>();
-  const [state, setState] = useState<State>();
-  const [district, setDistrict] = useState<number>();
+  const [raceType, setRaceType] = useState<RaceType>(RaceType.Unset);
+  const [state, setState] = useState<State>(State.National);
+  const [district, setDistrict] = useState<number>(0);
   const [winner, setWinner] = useState<Party>(Party.Democrat);
   const [likelihood, setLikelihood] = useState<number>(0);
   const [margin, setMargin] = useState<number>(0);
@@ -249,12 +252,9 @@ export default function Home(): JSX.Element {
           );
         }
       }
-      console.log("Use Effect 1: " + raceType + state + district + "\n");
       setFirstRun(false);
     } else {
-      console.log("Use Effect 2 Begin: " + raceType + state + district + "\n");
-      if (raceType == undefined || state == undefined || district == undefined)
-        return;
+      if (raceType == RaceType.Unset) return;
 
       const updateSearchParams = (newParams: { [key: string]: string }) => {
         const newSearchParams = new URLSearchParams(window.location.search);
@@ -281,7 +281,6 @@ export default function Home(): JSX.Element {
         }?${newSearchParams.toString()}`;
         window.history.pushState({ path: newUrl }, "", newUrl);
       };
-      console.log("Use Effect 2 Middle: " + raceType + state + district + "\n");
       if (active) {
         setFetchComplete(false);
         fetchRaceData(raceType, state, district)
@@ -301,9 +300,6 @@ export default function Home(): JSX.Element {
             } else {
               setWeird("");
             }
-            console.log(
-              "Use Effect 2 End: " + raceType + state + district + "\n"
-            );
             updateSearchParams({
               raceType: raceType,
               state: state,

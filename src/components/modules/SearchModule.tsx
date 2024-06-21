@@ -44,7 +44,8 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
         break;
       case RaceType.House:
         setFilteredStates(getHouseRaceStates());
-        if (props.district === 0) { // Added this condition
+        if (props.district === 0) {
+          // Added this condition
           props.setDistrict(1); // Set district to 1 if switching to House races and district is 0
         }
       default:
@@ -195,12 +196,19 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
       <div className={styles.search}>
         <p>
           I want to see
-          <select value={props.raceType} onChange={handleRaceChange} aria-label="Race Selection">
-            {Object.values(RaceType).map((race, index) => (
-              <option key={index} value={race}>
-                {race}
-              </option>
-            ))}
+          <select
+            value={props.raceType}
+            onChange={handleRaceChange}
+            aria-label="Race Selection"
+          >
+            {Object.values(RaceType).map((race, index) => {
+              if (race != RaceType.Unset)
+                return (
+                  <option key={index} value={race}>
+                    {race}
+                  </option>
+                );
+            })}
           </select>
           races in
           <select

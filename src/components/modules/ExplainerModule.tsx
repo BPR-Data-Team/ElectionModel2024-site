@@ -4,7 +4,6 @@ import Module from "../Module";
 import styles from "./ExplainerModule.module.css";
 import { Party } from "@/types/Party";
 import { SHAPFactor } from "@/types/SHAPFactor";
-import SHAPDonut from "@/components/dataviz/SHAPDonut";
 import DonutChart from "@/components/dataviz/SHAPDonut";
 import { formatNumber } from "@/utils";
 
@@ -167,6 +166,9 @@ export default function ExplainerModule(
           </p>
         )}
         {mostPredictiveFactors.length === 0 && <p></p>}
+        {mostPredictiveFactors.length > 0 && (
+          <DonutChart SHAPFactors={props.SHAPFactors} />)}
+        
         <p>
           <a href="/methodology" className={styles.methodologyLink}>
             Look through our full methodology!

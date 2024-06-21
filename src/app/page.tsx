@@ -225,98 +225,95 @@ export default function Home(): JSX.Element {
   const [bins, setBins] = useState<number[]>([]);
   const [weird, setWeird] = useState<string>("");
   const [fetchComplete, setFetchComplete] = useState<boolean>(false);
-  let active = false;
+  const [firstRun, setFirstRun] = useState<boolean>(true);
   useEffect(() => {
-    active = true;
-    if (typeof window !== "undefined") {
-      console.log("Use Effect 1: " + raceType + state + district + "\n");
-      const searchParams = new URLSearchParams(window.location.search);
+    let active = true;
+    if (firstRun) {
+      if (typeof window !== "undefined") {
+        console.log("Use Effect 1: " + raceType + state + district + "\n");
+        const searchParams = new URLSearchParams(window.location.search);
+        if (active) {
+          setRaceType(
+            (searchParams.get("raceType") as RaceType) ?? RaceType.Presidential
+          );
+          setState((searchParams.get("state") as State) ?? State.National);
+          setDistrict(
+            searchParams.get("district")
+              ? parseInt(searchParams.get("district") as string)
+              : 0
+          );
+        }
+      }
+      setFirstRun(false);
+    } else {
+      console.log("Use Effect 2 Begin: " + raceType + state + district + "\n");
+      if (raceType == undefined || state == undefined || district == undefined)
+        return;
+
+      const updateSearchParams = (newParams: { [key: string]: string }) => {
+        const newSearchParams = new URLSearchParams(window.location.search);
+        Object.entries(newParams).forEach(([key, value]) => {
+          if (
+            key === "district" && // Only show district param when relevant. The reason we have to handle this here is because the district value isn't changed when the user navigates to a race without a district to increase speed.
+            (value === "0" ||
+              (raceType !== RaceType.House && // Only House races have districts (except for the Maine and Nebraska presidential handled below)
+                !(
+                  (
+                    raceType === RaceType.Presidential &&
+                    (state === State.Maine || state === State.Nebraska)
+                  ) // Maine and Nebraska have individual electors + at-large for presidential elections
+                )) ||
+              state === State.National) // National House race doesn't have a district
+          ) {
+            newSearchParams.delete("district");
+          } else {
+            newSearchParams.set(key, value);
+          }
+        });
+        const newUrl = `${
+          window.location.pathname
+        }?${newSearchParams.toString()}`;
+        window.history.pushState({ path: newUrl }, "", newUrl);
+      };
+      console.log("Use Effect 2 Middle: " + raceType + state + district + "\n");
       if (active) {
-        setRaceType(
-          (searchParams.get("raceType") as RaceType) ?? RaceType.Presidential
-        );
-        setState((searchParams.get("state") as State) ?? State.National);
-        setDistrict(
-          searchParams.get("district")
-            ? parseInt(searchParams.get("district") as string)
-            : 0
-        );
+        setFetchComplete(false);
+        fetchRaceData(raceType, state, district)
+          .then((data: RaceData) => {
+            setWinner(data.winner);
+            setLikelihood(data.likelihood);
+            setMargin(data.margin);
+            setNumDemWins(data.numDemWins);
+            setNumRepWins(data.numRepWins);
+            setNumTies(data.numTies);
+            setSHAPFactors(data.SHAPFactors);
+            setBinBounds(data.binBounds);
+            setBinEdges(data.binEdges);
+            setBins(data.bins);
+            if (data.weird) {
+              setWeird(data.weird);
+            } else {
+              setWeird("");
+            }
+            console.log(
+              "Use Effect 2 End: " + raceType + state + district + "\n"
+            );
+            updateSearchParams({
+              raceType: raceType,
+              state: state,
+              district: district.toString(),
+            });
+            setFetchComplete(true);
+          })
+          .catch((error: Error) => {
+            console.error(error);
+          });
       }
     }
     return () => {
       active = false;
     };
-  }, []); // Only run on first render
-
-  useEffect(() => {
-    active = true;
-    console.log("Use Effect 2 Begin: " + raceType + state + district + "\n");
-    if (raceType == undefined || state == undefined || district == undefined)
-      return;
-
-    const updateSearchParams = (newParams: { [key: string]: string }) => {
-      const newSearchParams = new URLSearchParams(window.location.search);
-      Object.entries(newParams).forEach(([key, value]) => {
-        if (
-          key === "district" && // Only show district param when relevant. The reason we have to handle this here is because the district value isn't changed when the user navigates to a race without a district to increase speed.
-          (value === "0" ||
-            (raceType !== RaceType.House && // Only House races have districts (except for the Maine and Nebraska presidential handled below)
-              !(
-                (
-                  raceType === RaceType.Presidential &&
-                  (state === State.Maine || state === State.Nebraska)
-                ) // Maine and Nebraska have individual electors + at-large for presidential elections
-              )) ||
-            state === State.National) // National House race doesn't have a district
-        ) {
-          newSearchParams.delete("district");
-        } else {
-          newSearchParams.set(key, value);
-        }
-      });
-      const newUrl = `${
-        window.location.pathname
-      }?${newSearchParams.toString()}`;
-      window.history.pushState({ path: newUrl }, "", newUrl);
-    };
-    console.log("Use Effect 2 Middle: " + raceType + state + district + "\n");
-    if (active) {
-      setFetchComplete(false);
-      fetchRaceData(raceType, state, district)
-        .then((data: RaceData) => {
-          setWinner(data.winner);
-          setLikelihood(data.likelihood);
-          setMargin(data.margin);
-          setNumDemWins(data.numDemWins);
-          setNumRepWins(data.numRepWins);
-          setNumTies(data.numTies);
-          setSHAPFactors(data.SHAPFactors);
-          setBinBounds(data.binBounds);
-          setBinEdges(data.binEdges);
-          setBins(data.bins);
-          if (data.weird) {
-            setWeird(data.weird);
-          } else {
-            setWeird("");
-          }
-          console.log(
-            "Use Effect 2 End: " + raceType + state + district + "\n"
-          );
-          updateSearchParams({
-            raceType: raceType,
-            state: state,
-            district: district.toString(),
-          });
-          setFetchComplete(true);
-        })
-        .catch((error: Error) => {
-          console.error(error);
-        });
-    }
-    return () => {
-      active = false;
-    };
-  }, [raceType, state, district]);
+  }, [raceType, state, district, firstRun]); // Only run on first render
 
   return (
     <main className={styles.main}>

@@ -225,24 +225,31 @@ export default function Home(): JSX.Element {
   const [bins, setBins] = useState<number[]>([]);
   const [weird, setWeird] = useState<string>("");
   const [fetchComplete, setFetchComplete] = useState<boolean>(false);
-
+  let active = false;
   useEffect(() => {
+    active = true;
     if (typeof window !== "undefined") {
       console.log("Use Effect 1: " + raceType + state + district + "\n");
       const searchParams = new URLSearchParams(window.location.search);
-      setRaceType(
-        (searchParams.get("raceType") as RaceType) ?? RaceType.Presidential
-      );
-      setState((searchParams.get("state") as State) ?? State.National);
-      setDistrict(
-        searchParams.get("district")
-          ? parseInt(searchParams.get("district") as string)
-          : 0
-      );
+      if (active) {
+        setRaceType(
+          (searchParams.get("raceType") as RaceType) ?? RaceType.Presidential
+        );
+        setState((searchParams.get("state") as State) ?? State.National);
+        setDistrict(
+          searchParams.get("district")
+            ? parseInt(searchParams.get("district") as string)
+            : 0
+        );
+      }
     }
+    return () => {
+      active = false;
+    };
   }, []); // Only run on first render
 
   useEffect(() => {
+    active = true;
     console.log("Use Effect 2 Begin: " + raceType + state + district + "\n");
     if (raceType == undefined || state == undefined || district == undefined)
       return;
@@ -273,35 +280,42 @@ export default function Home(): JSX.Element {
       window.history.pushState({ path: newUrl }, "", newUrl);
     };
     console.log("Use Effect 2 Middle: " + raceType + state + district + "\n");
-    setFetchComplete(false);
-    fetchRaceData(raceType, state, district)
-      .then((data: RaceData) => {
-        setWinner(data.winner);
-        setLikelihood(data.likelihood);
-        setMargin(data.margin);
-        setNumDemWins(data.numDemWins);
-        setNumRepWins(data.numRepWins);
-        setNumTies(data.numTies);
-        setSHAPFactors(data.SHAPFactors);
-        setBinBounds(data.binBounds);
-        setBinEdges(data.binEdges);
-        setBins(data.bins);
-        if (data.weird) {
-          setWeird(data.weird);
-        } else {
-          setWeird("");
-        }
-        console.log("Use Effect 2 End: " + raceType + state + district + "\n");
-        updateSearchParams({
-          raceType: raceType,
-          state: state,
-          district: district.toString(),
+    if (active) {
+      setFetchComplete(false);
+      fetchRaceData(raceType, state, district)
+        .then((data: RaceData) => {
+          setWinner(data.winner);
+          setLikelihood(data.likelihood);
+          setMargin(data.margin);
+          setNumDemWins(data.numDemWins);
+          setNumRepWins(data.numRepWins);
+          setNumTies(data.numTies);
+          setSHAPFactors(data.SHAPFactors);
+          setBinBounds(data.binBounds);
+          setBinEdges(data.binEdges);
+          setBins(data.bins);
+          if (data.weird) {
+            setWeird(data.weird);
+          } else {
+            setWeird("");
+          }
+          console.log(
+            "Use Effect 2 End: " + raceType + state + district + "\n"
+          );
+          updateSearchParams({
+            raceType: raceType,
+            state: state,
+            district: district.toString(),
+          });
+          setFetchComplete(true);
+        })
+        .catch((error: Error) => {
+          console.error(error);
         });
-        setFetchComplete(true);
-      })
-      .catch((error: Error) => {
-        console.error(error);
-      });
+    }
+    return () => {
+      active = false;
+    };
   }, [raceType, state, district]);
 
   return (

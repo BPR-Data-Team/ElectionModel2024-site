@@ -1,4 +1,4 @@
-import { Historical } from "@/components/dataviz/Historical";
+import Historical from "@/components/dataviz/Historical";
 import Module from "../Module";
 import styles from "./SimulationsModule.module.css";
 import { RaceType } from "@/types/RaceType";
@@ -9,7 +9,7 @@ export interface HistoricalModuleProps {
   raceType: RaceType;
   state: State;
   dates: string[];
-  winMargins: number[];
+  winPercents: number[];
 }
 
 export default function HistoricalModule(
@@ -18,14 +18,12 @@ export default function HistoricalModule(
   return (
     <Module>
       <div className={styles.simulations}>
-        <h3>Margin Simulations</h3>
+        <h3>Win Percentage Over Time</h3>
         <Historical
-          binBounds={props.binBounds}
-          binEdges={props.binEdges}
-          bins={props.bins}
           raceType={props.raceType}
+          dates={props.dates}
+          winPercents={props.winPercents}
           state={props.state}
-          winner={props.winner}
         />
       </div>
     </Module>

@@ -68,14 +68,14 @@ export default function MapModule(props: mapProps): JSX.Element {
   useEffect(() => {
     if (props.raceType == RaceType.Unset) return;
     let active = true;
-    if (active) {
-      try {
-        let type = "USPresident";
-        if (props.raceType == RaceType.Senate) {
-          type = "USSenate";
-        } else if (props.raceType == RaceType.Gubernatorial) {
-          type = "USGovernor";
-        }
+    try {
+      let type = "USPresident";
+      if (props.raceType == RaceType.Senate) {
+        type = "USSenate";
+      } else if (props.raceType == RaceType.Gubernatorial) {
+        type = "USGovernor";
+      }
+      if (active) {
         if (type == "USPresident" && USPresidentMapData.length > 0) {
           setMapData(USPresidentMapData);
           return;
@@ -98,9 +98,9 @@ export default function MapModule(props: mapProps): JSX.Element {
           }
           setMapData(data);
         });
-      } catch (error) {
-        console.error(error);
       }
+    } catch (error) {
+      console.error(error);
     }
     return () => {
       active = false;

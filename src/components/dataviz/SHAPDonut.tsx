@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import Highcharts, { SeriesPieOptions } from "highcharts";
 import { SHAPFactor } from "@/types/SHAPFactor";
 import highchartsAccessibility from "highcharts/modules/accessibility";
@@ -25,13 +25,16 @@ const DonutChart: React.FC<DonutChartProps> = ({ SHAPFactors }) => {
         .sort((a, b) => b.y - a.y)
     : [];
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const options: Highcharts.Options = {
       chart: {
         type: "pie",
-        height: "200",
+        height: 130,
+        width: null,
         marginLeft: 0, 
         marginRight: 0,
+        marginTop: 10,
+        marginBottom: 0,
       },
       credits: {
         enabled: false,
@@ -63,6 +66,9 @@ const DonutChart: React.FC<DonutChartProps> = ({ SHAPFactors }) => {
       tooltip: {
         formatter: function() {
           return `<b>${this.key}</b>: ${this.y}%`;
+        },
+        style: {
+          fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
         },
       },
       series: [

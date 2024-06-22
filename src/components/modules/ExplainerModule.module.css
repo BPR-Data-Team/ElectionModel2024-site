@@ -8,3 +8,11 @@
 .boldText {
   font-weight: 700;
 }
+
+.noBottom {
+  margin-block-end: 0.3em;
+}
+
+.noTop {
+  margin-block-start: 0.3em;
+}

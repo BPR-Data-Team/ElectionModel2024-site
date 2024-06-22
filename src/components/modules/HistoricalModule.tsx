@@ -18,7 +18,7 @@ export default function HistoricalModule(
   return (
     <Module>
       <div className={styles.simulations}>
-        <h3>Win Percentage Over Time</h3>
+        <h3>Margin Over Time</h3>
         <Historical
           raceType={props.raceType}
           dates={props.dates}

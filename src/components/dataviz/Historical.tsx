@@ -60,8 +60,11 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
         },
         xAxis: {
           crosshair: {
-            width: 0.5, 
-            color: 'black'
+            width: 0.2, 
+            color: 'black', 
+            label: {
+              enabled: false // Disable crosshair label
+            }
           },
           categories: dates,
           type: 'datetime',
@@ -93,11 +96,31 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
         },
         },
         yAxis: {
+          min: -10, 
+          max: 10,
           title: {
             text: 'Margin',
             style: {
               color: "black",
               fontSize: "18px",
+              fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
+            },
+          },
+          labels: {
+            formatter: function (this: any) {
+              if (props.state === State.National) {
+                return this.value;
+              }
+              if (this.value < 0) {
+                return `R +${Math.abs(this.value)}`;
+              }
+              if (this.value > 0) {
+                return `D +${Math.abs(this.value)}`;
+              }
+              return "Tie";
+            },
+            style: {
+              color: "black",
               fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
             },
           },
@@ -119,30 +142,9 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
           shared: true,  
           formatter: function() {
 
-            let tooltipContent = '<b>Median Margin:</b> ';
-    
-            if (this.points && this.points[1].y && this.points[1].y > 0) {
-              tooltipContent += `D+${this.points[1].y}`;
-            } else if (this.points && this.points[1].y && this.points[1].y < 0) {
-              tooltipContent += `R+${-1*this.points[1].y}`;
-            } else {
-              tooltipContent += 'Tie';
-            }
-            
-            tooltipContent += '<br><b>R Overperformance:</b> ';
-            
-            let range = "";
-            if (this.point.low && this.point.low > 0) {
-              range += `D+${this.point.low}`;
-            } else if (this.point.low && this.point.low < 0) {
-              range += `R+${-1*this.point.low}`;
-            } else {
-              range += 'Tie';
-            }
+            let tooltipContent = "";
 
-            tooltipContent += range;
-
-            tooltipContent += '<br><b>D Overperformance:</b> ';
+            tooltipContent += '<b><span style="color: #595D9A;">D Overperformance:</span></b> ';
 
             let dem = ""
             if (this.point.high && this.point.high > 0) {
@@ -155,6 +157,30 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
             
             tooltipContent += dem;
             
+            tooltipContent += '<br><b>Median Margin:</b> ';
+    
+            if (this.points && this.points[1].y && this.points[1].y > 0) {
+              tooltipContent += `D+${this.points[1].y}`;
+            } else if (this.points && this.points[1].y && this.points[1].y < 0) {
+              tooltipContent += `R+${-1*this.points[1].y}`;
+            } else {
+              tooltipContent += 'Tie';
+            }
+
+            tooltipContent += '<br><b><span style="color: #B83C2B;">R Overperformance:</span></b> ';
+            
+            let range = "";
+            if (this.point.low && this.point.low > 0) {
+              range += `D+${this.point.low}`;
+            } else if (this.point.low && this.point.low < 0) {
+              range += `R+${-1*this.point.low}`;
+            } else {
+              range += 'Tie';
+            }
+
+            tooltipContent += range;
+            
+            
             return tooltipContent;
           },
         },
@@ -165,9 +191,15 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
           name: 'Value Range',
           data: ranges,
           zIndex: 1,
+          fillOpacity: 0.5,
           type: 'arearange',
           marker: {
-            enabled: false
+            enabled: false,
+            states: {
+              hover: {
+                enabled: false // Disable markers on hover
+              }
+            }
           }          
         }, {
           name: 'Margin',

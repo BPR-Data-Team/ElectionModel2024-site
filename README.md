@@ -44,7 +44,7 @@ To learn more about Next.js, take a look at the following resources:
 ## License
 Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
-24cast Website © 2024 by the Brown Political Review is licensed under a
+24cast.org Website © 2024 by the Brown Political Review is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
 
 [![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]

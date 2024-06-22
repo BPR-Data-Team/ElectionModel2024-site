@@ -11,7 +11,7 @@
       {
         "name": "Predictions | 24cast.org",
         "short_name": "Predictions",
-        "description": "See what 24cast predicts",
+        "description": "See what 24cast.org predicts",
         "url": "/?source=pwa"
       }
     ],

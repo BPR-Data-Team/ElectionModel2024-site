@@ -68,30 +68,30 @@ const AboutPage: React.FC = () => {
   return (
     <div className={styles.overall}>
       <div className={styles.main}>
-        <h1 className={styles.header}>About 24cast</h1>
+        <h1 className={styles.header}>About 24cast.org</h1>
         <p>
           This isn&apos;t your typical election prediction model—we use new methods to determine the outcomes
           of races down to the margin and break down <i>exactly</i> how each race&apos;s history
           affects expected outcomes.
         </p>
         <p>
-          24cast is produced by the Brown Political Review&apos;s Data Board. When the Data Board isn&apos;t innovating
+          24cast.org is produced by the Brown Political Review&apos;s Data Board. When the Data Board isn&apos;t innovating
           election predictions, our team writes <a className={styles.linkText} href='https://brownpoliticalreview.org/category/data/'>data-driven articles</a> for BPR
           and creates data visualizations for <a className={styles.linkText} href='https://brownpoliticalreview.org/'>articles</a> written by BPR&apos;s Editorial Board.
         </p>
         <p>
-          24cast is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
+          24cast.org is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
           featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/methodology">methodology</a> page!)
         </p>
         <p>
           <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b>
         </p>
         <p>
-          Spearheaded by founder Asher Labovich, 24cast is the product of months of effort
+          Spearheaded by founder Asher Labovich, 24cast.org is the product of months of effort
           by a team of Brown students, who we wish to highlight below:
         </p>
       </div>
-      <h2 className={styles.header}>24cast Primary Team</h2>
+      <h2 className={styles.header}>24cast.org Primary Team</h2>
       <div className={styles.grid}>
         {people.map((person) => (
           <div key={person.id} className={styles.person}>
@@ -135,10 +135,10 @@ const AboutPage: React.FC = () => {
       </div>
       <div className={styles.main}>
         <h2 className={styles.header}>
-          24cast wishes to thank the following organizations for their data:
+          24cast.org wishes to thank the following organizations for their data:
         </h2>
         <p>
-        <i>(endorsement of 24cast is not implied through inclusion in this list)</i>
+        <i>(endorsement of 24cast.org is not implied through inclusion in this list)</i>
         </p>
         <p>
           Cook Political Report &bull; Cost of Voting Index &bull; FiveThirtyEight &bull;

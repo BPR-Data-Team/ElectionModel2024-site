@@ -128,6 +128,8 @@ async function fetchRaceData(
           binEdges: [],
           bins: [],
           weird: responseItem.weird,
+          dates: [],
+          winMargins: [],
         };
       }
       let winner: Party =
@@ -200,9 +202,9 @@ async function fetchRaceData(
         SHAPFactors: SHAPFactors,
         binBounds: responseItem.bin_bounds,
         binEdges: responseItem.bin_edges,
+        bins: responseItem.bins,
         dates: responseItem.dates,
         winMargins: responseItem.winMargins,
-        bins: responseItem.bins,
       };
       return predictions;
     })
@@ -365,7 +367,7 @@ export default function Home(): JSX.Element {
         <HistoricalModule
           raceType={raceType}
           dates={dates}
-          winMargins={winMargins}
+          winPercents={winMargins}
           state={state}
           />
       )}

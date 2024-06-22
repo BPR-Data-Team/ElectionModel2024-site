@@ -85,6 +85,11 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
                 return ""
                }
           },
+          style: {
+            color: "black",
+            fontSize: "18px",
+            fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
+          },
         },
         },
         yAxis: {

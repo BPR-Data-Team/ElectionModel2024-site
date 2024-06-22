@@ -5,8 +5,6 @@ import MapChart, { StateData } from "@/components/dataviz/MapChart";
 import { RaceType } from "@/types/RaceType";
 import { State, getStateFromAbbreviation } from "@/types/State";
 
-
-
 interface MapItemJSON {
   avg_margin: { S: string };
   state: { S: string };
@@ -19,22 +17,41 @@ function parseMapItem(apiResponse: MapItemJSON): StateData {
   };
 }
 
-async function fetchMapData(race: string): Promise<StateData[]> {
-  return fetch(
-    `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${race}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      var result: StateData[] = [];
-      var items = data["Responses"]["BPR_Data_Model"];
-      for (var i = 0; i < items.length; i++) {
-        result.push(parseMapItem(items[i]));
+async function fetchMapData(
+  race: string,
+  retries: number = 3
+): Promise<StateData[]> {
+  const fetchMapData = async (): Promise<StateData[]> => {
+    const response = await fetch(
+      `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${race}`
+    );
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch API, server responded with status code ${response.status}`
+      );
+    }
+    const data = await response.json();
+    const result: StateData[] = [];
+    const items = data["Responses"]["BPR_Data_Model"];
+    for (let i = 0; i < items.length; i++) {
+      result.push(parseMapItem(items[i]));
+    }
+    return result;
+  };
+
+  for (let attempt = 0; attempt < retries; attempt++) {
+    try {
+      return await fetchMapData();
+    } catch (error) {
+      if (attempt < retries - 1) {
+        console.warn(`Attempt ${attempt + 1} failed. Retrying...`);
+      } else {
+        console.error("All attempts failed.");
+        throw new Error("Failed to fetch data after all retries.");
       }
-      return result;
-    })
-    .catch((error) => {
-      throw new Error("Failed to fetch API");
-    });
+    }
+  }
+  throw new Error("Failed to fetch data after all retries.");
 }
 
 interface mapProps {
@@ -43,13 +60,14 @@ interface mapProps {
   setDistrict: (district: number) => void;
 }
 
-
 export default function MapModule(props: mapProps): JSX.Element {
   const [mapData, setMapData] = useState<StateData[]>([]);
   const [USPresidentMapData, setUSPresidentMapData] = useState<StateData[]>([]); // cache map data
   const [USSenateMapData, setUSSenateMapData] = useState<StateData[]>([]); // cache map data
   const [USGovernorMapData, setUSGovernorMapData] = useState<StateData[]>([]); // cache map data
   useEffect(() => {
+    if (props.raceType == RaceType.Unset) return;
+    let active = true;
     try {
       let type = "USPresident";
       if (props.raceType == RaceType.Senate) {
@@ -57,31 +75,36 @@ export default function MapModule(props: mapProps): JSX.Element {
       } else if (props.raceType == RaceType.Gubernatorial) {
         type = "USGovernor";
       }
-      if (type == "USPresident" && USPresidentMapData.length > 0) {
-        setMapData(USPresidentMapData);
-        return;
-      }
-      if (type == "USSenate" && USSenateMapData.length > 0) {
-        setMapData(USSenateMapData);
-        return;
-      }
-      if (type == "USGovernor" && USGovernorMapData.length > 0) {
-        setMapData(USGovernorMapData);
-        return;
-      }
-      fetchMapData(type).then((data: StateData[]) => {
-        if (type == "USPresident") {
-          setUSPresidentMapData(data);
-        } else if (type == "USSenate") {
-          setUSSenateMapData(data);
-        } else if (type == "USGovernor") {
-          setUSGovernorMapData(data);
+      if (active) {
+        if (type == "USPresident" && USPresidentMapData.length > 0) {
+          setMapData(USPresidentMapData);
+          return;
         }
-        setMapData(data);
-      });
+        if (type == "USSenate" && USSenateMapData.length > 0) {
+          setMapData(USSenateMapData);
+          return;
+        }
+        if (type == "USGovernor" && USGovernorMapData.length > 0) {
+          setMapData(USGovernorMapData);
+          return;
+        }
+        fetchMapData(type).then((data: StateData[]) => {
+          if (type == "USPresident") {
+            setUSPresidentMapData(data);
+          } else if (type == "USSenate") {
+            setUSSenateMapData(data);
+          } else if (type == "USGovernor") {
+            setUSGovernorMapData(data);
+          }
+          setMapData(data);
+        });
+      }
     } catch (error) {
       console.error(error);
     }
+    return () => {
+      active = false;
+    };
   }, [props.raceType]);
 
   const handleStateClick = (hcKey: string) => {
@@ -94,13 +117,9 @@ export default function MapModule(props: mapProps): JSX.Element {
   return (
     <Module className="mapModule">
       <div className={styles.map}>
-        <h3>
-          24cast.org&apos;s Prediction Map:
-        </h3>
-        <p>
-          Click on a state to switch views.
-        </p>  
-        <MapChart stateData={mapData} onStateClick={handleStateClick}/>
+        <h3>24cast.org&apos;s Prediction Map:</h3>
+        <p>Click on a state to switch views.</p>
+        <MapChart stateData={mapData} onStateClick={handleStateClick} />
       </div>
     </Module>
   );

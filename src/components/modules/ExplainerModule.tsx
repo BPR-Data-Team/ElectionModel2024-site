@@ -167,7 +167,7 @@ export default function ExplainerModule(
         )}
         {mostPredictiveFactors.length === 0 && <p></p>}
         {mostPredictiveFactors.length > 0 && (
-          <DonutChart SHAPFactors={props.SHAPFactors} />)}
+          <div className={styles.donut}><DonutChart SHAPFactors={props.SHAPFactors} /></div>)}
         
         <p className={styles.noTop}>
           <a href="/methodology" className={styles.methodologyLink}>

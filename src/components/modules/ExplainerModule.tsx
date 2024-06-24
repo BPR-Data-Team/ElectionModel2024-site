@@ -4,11 +4,13 @@ import Module from "../Module";
 import styles from "./ExplainerModule.module.css";
 import { Party } from "@/types/Party";
 import { SHAPFactor } from "@/types/SHAPFactor";
+import { RaceType } from "@/types/RaceType";
 import DonutChart from "@/components/dataviz/SHAPDonut";
 import { formatNumber } from "@/utils";
 
 export interface ExplainerModuleProps {
   winner: Party;
+  raceType: RaceType
   numDemWins: number;
   numRepWins: number;
   numTies: number;
@@ -166,7 +168,7 @@ export default function ExplainerModule(
           </p>
         )}
         {mostPredictiveFactors.length === 0 && <p></p>}
-        {mostPredictiveFactors.length > 0 && (
+        {mostPredictiveFactors.length > 0 && props.raceType != RaceType.House && (
           <div className={styles.donut}><DonutChart SHAPFactors={props.SHAPFactors} /></div>)}
         
         <p className={styles.noTop}>

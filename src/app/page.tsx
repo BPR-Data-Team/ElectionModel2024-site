@@ -350,6 +350,7 @@ export default function Home(): JSX.Element {
             />
           )}
           <ExplainerModule
+           raceType={raceType}
             winner={winner}
             numDemWins={numDemWins}
             numRepWins={numRepWins}
@@ -358,7 +359,7 @@ export default function Home(): JSX.Element {
           />
         </div>
       )}
-      {weird === "" && (
+      {weird === ""  && (
         <SimulationsModule
           binBounds={binBounds}
           binEdges={binEdges}
@@ -368,7 +369,7 @@ export default function Home(): JSX.Element {
           winner={winner}
         />
       )}
-      {weird === "" && state !== State.National && (
+      {weird === "" && state !== State.National && raceType !== RaceType.House && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}
       {weird === "" && (

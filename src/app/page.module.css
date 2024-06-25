@@ -13,8 +13,17 @@
   gap: 1rem;
 }
 
+.nationalMaps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 @media (min-width: 768px) {
   .mapAndSims {
+    flex-direction: row;
+  }
+  .nationalMaps {
     flex-direction: row;
   }
 }

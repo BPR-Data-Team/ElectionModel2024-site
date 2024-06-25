@@ -191,6 +191,33 @@
   font-weight: 300;
 }
 
+.liveSymbol {
+  margin-inline-end: 6px;
+  padding-block-end: 2px;
+  vertical-align: middle;
+}
+
+.pulsingCircle {
+  fill: var(--republican-red);
+  opacity: 0.5;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    r: 5;
+    filter: blur(0.2px)
+  }
+  50% {
+    r: 8;
+    filter: blur(0px)
+  }
+  100% {
+    r: 5;
+    filter: blur(0.2px)
+  }
+}
+
 .note {
   font-style: italic;
   font-weight: 300;

@@ -191,6 +191,24 @@ export default function PredictionModule(
         return props.margin;
     }
   };
+
+  const [hoursToMidnight, setHoursToMidnight] = useState(0);
+
+  useEffect(() => {
+    const updateHoursToMidnight = () => {
+      const now = new Date();
+      const midnightET = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+      midnightET.setHours(24, 0, 0, 0); // Set time to midnight
+      const hours = (midnightET.getTime() - now.getTime()) / 1000 / 60 / 60;
+      setHoursToMidnight(Math.ceil(hours));
+    };
+
+    updateHoursToMidnight();
+    const interval = setInterval(updateHoursToMidnight, 60 * 60 * 1000); // Update every hour
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Module>
       <div>
@@ -240,8 +258,11 @@ export default function PredictionModule(
           </div>
         ) : null}
         <p className={styles.lastDataUpdate}>
-          Last data update: {`${new Date().toLocaleDateString()}`}{" "}
-          {/*TODO: make this real */}
+        <svg width="16" height="16" className={styles.liveSymbol}>
+          <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
+          <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
+        </svg>
+          Next update in {hoursToMidnight} hours
         </p>
         {props.state === State.Nebraska &&
         props.raceType === RaceType.Senate ? (

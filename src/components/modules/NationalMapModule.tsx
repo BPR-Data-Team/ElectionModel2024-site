@@ -119,7 +119,7 @@ const NationalMapModule: React.FC<NationalMapModuleProps> = ({ rank, probability
         <Module className="NationalMapModule">
           <div className={styles.map}>
             <h3>#{rank} Most Likely Outcome:</h3>
-            <p>{winner} wins between {538 - winnerEV} and {winnerEV} electoral votes.</p>
+            <p>{winner} wins {winnerEV} electoral votes.</p>
             <p className={styles.subtitle}>({probability}% of simulations)</p>
             <NationalMap stateData={rank === 1 ? stateData1 : stateData2} rank={rank}/>
           </div>

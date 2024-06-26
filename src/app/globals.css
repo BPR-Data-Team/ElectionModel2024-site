@@ -119,3 +119,8 @@ footer a {
 .mapModule {
   min-width: 60%;
 }
+
+.NationalMapModule {
+  min-width: calc(50% - 0.5rem);
+  box-sizing: border-box;
+}

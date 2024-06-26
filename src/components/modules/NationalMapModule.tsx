@@ -1,6 +1,6 @@
 import Module from "../Module";
-import styles from "./MapModule.module.css";
-import NationalMap, {StateData} from "@/components/dataviz/NationalMap";
+import styles from "./NationalMapModule.module.css";
+import NationalMap, { StateData } from "@/components/dataviz/NationalMap";
 
 const stateData1 = [
     { code: 'us-al', value: -1 }, // Alabama
@@ -116,10 +116,11 @@ interface NationalMapModuleProps {
 }
 const NationalMapModule: React.FC<NationalMapModuleProps> = ({ rank, probability, winner, winnerEV }) => {
     return (
-        <Module className="nationalMapModule">
+        <Module className="NationalMapModule">
           <div className={styles.map}>
             <h3>#{rank} Most Likely Outcome:</h3>
-            <p>In {probability}% of races, {winner} wins {winnerEV}-{538 - winnerEV}.</p>
+            <p>{winner} wins between {538 - winnerEV} and {winnerEV} electoral votes.</p>
+            <p className={styles.subtitle}>({probability}% of simulations)</p>
             <NationalMap stateData={rank === 1 ? stateData1 : stateData2} rank={rank}/>
           </div>
         </Module>

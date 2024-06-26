@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
 import highchartsAccessibility from "highcharts/modules/accessibility";
+import { fetchMapData } from "./mapDataCache";
+
 if (typeof window !== `undefined`) {
   highchartsAccessibility(Highcharts);
 }
@@ -30,7 +32,7 @@ const colorAxisStops: [number, string][] = [
 ];
 
 const MapChart: React.FC<MapProps> = (props: MapProps) => {
-  const [mapData, setMapData] = useState<JSON>(); // cache map data
+  const [mapData, setMapData] = useState<any>(null);
 
   useEffect(() => {
     if (props.stateData.length > 0)
@@ -38,42 +40,20 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
   }, [props.stateData]);
 
   const fetchMapDataAndInitializeMap = async (stateData: StateData[]) => {
-    if (mapData) {
-      initializeMap(stateData, mapData);
-      return;
-    }
-    fetch("https://code.highcharts.com/mapdata/countries/us/us-all.topo.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setMapData(data);
-        initializeMap(stateData, data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const data = await fetchMapData();
+    setMapData(data);
+    initializeMap(stateData, data);
   };
 
   function getMaxState(stateData: StateData[]): number {
-    var max = stateData[0].value;
-    for (var i = 1; i < stateData.length; i++) {
-      if (stateData[i].value > max) {
-        max = stateData[i].value;
-      }
-    }
-    return max;
+    return Math.max(...stateData.map((state) => state.value));
   }
 
   function getMinState(stateData: StateData[]): number {
-    var min = stateData[0].value;
-    for (var i = 1; i < stateData.length; i++) {
-      if (stateData[i].value < min) {
-        min = stateData[i].value;
-      }
-    }
-    return min;
+    return Math.min(...stateData.map((state) => state.value));
   }
 
-  const initializeMap = (stateData: StateData[], mapData: JSON) => {
+  const initializeMap = (stateData: StateData[], mapData: any) => {
     const axisMax: number = Math.max(
       Math.abs(getMinState(stateData)),
       Math.abs(getMaxState(stateData))

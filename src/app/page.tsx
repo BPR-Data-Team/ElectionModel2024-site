@@ -5,6 +5,7 @@ import WelcomeModule from "@/components/modules/WelcomeModule";
 import MapModule from "@/components/modules/MapModule";
 import SimulationsModule from "@/components/modules/SimulationsModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
+import NationalMapModule from "@/components/modules/NationalMapModule";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
@@ -372,6 +373,14 @@ export default function Home(): JSX.Element {
       {weird === "" && state !== State.National && raceType !== RaceType.House && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}
+      <div className={styles.nationalMaps}>
+      {state === State.National && raceType === RaceType.Presidential && (
+        <NationalMapModule rank={1} probability={16} winner = {"Donald Trump"} winnerEV = {312} />
+        )}
+      {state === State.National && raceType === RaceType.Presidential && (
+      <NationalMapModule rank={2} probability={14} winner = {"Joe Biden"} winnerEV = {287}/>
+      )}
+      </div>
       {weird === "" && (
         <KeyRacesModule
           setRaceType={setRaceType}

@@ -39,6 +39,14 @@
   font-weight: 600;
   margin-bottom: 0px;
 }
+
+.linkText {
+  color: black;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
 /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
 .predictionInfo {
   display: flex;
@@ -183,10 +191,14 @@
     align-self: center;
   }
   .mainPredictionTextAlt {
-    margin-top: 10px;
-    font-size: 16px;
+    margin-top: 0px;
+    font-size: 20px;
     font-weight: 600;
     align-self: center;
+  }
+
+  .linkText {
+    font-size: 0.8rem;
   }
   /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
   .predictionInfo {
@@ -260,9 +272,3 @@
   font-weight: 300;
 }
 
-.linkText {
-  color: black;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 65%;
-}

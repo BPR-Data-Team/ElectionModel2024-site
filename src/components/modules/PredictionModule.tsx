@@ -174,6 +174,11 @@ export default function PredictionModule(
       message += "*";
     }
 
+    // Add conditional message for presidential and national races
+    if (props.raceType === RaceType.Presidential && props.state === State.National) {
+      message = `${props.winner === Party.Democrat ? "Joe Biden" : "Donald Trump"} has a ${props.likelihood}% chance of winning the presidency.`;
+    }
+
     return message;
   };
 
@@ -214,49 +219,66 @@ export default function PredictionModule(
       <div>
         <h3>24cast.org Prediction:</h3>
       </div>
+      
       <div className={styles.prediction}>
+      {props.raceType === RaceType.Presidential && props.state === State.National ? (
+        <div className={styles.mainPredictionAlt}>
+          <span className={styles.mainPredictionIcon}>{icon}</span>
+          <span className={styles.mainPredictionTextAlt}>
+            {predictionMessage}
+            <br />
+            <a href="#likely-outcomes" className={styles.linkText}>
+              Scroll down to see likely electoral outcomes.
+            </a>
+          </span>
+        </div>
+      ) : (
         <div className={styles.mainPrediction}>
           <span className={styles.mainPredictionIcon}>{icon}</span>
           <span className={styles.mainPredictionText}>{predictionMessage}</span>
         </div>
+      )}
 
-        {props.weird == "" ? (
-          <div className={styles.predictionInfo}>
-            <div className={styles.predictionInfoItem}>
-              <div className={styles.predictionInfoItemIcon}>
-                <Trophy />
+        {props.raceType !== RaceType.Presidential || props.state !== State.National ? (
+          props.weird == "" ? (
+            <div className={styles.predictionInfo}>
+              <div className={styles.predictionInfoItem}>
+                <div className={styles.predictionInfoItemIcon}>
+                  <Trophy />
+                </div>
+                <div className={styles.predictionInfoItemText}>
+                  <h4 className={styles.predictionInfoItemHeader}>
+                    Outcome Likelihood:
+                  </h4>
+                  <span className={styles.predictionInfoItemContent}>
+                    {likelihood === 100 ? ">99" : likelihood}%
+                  </span>
+                </div>
               </div>
-              <div className={styles.predictionInfoItemText}>
-                <h4 className={styles.predictionInfoItemHeader}>
-                  Outcome Likelihood:
-                </h4>
-                <span className={styles.predictionInfoItemContent}>
-                  {likelihood === 100 ? ">99" : likelihood}%
-                </span>
+
+              <div className={styles.predictionInfoItem}>
+                <div className={styles.predictionInfoItemIcon}>
+                  <RingChart />
+                </div>
+                <div className={styles.predictionInfoItemText}>
+                  <h4 className={styles.predictionInfoItemHeader}>
+                    {props.state === State.National
+                      ? props.raceType === RaceType.Presidential
+                        ? "Electoral Votes"
+                        : "Seats"
+                      : "Margin"}
+                    :
+                  </h4>
+                  <span className={styles.predictionInfoItemContent}>
+                    {props.state !== State.National && margin > 0.1 ? "+" : ""}
+                    {margin < 0.1 ? "<0.1" : margin}
+                  </span>
+                </div>
               </div>
             </div>
-
-            <div className={styles.predictionInfoItem}>
-              <div className={styles.predictionInfoItemIcon}>
-                <RingChart />
-              </div>
-              <div className={styles.predictionInfoItemText}>
-                <h4 className={styles.predictionInfoItemHeader}>
-                  {props.state === State.National
-                    ? props.raceType === RaceType.Presidential
-                      ? "Electoral Votes"
-                      : "Seats"
-                    : "Margin"}
-                  :
-                </h4>
-                <span className={styles.predictionInfoItemContent}>
-                  {props.state !== State.National && margin > 0.1 ? "+" : ""}
-                  {margin < 0.1 ? "<0.1" : margin}
-                </span>
-              </div>
-            </div>
-          </div>
+          ) : null
         ) : null}
+
         <p className={styles.lastDataUpdate}>
         <svg width="16" height="16" className={styles.liveSymbol}>
           <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />

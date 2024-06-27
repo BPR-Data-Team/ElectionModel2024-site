@@ -373,7 +373,7 @@ export default function Home(): JSX.Element {
       {weird === "" && state !== State.National && raceType !== RaceType.House && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}
-      <div className={styles.nationalMaps}>
+      <div className={styles.nationalMaps} id="likely-outcomes">
       {state === State.National && raceType === RaceType.Presidential && (
         <NationalMapModule rank={1} probability={16} winner = {"Donald Trump"} winnerEV = {312} />
         )}

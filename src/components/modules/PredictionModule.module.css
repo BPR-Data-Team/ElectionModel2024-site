@@ -266,3 +266,79 @@
   font-weight: 500;
   font-size: 65%;
 }
+
+/* CSS Format for Small Screens */
+@media (max-width: 450px) {
+  /* Democrat image and prediction text, TODO: Format for small and medium */
+  .prediction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mainPrediction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  .mainPredictionAlt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .mainPredictionIcon {
+    flex-shrink: 0;
+    transform: scale(1);
+    margin-bottom: auto;
+    align-self: flex-start;
+  }
+
+  .mainPredictionText {
+    margin-top: 10px;
+    font-size: 20px; /* Increased from 16px */
+    font-weight: 600;
+    align-self: center;
+  }
+  .mainPredictionTextAlt {
+    margin-top: 10px;
+    font-size: 20px; /* Increased from 16px */
+    font-weight: 600;
+    align-self: center;
+  }
+  /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
+  .predictionInfo {
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0;
+    margin-top: -30px;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: flex-start;
+  }
+
+  .predictionInfoItem {
+    display: flex;
+    justify-content: left;
+    gap: 0.875rem;
+    margin-top: -10px;
+    margin-right: 52px;
+    margin-left: 10px;
+  }
+
+  .predictionInfoItemIcon {
+    margin-right: 10px;
+  }
+
+  .predictionInfoItemHeader {
+    margin: 0.25rem 0;
+    font-size: 16px; /* Added font size */
+  }
+
+  .predictionInfoItemContent {
+    font-size: 2rem; /* Increased from 1.875rem */
+    font-weight: 500;
+  }
+}

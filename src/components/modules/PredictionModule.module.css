@@ -14,6 +14,13 @@
   gap: 2rem;
 }
 
+.mainPredictionAlt {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+
 .mainPredictionIcon {
   flex-shrink: 0;
   transform: scale(1);
@@ -25,6 +32,12 @@
   font-size: 1.625rem;
   font-weight: 600;
   margin-bottom: 70px;
+}
+
+.mainPredictionTextAlt {
+  font-size: 1.625rem;
+  font-weight: 600;
+  margin-bottom: 0px;
 }
 /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
 .predictionInfo {
@@ -66,6 +79,12 @@
     align-items: left;
     gap: 2rem;
   }
+  .mainPredictionAlt {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 2rem;
+  }
 
   .mainPredictionIcon {
     flex-shrink: 0;
@@ -75,6 +94,12 @@
   }
 
   .mainPredictionText {
+    font-size: 1.625rem;
+    font-weight: 600;
+    align-self: center;
+    margin-top: 16px;
+  }
+  .mainPredictionTextAlt {
     font-size: 1.625rem;
     font-weight: 600;
     align-self: center;
@@ -137,6 +162,12 @@
     align-items: center;
     gap: 2rem;
   }
+  .mainPredictionAlt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
 
   .mainPredictionIcon {
     flex-shrink: 0;
@@ -146,6 +177,12 @@
   }
 
   .mainPredictionText {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    align-self: center;
+  }
+  .mainPredictionTextAlt {
     margin-top: 10px;
     font-size: 16px;
     font-weight: 600;
@@ -221,4 +258,11 @@
 .note {
   font-style: italic;
   font-weight: 300;
+}
+
+.linkText {
+  color: black;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 65%;
 }

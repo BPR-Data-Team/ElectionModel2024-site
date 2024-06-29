@@ -7,6 +7,8 @@ import { SHAPFactor } from "@/types/SHAPFactor";
 import { RaceType } from "@/types/RaceType";
 import DonutChart from "@/components/dataviz/SHAPDonut";
 import { formatNumber } from "@/utils";
+import Image from "next/image";
+import NoDonut from "image-assets/donut.svg"
 
 export interface ExplainerModuleProps {
   winner: Party;
@@ -170,7 +172,11 @@ export default function ExplainerModule(
         {mostPredictiveFactors.length === 0 && <p></p>}
         {mostPredictiveFactors.length > 0 && props.raceType != RaceType.House && (
           <div className={styles.donut}><DonutChart SHAPFactors={props.SHAPFactors} /></div>)}
-        
+        {mostPredictiveFactors.length == 0 && props.raceType != RaceType.House && (
+          <div className={styles.Nodonut}>
+            <Image src={NoDonut} alt="Placeholder Donut Chart" width={90}></Image>
+            <p>Select a state to see more information</p>
+            </div>)}
         <p className={styles.noTop}>
           <a href="/methodology" className={styles.methodologyLink}>
             Look through our full methodology!

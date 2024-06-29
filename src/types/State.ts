@@ -116,6 +116,7 @@ export const getGubernatorialRaceStates = () => {
 
 export const getHouseRaceStates = () => {
   return [
+    State.National,
     State.Alabama,
     State.Alaska,
     State.Arizona,

@@ -10,7 +10,7 @@ export default function WelcomeModule(): JSX.Element {
     <Module>
       <div className={styles.welcome}>
         <p>
-        <b>24cast.org&apos;s predictions below update daily</b> as the most recent
+        <b>24cast.org&apos;s predictions update daily</b> as the most recent
          data comes in. While our predictive accuracy is high for past 
         elections, the outcome of the 2024 
         election will depend on how the American people vote, so please{" "} 

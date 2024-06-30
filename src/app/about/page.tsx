@@ -23,7 +23,7 @@ const people = [
   { id: "Asher", name: 'Asher Labovich, Founder', image: asher, year: "Brown '26", bio: "R is Asher's true love."},
   { id: "Ariel", name: 'Ariel Shifrin, Project Manager', image: blank, year: "Brown '27", bio: 'Ariel was the headshot photographer.'},
   { id: "Alex", name: "Alex Wick, Frontend Lead", image: alex, year: "Brown '25", bio: "Alex is getting kind of alright at playing drums."},
-  { id: "Akshay", name: 'Akshay Mehta, Backend Lead', image: akshay, year: "Brown '26", bio: ''},
+  { id: "Akshay", name: 'Akshay Mehta, Fullstack/Backend Lead', image: akshay, year: "Brown '26", bio: ''},
   { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: ''},
   { id: "Amy", name: "Amy Qiao, Data Contributor", image: amy, year: "Brown '26", bio: ''},
   { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: javier, year: "Brown '25", bio: 'Javier is probably watching multiple soccer matches simultaneously.'},

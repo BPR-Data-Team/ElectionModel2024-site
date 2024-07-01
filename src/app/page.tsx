@@ -6,6 +6,7 @@ import MapModule from "@/components/modules/MapModule";
 import SimulationsModule from "@/components/modules/SimulationsModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import NationalMapModule from "@/components/modules/NationalMapModule";
+import FinanceModule from "@/components/modules/FinanceModule";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
@@ -381,6 +382,9 @@ export default function Home(): JSX.Element {
       <NationalMapModule rank={2} probability={14} winner = {"Joe Biden"} winnerEV = {287}/>
       )}
       </div>
+      {weird === "" && state != State.National && (
+        <FinanceModule raceType={raceType} std={5} margins={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+      )}
       {weird === "" && (
         <KeyRacesModule
           setRaceType={setRaceType}

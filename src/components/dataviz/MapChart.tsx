@@ -33,7 +33,6 @@ const colorAxisStops: [number, string][] = [
 
 const MapChart: React.FC<MapProps> = (props: MapProps) => {
   const [mapData, setMapData] = useState<any>(null);
-
   useEffect(() => {
     if (props.stateData.length > 0)
       fetchMapDataAndInitializeMap(props.stateData);

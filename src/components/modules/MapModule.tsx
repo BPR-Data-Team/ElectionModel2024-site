@@ -4,6 +4,7 @@ import styles from "./MapModule.module.css";
 import MapChart, { StateData } from "@/components/dataviz/MapChart";
 import { RaceType } from "@/types/RaceType";
 import { State, getStateFromAbbreviation } from "@/types/State";
+import { parse } from "path";
 
 interface MapItemJSON {
   avg_margin: { S: string };
@@ -34,7 +35,10 @@ async function fetchMapData(
     const result: StateData[] = [];
     const items = data["Responses"]["BPR_Data_Model"];
     for (let i = 0; i < items.length; i++) {
-      result.push(parseMapItem(items[i]));
+      let item = parseMapItem(items[i]);
+      if (!isNaN(item.value)) {
+        result.push(item);
+      }
     }
     return result;
   };

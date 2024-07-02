@@ -4,7 +4,6 @@ import styles from "./MapModule.module.css";
 import MapChart, { StateData } from "@/components/dataviz/MapChart";
 import { RaceType } from "@/types/RaceType";
 import { State, getStateFromAbbreviation } from "@/types/State";
-import { parse } from "path";
 
 interface MapItemJSON {
   avg_margin: { S: string };

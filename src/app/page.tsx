@@ -34,6 +34,7 @@ interface RaceData {
   winner: Party;
   likelihood: number;
   margin: number;
+  std: number;
   numDemWins: number;
   numRepWins: number;
   numTies: number;
@@ -41,6 +42,8 @@ interface RaceData {
   binBounds: [number, number];
   binEdges: number[];
   bins: number[];
+  financeArray: number[];
+  useFinance: boolean;
   weird?: string;
 }
 
@@ -129,6 +132,9 @@ async function fetchRaceData(
           binEdges: [],
           bins: [],
           weird: responseItem.weird,
+          std: 0,
+          financeArray: [],
+          useFinance: false,
         };
       }
       let winner: Party =
@@ -202,6 +208,9 @@ async function fetchRaceData(
         binBounds: responseItem.bin_bounds,
         binEdges: responseItem.bin_edges,
         bins: responseItem.bins,
+        std: responseItem.std,
+        financeArray: responseItem.finance_array,
+        useFinance: responseItem.use_campaign,
       };
       return predictions;
     } catch (error) {
@@ -222,6 +231,7 @@ async function fetchRaceData(
  */
 export default function Home(): JSX.Element {
   const [raceType, setRaceType] = useState<RaceType>(RaceType.Unset);
+  const [std, setStd] = useState<number>(0);
   const [state, setState] = useState<State>(State.National);
   const [district, setDistrict] = useState<number>(0);
   const [winner, setWinner] = useState<Party>(Party.Democrat);
@@ -236,6 +246,8 @@ export default function Home(): JSX.Element {
   const [bins, setBins] = useState<number[]>([]);
   const [weird, setWeird] = useState<string>("");
   const [fetchComplete, setFetchComplete] = useState<boolean>(false);
+  const [financeArray, setFinanceArray] = useState<number[]>([]);
+  const [useFinance, setUseFinance] = useState<boolean>(false);
   const [firstRun, setFirstRun] = useState<boolean>(true);
   useEffect(() => {
     let active = true;
@@ -297,6 +309,9 @@ export default function Home(): JSX.Element {
             setBinBounds(data.binBounds);
             setBinEdges(data.binEdges);
             setBins(data.bins);
+            setStd(data.std);
+            setFinanceArray(data.financeArray);
+            setUseFinance(data.useFinance);
             if (data.weird) {
               setWeird(data.weird);
             } else {
@@ -371,7 +386,7 @@ export default function Home(): JSX.Element {
           winner={winner}
         />
       )}
-      {weird === "" && state !== State.National && raceType !== RaceType.House && (
+      {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}
       <div className={styles.nationalMaps} id="likely-outcomes">
@@ -383,7 +398,7 @@ export default function Home(): JSX.Element {
       )}
       </div>
       {weird === "" && state != State.National && (
-        <FinanceModule raceType={raceType} std={5} margins={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+        <FinanceModule raceType={raceType} std={std} margins={financeArray} useFinance={useFinance} />
       )}
       {weird === "" && (
         <KeyRacesModule

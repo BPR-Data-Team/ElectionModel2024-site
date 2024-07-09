@@ -19,7 +19,8 @@
         "react-icons": "^5.0.1",
         "react-microsoft-clarity": "^1.2.0",
         "react-select": "^5.8.0",
-        "sharp": "^0.33.3"
+        "sharp": "^0.33.3",
+        "svelte-range-slider-pips": "^2.3.1"
     },
     "devDependencies": {
         "@types/node": "^20",

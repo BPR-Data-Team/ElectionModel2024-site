@@ -101,7 +101,7 @@ const Finance: React.FC<FinanceProps> = (props: FinanceProps) => {
             negativeColor: '#B83C2B',
           },
           line: {
-            color: '#000000',
+            color: 'black',
           }, 
           series: {
             showInLegend: false,
@@ -117,8 +117,12 @@ const Finance: React.FC<FinanceProps> = (props: FinanceProps) => {
                     money = parseFloat((Math.abs(money) * (RaceType.Senate ? 1 : 0.1)).toFixed(1));
                     
                         return `If ${party + " raise "}
-                        ${money == 0 ? "any more money" : "$" + money + " million more in this race" }, <br> we predict that 
-                        the margin will be <b>${margin < 0 ? "R+" + Math.abs(margin) : margin > 0 ? "D+" + margin : "a tie"}</b>`;
+                        ${money == 0 ? "any more money" : "$" + money + " million more in this race" },<br /> we predict that 
+                        the margin will be <b>${margin < 0 ? "R+" + Math.abs(margin) : margin > 0 ? "D+" + margin : "a tie"}`;
+                },
+                style: {
+                  fontSize: "12px",
+                  fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
                 },
         },
         credits: {

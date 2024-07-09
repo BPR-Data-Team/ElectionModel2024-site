@@ -7,6 +7,8 @@ import SimulationsModule from "@/components/modules/SimulationsModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import NationalMapModule from "@/components/modules/NationalMapModule";
 import FinanceModule from "@/components/modules/FinanceModule";
+import SliderModule from "@/components/modules/SliderModule";
+import SliderModuleAlt from "@/components/modules/SliderModuleAlt";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";
 import SearchModule from "@/components/modules/SearchModule";
@@ -397,8 +399,11 @@ export default function Home(): JSX.Element {
       <NationalMapModule rank={2} probability={14} winner = {"Joe Biden"} winnerEV = {287}/>
       )}
       </div>
-      {weird === "" && state != State.National && (
+      {/* {weird === "" && state != State.National && (
         <FinanceModule raceType={raceType} std={std} margins={financeArray} useFinance={useFinance} />
+      )} */}
+      {weird === "" && state != State.National && (
+        <SliderModuleAlt raceType={raceType} std={std} margins={financeArray} useFinance={useFinance} />
       )}
       {weird === "" && (
         <KeyRacesModule

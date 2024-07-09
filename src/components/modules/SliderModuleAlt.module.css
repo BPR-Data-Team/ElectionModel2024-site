@@ -1,0 +1,21 @@
+.finance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+.sliderContainer {
+  flex: 2;
+}
+
+.statement {
+  flex: 1;
+}
+
+.metrics {
+  flex: 1;
+}

@@ -147,11 +147,17 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, margins, 
                 <div className={styles.metrics}>
                   <div>
                     <p>Original Margin</p>
-                    <p><b>-0.5</b></p>
+                    <div>
+                      <NewMargin />
+                      <p><b>-0.5</b></p>
+                    </div>
                   </div>
                   <div>
                     <p>New Margin</p>
-                    <p><b>+2.7 &ndash; +3.0</b></p>
+                    <div>
+                      <NewMargin />
+                      <p><b>+2.7 &ndash; +3.0</b></p>
+                    </div>
                   </div>
                 </div>
           </div>

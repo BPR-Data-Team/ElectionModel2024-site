@@ -6,14 +6,17 @@ import RangeSlider from 'svelte-range-slider-pips';
 
 interface SliderModuleProps {
     raceType: string;
+    currentMargin: number;
     std: number;
     margins: number[];
     useFinance: boolean;
 }
 
-const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, margins, useFinance }) => {
+const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, currentMargin, margins, useFinance }) => {
     // Use state to manage the local copy of margins
     const [localMargins, setLocalMargins] = useState<number[]>([]);
+    const [currentFinance, setCurrentFinance] = useState<number>(0);
+    const [marginChange, setMarginChange] = useState<number>(0);
 
     // useEffect to update localMargins when margins prop changes
     useEffect(() => {
@@ -67,7 +70,7 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, margins, 
         return oklabToRgb(result);
       }
 
-        const [value, setValue] = useState(50);
+        const [value, setValue] = useState(0);
         const $node = useRef();
         const MySlider = useRef();
         const [thumbColor, setThumbColor] = useState('rgb(255, 0, 0)'); // Initial color is red in RGB
@@ -80,24 +83,33 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, margins, 
                 values: [value],
                 float: true,
                 id: 'financeSlider',
-                min: 0,
-                max: 100,
-                step: 1,
+                min: (raceType == RaceType.House ? -2 : -20),
+                max: (raceType == RaceType.House ? 2 : 20) ,
+                step: (raceType == RaceType.House ? 0.04 : .4),
                 pips: true,
                 pipstep: 20,
                 all: "label",
                 formatter: function(v: number, i: number, p: number) {
-                  return ("$" + v)
+                  return ((v > 0 ? "D+" + "$" + v: v < 0 ? "R+" + "$" + Math.abs(v): "No change"))
                 },
                 range: false,
                 springValues: {stiffness: 0.6, damping: 0.8}
               },
             });
             MySlider.current.$on('change', (e) => {
-              setValue(e.detail.values);
+              let currentFinance = e.detail.value
+              let stepSize = (raceType == RaceType.House ? 0.04 : 0.4)
+              let index = currentFinance / stepSize + 50
+              let marginChange = margins[index]
+              console.log("Margin change is " + marginChange)
+              console.log("Local margins is " + margins)
+              console.log("index is " + index)
+              setMarginChange(marginChange)
+              setValue(currentFinance);
+              setCurrentFinance(currentFinance);
             });
           }
-        }, []);
+        }, [margins]);
 
         useEffect(() => {
           const gradient = [
@@ -139,23 +151,28 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, margins, 
                     ></div>
                 </div>
                 <div className={styles.statement}>
-                  <p>We predict that raising another</p>
-                  <h3>$700,000</h3>
-                  <p>would raise the Democratic margin by</p>
-                  <h3>2 points.</h3>
+                  <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans Raising" : "neither raising"}</p>
+                  <h3>{currentFinance != 0 ? "$" + Math.abs(currentFinance) + " million more" : "any more money"}</h3>
+                  <p>would {currentFinance > 0 ? "raise the Democrat" : currentFinance < 0 ? "raise the Democrat" : "change the"} margin by</p>
+                  <h3>{currentFinance != 0 ? {marginChange} + "points." : "0 points"}</h3>
                 </div>
                 <div className={styles.metrics}>
                   <div>
                     <p>Original Margin</p>
                     <div>
-                      <NewMargin />
-                      <p><b>-0.5</b></p>
+                      { /*<NewMargin />*/ }
+                      <p>
+                      <b>
+                        {currentMargin < 0 ? "R+" : currentMargin > 0 ? "D+" : "Tie"}
+                        {currentMargin !== 0 && Math.abs(currentMargin)}
+                      </b>
+                    </p>
                     </div>
                   </div>
                   <div>
                     <p>New Margin</p>
                     <div>
-                      <NewMargin />
+                    { /*<NewMargin />*/ }
                       <p><b>+2.7 &ndash; +3.0</b></p>
                     </div>
                   </div>

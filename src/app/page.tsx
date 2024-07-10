@@ -375,7 +375,7 @@ export default function Home(): JSX.Element {
       )}
       <div className={styles.nationalMaps} id="likely-outcomes">
       {state === State.National && raceType === RaceType.Presidential && (
-        <NationalMapModule rank={1} probability={16} winner = {"Donald Trump"} winnerEV = {312} />
+        <NationalMapModule rank={1} probability={17} winner = {"Donald Trump"} winnerEV = {312} />
         )}
       {state === State.National && raceType === RaceType.Presidential && (
       <NationalMapModule rank={2} probability={14} winner = {"Joe Biden"} winnerEV = {287}/>

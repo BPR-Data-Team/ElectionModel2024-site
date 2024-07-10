@@ -1,30 +1,32 @@
 import Module from "../Module";
 import styles from "./SliderModuleAlt.module.css";
+import { Party } from "@/types/Party";
 import React, { useState, useEffect, useRef } from 'react';
 import { RaceType } from "@/types/RaceType";
 import RangeSlider from 'svelte-range-slider-pips';
+import { State } from "@/types/State";
 
 interface SliderModuleProps {
-    raceType: string;
+    raceType: RaceType;
     currentMargin: number;
+    winner: Party;
     std: number;
-    margins: number[];
+    marginChanges: number[];
     useFinance: boolean;
 }
 
-const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, currentMargin, margins, useFinance }) => {
+const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, winner, currentMargin, marginChanges, useFinance }) => {
     // Use state to manage the local copy of margins
-    const [localMargins, setLocalMargins] = useState<number[]>([]);
+    console.log("Current Margin is " + currentMargin)
     const [currentFinance, setCurrentFinance] = useState<number>(0);
     const [marginChange, setMarginChange] = useState<number>(0);
-
-    // useEffect to update localMargins when margins prop changes
-    useEffect(() => {
-        if (margins && Array.isArray(margins)) {
-            setLocalMargins(margins);
-        }
-    }, [margins]); // Only re-run the effect if margins changes    
+    const [newMargin, setNewMargin] = useState<number>(currentMargin);
       
+    useEffect(() => {
+        setNewMargin((winner == Party.Democrat ? 1 : -1) * currentMargin)
+        setCurrentFinance(0)
+    }, [currentMargin])
+
     function rgbToOklab({ r, g, b }) {
         const l = 0.4121656120 * r + 0.5362752080 * g + 0.0514575653 * b;
         const m = 0.2118591070 * r + 0.6807189584 * g + 0.1074065790 * b;
@@ -95,21 +97,18 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, currentMa
                 range: false,
                 springValues: {stiffness: 0.6, damping: 0.8}
               },
-            });
+            })};
             MySlider.current.$on('change', (e) => {
               let currentFinance = e.detail.value
               let stepSize = (raceType == RaceType.House ? 0.04 : 0.4)
               let index = currentFinance / stepSize + 50
-              let marginChange = margins[index]
-              console.log("Margin change is " + marginChange)
-              console.log("Local margins is " + margins)
-              console.log("index is " + index)
+              let marginChange = marginChanges[Math.round(index)]
               setMarginChange(marginChange)
               setValue(currentFinance);
               setCurrentFinance(currentFinance);
+              setNewMargin((winner == Party.Democrat ? currentMargin : -1 * currentMargin) + marginChange)
             });
-          }
-        }, [margins]);
+        }, [currentMargin, marginChanges]);
 
         useEffect(() => {
           const gradient = [
@@ -151,9 +150,9 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, currentMa
                     ></div>
                 </div>
                 <div className={styles.statement}>
-                  <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans Raising" : "neither raising"}</p>
+                  <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans raising" : "neither raising"}</p>
                   <h3>{currentFinance != 0 ? "$" + Math.abs(currentFinance) + " million more" : "any more money"}</h3>
-                  <p>would {currentFinance > 0 ? "raise the Democrat" : currentFinance < 0 ? "raise the Democrat" : "change the"} margin by</p>
+                  <p>would {currentFinance > 0 ? "raise the Democratic" : currentFinance < 0 ? "raise the Republican" : "change the"} margin by</p>
                   <h3>{currentFinance != 0 ? {marginChange} + "points." : "0 points"}</h3>
                 </div>
                 <div className={styles.metrics}>
@@ -163,8 +162,8 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, currentMa
                       { /*<NewMargin />*/ }
                       <p>
                       <b>
-                        {currentMargin < 0 ? "R+" : currentMargin > 0 ? "D+" : "Tie"}
-                        {currentMargin !== 0 && Math.abs(currentMargin)}
+                        {winner == Party.Republican ? "R+" : winner == Party.Democrat ? "D+" : "Tie"}
+                        {currentMargin !== 0 && currentMargin}
                       </b>
                     </p>
                     </div>
@@ -173,7 +172,10 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = ({ raceType, std, currentMa
                     <p>New Margin</p>
                     <div>
                     { /*<NewMargin />*/ }
-                      <p><b>+2.7 &ndash; +3.0</b></p>
+                      <p><b>
+                        {newMargin > 0 ? "D+" : newMargin < 0 ? "R+" : "Tie"}
+                        {newMargin !== 0 && Math.abs(parseFloat(newMargin.toFixed(1)))}
+                      </b></p>
                     </div>
                   </div>
                 </div>

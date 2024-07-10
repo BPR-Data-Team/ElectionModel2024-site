@@ -403,7 +403,7 @@ export default function Home(): JSX.Element {
         <FinanceModule raceType={raceType} std={std} margins={financeArray} useFinance={useFinance} />
       )} */}
       {weird === "" && state != State.National && (
-        <SliderModuleAlt raceType={raceType} std={std} currentMargin={margin} margins={financeArray} useFinance={useFinance} />
+        <SliderModuleAlt raceType={raceType} winner={winner} std={std} currentMargin={margin} marginChanges={financeArray} useFinance={useFinance} />
       )}
       {weird === "" && (
         <KeyRacesModule

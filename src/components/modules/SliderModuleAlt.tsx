@@ -23,21 +23,27 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
     const [value, setValue] = useState(0);
     const node = useRef<HTMLDivElement | null>(null);
     const MySlider = useRef<RangeSlider | null>(null);
-    const [thumbColor, setThumbColor] = useState('rgb(255, 0, 0)'); // Initial color is red in RGB
+    const [thumbColor, setThumbColor] = useState('rgb(255, 0, 0)');
 
     useEffect(() => {
         setNewMargin((props.winner === Party.Democrat ? 1 : -1) * props.currentMargin);
         setCurrentFinance(0);
-    }, [props.currentMargin, props.winner]);
+        setValue(0);
+        if (MySlider.current) {
+            MySlider.current.$set({ values: [0] });
+        }
+    }, [props.currentMargin, props.winner, props.raceType]);
 
-    useEffect(() => {
-      // Reset slider value and update currentFinance when raceType changes
-      if (MySlider.current) {
-          MySlider.current.$set({ values: [0] });
-      }
-      setValue(0);
-      setCurrentFinance(0);
-  }, [props.raceType]);
+    const handleSliderChange = (e: { detail: { value: any; }; }) => {
+        const currentFinance = e.detail.value;
+        const stepSize = (props.raceType === RaceType.House ? 0.04 : 0.4);
+        const index = Math.round((currentFinance / stepSize) + 50);
+        const marginChange = props.marginChanges && props.marginChanges.length > index ? props.marginChanges[index] : 0;
+        setMarginChange(marginChange);
+        setValue(currentFinance);
+        setCurrentFinance(currentFinance);
+        setNewMargin((props.winner === Party.Democrat ? props.currentMargin : -1 * props.currentMargin) + marginChange);
+    };
 
     useEffect(() => {
         if (node.current && !MySlider.current) {
@@ -61,16 +67,7 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
                 },
             });
 
-            MySlider.current.$on('change', (e: { detail: { value: any; }; }) => {
-                const currentFinance = e.detail.value;
-                const stepSize = (props.raceType === RaceType.House ? 0.04 : 0.4);
-                const index = currentFinance / stepSize + 50;
-                const marginChange = props.marginChanges[Math.round(index)];
-                setMarginChange(marginChange);
-                setValue(currentFinance);
-                setCurrentFinance(currentFinance);
-                setNewMargin((props.winner === Party.Democrat ? props.currentMargin : -1 * props.currentMargin) + marginChange);
-            });
+            MySlider.current.$on('change', handleSliderChange);
         } else if (MySlider.current) {
             // Update the existing slider's properties
             MySlider.current.$set({
@@ -80,6 +77,9 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
                 pipstep: ((props.raceType === RaceType.House ? 2 : 20) - (props.raceType === RaceType.House ? -2 : -20)) / (props.raceType === RaceType.House ? 0.04 : 0.4) / 4,
                 values: [value],
             });
+            
+            // Re-attach the event listener
+            MySlider.current.$on('change', handleSliderChange);
         }
     }, [props.raceType, props.marginChanges, props.winner, props.currentMargin, value]);
 
@@ -89,11 +89,11 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
         const range = max - min;
         const percentage = (value - min) / range * 100;
         const gradient = [
-            { stop: 0, color: { r: 184, g: 60, b: 43 } }, // red
-            { stop: 100, color: { r: 89, g: 93, b: 154 } } // blue
+            { stop: 0, color: { r: 184, g: 60, b: 43 } },
+            { stop: 100, color: { r: 89, g: 93, b: 154 } }
         ];
 
-        let newThumbColor = { r: 255, g: 255, b: 255 }; // default to white
+        let newThumbColor = { r: 255, g: 255, b: 255 };
 
         for (let i = 0; i < gradient.length - 1; i++) {
             const start = gradient[i];
@@ -133,10 +133,10 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
                     ></div>
                 </div>
                 <div className={styles.statement}>
-                    <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans raising" : "neither raising"}</p>
+                    <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans raising" : "neither party raising"}</p>
                     <h3>{currentFinance !== 0 ? "$" + Math.abs(currentFinance) + " million more" : "any more money"}</h3>
                     <p>would {currentFinance > 0 ? "raise the Democratic" : currentFinance < 0 ? "raise the Republican" : "change the"} margin by</p>
-                    <h3>{currentFinance !== 0 ? marginChange + " points." : "0 points"}</h3>
+                    <h3>{currentFinance !== 0 ? Math.abs(marginChange) + " points." : "0 points."}</h3>
                 </div>
                 <div className={styles.metrics}>
                     <div>

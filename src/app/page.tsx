@@ -136,15 +136,6 @@ async function fetchRaceData(
         responseItem.democrat_winning_num +
         responseItem.republican_winning_num +
         responseItem.tie_num;
-      const likelihood: number = Math.round(
-        (Math.max(
-          responseItem.republican_winning_num,
-          responseItem.democrat_winning_num,
-          responseItem.tie_num
-        ) /
-          numSimulations) *
-          100
-      );
       if (state === State.National) {
         switch (raceType) {
           case RaceType.Presidential:
@@ -171,6 +162,13 @@ async function fetchRaceData(
             break;
         }
       }
+      const likelihood: number = Math.round(
+        winner === Party.Tie
+          ? (responseItem.tie_num / numSimulations) * 100
+          : winner === Party.Democrat
+          ? (responseItem.democrat_winning_num / numSimulations) * 100
+          : (responseItem.republican_winning_num / numSimulations) * 100
+      );
       const margin: number = Math.abs(
         Math.round(responseItem.avg_margin * 10) / 10
       );

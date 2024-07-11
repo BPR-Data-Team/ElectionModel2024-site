@@ -22,7 +22,7 @@ export default function Footer(): JSX.Element {
               href="https://github.com/BPR-Data-Team/ElectionModel2024"
             >
               Github
-            </a>.
+            </a>. Think you've found a bug? <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>Reach out to us!</a>
           </span>
         </div>
         <div>

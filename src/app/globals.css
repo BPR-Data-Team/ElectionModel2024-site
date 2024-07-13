@@ -148,3 +148,13 @@ footer a {
 .rangeSlider > .rangeHandle > .rangeFloat {
   background-color: var(--thumb-color) !important;
 }
+
+@media (max-width: 350px) {
+
+  .pipVal {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0;
+  }
+
+}

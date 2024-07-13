@@ -3,6 +3,7 @@ import Module from "../Module";
 import styles from "./MapModule.module.css";
 import MapChart, { StateData } from "@/components/dataviz/MapChart";
 import { RaceType } from "@/types/RaceType";
+import {Party} from "@/types/Party";
 import { State, getStateFromAbbreviation } from "@/types/State";
 
 interface MapItemJSON {
@@ -12,7 +13,7 @@ interface MapItemJSON {
 
 function parseMapItem(apiResponse: MapItemJSON): StateData {
   return {
-    value: parseFloat(parseFloat(apiResponse.avg_margin.S).toFixed(1)),
+    value: (parseFloat(apiResponse.avg_margin.S)),
     "hc-key": "us-" + apiResponse.state.S.toLowerCase(),
   };
 }

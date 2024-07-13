@@ -3,6 +3,8 @@ import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
 import highchartsAccessibility from "highcharts/modules/accessibility";
 import { fetchMapData } from "./mapDataCache";
+import { Party } from "@/types/Party";
+
 
 if (typeof window !== `undefined`) {
   highchartsAccessibility(Highcharts);
@@ -85,14 +87,14 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       colorAxis: colorAxis,
       tooltip: {
         formatter: function (this: any) {
-          let prefix = this.point.value >= 0 ? "D " : "R ";
+          let prefix = this.point.value >= 0 ? "D" : "R";
           return (
             "<b>" +
             this.point.name +
             "</b><br/>" +
             prefix +
             "+" +
-            Math.abs(this.point.value)
+            (Math.abs(this.point.value) <= 0.1 ? "<0.1" : Math.abs(this.point.value).toFixed(1)) 
           );
         },
         style: {

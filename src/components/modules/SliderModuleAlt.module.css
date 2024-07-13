@@ -130,8 +130,9 @@
       margin-right: 6px;
   }
 
-  .asterisk {
+  .statement .asterisk {
     display: block;
+    width: 100%;
   }
 
 }

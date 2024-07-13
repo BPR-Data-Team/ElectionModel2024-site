@@ -12,7 +12,7 @@ interface MapItemJSON {
 
 function parseMapItem(apiResponse: MapItemJSON): StateData {
   return {
-    value: parseFloat(parseFloat(apiResponse.avg_margin.S).toFixed(1)),
+    value: (parseFloat(apiResponse.avg_margin.S)),
     "hc-key": "us-" + apiResponse.state.S.toLowerCase(),
   };
 }

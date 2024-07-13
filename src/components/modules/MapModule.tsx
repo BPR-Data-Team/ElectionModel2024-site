@@ -3,7 +3,6 @@ import Module from "../Module";
 import styles from "./MapModule.module.css";
 import MapChart, { StateData } from "@/components/dataviz/MapChart";
 import { RaceType } from "@/types/RaceType";
-import {Party} from "@/types/Party";
 import { State, getStateFromAbbreviation } from "@/types/State";
 
 interface MapItemJSON {

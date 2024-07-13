@@ -3,7 +3,6 @@ import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
 import highchartsAccessibility from "highcharts/modules/accessibility";
 import { fetchMapData } from "./mapDataCache";
-import { Party } from "@/types/Party";
 
 
 if (typeof window !== `undefined`) {

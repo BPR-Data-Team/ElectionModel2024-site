@@ -140,7 +140,7 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
                           <Image src={oldMarginIcon} width={20} height={20} alt="" />
                             <p>
                                 <b>
-                                    {props.winner === Party.Republican ? "R+" : props.winner === Party.Democrat ? "D+" : "Tie"}
+                                    {props.currentMargin === 0 ? "Tie" : props.winner === Party.Republican ? "R+" : "D+"}
                                     {props.currentMargin !== 0 && props.currentMargin}
                                 </b>
                             </p>

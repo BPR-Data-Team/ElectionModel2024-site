@@ -159,10 +159,11 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
                 </div>
                 </div>
                 <div className={styles.statement}>
-                    <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans raising"}</p>
+                    <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans raising" : "neither party raising"}</p>
                     <h3>{currentFinance !== 0 ? "$" + Math.abs(currentFinance) + " million more" : "any more money"}</h3>
                     <p>would {currentFinance > 0 ? "raise the Democratic" : currentFinance < 0 ? "raise the Republican" : "change the"} margin by</p>
                     <h3>{currentFinance !== 0 ? Math.abs(marginChange) + " points." : "0 points."}</h3>
+                    <p className={styles.asterisk}>*All else remaining the same</p>
                 </div>
                 <div className={styles.metricsSeparate}>
                     <div>

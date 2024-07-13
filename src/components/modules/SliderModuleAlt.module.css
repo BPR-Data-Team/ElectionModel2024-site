@@ -25,6 +25,11 @@
 
 }
 
+.asterisk {
+  font-style: italic;
+    font-size: 0.8em;
+}
+
 .metricsUnder {
   display: flex;
   gap: 1rem 1rem;
@@ -75,6 +80,7 @@
 .statement {
   flex: 1;
   text-align: center;
+  text-wrap: balance;
 
   & > h3 {
     margin-block: 0.4em;
@@ -122,6 +128,10 @@
   .statement p, .statement h3 {
       display: inline;
       margin-right: 6px;
+  }
+
+  .asterisk {
+    display: block;
   }
 
 }

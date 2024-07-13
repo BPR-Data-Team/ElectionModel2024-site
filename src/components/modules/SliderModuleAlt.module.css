@@ -5,15 +5,87 @@
   align-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 1rem 2rem;
+  margin-block-end: 15px;
 }
 
 .sliderContainer {
   flex: 2;
+  box-sizing: border-box;
+  padding-inline: 20px;
+
+  & > p {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.8em;
+    margin-block-end: 2em;
+    margin-block-start: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+}
+
+.metricsUnder {
+  display: flex;
+  gap: 1rem 1rem;
+  justify-content: center;
+  padding-block-start: 1em;
+
+  & > div > p {
+    margin-block: 0;
+  }
+
+  & > div > div {
+    margin-block: 0.3rem;
+    display: flex;
+    gap: 0.3rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: fit-content;
+     & p {
+      margin-block: 0;
+     }
+  }
+}
+
+.metricsSeparate {
+  display: none;
+  gap: 1rem 1rem;
+  justify-content: center;
+
+  & > div > p {
+    margin-block: 0;
+  }
+
+  & > div > div {
+    margin-block: 0.3rem;
+    display: flex;
+    gap: 0.3rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: fit-content;
+     & p {
+      margin-block: 0;
+     }
+  }
 }
 
 .statement {
   flex: 1;
+  text-align: center;
+
+  & > h3 {
+    margin-block: 0.4em;
+    color: var(--thumb-color);
+    font-size: 22px;
+  }
+
+  & > p {
+    margin-block: 0.4em;
+  }
+
 }
 
 .metrics {
@@ -22,4 +94,42 @@
 
 .slider {
   font-size: 0.8em;
+}
+
+.rangeSlider {
+  margin-inline: 2em;
+}
+
+@media (max-width: 650px) {
+  .finance {
+    flex-direction: column;
+  }
+
+  .metricsUnder {
+    display: none;
+  }
+
+  .metricsSeparate {
+    display: flex;
+  }
+
+  .statement {
+    display: inline;
+    width: 60%;
+    line-height: 170%;
+  }
+
+  .statement p, .statement h3 {
+      display: inline;
+      margin-right: 6px;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .statement {
+    width: 90%;
+  }
+
 }

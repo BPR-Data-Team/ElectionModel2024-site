@@ -391,18 +391,16 @@ export default function Home(): JSX.Element {
       {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}
+      {state === State.National && raceType === RaceType.Presidential && (
       <div className={styles.nationalMaps} id="likely-outcomes">
-      {state === State.National && raceType === RaceType.Presidential && (
         <NationalMapModule rank={1} probability={17} winner = {"Donald Trump"} winnerEV = {312} />
-        )}
-      {state === State.National && raceType === RaceType.Presidential && (
-      <NationalMapModule rank={2} probability={14} winner = {"Joe Biden"} winnerEV = {287}/>
-      )}
+        <NationalMapModule rank={2} probability={14} winner = {"Joe Biden"} winnerEV = {287}/>
       </div>
+      )}
       {/* {weird === "" && state != State.National && (
         <FinanceModule raceType={raceType} std={std} margins={financeArray} useFinance={useFinance} />
       )} */}
-      {weird === "" && state != State.National && (
+      {weird === "" && state != State.National && raceType != RaceType.Presidential && raceType != RaceType.Gubernatorial && (
         <SliderModuleAlt raceType={raceType} winner={winner} std={std} currentMargin={margin} marginChanges={financeArray} useFinance={useFinance} />
       )}
       {weird === "" && (

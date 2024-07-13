@@ -4,7 +4,9 @@ import { Party } from "@/types/Party";
 import React, { useState, useEffect, useRef } from 'react';
 import { RaceType } from "@/types/RaceType";
 import RangeSlider from 'svelte-range-slider-pips';
-import { State } from "@/types/State";
+import Image from "next/image";
+import oldMarginIcon from "image-assets/oldMagin.svg"
+import newMarginIcon from "image-assets/newMargin.svg"
 
 interface SliderModuleProps {
     raceType: RaceType;
@@ -121,27 +123,21 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
     return (
         <Module>
             <h3>How can campaign contributions affect race outcomes?</h3>
-            <div className={styles.finance}>
+            <div className={styles.finance}
+            style={{
+              '--thumb-color': thumbColor
+          } as React.CSSProperties}>
                 <div className={styles.sliderContainer}>
                     <p>Drag the slider to simulate additional campaign contributions.</p>
                     <div 
                         className={styles.slider} 
                         ref={node} 
-                        style={{
-                            '--thumb-color': thumbColor
-                        } as React.CSSProperties}
                     ></div>
-                </div>
-                <div className={styles.statement}>
-                    <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans raising" : "neither party raising"}</p>
-                    <h3>{currentFinance !== 0 ? "$" + Math.abs(currentFinance) + " million more" : "any more money"}</h3>
-                    <p>would {currentFinance > 0 ? "raise the Democratic" : currentFinance < 0 ? "raise the Republican" : "change the"} margin by</p>
-                    <h3>{currentFinance !== 0 ? Math.abs(marginChange) + " points." : "0 points."}</h3>
-                </div>
-                <div className={styles.metrics}>
+                <div className={styles.metricsUnder}>
                     <div>
                         <p>Original Margin</p>
                         <div>
+                          <Image src={oldMarginIcon} width={20} height={20} alt="" />
                             <p>
                                 <b>
                                     {props.winner === Party.Republican ? "R+" : props.winner === Party.Democrat ? "D+" : "Tie"}
@@ -153,6 +149,7 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
                     <div>
                         <p>New Margin</p>
                         <div>
+                        <Image src={newMarginIcon} width={20} height={20} alt="" />
                             <p><b>
                                 {newMargin > 0 ? "D+" : newMargin < 0 ? "R+" : "Tie"}
                                 {newMargin !== 0 && Math.abs(parseFloat(newMargin.toFixed(1)))}
@@ -160,7 +157,38 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
+                <div className={styles.statement}>
+                    <p>We predict that {currentFinance > 0 ? "Democrats raising" : currentFinance < 0 ? "Republicans raising"}</p>
+                    <h3>{currentFinance !== 0 ? "$" + Math.abs(currentFinance) + " million more" : "any more money"}</h3>
+                    <p>would {currentFinance > 0 ? "raise the Democratic" : currentFinance < 0 ? "raise the Republican" : "change the"} margin by</p>
+                    <h3>{currentFinance !== 0 ? Math.abs(marginChange) + " points." : "0 points."}</h3>
+                </div>
+                <div className={styles.metricsSeparate}>
+                    <div>
+                        <p>Original Margin</p>
+                        <div>
+                          <Image src={oldMarginIcon} width={20} height={20} alt="" />
+                            <p>
+                                <b>
+                                    {props.winner === Party.Republican ? "R+" : props.winner === Party.Democrat ? "D+" : "Tie"}
+                                    {props.currentMargin !== 0 && props.currentMargin}
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>New Margin</p>
+                        <div>
+                        <Image src={newMarginIcon} width={20} height={20} alt="" />
+                            <p><b>
+                                {newMargin > 0 ? "D+" : newMargin < 0 ? "R+" : "Tie"}
+                                {newMargin !== 0 && Math.abs(parseFloat(newMargin.toFixed(1)))}
+                            </b></p>
+                        </div>
+                    </div>
+                </div>
+                </div>   
         </Module>
     );
 }

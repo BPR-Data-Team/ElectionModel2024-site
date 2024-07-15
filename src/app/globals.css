@@ -124,3 +124,37 @@ footer a {
   min-width: calc(50% - 0.5rem);
   box-sizing: border-box;
 }
+
+.rangeSlider {
+  background: linear-gradient(-90deg, var(--bemocrat-blue), var(--republican-red));
+}
+
+.rangeSlider > .rangeHandle > .rangeNub {
+  background-color: var(--module-bg-color) !important;
+  box-shadow: 0 0 0 6px var(--thumb-color) inset;
+  font-size: 0.7em !important;
+  transition: background-color 0.2s, box-shadow 0.1s;
+}
+
+.rangeSlider > .rangeHandle:hover >.rangeNub {
+  background-color: color-mix(in srgb, var(--handle-border) 20%, white) !important;
+}
+
+.rangeSlider > .rangeHandle:active >.rangeNub {
+  background-color: color-mix(in srgb, var(--handle-border) 40%, white) !important;
+  box-shadow: 0 0 0 6.5px var(--thumb-color) inset;
+}
+
+.rangeSlider > .rangeHandle > .rangeFloat {
+  background-color: var(--thumb-color) !important;
+}
+
+@media (max-width: 350px) {
+
+  .pipVal {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0;
+  }
+
+}

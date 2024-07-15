@@ -6,8 +6,6 @@ import MapModule from "@/components/modules/MapModule";
 import SimulationsModule from "@/components/modules/SimulationsModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import NationalMapModule from "@/components/modules/NationalMapModule";
-import FinanceModule from "@/components/modules/FinanceModule";
-import SliderModule from "@/components/modules/SliderModule";
 import SliderModuleAlt from "@/components/modules/SliderModuleAlt";
 import SHAPModule from "@/components/modules/SHAPModule";
 import KeyRacesModule from "@/components/modules/KeyRacesModule";

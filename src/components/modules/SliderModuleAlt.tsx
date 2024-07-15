@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { RaceType } from "@/types/RaceType";
 import RangeSlider from 'svelte-range-slider-pips';
 import Image from "next/image";
+import ExclamationMark from "../svgs/ExclamationMark";
 import oldMarginIcon from "image-assets/oldMagin.svg"
 import newMarginIcon from "image-assets/newMargin.svg"
 
@@ -118,6 +119,23 @@ const SliderModuleAlt: React.FC<SliderModuleProps> = (props: SliderModuleProps) 
             g: color1.g + (color2.g - color1.g) * factor,
             b: color1.b + (color2.b - color1.b) * factor
         };
+    }
+
+    if (!props.useFinance) {
+        return (
+            <Module className="FinanceModule">
+                <h3>How does raising money affect race outcomes?</h3>
+                <div className={styles.exclamation}>
+                <span className={styles.exclamationIcon}>
+                    <ExclamationMark />
+                </span>
+                <span className={styles.exclamationText}>
+                    <p>One or more candidates in this race have not reported their fundraising totals.
+                    </p>
+                </span>
+                </div>
+
+            </Module>)
     }
 
     return (

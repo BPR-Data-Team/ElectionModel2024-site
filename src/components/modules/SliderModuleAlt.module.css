@@ -9,6 +9,28 @@
   margin-block-end: 15px;
 }
 
+.exclamation {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+
+.exclamationText {
+  font-size: 1.625rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+
+.exclamationIcon {
+  flex-shrink: 0;
+  transform: scale(1);
+  margin-bottom: auto;
+  align-self: flex-start;
+}
+
 .sliderContainer {
   flex: 2;
   box-sizing: border-box;
@@ -125,6 +147,12 @@
     line-height: 170%;
   }
 
+  .exclamationText {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+  
   .statement p, .statement h3 {
       display: inline;
       margin-right: 6px;

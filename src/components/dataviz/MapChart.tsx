@@ -4,6 +4,7 @@ import HighchartsMap from "highcharts/modules/map";
 import highchartsAccessibility from "highcharts/modules/accessibility";
 import { fetchMapData } from "./mapDataCache";
 
+
 if (typeof window !== `undefined`) {
   highchartsAccessibility(Highcharts);
 }
@@ -33,7 +34,6 @@ const colorAxisStops: [number, string][] = [
 
 const MapChart: React.FC<MapProps> = (props: MapProps) => {
   const [mapData, setMapData] = useState<any>(null);
-
   useEffect(() => {
     if (props.stateData.length > 0)
       fetchMapDataAndInitializeMap(props.stateData);
@@ -88,14 +88,14 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       colorAxis: colorAxis,
       tooltip: {
         formatter: function (this: any) {
-          let prefix = this.point.value >= 0 ? "D " : "R ";
+          let prefix = this.point.value >= 0 ? "D" : "R";
           return (
             "<b>" +
             this.point.name +
             "</b><br/>" +
             prefix +
             "+" +
-            Math.abs(this.point.value)
+            (Math.abs(this.point.value) <= 0.1 ? "<0.1" : Math.abs(this.point.value).toFixed(1)) 
           );
         },
         style: {

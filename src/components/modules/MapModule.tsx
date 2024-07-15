@@ -12,7 +12,7 @@ interface MapItemJSON {
 
 function parseMapItem(apiResponse: MapItemJSON): StateData {
   return {
-    value: parseFloat(parseFloat(apiResponse.avg_margin.S).toFixed(1)),
+    value: (parseFloat(apiResponse.avg_margin.S)),
     "hc-key": "us-" + apiResponse.state.S.toLowerCase(),
   };
 }
@@ -34,7 +34,10 @@ async function fetchMapData(
     const result: StateData[] = [];
     const items = data["Responses"]["BPR_Data_Model"];
     for (let i = 0; i < items.length; i++) {
-      result.push(parseMapItem(items[i]));
+      let item = parseMapItem(items[i]);
+      if (!isNaN(item.value)) {
+        result.push(item);
+      }
     }
     return result;
   };

@@ -183,13 +183,13 @@ export const getNumDistricts = (state: State): number => {
     case State.California:
       return 52;
     case State.Colorado:
-      return 7;
+      return 8;
     case State.Connecticut:
       return 5;
     case State.Delaware:
       return 1;
     case State.Florida:
-      return 27;
+      return 28;
     case State.Georgia:
       return 14;
     case State.Hawaii:
@@ -197,7 +197,7 @@ export const getNumDistricts = (state: State): number => {
     case State.Idaho:
       return 2;
     case State.Illinois:
-      return 18;
+      return 17;
     case State.Indiana:
       return 9;
     case State.Iowa:
@@ -215,7 +215,7 @@ export const getNumDistricts = (state: State): number => {
     case State.Massachusetts:
       return 9;
     case State.Michigan:
-      return 14;
+      return 13;
     case State.Minnesota:
       return 8;
     case State.Mississippi:
@@ -223,7 +223,7 @@ export const getNumDistricts = (state: State): number => {
     case State.Missouri:
       return 8;
     case State.Montana:
-      return 1;
+      return 2;
     case State.Nebraska:
       return 3;
     case State.Nevada:
@@ -235,19 +235,19 @@ export const getNumDistricts = (state: State): number => {
     case State.NewMexico:
       return 3;
     case State.NewYork:
-      return 27;
+      return 26;
     case State.NorthCarolina:
-      return 13;
+      return 14;
     case State.NorthDakota:
       return 1;
     case State.Ohio:
-      return 16;
+      return 15;
     case State.Oklahoma:
       return 5;
     case State.Oregon:
       return 6;
     case State.Pennsylvania:
-      return 18;
+      return 17;
     case State.RhodeIsland:
       return 2;
     case State.SouthCarolina:
@@ -257,7 +257,7 @@ export const getNumDistricts = (state: State): number => {
     case State.Tennessee:
       return 9;
     case State.Texas:
-      return 36;
+      return 38;
     case State.Utah:
       return 4;
     case State.Vermont:
@@ -267,7 +267,7 @@ export const getNumDistricts = (state: State): number => {
     case State.Washington:
       return 10;
     case State.WestVirginia:
-      return 3;
+      return 2;
     case State.Wisconsin:
       return 8;
     case State.Wyoming:

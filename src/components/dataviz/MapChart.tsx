@@ -46,12 +46,12 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
   };
 
   function getMaxState(stateData: StateData[]): number {
-    console.log("The maximumum state is" + Math.max(...stateData.map((state) => state.value)))
+    // console.log("The maximumum state is" + Math.max(...stateData.map((state) => state.value)))
     return Math.max(...stateData.map((state) => state.value));
   }
 
   function getMinState(stateData: StateData[]): number {
-    console.log("The minimum state is" + Math.min(...stateData.map((state) => state.value)))
+    // console.log("The minimum state is" + Math.min(...stateData.map((state) => state.value)))
     return Math.min(...stateData.map((state) => state.value));
   }
 

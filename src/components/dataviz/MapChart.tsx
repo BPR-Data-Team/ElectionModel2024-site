@@ -81,6 +81,11 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       title: {
         text: "",
       },
+      plotOptions: {
+        map: {
+            cursor: 'pointer'
+        }
+      },
       mapNavigation: {
         enabled: false,
         enableButtons: false,

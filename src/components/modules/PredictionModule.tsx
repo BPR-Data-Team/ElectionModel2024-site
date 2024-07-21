@@ -73,7 +73,7 @@ export default function PredictionModule(
 
     if (props.winner === Party.Democrat) {
       if (props.raceType === RaceType.Presidential) {
-        message = "Joe Biden is";
+        message = "Democrats are";
       } else {
         message = "Democrats are";
       }
@@ -176,7 +176,7 @@ export default function PredictionModule(
 
     // Add conditional message for presidential and national races
     if (props.raceType === RaceType.Presidential && props.state === State.National) {
-      message = `${props.winner === Party.Democrat ? "Joe Biden" : "Donald Trump"} has a ${props.likelihood}% chance of winning the presidency.`;
+      message = `${props.winner === Party.Democrat ? "The Democratic Candidate" : "Donald Trump"} has a ${props.likelihood}% chance of winning the presidency.`;
     }
 
     return message;

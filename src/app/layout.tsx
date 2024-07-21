@@ -18,7 +18,7 @@ export const metadata: Metadata = {
       "Innovative election predictions with in-depth explanations by the Brown Political Review.",
   },
   alternates: {
-    canonical: "./"
+    canonical: "./",
   },
 };
 
@@ -33,7 +33,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/dze2nzm.css" />
         <meta
           name="keywords"
-          content="election, politics, AI, brown, 24cast, prediction, biden, trump, president, senate, house, governor"
+          content="election, politics, AI, brown, 24cast, prediction, democrat, trump, president, senate, house, governor"
         />
         <meta
           name="author"
@@ -44,6 +44,7 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
       </head>
       <body className={inter.className}>
+        <Banner />
         <div className="wrapper">
           <Header />
           <div className="content">{children}</div>

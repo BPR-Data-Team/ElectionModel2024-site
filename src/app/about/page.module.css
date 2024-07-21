@@ -135,3 +135,23 @@
   margin: 0;
   font-size: 0.9rem;
 }
+
+.prImage {
+  filter: grayscale();
+  mix-blend-mode: multiply;
+
+  &:hover {
+    filter: none;
+  }
+
+}
+
+.prGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1rem 1.5rem;
+}

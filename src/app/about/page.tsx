@@ -14,6 +14,10 @@ import chai from "image-assets/headshots/headshot10.webp";
 import john from "image-assets/headshots/headshot11.webp";
 import javier from "image-assets/headshots/headshot12.webp";
 import blank from "image-assets/icon-set/num-icon256.png";
+import poder from "image-assets/press-logos/poder.webp"
+import bizjournal from "image-assets/press-logos/bizjournal.svg"
+import marketwatch from "image-assets/press-logos/marketwatch.svg"
+import prnw from "image-assets/press-logos/pr-newswire.svg"
 
 export const metadata: Metadata = {
   title: 'About | 24cast.org',
@@ -83,8 +87,15 @@ const AboutPage: React.FC = () => {
           24cast.org is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
           featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/methodology">methodology</a> page!)
         </p>
+        <h2 className={styles.header}>24cast.org In The Media</h2>
+        <div className={styles.prGrid}>
+          <a href="https://www.buzzsprout.com/352718/15350700"><Image className={styles.prImage} src={poder} width={undefined} height={40} alt="102.1FM Power (Poder) 1110" /></a>
+          <a href="https://www.marketwatch.com/press-release/new-election-prediction-model-by-students-at-brown-university-outperforms-industry-leaders-e1fd2d38"><Image className={styles.prImage} src={marketwatch} width={undefined} height={30} alt="MarketWatch" /></a>
+          <a href="https://www.bizjournals.com/rhodeisland/news/2024/07/05/brown-u-election-model-drive-by-ai.html"><Image className={styles.prImage} src={bizjournal} width={undefined} height={40} alt="Providence Business First" /></a>
+          <a href="https://www.prnewswire.com/news-releases/new-election-prediction-model-by-students-at-brown-university-outperforms-industry-leaders-302184650.html"><Image className={styles.prImage} src={prnw} width={undefined} height={30} alt="PR Newswire" /></a>
+        </div>
         <p>
-          <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b>
+          <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b> Our <a className={styles.linkText} href="https://drive.google.com/drive/folders/1AM1eAzHxJSkhnvdIwNUSsZYrfRnNew45">media kit</a> is also available for the press.
         </p>
         <p>
           Spearheaded by founder Asher Labovich, 24cast.org is the product of months of effort

@@ -44,7 +44,8 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
         break;
       case RaceType.House:
         setFilteredStates(getHouseRaceStates());
-        if (props.district === 0) { // Added this condition
+        if (props.district === 0) {
+          // Added this condition
           props.setDistrict(1); // Set district to 1 if switching to House races and district is 0
         }
       default:
@@ -190,42 +191,74 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
     );
   };
 
+  const raceSelectElement: JSX.Element = (
+    <select
+      value={props.raceType}
+      onChange={handleRaceChange}
+      aria-label="Race Selection"
+    >
+      {Object.values(RaceType).map((race, index) => (
+        <option key={index} value={race}>
+          {race}
+        </option>
+      ))}
+    </select>
+  );
+
+  const localeSelectElement: JSX.Element = (
+    <select
+      value={props.state}
+      onChange={handleStateChange}
+      className={styles.drops}
+      aria-label="Locale Selection"
+    >
+      {filteredStates.map((state, index) => (
+        <option key={index} value={state}>
+          {state === State.National ? "the nation" : state}
+        </option>
+      ))}
+    </select>
+  );
+
+  const districtSelectElement: JSX.Element = (
+    <select
+      className={styles.drops}
+      value={props.district}
+      onChange={handleDistrictChange}
+      disabled={maxDistricts === 1}
+      aria-label="District Selection"
+    >
+      {getDistrictDropdownOptions()}
+    </select>
+  );
+
+  const dropdownElement = (selectElement: JSX.Element): JSX.Element => (
+    <span className={styles.dropdown}>
+      {selectElement}
+      <span className={styles.arrow} aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="11"
+          height="7"
+          viewBox="0 0 11 7"
+          fill="none"
+        >
+          <path
+            d="M5.66168 6.67969L0.808704 0.679687L10.5146 0.679688L5.66168 6.67969Z"
+            fill="black"
+          />
+        </svg>
+      </span>
+    </span>
+  );
+
   return (
     <Module>
       <div className={styles.search}>
         <p>
-          I want to see
-          <select value={props.raceType} onChange={handleRaceChange} aria-label="Race Selection">
-            {Object.values(RaceType).map((race, index) => (
-              <option key={index} value={race}>
-                {race}
-              </option>
-            ))}
-          </select>
-          races in
-          <select
-            value={props.state}
-            onChange={handleStateChange}
-            className={styles.drops}
-            aria-label="Locale Selection"
-          >
-            {filteredStates.map((state, index) => (
-              <option key={index} value={state}>
-                {state === State.National ? "the nation" : state}
-              </option>
-            ))}
-          </select>
-          {showDistrictDropdown() && (
-            <select
-              className={styles.drops}
-              value={props.district}
-              onChange={handleDistrictChange}
-              disabled={maxDistricts === 1}
-              aria-label="District Selection"
-            >
-              {getDistrictDropdownOptions()}
-            </select>
-          )}
+          I want to see {dropdownElement(raceSelectElement)} races in{" "}
+          {dropdownElement(localeSelectElement)}
+          {showDistrictDropdown() && dropdownElement(districtSelectElement)}
         </p>
       </div>
     </Module>

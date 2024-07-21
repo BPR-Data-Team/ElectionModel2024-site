@@ -1,4 +1,3 @@
-
 .search {
   display: flex;
   flex-wrap: wrap;
@@ -7,51 +6,26 @@
   text-align: center;
 }
 
-.search p {
-  margin-bottom: 10px; /* Add margin to separate paragraphs */
-  width: 100%; 
-  font-size: inherit;
-}
-.search select:focus {
-  outline: none;
-  border-color: var(--bemocrat-blue); 
+.dropdown {
+  background-color: var(--gradient-descent-gray);
+  position: relative;
+  display: inline-block;
 }
 
-.search select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.dropdown select {
   appearance: none;
-
-  background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7 10l5 5 5-5z" fill="black"/><path d="M0 0h24v24H0z" fill="none"/></svg>') 100% 50% no-repeat transparent;
-
-  padding: 8px;
-  padding-right: 25px;
-  margin: 5px; 
-  border: 1px solid #ccc;
-  border-radius: 2px;
-
-  width: auto;
-  font-size: inherit;
-  font-family: inherit;
-}
-/* SearchModule.module.css */
-
-.searchText {
-  font-size: 16px; /* Adjust the font size as needed */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.25rem;
 }
 
-/* Media query for screens smaller than 768px (typical mobile screens) */
-@media screen and (max-width: 767px) {
-  .search select {
-      max-width: calc(100% - 10px); /* Set maximum width to 100% on mobile */
-      font-size: 12px; 
-      padding: 3px;
-      padding-right: 18px;
-      margin: 3px;
-      background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="black"/><path d="M0 0h24v24H0z" fill="none"/></svg>') 100% 50% no-repeat transparent;
-      color: var(--main-text-color)
-  }
-  .search p{
-    font-size: 12px;
-  }
+.dropdown .arrow {
+  position: absolute;
+  width: 1rem;
+  inset-inline-end: 0;
+  line-height: 0;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }

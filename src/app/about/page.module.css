@@ -146,6 +146,15 @@
 
 }
 
+@media (max-width: 650px) {
+  .prImage {
+    scale: 0.8;
+  }
+  .prGrid a:first-of-type img {
+    scale: 1;
+  }
+}
+
 .prGrid {
   display: flex;
   justify-content: center;

@@ -87,6 +87,9 @@ const AboutPage: React.FC = () => {
           24cast.org is the successor to an <a className={styles.linkText} href='https://brownpoliticalreview.org/2022/10/senate-midterm-forecast-model/'>election model</a> produced by BPR during the previous election cycle
           featuring a fully revised structure (learn more at our <a className={styles.linkText} href="/methodology">methodology</a> page!)
         </p>
+        <p>
+          <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b> Our <a className={styles.linkText} href="https://drive.google.com/drive/folders/1AM1eAzHxJSkhnvdIwNUSsZYrfRnNew45">media kit</a> is also available for the press.
+        </p>
         <h2 className={styles.header}>24cast.org In The Media</h2>
         <div className={styles.prGrid}>
           <a href="https://www.buzzsprout.com/352718/15350700"><Image className={styles.prImage} src={poder} width={undefined} height={40} alt="102.1FM Power (Poder) 1110" /></a>
@@ -94,15 +97,12 @@ const AboutPage: React.FC = () => {
           <a href="https://www.bizjournals.com/rhodeisland/news/2024/07/05/brown-u-election-model-drive-by-ai.html"><Image className={styles.prImage} src={bizjournal} width={undefined} height={40} alt="Providence Business First" /></a>
           <a href="https://www.prnewswire.com/news-releases/new-election-prediction-model-by-students-at-brown-university-outperforms-industry-leaders-302184650.html"><Image className={styles.prImage} src={prnw} width={undefined} height={30} alt="PR Newswire" /></a>
         </div>
-        <p>
-          <b>Please <a className={styles.linkText} href='mailto:24castbpr@gmail.com'>contact us</a> with any questions, ideas, or press inquiries.</b> Our <a className={styles.linkText} href="https://drive.google.com/drive/folders/1AM1eAzHxJSkhnvdIwNUSsZYrfRnNew45">media kit</a> is also available for the press.
-        </p>
-        <p>
+      </div>
+      <h2 className={styles.header}>24cast.org Primary Team</h2>
+      <p className={styles.main}>
           Spearheaded by founder Asher Labovich, 24cast.org is the product of months of effort
           by a team of Brown students, who we wish to highlight below:
         </p>
-      </div>
-      <h2 className={styles.header}>24cast.org Primary Team</h2>
       <div className={styles.grid}>
         {people.map((person) => (
           <div key={person.id} className={styles.person}>

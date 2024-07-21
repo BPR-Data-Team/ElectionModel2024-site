@@ -18,7 +18,7 @@ export const metadata: Metadata = {
       "Innovative election predictions with in-depth explanations by the Brown Political Review.",
   },
   alternates: {
-    canonical: "./"
+    canonical: "./",
   },
 };
 
@@ -44,6 +44,7 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
       </head>
       <body className={inter.className}>
+        <Banner />
         <div className="wrapper">
           <Header />
           <div className="content">{children}</div>

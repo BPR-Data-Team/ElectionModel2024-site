@@ -70,9 +70,6 @@ const NationalMap: React.FC<NationalMapProps> = ({ stateData, rank }) => {
       accessibility: {
         description:
           "Map of the United States showing the average predicted margin by state.",
-        keyboardNavigation: {
-          enabled: false,
-        },
       },
       title: {
         text: "",

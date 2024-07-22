@@ -55,12 +55,24 @@ const NationalMap: React.FC<NationalMapProps> = ({ stateData, rank }) => {
         map: mapData,
         margin: [0, 0, 0, 0],
       },
+      plotOptions: {
+        series: {
+            states: {
+                hover: {
+                    enabled: false
+                }
+            }
+        }
+    },
       credits: {
         enabled: false,
       },
       accessibility: {
         description:
           "Map of the United States showing the average predicted margin by state.",
+        keyboardNavigation: {
+          enabled: false,
+        },
       },
       title: {
         text: "",

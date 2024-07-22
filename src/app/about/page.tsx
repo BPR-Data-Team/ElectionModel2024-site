@@ -152,8 +152,8 @@ const AboutPage: React.FC = () => {
         <i>(endorsement of 24cast.org is not implied through inclusion in this list)</i>
         </p>
         <p>
-          Cook Political Report &bull; Cost of Voting Index &bull; FiveThirtyEight &bull;
-          FRED &bull; UVA Center for Politics
+          <a href="https://www.cookpolitical.com/" className={styles.linkText}>Cook Political Report</a> &bull; <a href="https://costofvotingindex.com/" className={styles.linkText}>Cost of Voting Index</a> &bull; <a href="https://abcnews.go.com/538" className={styles.linkText}>FiveThirtyEight</a> &bull;{" "}
+          <a href="https://fred.stlouisfed.org/" className={styles.linkText}>FRED</a> &bull; <a href="https://centerforpolitics.org/crystalball/" className={styles.linkText}>UVA Center for Politics</a>
         </p>
       </div>
     </div>

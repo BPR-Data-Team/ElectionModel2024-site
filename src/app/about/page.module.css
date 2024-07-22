@@ -139,6 +139,7 @@
 
 .prImage {
   filter: grayscale();
+  transition: filter 0.15s;
   mix-blend-mode: multiply;
 
   &:hover {

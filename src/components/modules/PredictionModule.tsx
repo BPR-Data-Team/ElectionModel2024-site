@@ -281,10 +281,10 @@ export default function PredictionModule(
 
         <p className={styles.lastDataUpdate}>
         <svg width="16" height="16" className={styles.liveSymbol}>
-          <circle cx="8" cy="8" r="5" fill="var(--gubernatorial-gray)" />
+          <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
           <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
         </svg>
-          Next update halted
+          Next update in {hoursToMidnight} hours
         </p>
         {props.state === State.Nebraska &&
         props.raceType === RaceType.Senate ? (

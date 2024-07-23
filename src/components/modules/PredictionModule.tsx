@@ -11,6 +11,7 @@ import { State, getNumDistricts } from "@/types/State";
 import TiedRace from "../svgs/TiedRace";
 import ExclamationMark from "../svgs/ExclamationMark";
 import { useEffect, useState } from "react";
+import ContentLoader from "react-content-loader";
 
 export interface PredictionModuleProps {
   winner: Party;
@@ -34,6 +35,7 @@ export default function PredictionModule(
   const [likelihood, setLikelihood] = useState<number>(0);
   const [margin, setMargin] = useState<number>(0);
   const [icon, setIcon] = useState<JSX.Element>(<></>);
+  const [showPlaceholder, setShowPlaceholder] = useState<boolean>(true);
 
   useEffect(() => {
     if (props.fetchComplete) {
@@ -41,6 +43,9 @@ export default function PredictionModule(
       setLikelihood(props.likelihood);
       setMargin(getMargin());
       setIcon(getIcon());
+      setShowPlaceholder(false);
+    } else {
+      setShowPlaceholder(true);
     }
   }, [props.fetchComplete]);
 
@@ -175,8 +180,15 @@ export default function PredictionModule(
     }
 
     // Add conditional message for presidential and national races
-    if (props.raceType === RaceType.Presidential && props.state === State.National) {
-      message = `${props.winner === Party.Democrat ? "The Democratic Candidate" : "Donald Trump"} has a ${props.likelihood}% chance of winning the presidency.`;
+    if (
+      props.raceType === RaceType.Presidential &&
+      props.state === State.National
+    ) {
+      message = `${
+        props.winner === Party.Democrat
+          ? "The Democratic Candidate"
+          : "Donald Trump"
+      } has a ${props.likelihood}% chance of winning the presidency.`;
     }
 
     return message;
@@ -202,7 +214,9 @@ export default function PredictionModule(
   useEffect(() => {
     const updateHoursToMidnight = () => {
       const now = new Date();
-      const midnightET = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+      const midnightET = new Date(
+        now.toLocaleString("en-US", { timeZone: "America/New_York" })
+      );
       midnightET.setHours(24, 0, 0, 0); // Set time to midnight
       const hours = (midnightET.getTime() - now.getTime()) / 1000 / 60 / 60;
       setHoursToMidnight(Math.ceil(hours));
@@ -216,85 +230,104 @@ export default function PredictionModule(
 
   return (
     <Module>
-      <div>
-        <h3>24cast.org Prediction:</h3>
-      </div>
-      
-      <div className={styles.prediction}>
-      {props.raceType === RaceType.Presidential && props.state === State.National ? (
-        <div className={styles.mainPredictionAlt}>
-          <span className={styles.mainPredictionIcon}>{icon}</span>
-          <span className={styles.mainPredictionTextAlt}>
-            {predictionMessage}
-            <br />
-            <a href="#likely-outcomes" className={styles.linkText}>
-              Scroll down to see likely electoral outcomes.
-            </a>
-          </span>
-        </div>
+      {/* Return ContentLoader if not fetchcomplete and hide the rest */}
+      {showPlaceholder ? (
+        <ContentLoader viewBox="0 0 950 206">
+          <rect x="0" y="16" rx="5" ry="5" width="160" height="19" />
+          <circle cx="50" cy="100" r="50" />
+          <rect x="137" y="76" rx="5" ry="5" width="740" height="32" />
+          <rect x="137" y="122" rx="5" ry="5" width="310" height="18" />
+          <rect x="765" y="178" rx="5" ry="5" width="185" height="18" />
+        </ContentLoader>
       ) : (
-        <div className={styles.mainPrediction}>
-          <span className={styles.mainPredictionIcon}>{icon}</span>
-          <span className={styles.mainPredictionText}>{predictionMessage}</span>
-        </div>
+        <>
+          <div>
+            <h3>24cast.org Prediction:</h3>
+          </div>
+
+          <div className={styles.prediction}>
+            {props.raceType === RaceType.Presidential &&
+            props.state === State.National ? (
+              <div className={styles.mainPredictionAlt}>
+                <span className={styles.mainPredictionIcon}>{icon}</span>
+                <span className={styles.mainPredictionTextAlt}>
+                  {predictionMessage}
+                  <br />
+                  <a href="#likely-outcomes" className={styles.linkText}>
+                    Scroll down to see likely electoral outcomes.
+                  </a>
+                </span>
+              </div>
+            ) : (
+              <div className={styles.mainPrediction}>
+                <span className={styles.mainPredictionIcon}>{icon}</span>
+                <span className={styles.mainPredictionText}>
+                  {predictionMessage}
+                </span>
+              </div>
+            )}
+
+            {props.raceType !== RaceType.Presidential ||
+            props.state !== State.National ? (
+              props.weird == "" ? (
+                <div className={styles.predictionInfo}>
+                  <div className={styles.predictionInfoItem}>
+                    <div className={styles.predictionInfoItemIcon}>
+                      <Trophy />
+                    </div>
+                    <div className={styles.predictionInfoItemText}>
+                      <h4 className={styles.predictionInfoItemHeader}>
+                        Outcome Likelihood:
+                      </h4>
+                      <span className={styles.predictionInfoItemContent}>
+                        {likelihood === 100 ? ">99" : likelihood}%
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className={styles.predictionInfoItem}>
+                    <div className={styles.predictionInfoItemIcon}>
+                      <RingChart />
+                    </div>
+                    <div className={styles.predictionInfoItemText}>
+                      <h4 className={styles.predictionInfoItemHeader}>
+                        {props.state === State.National
+                          ? props.raceType === RaceType.Presidential
+                            ? "Electoral Votes"
+                            : "Seats"
+                          : "Margin"}
+                        :
+                      </h4>
+                      <span className={styles.predictionInfoItemContent}>
+                        {props.state !== State.National && margin > 0.1
+                          ? "+"
+                          : ""}
+                        {margin < 0.1 ? "<0.1" : margin}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : null
+            ) : null}
+
+            <p className={styles.lastDataUpdate}>
+              <svg width="16" height="16" className={styles.liveSymbol}>
+                <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
+                <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
+              </svg>
+              Next update in {hoursToMidnight} hours
+            </p>
+            {props.state === State.Nebraska &&
+            props.raceType === RaceType.Senate ? (
+              <p className={styles.note}>
+                *We are not predicting Nebraska&apos;s regular Senate election
+                because there is no Democratic candidate.
+              </p>
+            ) : null}
+            <DownloadThisCard />
+          </div>
+        </>
       )}
-
-        {props.raceType !== RaceType.Presidential || props.state !== State.National ? (
-          props.weird == "" ? (
-            <div className={styles.predictionInfo}>
-              <div className={styles.predictionInfoItem}>
-                <div className={styles.predictionInfoItemIcon}>
-                  <Trophy />
-                </div>
-                <div className={styles.predictionInfoItemText}>
-                  <h4 className={styles.predictionInfoItemHeader}>
-                    Outcome Likelihood:
-                  </h4>
-                  <span className={styles.predictionInfoItemContent}>
-                    {likelihood === 100 ? ">99" : likelihood}%
-                  </span>
-                </div>
-              </div>
-
-              <div className={styles.predictionInfoItem}>
-                <div className={styles.predictionInfoItemIcon}>
-                  <RingChart />
-                </div>
-                <div className={styles.predictionInfoItemText}>
-                  <h4 className={styles.predictionInfoItemHeader}>
-                    {props.state === State.National
-                      ? props.raceType === RaceType.Presidential
-                        ? "Electoral Votes"
-                        : "Seats"
-                      : "Margin"}
-                    :
-                  </h4>
-                  <span className={styles.predictionInfoItemContent}>
-                    {props.state !== State.National && margin > 0.1 ? "+" : ""}
-                    {margin < 0.1 ? "<0.1" : margin}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ) : null
-        ) : null}
-
-        <p className={styles.lastDataUpdate}>
-        <svg width="16" height="16" className={styles.liveSymbol}>
-          <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
-          <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
-        </svg>
-          Next update in {hoursToMidnight} hours
-        </p>
-        {props.state === State.Nebraska &&
-        props.raceType === RaceType.Senate ? (
-          <p className={styles.note}>
-            *We are not predicting Nebraska&apos;s regular Senate election
-            because there is no Democratic candidate.
-          </p>
-        ) : null}
-        <DownloadThisCard />
-      </div>
     </Module>
   );
 }

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsMap from "highcharts/modules/map";
 import highchartsAccessibility from "highcharts/modules/accessibility";
+import { fetchMapData } from "./mapDataCache";
+
+
 if (typeof window !== `undefined`) {
   highchartsAccessibility(Highcharts);
 }
@@ -30,50 +33,29 @@ const colorAxisStops: [number, string][] = [
 ];
 
 const MapChart: React.FC<MapProps> = (props: MapProps) => {
-  const [mapData, setMapData] = useState<JSON>(); // cache map data
-
+  const [mapData, setMapData] = useState<any>(null);
   useEffect(() => {
     if (props.stateData.length > 0)
       fetchMapDataAndInitializeMap(props.stateData);
   }, [props.stateData]);
 
   const fetchMapDataAndInitializeMap = async (stateData: StateData[]) => {
-    if (mapData) {
-      initializeMap(stateData, mapData);
-      return;
-    }
-    fetch("https://code.highcharts.com/mapdata/countries/us/us-all.topo.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setMapData(data);
-        initializeMap(stateData, data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const data = await fetchMapData();
+    setMapData(data);
+    initializeMap(stateData, data);
   };
 
   function getMaxState(stateData: StateData[]): number {
-    var max = stateData[0].value;
-    for (var i = 1; i < stateData.length; i++) {
-      if (stateData[i].value > max) {
-        max = stateData[i].value;
-      }
-    }
-    return max;
+    // console.log("The maximumum state is" + Math.max(...stateData.map((state) => state.value)))
+    return Math.max(...stateData.map((state) => state.value));
   }
 
   function getMinState(stateData: StateData[]): number {
-    var min = stateData[0].value;
-    for (var i = 1; i < stateData.length; i++) {
-      if (stateData[i].value < min) {
-        min = stateData[i].value;
-      }
-    }
-    return min;
+    // console.log("The minimum state is" + Math.min(...stateData.map((state) => state.value)))
+    return Math.min(...stateData.map((state) => state.value));
   }
 
-  const initializeMap = (stateData: StateData[], mapData: JSON) => {
+  const initializeMap = (stateData: StateData[], mapData: any) => {
     const axisMax: number = Math.max(
       Math.abs(getMinState(stateData)),
       Math.abs(getMaxState(stateData))
@@ -99,6 +81,11 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       title: {
         text: "",
       },
+      plotOptions: {
+        map: {
+            cursor: 'pointer'
+        }
+      },
       mapNavigation: {
         enabled: false,
         enableButtons: false,
@@ -106,14 +93,14 @@ const MapChart: React.FC<MapProps> = (props: MapProps) => {
       colorAxis: colorAxis,
       tooltip: {
         formatter: function (this: any) {
-          let prefix = this.point.value >= 0 ? "D " : "R ";
+          let prefix = this.point.value >= 0 ? "D" : "R";
           return (
             "<b>" +
             this.point.name +
             "</b><br/>" +
             prefix +
             "+" +
-            Math.abs(this.point.value)
+            (Math.abs(this.point.value) <= 0.1 ? "<0.1" : Math.abs(this.point.value).toFixed(1)) 
           );
         },
         style: {

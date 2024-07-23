@@ -4,12 +4,15 @@ import Module from "../Module";
 import styles from "./ExplainerModule.module.css";
 import { Party } from "@/types/Party";
 import { SHAPFactor } from "@/types/SHAPFactor";
-import SHAPDonut from "@/components/dataviz/SHAPDonut";
+import { RaceType } from "@/types/RaceType";
 import DonutChart from "@/components/dataviz/SHAPDonut";
 import { formatNumber } from "@/utils";
+import Image from "next/image";
+import NoDonut from "image-assets/donut.svg"
 
 export interface ExplainerModuleProps {
   winner: Party;
+  raceType: RaceType
   numDemWins: number;
   numRepWins: number;
   numTies: number;
@@ -159,7 +162,7 @@ export default function ExplainerModule(
           </p>
         )}
         {mostPredictiveFactors.length > 0 && (
-          <p>
+          <p className={styles.noBottom}>
             By running simulations with varied input data, we determined that{" "}
             {formatStringList(mostPredictiveFactors)}{" "}
             {mostPredictiveFactors.length > 1 ? "were" : "was"} the most
@@ -167,12 +170,18 @@ export default function ExplainerModule(
           </p>
         )}
         {mostPredictiveFactors.length === 0 && <p></p>}
-        <p>
+        {mostPredictiveFactors.length > 0 && props.raceType != RaceType.House && (
+          <div className={styles.donut}><DonutChart SHAPFactors={props.SHAPFactors} /></div>)}
+        {mostPredictiveFactors.length == 0 && props.raceType != RaceType.House && (
+          <div className={styles.Nodonut}>
+            <Image src={NoDonut} alt="Placeholder Donut Chart" width={90}></Image>
+            <p>Select a state to see more information</p>
+            </div>)}
+        <p className={styles.noTop}>
           <a href="/methodology" className={styles.methodologyLink}>
             Look through our full methodology!
           </a>
         </p>
-        {/* <SHAPDonut SHAPFactors={props.SHAPFactors} /> */}
         <DownloadThisCard />
       </div>
     </Module>

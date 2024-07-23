@@ -6,7 +6,9 @@
 .bannerText {
   color: white;
   text-align: center;
-  padding: 10px;
+  padding-block: 10px;
+  padding-inline: 10%;
+  text-wrap: pretty;
   font-family: gelica, georgia, book antiqua, times new roman, serif;
   font-weight: 300;
   font-style: normal;

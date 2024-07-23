@@ -20,7 +20,7 @@ export default function SimulationsModule(
   return (
     <Module>
       <div className={styles.simulations}>
-        <h3>Margin Simulations</h3>
+        <h3>Margin Simulations:</h3>
         <Histogram
           binBounds={props.binBounds}
           binEdges={props.binEdges}

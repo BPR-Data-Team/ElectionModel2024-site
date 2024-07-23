@@ -1,6 +1,8 @@
 import styles from "./Footer.module.css";
 import Image from "next/image";
-import InstaIcon from "image-assets/Instagram_Glyph_Black.svg";
+import InstaIcon from "image-assets/instagram.svg";
+import LinkedinIcon from "image-assets/linkedin.svg";
+import TwitterIcon from "image-assets/twitter.svg";
 
 export default function Footer(): JSX.Element {
   return (
@@ -43,7 +45,27 @@ export default function Footer(): JSX.Element {
               height={13}
               alt={"Instagram"}
               priority={false}
-              className={styles.instaicon}
+              className={styles.socialicon}
+            />
+          </a>
+          <a className={styles.linkText} href="https://twitter.com/Brown24cast">
+          <Image
+              src={TwitterIcon}
+              width={undefined}
+              height={13}
+              alt={"Twitter"}
+              priority={false}
+              className={styles.socialicon}
+            />
+          </a>
+          <a className={styles.linkText} href="https://www.linkedin.com/company/24castorg/">
+          <Image
+              src={LinkedinIcon}
+              width={undefined}
+              height={13}
+              alt={"LinkedIn"}
+              priority={false}
+              className={styles.socialicon}
             />
           </a>
         </div>

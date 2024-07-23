@@ -14,6 +14,13 @@
   gap: 2rem;
 }
 
+.mainPredictionAlt {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 2rem;
+}
+
 .mainPredictionIcon {
   flex-shrink: 0;
   transform: scale(1);
@@ -26,6 +33,20 @@
   font-weight: 600;
   margin-bottom: 70px;
 }
+
+.mainPredictionTextAlt {
+  font-size: 1.625rem;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.linkText {
+  color: black;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
 /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
 .predictionInfo {
   display: flex;
@@ -66,6 +87,12 @@
     align-items: left;
     gap: 2rem;
   }
+  .mainPredictionAlt {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 2rem;
+  }
 
   .mainPredictionIcon {
     flex-shrink: 0;
@@ -75,6 +102,12 @@
   }
 
   .mainPredictionText {
+    font-size: 1.625rem;
+    font-weight: 600;
+    align-self: center;
+    margin-top: 16px;
+  }
+  .mainPredictionTextAlt {
     font-size: 1.625rem;
     font-weight: 600;
     align-self: center;
@@ -137,6 +170,12 @@
     align-items: center;
     gap: 2rem;
   }
+  .mainPredictionAlt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
 
   .mainPredictionIcon {
     flex-shrink: 0;
@@ -150,6 +189,16 @@
     font-size: 16px;
     font-weight: 600;
     align-self: center;
+  }
+  .mainPredictionTextAlt {
+    margin-top: 0px;
+    font-size: 20px;
+    font-weight: 600;
+    align-self: center;
+  }
+
+  .linkText {
+    font-size: 0.8rem;
   }
   /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
   .predictionInfo {
@@ -191,7 +240,44 @@
   font-weight: 300;
 }
 
+.liveSymbol {
+  margin-inline-end: 6px;
+  padding-block-end: 2px;
+  vertical-align: middle;
+}
+
+.pulsingCircle {
+  fill: var(--republican-red);
+  opacity: 0.5;
+}
+
+@media
+  (
+    prefers-reduced-motion: 
+    no-preference
+  ) {
+    .pulsingCircle {
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+
+@keyframes pulse {
+  0% {
+    r: 5;
+    filter: blur(0.2px)
+  }
+  50% {
+    r: 8;
+    filter: blur(0px)
+  }
+  100% {
+    r: 5;
+    filter: blur(0.2px)
+  }
+}
+
 .note {
   font-style: italic;
   font-weight: 300;
 }
+

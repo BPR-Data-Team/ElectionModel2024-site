@@ -1,12 +1,25 @@
 User-agent: googlebot-image
 Disallow: /
+Allow: /icon1.png
+Allow: /icon2.png
+Allow: /icon3.png
+Allow: /icon4.png
+Allow: /icon5.png
+Allow: /icon6.png
 
 User-agent: *
 Disallow: /tos
 Disallow: /privacy
 Disallow: /soon
 Disallow: /_next/
+Disallow: /map
 Allow: /favicon.ico
+Allow: /icon1.png
+Allow: /icon2.png
+Allow: /icon3.png
+Allow: /icon4.png
+Allow: /icon5.png
+Allow: /icon6.png
 
 Sitemap: https://24cast.org/sitemap.xml
 Sitemap: https://www.24cast.org/sitemap.xml

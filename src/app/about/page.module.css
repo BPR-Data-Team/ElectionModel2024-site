@@ -3,6 +3,7 @@
   text-align: center;
   width: 70%;
   margin-inline: auto;
+  text-wrap: pretty;
 }
 
 .overall {
@@ -134,4 +135,34 @@
 .bio {
   margin: 0;
   font-size: 0.9rem;
+}
+
+.prImage {
+  filter: grayscale();
+  transition: filter 0.15s;
+  mix-blend-mode: multiply;
+
+  &:hover {
+    filter: none;
+  }
+
+}
+
+@media (max-width: 650px) {
+  .prImage {
+    scale: 0.8;
+  }
+  .prGrid a:first-of-type img {
+    scale: 1;
+  }
+}
+
+.prGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1rem 1.5rem;
 }

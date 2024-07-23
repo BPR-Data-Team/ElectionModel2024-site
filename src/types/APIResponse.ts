@@ -30,6 +30,8 @@ export interface ItemJSON {
   demographics: { S: string };
   bin_bounds: { S: string };
   gas_prices: { S: string };
+  campaign: {S: string};
+  use_campaign: {BOOL: boolean};
 }
 
 export interface ResponseMetadata {
@@ -74,6 +76,8 @@ export interface ResponseItem {
   demographics: number;
   bin_bounds: [number, number];
   gas_prices: number;
+  finance_array: number[];
+  use_campaign: boolean;
 }
 
 export function parseItem(apiResponse: APIResponse): ResponseItem {
@@ -110,6 +114,8 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
     "demographics",
     "bin_bounds",
     "gas_prices",
+    "campaign", 
+    "use_campaign"
   ];
 
   const missingFields: string[] = requiredFields.filter(
@@ -202,6 +208,10 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
       apiResponse.Item.gas_prices.S === "nan"
         ? 0
         : parseFloat(apiResponse.Item.gas_prices.S),
+    finance_array: apiResponse.Item.campaign.S === "nan"
+        ? 0 
+        : JSON.parse(apiResponse.Item.campaign.S),
+    use_campaign: apiResponse.Item.use_campaign.BOOL
   };
 
   return responseItem;

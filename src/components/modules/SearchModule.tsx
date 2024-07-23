@@ -48,6 +48,7 @@ export default function SearchModule(props: SearchModuleProps): JSX.Element {
           // Added this condition
           props.setDistrict(1); // Set district to 1 if switching to House races and district is 0
         }
+        break;
       default:
         setFilteredStates(Object.values(State));
         break;

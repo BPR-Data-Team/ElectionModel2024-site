@@ -8,3 +8,41 @@
 .boldText {
   font-weight: 700;
 }
+
+.noBottom {
+  margin-block-end: 0;
+}
+
+.noTop {
+  margin-block-start: 0.6em;
+}
+
+.donut {
+  max-width: 300px;
+}
+
+.Nodonut {
+  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.Nodonut p {
+  padding-inline-start: 10px;
+  font-style: italic;
+}
+
+@media (max-width: 1016px) {
+  .donut {
+    display: none;
+  }
+
+/*   .Nodonut {
+    display: none;
+  } */
+
+}

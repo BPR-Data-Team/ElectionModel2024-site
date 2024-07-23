@@ -1,0 +1,14 @@
+.map h3 {
+    margin-block-end: 5px;
+}
+  
+.map p {
+    margin-block: 0;
+    font-style: italic;
+}
+
+.map .subtitle {
+    font-style: italic;
+    font-size: 90%;
+    margin-block-end: 5px;
+}

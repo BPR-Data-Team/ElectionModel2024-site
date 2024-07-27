@@ -2,6 +2,7 @@
 .keyRaces {
     max-width: 70%;
     margin-block-end: 16px;
+    scroll-margin: 30px;
   }
   
   .grid {

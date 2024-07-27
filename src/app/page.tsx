@@ -399,13 +399,11 @@ export default function Home(): JSX.Element {
       {weird === "" && state != State.National && raceType != RaceType.Presidential && raceType != RaceType.Gubernatorial && (
         <SliderModuleAlt raceType={raceType} winner={winner} std={std} currentMargin={margin} marginChanges={financeArray} useFinance={useFinance} />
       )}
-      {weird === "" && (
-        <KeyRacesModule
-          setRaceType={setRaceType}
-          setState={setState}
-          setDistrict={setDistrict}
-        />
-      )}
+      <KeyRacesModule
+        setRaceType={setRaceType}
+        setState={setState}
+        setDistrict={setDistrict}
+      />
     </main>
   );
 }

@@ -26,6 +26,14 @@ export default function Footer(): JSX.Element {
           </span>
         </div>
         <div>
+          <span className={styles.footerText}>
+            Find a bug or want to get in touch?{" "}<a
+              className={styles.linkTextAlt}
+              href="mailto:24castbpr@gmail.com"
+            >Email us</a>.
+          </span>
+        </div>
+        <div>
           <a className={styles.linkText} href="/tos">
             Terms of Use
           </a>

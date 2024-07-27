@@ -10,11 +10,11 @@ const TOSPage: React.FC = () => {
         <div className={styles.overall}>
             <div className={styles.main}>
                 <h2>Terms of Use</h2>
-                <p>Last Updated: June 1, 2024</p>
+                <p>Last Updated: July 26, 2024</p>
             </div>
             <div className={styles.main}>
-                <p>These terms and conditions (the &quot;Terms and Conditions&quot;) govern the use of https://24cast.org (&quot;24cast.org&quot;, the &quot;Site&quot;). This Site is owned and operated by The Brown Political Review (&quot;BPR&quot;). </p>
-                <p>By using this Site, you indicate that you have read and understand these Terms and Conditions and agree to abide by them at all times.</p>
+                <p>These terms and conditions (the &ldquo;Terms of Use&rdquo;) govern the use of https://24cast.org (&ldquo;24cast.org&rdquo;, the &ldquo;Site&rdquo;). This Site is owned and operated by The Brown Political Review (&ldquo;BPR&rdquo;). </p>
+                <p>By using this Site, you indicate that you have read and understand these Terms of Use and agree to abide by them at all times.</p>
                 <p>24cast.org creates predictions for races in the 2024 general US election using an open-source machine learning model. The predictions on this site are created solely for entertainment purposes in an effort to demonstrate how elections can be modeled and what factors are most crucial to predicting an election.</p>
                 <p>24cast.org&apos;s webmaster can be contacted at ariel[underscore]shifrin[at]brown[dot]edu. Please request a mailing address by email if needed.</p>
             </div>
@@ -30,7 +30,7 @@ const TOSPage: React.FC = () => {
                 <li>Attempt to reverse engineer components of the website that are not open-sourced</li>
                 <li>Make any financial decisions, including gambling, on the basis of predictions</li>
                </ul>
-               <p>If we believe you are using our Site illegally or in a manner that violates these Terms and Conditions, we reserve the right to limit, suspend or terminate your access to our Site. We also reserve the right to take any legal steps necessary to prevent you from accessing our Site.</p>
+               <p>If we believe you are using our Site illegally or in a manner that violates these Terms of Use, we reserve the right to limit, suspend or terminate your access to our Site. We also reserve the right to take any legal steps necessary to prevent you from accessing our Site.</p>
             </div>
             <div className={styles.main}>
                 <p><b>Third-Party Content</b></p>

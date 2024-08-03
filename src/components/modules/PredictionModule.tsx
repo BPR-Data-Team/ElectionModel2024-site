@@ -217,7 +217,7 @@ export default function PredictionModule(
   return (
     <Module>
       <div>
-        <h3>24cast.org Prediction:</h3>
+        <h3>In an election held today...</h3>
       </div>
       
       <div className={styles.prediction}>

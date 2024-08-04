@@ -5,6 +5,7 @@
   
 .overall {
   width: 80%;
+  max-width: 1040px;
   margin-inline: auto;
 }
 

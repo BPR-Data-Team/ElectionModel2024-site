@@ -16,6 +16,11 @@ html {
   color: var(--main-text-color);
 }
 
+::selection {
+  background-color: var(--bemocrat-blue);
+  color: var(--gradient-descent-gray);
+}
+
 @media
   (
     prefers-reduced-motion: 

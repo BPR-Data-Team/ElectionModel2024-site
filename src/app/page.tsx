@@ -390,7 +390,7 @@ export default function Home(): JSX.Element {
       {state === State.National && raceType === RaceType.Presidential && (
       <div className={styles.nationalMaps} id="likely-outcomes">
         <NationalMapModule rank={1} probability={17} winner = {"Donald Trump"} winnerEV = {312} />
-        <NationalMapModule rank={2} probability={14} winner = {"The Democratic candidate"} winnerEV = {287}/>
+        <NationalMapModule rank={2} probability={14} winner = {"Kamala Harris"} winnerEV = {287}/>
       </div>
       )}
       {/* {weird === "" && state != State.National && (
@@ -399,13 +399,11 @@ export default function Home(): JSX.Element {
       {weird === "" && state != State.National && raceType != RaceType.Presidential && raceType != RaceType.Gubernatorial && (
         <SliderModuleAlt raceType={raceType} winner={winner} std={std} currentMargin={margin} marginChanges={financeArray} useFinance={useFinance} />
       )}
-      {weird === "" && (
-        <KeyRacesModule
-          setRaceType={setRaceType}
-          setState={setState}
-          setDistrict={setDistrict}
-        />
-      )}
+      <KeyRacesModule
+        setRaceType={setRaceType}
+        setState={setState}
+        setDistrict={setDistrict}
+      />
     </main>
   );
 }

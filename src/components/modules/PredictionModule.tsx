@@ -78,7 +78,7 @@ export default function PredictionModule(
 
     if (props.winner === Party.Democrat) {
       if (props.raceType === RaceType.Presidential) {
-        message = "Democrats are";
+        message = "Kamala Harris is";
       } else {
         message = "Democrats are";
       }
@@ -185,9 +185,7 @@ export default function PredictionModule(
       props.state === State.National
     ) {
       message = `${
-        props.winner === Party.Democrat
-          ? "The Democratic Candidate"
-          : "Donald Trump"
+        props.winner === Party.Democrat ? "Kamala Harris" : "Donald Trump"
       } has a ${props.likelihood}% chance of winning the presidency.`;
     }
 
@@ -242,7 +240,7 @@ export default function PredictionModule(
       ) : (
         <>
           <div>
-            <h3>24cast.org Prediction:</h3>
+            <h3>In an election held today...:</h3>
           </div>
 
           <div className={styles.prediction}>

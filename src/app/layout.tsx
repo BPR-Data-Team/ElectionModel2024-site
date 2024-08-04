@@ -33,7 +33,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/dze2nzm.css" />
         <meta
           name="keywords"
-          content="election, politics, AI, brown, 24cast, prediction, democrat, trump, president, senate, house, governor"
+          content="election, politics, AI, brown, 24cast, prediction, harris, trump, president, senate, house, governor"
         />
         <meta
           name="author"

@@ -66,22 +66,22 @@ export default function PredictionModule(
       props.state === State.National &&
       props.margin === 50
     ) {
-      return "The Senate is predicted to be a 50-50 split.";
+      return "The Senate would be predicted to be a 50-50 split.";
     }
 
     let message: string = "";
 
     if (props.winner === Party.Democrat) {
       if (props.raceType === RaceType.Presidential) {
-        message = "Kamala Harris is";
+        message = "Kamala Harris would be";
       } else {
-        message = "Democrats are";
+        message = "Democrats would be";
       }
     } else {
       if (props.raceType === RaceType.Presidential) {
-        message = "Donald Trump is";
+        message = "Donald Trump would be";
       } else {
-        message = "Republicans are";
+        message = "Republicans would be";
       }
     }
 
@@ -176,7 +176,7 @@ export default function PredictionModule(
 
     // Add conditional message for presidential and national races
     if (props.raceType === RaceType.Presidential && props.state === State.National) {
-      message = `${props.winner === Party.Democrat ? "Kamala Harris" : "Donald Trump"} has a ${props.likelihood}% chance of winning the presidency.`;
+      message = `${props.winner === Party.Democrat ? "Kamala Harris" : "Donald Trump"} would have a ${props.likelihood}% chance of winning the presidency.`;
     }
 
     return message;

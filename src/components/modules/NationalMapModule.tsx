@@ -5,7 +5,7 @@ import NationalMap, { StateData } from "@/components/dataviz/NationalMap";
 const stateData1 = [
     { code: 'us-al', value: -1 }, // Alabama
     { code: 'us-ak', value: -1 }, // Alaska
-    { code: 'us-az', value: -1 }, // Arizona
+    { code: 'us-az', value: 1 }, // Arizona
     { code: 'us-ar', value: -1 }, // Arkansas
     { code: 'us-ca', value: 1 },  // California
     { code: 'us-co', value: 1 },  // Colorado
@@ -24,13 +24,13 @@ const stateData1 = [
     { code: 'us-me', value: 1 },  // Maine
     { code: 'us-md', value: 1 },  // Maryland
     { code: 'us-ma', value: 1 },  // Massachusetts
-    { code: 'us-mi', value: -1 }, // Michigan
+    { code: 'us-mi', value: 1 }, // Michigan
     { code: 'us-mn', value: 1 },  // Minnesota
     { code: 'us-ms', value: -1 }, // Mississippi
     { code: 'us-mo', value: -1 }, // Missouri
     { code: 'us-mt', value: -1 }, // Montana
     { code: 'us-ne', value: -1 }, // Nebraska
-    { code: 'us-nv', value: -1 }, // Nevada
+    { code: 'us-nv', value: 1 }, // Nevada
     { code: 'us-nh', value: 1 },  // New Hampshire
     { code: 'us-nj', value: 1 },  // New Jersey
     { code: 'us-nm', value: 1 },  // New Mexico
@@ -40,7 +40,7 @@ const stateData1 = [
     { code: 'us-oh', value: -1 }, // Ohio
     { code: 'us-ok', value: -1 }, // Oklahoma
     { code: 'us-or', value: 1 },  // Oregon
-    { code: 'us-pa', value: -1 }, // Pennsylvania
+    { code: 'us-pa', value: 1 }, // Pennsylvania
     { code: 'us-ri', value: 1 },  // Rhode Island
     { code: 'us-sc', value: -1 }, // South Carolina
     { code: 'us-sd', value: -1 }, // South Dakota
@@ -51,14 +51,14 @@ const stateData1 = [
     { code: 'us-va', value: 1 },  // Virginia
     { code: 'us-wa', value: 1 },  // Washington
     { code: 'us-wv', value: -1 }, // West Virginia
-    { code: 'us-wi', value: -1 }, // Wisconsin
+    { code: 'us-wi', value: 1 }, // Wisconsin
     { code: 'us-wy', value: -1 }  // Wyoming
 ];
 
 const stateData2 = [
     { code: 'us-al', value: -1 }, // Alabama
     { code: 'us-ak', value: -1 }, // Alaska
-    { code: 'us-az', value: 1 },  // Arizona
+    { code: 'us-az', value: -1 },  // Arizona
     { code: 'us-ar', value: -1 }, // Arkansas
     { code: 'us-ca', value: 1 },  // California
     { code: 'us-co', value: 1 },  // Colorado
@@ -77,13 +77,13 @@ const stateData2 = [
     { code: 'us-me', value: 1 },  // Maine General
     { code: 'us-md', value: 1 },  // Maryland
     { code: 'us-ma', value: 1 },  // Massachusetts
-    { code: 'us-mi', value: 1 },  // Michigan
+    { code: 'us-mi', value: -1 },  // Michigan
     { code: 'us-mn', value: 1 },  // Minnesota
     { code: 'us-ms', value: -1 }, // Mississippi
     { code: 'us-mo', value: -1 }, // Missouri
     { code: 'us-mt', value: -1 }, // Montana
     { code: 'us-ne', value: -1 }, // Nebraska General
-    { code: 'us-nv', value: 1 },  // Nevada
+    { code: 'us-nv', value: -1 },  // Nevada
     { code: 'us-nh', value: 1 },  // New Hampshire
     { code: 'us-nj', value: 1 },  // New Jersey
     { code: 'us-nm', value: 1 },  // New Mexico
@@ -93,7 +93,7 @@ const stateData2 = [
     { code: 'us-oh', value: -1 }, // Ohio
     { code: 'us-ok', value: -1 }, // Oklahoma
     { code: 'us-or', value: 1 },  // Oregon
-    { code: 'us-pa', value: 1 },  // Pennsylvania
+    { code: 'us-pa', value: -1 },  // Pennsylvania
     { code: 'us-ri', value: 1 },  // Rhode Island
     { code: 'us-sc', value: -1 }, // South Carolina
     { code: 'us-sd', value: -1 }, // South Dakota
@@ -104,7 +104,7 @@ const stateData2 = [
     { code: 'us-va', value: 1 },  // Virginia
     { code: 'us-wa', value: 1 },  // Washington
     { code: 'us-wv', value: -1 }, // West Virginia
-    { code: 'us-wi', value: 1 },  // Wisconsin
+    { code: 'us-wi', value: -1 },  // Wisconsin
     { code: 'us-wy', value: -1 }, // Wyoming
     { code: 'us-dc', value: 1 }  // District of Columbia
 ];

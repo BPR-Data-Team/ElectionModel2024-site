@@ -390,7 +390,7 @@ export default function Home(): JSX.Element {
       {state === State.National && raceType === RaceType.Presidential && (
       <div className={styles.nationalMaps} id="likely-outcomes">
         <NationalMapModule rank={1} probability={21} winner = {"Kamala Harris"} winnerEV = {287} />
-        <NationalMapModule rank={2} probability={18} winner = {"Donald Trump"} winnerEV = {313}/>
+        <NationalMapModule rank={2} probability={19} winner = {"Donald Trump"} winnerEV = {313}/>
       </div>
       )}
       {/* {weird === "" && state != State.National && (

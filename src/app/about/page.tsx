@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 const people = [
   { id: "Asher", name: 'Asher Labovich, Founder', image: asher, year: "Brown '26", bio: "R is Asher's true love."},
-  { id: "Ariel", name: 'Ariel Shifrin, Project Manager', image: blank, year: "Brown '27", bio: 'Ariel was the headshot photographer.'},
+  { id: "Ariel", name: 'Ariel Shifrin, Operations Manager', image: blank, year: "Brown '27", bio: 'Ariel was the headshot photographer.'},
   { id: "Alex", name: "Alex Wick, Frontend Lead", image: alex, year: "Brown '25", bio: "Alex is getting kind of alright at playing drums."},
   { id: "Akshay", name: 'Akshay Mehta, Fullstack/Backend Lead', image: akshay, year: "Brown '26", bio: ''},
   { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: ''},

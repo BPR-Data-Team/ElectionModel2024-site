@@ -37,14 +37,14 @@
 /* SearchModule.module.css */
 
 .searchText {
-  font-size: 16px; /* Adjust the font size as needed */
+  font-size: 1rem; /* Adjust the font size as needed */
 }
 
 /* Media query for screens smaller than 768px (typical mobile screens) */
 @media screen and (max-width: 767px) {
   .search select {
       max-width: calc(100% - 10px); /* Set maximum width to 100% on mobile */
-      font-size: 12px; 
+      font-size: 0.9rem; 
       padding: 3px;
       padding-right: 18px;
       margin: 3px;
@@ -52,6 +52,6 @@
       color: var(--main-text-color)
   }
   .search p{
-    font-size: 12px;
+    font-size: 0.9rem;
   }
 }

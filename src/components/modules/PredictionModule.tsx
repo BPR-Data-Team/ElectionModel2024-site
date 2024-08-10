@@ -225,7 +225,7 @@ export default function PredictionModule(
         <div className={styles.mainPredictionAlt}>
           <span className={styles.mainPredictionIcon}>{icon}</span>
           <span className={styles.mainPredictionTextAlt}>
-            {predictionMessage}
+            <h2 className={styles.unburdenedByWhatHasBeen}>{predictionMessage}</h2>
             <br />
             <a href="#likely-outcomes" className={styles.linkText}>
               Scroll down to see likely electoral outcomes.

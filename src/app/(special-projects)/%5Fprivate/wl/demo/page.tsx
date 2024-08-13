@@ -1,5 +1,13 @@
 import styles from "./page.module.css";
 import { Metadata } from "next";
+import { BioRhyme, Radio_Canada } from 'next/font/google'
+
+const biorhyme = BioRhyme({ subsets: ['latin'] })
+const radioCanada = Radio_Canada({
+  weight: '400', // Ensure this weight is available
+  style: 'normal', // Ensure this style is available
+  subsets: ['latin']
+});
 
 export const metadata: Metadata = {
   title: 'Whitelabel Demo | 24cast.org',
@@ -7,7 +15,7 @@ export const metadata: Metadata = {
 
 const NewsSite: React.FC = () => {
   return (
-    <div className={styles.newssite}>
+    <div className={styles.newssite} style={{ fontFamily: radioCanada.style.fontFamily }}>
       <header className={styles.header}>
       <h1>The Chicago Caller</h1>
       <div className={styles.navBar}>
@@ -35,16 +43,21 @@ const NewsSite: React.FC = () => {
       
       <main className={styles.maincontent}>
         <section className={styles.mainarticle}>
-          <h2>2024 Election &gt; The Caller Oracle</h2>
+          <p className={styles.breadcrumbs}><b>2024 Election &gt; The Caller Oracle</b></p>
+          <div className={styles.articleTitle}>
+            <h3>The Caller Oracle</h3>
+            <h4>Daily predictions for the 2024 general election</h4>
+            <iframe src="/_private/wl/iframes" width="100%" height="500px" className={styles.iframe}></iframe>
+          </div>
         </section>
 
         <aside className={styles.sidebar}>
           <h3>Popular Articles</h3>
           <ul>
             {Array(5).fill(0).map((_, i) => (
-              <li key={i}>
+              <li key={i} className={styles.popArtItem}>
                 <div className={styles.articlethumbnail}></div>
-                <p>How 24cast.org predicts elections.<br/><span>Joe Smith</span></p>
+                <p><b>How 24cast.org predicts elections.</b><br/><span>Joe Smith</span></p>
               </li>
             ))}
           </ul>

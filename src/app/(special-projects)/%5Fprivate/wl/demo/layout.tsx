@@ -1,4 +1,4 @@
-export default function CleanLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

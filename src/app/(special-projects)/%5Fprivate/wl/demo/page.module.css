@@ -1,5 +1,5 @@
 .newssite {
-  font-family: Arial, sans-serif !important;
+  font-family: times, Arial, sans-serif;
   background-color: white;
 }
 
@@ -15,6 +15,8 @@
 
 .header h1 {
   text-align: center;
+  font-family: BioRhyme, Impact, Haettenschweiler, 'Arial Narrow Bold', serif;
+  margin-block-end: 0;
 }
 
 .header .navBar {
@@ -46,6 +48,9 @@
 
 }
 
+.navBar span {
+  cursor: pointer;
+}
 
 .headerright {
   display: flex;
@@ -65,9 +70,9 @@
 .maincontent {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-areas: "main main main aside" "footer footer footer ...";
+  grid-template-areas: "main main main aside" "footer footer footer aside";
   gap: 25px;
-  width: 90%;
+  max-width: 1300px;
   margin-inline: auto;
 }
 
@@ -77,9 +82,28 @@
   margin-right: 20px;
 }
 
+.articleTitle {
+  font-family: BioRhyme, Impact, Haettenschweiler, 'Arial Narrow Bold', serif;
+}
+
+.articleTitle h3 {
+  font-size: 2em;
+  margin: 0.3em 0 0 0;
+}
+
+.articleTitle h4 {
+  font-size: 1.1em;
+  font-weight: 400;
+  margin: 0;
+}
+
 .sidebar {
   grid-area: aside;
   padding: 20px;
+}
+
+.sidebar h3 {
+  font-family: BioRhyme, Impact, Haettenschweiler, 'Arial Narrow Bold', serif;
 }
 
 .sidebar ul,
@@ -91,11 +115,14 @@
 .sidebar li,
 .footerarticles li {
   display: flex;
-  margin-bottom: 10px;
+}
+
+.sidebar, .footerarticles {
+  gap: 30px;
 }
 
 .articlethumbnail {
-  width: 60px;
+  width: min(100%, 150px);
   height: 60px;
   background-color: #2c3e50;
   margin-right: 10px;
@@ -113,4 +140,26 @@
 .footerarticles {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .maincontent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "main" "footer";
+    gap: 25px;
+    width: 90%;
+    margin-inline: auto;
+  }
+  .sidebar {
+    display: none;
+  }
+  .nav {
+    display: none;
+  }
+}
+
+.iframe {
+  border: none;
+  padding: 0;
 }

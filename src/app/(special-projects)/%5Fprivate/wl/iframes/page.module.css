@@ -1,13 +1,12 @@
 .frame {
   padding: 0;
   margin: 0;
-  height: 500px;
 }
 
 .summaryBlock {
   display: flex;
   align-items: center;
-
+  gap: 0.5rem;
 }
 
 .geography img {
@@ -47,12 +46,35 @@
 }
 
 .leadText {
-  text-wrap: balance;
+  text-wrap: pretty;
+}
+
+.summaryMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem
 }
 
 .metricBlock {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em
+}
+
+.metricStack p {
+  padding: 0;
+  margin: 0;
+}
+
+.metricStack p:nth-of-type(2) {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.metricIcon span {
+  font-size: 2.5rem;
+  vertical-align: middle;
 }
 
 .vizBlock {

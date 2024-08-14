@@ -84,6 +84,7 @@
 
 .articleTitle {
   font-family: BioRhyme, Impact, Haettenschweiler, 'Arial Narrow Bold', serif;
+  padding-block-end: 1rem;
 }
 
 .articleTitle h3 {
@@ -117,8 +118,12 @@
   display: flex;
 }
 
-.sidebar, .footerarticles {
-  gap: 30px;
+.sidebar li {
+  margin-block-end: 30px;
+}
+
+.footerarticles li {
+  margin-inline-end: 30px;
 }
 
 .articlethumbnail {

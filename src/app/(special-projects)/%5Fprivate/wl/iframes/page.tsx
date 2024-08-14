@@ -42,7 +42,8 @@ const NewsSite: React.FC = () => {
                   <span className="material-symbols-outlined">trophy</span>
                 </div>
                 <div className={styles.metricStack}>
-
+                  <p>Outcome Likelihood:</p>
+                  <p>78%</p>
                 </div>
               </div>
               <div className={styles.metricBlock}>
@@ -50,7 +51,8 @@ const NewsSite: React.FC = () => {
                   <span className="material-symbols-outlined">data_usage</span>
                 </div>
                 <div className={styles.metricStack}>
-                  
+                  <p>Predicted Margin:</p>
+                  <p>+3.48</p>
                 </div>
               </div>
             </div>
@@ -65,8 +67,8 @@ const NewsSite: React.FC = () => {
           </div>
         </div>
         <div className={styles.footer}>
-          <p className={styles.cta}><a href="/">See more predictions/more details</a></p>
-          <p className={styles.credit}><a href="/">Powered by <span className={styles.wordmark}>24cast.org</span></a></p>
+          <p className={styles.cta}><a href="https://24cast.org">See more predictions/more details</a></p>
+          <p className={styles.credit}><a href="https://24cast.org">Powered by <span className={styles.wordmark}>24cast.org</span></a></p>
         </div>
       </div>
     </div>

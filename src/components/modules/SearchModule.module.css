@@ -33,6 +33,7 @@
   width: auto;
   font-size: inherit;
   font-family: inherit;
+  color: var(--main-text-color);
 }
 /* SearchModule.module.css */
 

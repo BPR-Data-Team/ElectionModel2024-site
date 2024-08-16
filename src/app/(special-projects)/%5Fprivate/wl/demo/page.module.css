@@ -136,6 +136,8 @@
 .footer {
   grid-area: footer;
   padding: 20px;
+  padding-block-start: 0;
+  margin-block-start: 0;
 }
 
 .footer h4 {

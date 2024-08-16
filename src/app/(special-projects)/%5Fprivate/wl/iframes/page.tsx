@@ -21,7 +21,6 @@ const NewsSite: React.FC = () => {
             src={Illinois}
             alt="Illinois Silhouette"
             fill={true}
-            layout="fill"
             />
           </div>
           <div className={styles.summaryStack}>
@@ -67,7 +66,7 @@ const NewsSite: React.FC = () => {
           </div>
         </div>
         <div className={styles.footer}>
-          <p className={styles.cta}><a href="https://24cast.org">See more predictions/more details</a></p>
+          <p className={styles.cta}><a href="https://24cast.org">See more predictions/details</a></p>
           <p className={styles.credit}><a href="https://24cast.org">Powered by <span className={styles.wordmark}>24cast.org</span></a></p>
         </div>
       </div>

@@ -49,7 +49,7 @@ export default function Footer(): JSX.Element {
             <FaLinkedinIn className={styles.socialicon} title="LinkedIn" />
           </a>
           <a className={styles.linkText} href="https://github.com/BPR-Data-Team/ElectionModel2024">
-            <FaGithub className={styles.socialicon} title="Instagram" />
+            <FaGithub className={styles.socialicon} title="GitHub" />
           </a>
         </div>
       </div>

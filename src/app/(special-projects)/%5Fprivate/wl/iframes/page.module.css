@@ -1,0 +1,112 @@
+.frame {
+  padding: 0;
+  margin: 0;
+}
+
+.summaryBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.geography img {
+  position: relative !important;
+  max-height: 120px;
+}
+
+@media (max-width: 430px) {
+  .geography img {
+    display: none;
+  }
+}
+
+.raceNav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  transition: text-decoration 50ms;
+
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  & .active {
+    text-decoration: underline 1.5px;
+    text-underline-offset: 4px;
+  }
+}
+
+.summaryStack {
+  display: flex;
+  flex-direction: column;
+}
+
+.leadText {
+  text-wrap: pretty;
+}
+
+.summaryMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem
+}
+
+.metricBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.5em
+}
+
+.metricStack p {
+  padding: 0;
+  margin: 0;
+}
+
+.metricStack p:nth-of-type(2) {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.metricIcon span {
+  font-size: 2.5rem;
+  vertical-align: middle;
+}
+
+.vizBlock {
+  display: flex;
+  flex-wrap: wrap;
+
+  & p {
+    text-wrap: balance;
+  }
+}
+
+.footer {
+  width: 100%;
+
+  & a {
+    color: inherit;
+  }
+
+}
+
+.credit {
+  text-align: end;
+  color: #696969;
+
+  & a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  & .wordmark {
+    font-family: gelica, book antiqua, georgia, times new roman, serif;
+    font-weight: 700;
+  }
+
+}

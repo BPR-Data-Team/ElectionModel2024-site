@@ -48,7 +48,7 @@ const NewsSite: React.FC = () => {
             <h3>The Caller Oracle</h3>
             <h4>Daily predictions for the 2024 general election</h4>
           </div>
-          <script src="/iframecode.js" fetchpriority="low" async />
+          <script src="/iframecode.js" async />
           <iframe src="/_private/wl/iframes" width="100%" height="324px" className={styles.iframe} id="castFrame"></iframe>
           
         </section>

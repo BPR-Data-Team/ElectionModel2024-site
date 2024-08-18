@@ -180,7 +180,7 @@ function makeHistogram(
           return `<b>${point.x}</b><br />Simulations: <b>${formatNumber(point.y)}</b>`;
         }
         if (state == State.National && raceType === RaceType.House) {
-          return `<b>${point.x - width}</b><br />Simulations: <b>${formatNumber(point.y) + width}</b>`;
+          return `<b>${point.x - width}-${point.x + width - 1}</b><br />Simulations: <b>${formatNumber(point.y)}</b>`;
         }
         if (this.x < 0) {
           return `<b>R+${Math.abs(this.x) - width} - R+${Math.abs(this.x) + width}</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;

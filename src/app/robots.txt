@@ -14,7 +14,6 @@ Disallow: /soon
 Disallow: /_next/
 Disallow: /map
 Disallow: /_private/
-Allow: /favicon.ico
 Allow: /icon1.png
 Allow: /icon2.png
 Allow: /icon3.png

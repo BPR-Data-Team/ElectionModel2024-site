@@ -22,3 +22,27 @@
   .linkText {
     color: var(--main-text-color);
   }
+
+  .main:target {
+    animation: fadeOutShadow 1s forwards;
+    animation-delay: 1.5s;
+}
+
+/* Animation for the shadow to grow and fade out */
+@keyframes fadeOutShadow {
+  0% {
+    box-shadow: 0 0 0 0 var(--bemocrat-blue);
+    background-color: var(--bemocrat-blue);
+    color: white;
+  }
+  20% {
+    box-shadow: 0 0 8px 2px var(--bemocrat-blue);
+    background-color: var(--bemocrat-blue);
+    color: white;
+  }
+  100% {
+    box-shadow: 0 0 0 0 var(--bemocrat-blue);
+    background-color: rgba(255, 255, 255, 0);
+    color: unset;
+  }
+}

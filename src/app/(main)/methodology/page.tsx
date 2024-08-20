@@ -91,9 +91,10 @@ const Methodology: React.FC = () => {
             <h2>Learn More</h2>
             <p>While we aim to be as transparent as possible, there were so many minute issues we faced as we created this model that describing all of them would take an entire book. If you&apos;re interested in looking at our code, check out our GitHub! If you have more specific math questions (or if you&apos;re confused by any of our code) feel free to reach out to <a className={styles.linkText} href="mailto:24castbpr@gmail.com">our team</a>. We&apos;re always willing to nerd out about data and politics, so we&apos;ll try and respond ASAP!</p>
             </div>
-            <div className={styles.main}></div>
+            <div className={styles.main} id="changelog">
             <h2>Changelog</h2>
             <p><b>August 3: </b> Previously, our model predicted the outcome of the upcoming November 5 election by incorporating uncertainty into the polls to account for increased unpredictability as we move further from the election date. However, we have decided to eliminate this added uncertainty and instead predict the election results <b>as if the election were held today.</b> This change minimizes assumptions and more accurately reflects the output of our machine learning algorithm without adding uncertainty.</p>
+            </div>
             </div>
   );
 };

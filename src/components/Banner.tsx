@@ -4,8 +4,8 @@ export default function Banner(): JSX.Element {
   return (
     <div className={styles.banner}>
       <div className={styles.bannerText}>
-        Due to unexpected user volume, predictions might take more time to load.
-        {" "} We are actively working on a solution and appreciate your patience.
+        Changes in 24cast.org&apos;s predictions over the last week are the result{" "} 
+        of routine upgrades to our predictive model. <a href="/methodology#changelog">See more.</a> 
       </div>
     </div>
   );

@@ -93,7 +93,7 @@ const Methodology: React.FC = () => {
             </div>
             <div className={styles.main}></div>
             <h2>Changelog</h2>
-            <p><b>August 20: </b> We realized that while we had excluded state-specific presidential polls after Biden exited the race, we were still including older generic ballot polls for the presidency. To address this, we updated our code to exclude all presidential polls—both state-specific and generic—from before Biden's withdrawal from the election. This change — along with an influx of new polls during and directly before the DNC showing Democrats outperforming Republicans across the country — resulted in a significant shift leftward for all three branches.</p>
+            <p><b>August 20</b>: Our team identified that, though we had filtered President Biden from state-specific polls following his withdrawal from candidacy, generic ballot polls for President Biden remained in our dataset. We have updated our codebase to remove all pre-withdrawal presidential polls—both state-specific and generic. This change and an influx of new polls during and directly before the DNC have resulted in a significant shift leftward for congressional and presidential races.</p>
             <p><b>August 3: </b> Previously, our model predicted the outcome of the upcoming November 5 election by incorporating uncertainty into the polls to account for increased unpredictability as we move further from the election date. However, we have decided to eliminate this added uncertainty and instead predict the election results <b>as if the election were held today.</b> This change minimizes assumptions and more accurately reflects the output of our machine learning algorithm without adding uncertainty.</p>
             </div>
   );

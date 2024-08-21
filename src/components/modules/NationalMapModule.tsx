@@ -35,7 +35,7 @@ const stateData1 = [
   { code: 'us-nj', value: 1 },  // New Jersey
   { code: 'us-nm', value: 1 },  // New Mexico
   { code: 'us-ny', value: 1 },  // New York
-  { code: 'us-nc', value: -1 }, // North Carolina
+  { code: 'us-nc', value: 1 }, // North Carolina
   { code: 'us-nd', value: -1 }, // North Dakota
   { code: 'us-oh', value: -1 }, // Ohio
   { code: 'us-ok', value: -1 }, // Oklahoma

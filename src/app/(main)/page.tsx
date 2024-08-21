@@ -163,7 +163,7 @@ async function fetchRaceData(
             break;
           case RaceType.House:
             winner =
-              responseItem.avg_margin > 218 ? Party.Democrat : Party.Republican;
+              responseItem.avg_margin >= 218 ? Party.Democrat : Party.Republican;
             break;
           default:
             break;

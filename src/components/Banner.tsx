@@ -4,9 +4,7 @@ export default function Banner(): JSX.Element {
   return (
     <div className={styles.banner}>
       <div className={styles.bannerText}>
-        Changes in 24cast.org&apos;s predictions over the last few days are partially the result{" "} 
-        of routine upgrades to our predictive model. <a href="/methodology#changelog">See more.</a> 
-      </div>
+        August 24: Changes in our predictions today are the result of the FEC releasing campaign finance data from the month of July.</div>
     </div>
   );
 }

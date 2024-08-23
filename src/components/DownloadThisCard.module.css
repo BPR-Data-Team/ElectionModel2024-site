@@ -1,10 +1,26 @@
 .downloadThisCard {
-  text-align: right;
-  margin: 1rem 0;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  border: none; /* Remove the outer border */
+  box-shadow: none; /* Remove any shadow */
 }
 
-.downloadThisCard a {
-  font-style: normal;
-  color: var(--main-text-color);
+.downloadThisCard button {
   text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none; /* Ensure there's no border on the button */
+  cursor: pointer;
 }

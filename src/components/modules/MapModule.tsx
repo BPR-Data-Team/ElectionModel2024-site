@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef} from "react";
 import Module from "../Module";
 import styles from "./MapModule.module.css";
 import MapChart, { StateData } from "@/components/dataviz/MapChart";
 import { RaceType } from "@/types/RaceType";
 import { State, getStateFromAbbreviation } from "@/types/State";
+import DownloadImage from '../DownloadThisCard';
+
 
 interface MapItemJSON {
   avg_margin: { S: string };
@@ -68,6 +70,8 @@ export default function MapModule(props: mapProps): JSX.Element {
   const [USPresidentMapData, setUSPresidentMapData] = useState<StateData[]>([]); // cache map data
   const [USSenateMapData, setUSSenateMapData] = useState<StateData[]>([]); // cache map data
   const [USGovernorMapData, setUSGovernorMapData] = useState<StateData[]>([]); // cache map data
+  const moduleRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (props.raceType == RaceType.Unset) return;
     let active = true;
@@ -119,10 +123,11 @@ export default function MapModule(props: mapProps): JSX.Element {
 
   return (
     <Module className="mapModule">
-      <div className={styles.map}>
+      <div ref={moduleRef} className={styles.map}>
         <h3>24cast.org&apos;s Prediction Map:</h3>
         <p>Click on a state to switch views.</p>
         <MapChart stateData={mapData} onStateClick={handleStateClick} />
+        <DownloadImage targetRef={moduleRef} filename="module1.png"/>
       </div>
     </Module>
   );

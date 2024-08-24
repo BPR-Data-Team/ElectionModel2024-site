@@ -78,7 +78,10 @@ const Methodology: React.FC = () => {
             </div>
             <div className={styles.main}>
             <h4>Updating Data</h4>
-            <p>Our model updates each day at midnight EDT with the latest data. Our predictions will constantly update as polls, campaign finance, and expert ratings change. Our model will finish updating on the day before the election. We use GitHub Actions and AWS with DynamoDB to gather new data and update our API, and R and Python to clean/analyze the incoming data while producing up-to-date predictions.</p>
+            <p>Our model updates each day at midnight EDT with the latest data. Our predictions will constantly update as polls, campaign finance, and expert ratings change. Our model will finish updating on the day before the election. We use GitHub Actions and AWS with DynamoDB to gather new data and update our API, and R and Python to clean/analyze the incoming data while producing up-to-date predictions.
+            </p>
+            <p>We will update the website with a purple banner at the top of the page whenever our predictions change significantly. This could be due to an influx of new polls, a change in expert ratings, or a new campaign finance report. We will also update the website with a banner when we release a new feature to our model, such as our campaign finance simulator.
+            </p>
             </div>
             <div className={styles.main}>
             <h4>Interpretation</h4>
@@ -93,7 +96,7 @@ const Methodology: React.FC = () => {
             </div>
             <div className={styles.main} id="changelog">
             <h2>Changelog</h2>
-            <p><b>August 20</b>: Our team identified that, though we had filtered Vice President Harris from state-specific polls before President Biden&apos;s withdrawal from candidacy, generic ballot polls for Harris pre-withdrawal remained in our dataset. We have updated our codebase to remove all pre-withdrawal presidential polls—both state-specific and generic. This change and an influx of new polls during and directly before the DNC have resulted in a significant shift leftward for congressional and presidential races.</p>
+            <p><b>August 20:</b> Our team identified that, though we had filtered Vice President Harris from state-specific polls before President Biden&apos;s withdrawal from candidacy, generic ballot polls for Harris pre-withdrawal remained in our dataset. We have updated our codebase to remove all pre-withdrawal presidential polls—both state-specific and generic. This change and an influx of new polls during and directly before the DNC have resulted in a significant shift leftward for congressional and presidential races.</p>
             <p><b>August 3: </b> Previously, our model predicted the outcome of the upcoming November 5 election by incorporating uncertainty into the polls to account for increased unpredictability as we move further from the election date. However, we have decided to eliminate this added uncertainty and instead predict the election results <b>as if the election were held today.</b> This change minimizes assumptions and more accurately reflects the output of our machine learning algorithm without adding uncertainty.</p>
             </div>
             </div>

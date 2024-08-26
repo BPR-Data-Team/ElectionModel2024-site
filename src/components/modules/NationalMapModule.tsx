@@ -77,13 +77,13 @@ const stateData2 = [
   { code: 'us-me', value: 1 },  // Maine General
   { code: 'us-md', value: 1 },  // Maryland
   { code: 'us-ma', value: 1 },  // Massachusetts
-  { code: 'us-mi', value: -1 },  // Michigan
+  { code: 'us-mi', value: 1 },  // Michigan
   { code: 'us-mn', value: 1 },  // Minnesota
   { code: 'us-ms', value: -1 }, // Mississippi
   { code: 'us-mo', value: -1 }, // Missouri
   { code: 'us-mt', value: -1 }, // Montana
   { code: 'us-ne', value: -1 }, // Nebraska General
-  { code: 'us-nv', value: -1 },  // Nevada
+  { code: 'us-nv', value: 1 },  // Nevada
   { code: 'us-nh', value: 1 },  // New Hampshire
   { code: 'us-nj', value: 1 },  // New Jersey
   { code: 'us-nm', value: 1 },  // New Mexico

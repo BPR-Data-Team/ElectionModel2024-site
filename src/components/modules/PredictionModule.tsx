@@ -293,7 +293,6 @@ export default function PredictionModule(
             because there is no Democratic candidate.
           </p>
         ) : null}
-        <DownloadThisCard />
       </div>
     </Module>
   );

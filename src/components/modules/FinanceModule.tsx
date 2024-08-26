@@ -65,6 +65,7 @@ const FinanceModule: React.FC<FinanceModuleProps> = ({ raceType, std, margins, u
             <p>95% of outcomes fall within the range. Uncertainty will significantly decrease as the election gets closer. </p>
             {/* Use localMargins instead of margins directly */}
             <Finance raceType={raceType} std={std} margins={localMargins}/>
+            
           </div>
         </Module>
     );

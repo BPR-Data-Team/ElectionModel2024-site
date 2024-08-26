@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import DownloadThisCard from "../DownloadThisCard";
 import Module from "../Module";
 import styles from "./ExplainerModule.module.css";
@@ -25,6 +25,8 @@ export default function ExplainerModule(
   const [mostPredictiveFactors, setMostPredictiveFactors] = useState<
     SHAPFactor[]
   >([]);
+
+  const ExplainerRef = useRef<HTMLDivElement>(null);;
 
   const formatStringList = (strings: string[]): React.JSX.Element | null => {
     if (strings.length === 0) return null; // No strings in the array
@@ -75,7 +77,7 @@ export default function ExplainerModule(
 
   return (
     <Module>
-      <div className={styles.explainer}>
+      <div ref={ExplainerRef} className={styles.explainer}>
         <h3>How 24cast.org Predicted This Race</h3>
         <p>
           We ran{" "}
@@ -182,8 +184,8 @@ export default function ExplainerModule(
             Look through our full methodology!
           </a>
         </p>
-        <DownloadThisCard />
       </div>
+      <DownloadThisCard targetRef={ExplainerRef} filename="24cast-explainer.png" />
     </Module>
   );
 }

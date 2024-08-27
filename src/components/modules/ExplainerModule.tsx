@@ -170,7 +170,7 @@ export default function ExplainerModule(
           </p>
         )}
         {mostPredictiveFactors.length === 0 && <p></p>}
-        {mostPredictiveFactors.length > 0 && props.raceType != RaceType.House && (
+        {mostPredictiveFactors.length > 0 && (
           <div className={styles.donut}><DonutChart SHAPFactors={props.SHAPFactors} /></div>)}
         {mostPredictiveFactors.length == 0 && props.raceType != RaceType.House && (
           <div className={styles.Nodonut}>

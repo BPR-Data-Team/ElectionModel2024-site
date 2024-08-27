@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import WelcomeModule from "@/components/modules/WelcomeModule";
 import MapModule from "@/components/modules/MapModule";
 import SimulationsModule from "@/components/modules/SimulationsModule";
+import HistoricalModule from "@/components/modules/HistoricalModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import NationalMapModule from "@/components/modules/NationalMapModule";
 import SliderModuleAlt from "@/components/modules/SliderModuleAlt";
@@ -383,6 +384,16 @@ export default function Home(): JSX.Element {
           state={state}
           winner={winner}
         />
+      )}
+      {weird === "" && (
+        <HistoricalModule
+          raceType={raceType}
+          state={state}
+          dates={[]}
+          demWinPercents={[]}
+          repWinPercents={[]}
+          tiePercents={[]}
+          />
       )}
       {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />

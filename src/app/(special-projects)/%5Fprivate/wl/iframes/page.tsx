@@ -2,7 +2,6 @@
 
 import styles from "./page.module.css";
 import { Metadata } from "next";
-import { BioRhyme, Radio_Canada } from 'next/font/google'
 import Image from "next/image";
 import Illinois from "image-assets/wl-content/illinois.svg"
 import DonutChart from "src/components/dataviz/SHAPDonut";
@@ -35,17 +34,9 @@ const HistogramData = {
   winner: Party.Democrat,
 }
 
-const biorhyme = BioRhyme({ subsets: ['latin'] })
-
-const radioCanada = Radio_Canada({
-  weight: '400', // Ensure this weight is available
-  style: 'normal', // Ensure this style is available
-  subsets: ['latin']
-});
-
 const NewsSite: React.FC = () => {
   return (
-    <div className={styles.frame} style={{ fontFamily: radioCanada.style.fontFamily }}>
+    <div className={styles.frame}>
       <div className={styles.wrapper}>
         <div className={styles.summaryBlock}>
           <div className={styles.geography} style={{position: 'relative'}}>
@@ -100,8 +91,8 @@ const NewsSite: React.FC = () => {
           </div>
         </div>
         <div className={styles.footer}>
-          <p className={styles.cta}><a href="https://24cast.org">See more predictions/details</a></p>
-          <p className={styles.credit}><a href="https://24cast.org">Powered by <span className={styles.wordmark}>24cast.org</span></a></p>
+          <p className={styles.cta}><a href="https://24cast.org" target="_parent">See more predictions/details</a></p>
+          <p className={styles.credit}><a href="https://24cast.org" target="_parent">Powered by <span className={styles.wordmark}>24cast.org</span></a></p>
         </div>
       </div>
     </div>

@@ -1,13 +1,5 @@
 import styles from "./page.module.css";
 import { Metadata } from "next";
-import { BioRhyme, Radio_Canada } from 'next/font/google'
-
-const biorhyme = BioRhyme({ subsets: ['latin'] })
-const radioCanada = Radio_Canada({
-  weight: '400', // Ensure this weight is available
-  style: 'normal', // Ensure this style is available
-  subsets: ['latin']
-});
 
 export const metadata: Metadata = {
   title: 'Whitelabel Demo | 24cast.org',
@@ -15,9 +7,10 @@ export const metadata: Metadata = {
 
 const NewsSite: React.FC = () => {
   return (
-    <div className={styles.newssite} style={{ fontFamily: radioCanada.style.fontFamily }}>
+    <div className={styles.newssite}>
       <header className={styles.header}>
       <h1>The Chicago Caller</h1>
+      <h3 className={styles.subHeader}>Static White-label Demo</h3>
       <div className={styles.navBar}>
         <span className="material-symbols-outlined">menu</span>
         <div>
@@ -48,7 +41,7 @@ const NewsSite: React.FC = () => {
             <h3>The Caller Oracle</h3>
             <h4>Daily predictions for the 2024 general election</h4>
           </div>
-          <script src="/iframecode.js" async />
+          <script src="/iframecode.js" />
           <iframe src="/_private/wl/iframes" width="100%" height="324px" className={styles.iframe} id="castFrame"></iframe>
           
         </section>

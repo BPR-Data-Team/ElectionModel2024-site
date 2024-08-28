@@ -4,8 +4,8 @@ import styles from "./page.module.css";
 import { Metadata } from "next";
 import Image from "next/image";
 import Illinois from "image-assets/wl-content/illinois.svg"
-import DonutChart from "src/components/dataviz/SHAPDonut";
-import { Histogram } from "src/components/dataviz/Histogram";
+import DonutChart from "./components/SHAPDonut";
+import { Histogram } from "./components/Histogram";
 import { SHAPFactor } from "@/types/SHAPFactor";
 import { Party } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
@@ -56,7 +56,7 @@ const NewsSite: React.FC = () => {
               </ul>
             </div>
             <div className={styles.leadText}>
-              <h3>Joe Biden is favored to win the presidency in Illinois.</h3>
+              <h3>Kamala Harris is favored to win the presidency in Illinois.</h3>
             </div>
             <div className={styles.summaryMetrics}>
               <div className={styles.metricBlock}>
@@ -82,11 +82,11 @@ const NewsSite: React.FC = () => {
         </div>
         <div className={styles.vizBlock}>
           <div className={styles.vizStack}>
-            <p>We simulated the margin this race 100,000 times. <wbr /><b>Here&apos;s the distribution of the simulations:</b></p>
+            <p>We simulated the margin this race 100,000 times.</p><p><b>Here&apos;s the distribution of the simulations:</b></p>
             <Histogram {...HistogramData} ></Histogram>
           </div>
           <div className={styles.vizStack}>
-            <p>Our model is informed by data that updates daily. <wbr /><b>Here&apos;s what was most impactful on our model:</b></p>
+            <p>Our model is informed by data that updates daily.</p><p><b>Here&apos;s what was most impactful on our model:</b></p>
             <DonutChart SHAPFactors={SHAPValues} />
           </div>
         </div>

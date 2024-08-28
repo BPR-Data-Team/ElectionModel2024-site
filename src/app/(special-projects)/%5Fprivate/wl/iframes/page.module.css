@@ -85,8 +85,11 @@
   box-sizing: border-box;
   margin-block-start: 1em;
 
-  & p {
-    text-wrap: balance;
+}
+
+@media (max-width: 500px) {
+  .vizBlock {
+    flex-direction: column;
   }
 }
 

@@ -106,7 +106,6 @@ function makeHistogram(
       type: "column",
       backgroundColor: "white",
       height: 250,
-      width: null,
     },
     title: {
       text: "",

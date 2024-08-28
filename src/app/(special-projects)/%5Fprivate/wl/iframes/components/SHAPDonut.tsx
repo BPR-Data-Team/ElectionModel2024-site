@@ -31,7 +31,6 @@ const DonutChart: React.FC<DonutChartProps> = ({ SHAPFactors }) => {
         type: "pie",
         height: 250,
         margin: 25,
-        width: null,
         style: {fontFamily: "var(--radioCanada), sans-serif", fontSize: "1rem"}
       },
       credits: {

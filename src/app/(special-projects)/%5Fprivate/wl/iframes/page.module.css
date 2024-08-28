@@ -93,12 +93,16 @@
 .vizStack {
   flex: 1;
   box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  padding-block-end: 5px;
 }
 
 .vizStack div {
   box-sizing: border-box;
   font-family: inherit;
-
+  width: 100%;
+  height: auto;
 }
 
 .vizStack p {
@@ -107,6 +111,8 @@
 
 .footer {
   width: 100%;
+  position: relative;
+  margin-block-start: 1rem;
 
   & a {
     color: inherit;

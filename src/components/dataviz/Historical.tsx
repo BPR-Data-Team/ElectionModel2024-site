@@ -35,16 +35,10 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
     "2024-02-25", "2024-03-03", "2024-03-10", "2024-03-17", "2024-03-24",
     "2024-03-31", "2024-04-07", "2024-04-14", "2024-04-21", "2024-04-28",
     "2024-05-05", "2024-05-12", "2024-05-19", "2024-05-26", "2024-06-02",
-    "2024-06-09", "2024-06-16", "2024-06-23", "2024-06-30", "2024-07-07",
-    "2024-07-14", "2024-07-21", "2024-07-28", "2024-08-04", "2024-08-11",
-    "2024-08-18", "2024-08-25", "2024-09-01", "2024-09-08", "2024-09-15",
-    "2024-09-22", "2024-09-29", "2024-10-06", "2024-10-13", "2024-10-20",
-    "2024-10-27", "2024-11-03", "2024-11-10", "2024-11-17", "2024-11-24",
-    "2024-12-01", "2024-12-08", "2024-12-15", "2024-12-22", "2024-12-29"
   ];
 
   const dateTimeStamps = dates.map(date => new Date(date).getTime());
-  const numValues = 100
+  const numValues = 70
   const demWinPercents: number[] = [];
   const repWinPercents: number[] = [];
 
@@ -55,7 +49,7 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
     // Republican win percent is the complement of the Democratic percentage
     repWinPercents.push(100 - demWinPercent);
   }
-  const tiePercents = Array(100).fill(1);
+  const tiePercents = Array(70).fill(1);
 
   // Exampled data finished
   
@@ -145,12 +139,14 @@ if (includeTies) {
           }
       },
       crosshair: {
-        width: 0.2, 
+        width: 1, 
         color: 'black', 
+        dashStyle: 'ShortDash', // Change to dashed line
         label: {
           enabled: false // Disable crosshair label
         }
       }, 
+      max: Date.UTC(2024, 10, 5),
     },
     yAxis: {
       min: 0,
@@ -167,7 +163,10 @@ if (includeTies) {
           style: {
               color: "black",
               fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
-          }
+          },
+          formatter: function() {
+            return this.value + '%'; // Append '%' to each label
+        },
       } 
     },
     legend: {

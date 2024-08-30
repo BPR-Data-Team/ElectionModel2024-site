@@ -385,16 +385,6 @@ export default function Home(): JSX.Element {
           winner={winner}
         />
       )}
-      {weird === "" && (
-        <HistoricalModule
-          raceType={raceType}
-          state={state}
-          dates={[]}
-          demWinPercents={[]}
-          repWinPercents={[]}
-          tiePercents={[]}
-          />
-      )}
       {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}

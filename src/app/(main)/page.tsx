@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import WelcomeModule from "@/components/modules/WelcomeModule";
 import MapModule from "@/components/modules/MapModule";
 import SimulationsModule from "@/components/modules/SimulationsModule";
+import HistoricalModule from "@/components/modules/HistoricalModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import NationalMapModule from "@/components/modules/NationalMapModule";
 import SliderModuleAlt from "@/components/modules/SliderModuleAlt";

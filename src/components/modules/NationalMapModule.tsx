@@ -93,7 +93,7 @@ const stateData2 = [
   { code: 'us-oh', value: -1 }, // Ohio
   { code: 'us-ok', value: -1 }, // Oklahoma
   { code: 'us-or', value: 1 },  // Oregon
-  { code: 'us-pa', value: -1 },  // Pennsylvania
+  { code: 'us-pa', value: 1 },  // Pennsylvania
   { code: 'us-ri', value: 1 },  // Rhode Island
   { code: 'us-sc', value: -1 }, // South Carolina
   { code: 'us-sd', value: -1 }, // South Dakota

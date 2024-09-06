@@ -24,6 +24,9 @@ import { SHAPFactor } from "@/types/SHAPFactor";
 import { usePathname, useSearchParams } from "next/navigation";
 import ReactGA from "react-ga4";
 import { clarity } from "react-microsoft-clarity";
+import { useQuery } from "react-query";
+import axios from "axios";
+import { HistoricalData } from "@/types/HistoricalData";
 
 const TRACKING_ID = "G-QDEM59MHXZ";
 if (typeof window !== `undefined`) {
@@ -164,7 +167,9 @@ async function fetchRaceData(
             break;
           case RaceType.House:
             winner =
-              responseItem.avg_margin >= 218 ? Party.Democrat : Party.Republican;
+              responseItem.avg_margin >= 218
+                ? Party.Democrat
+                : Party.Republican;
             break;
           default:
             break;
@@ -224,6 +229,66 @@ async function fetchRaceData(
   throw new Error("Failed to fetch data after all retries.");
 }
 
+async function fetchHistData(
+  raceType: RaceType,
+  state: State,
+  district: number
+): Promise<HistoricalData> {
+  if (raceType == RaceType.Unset) {
+    throw new Error("Race type is unset");
+  }
+  if (typeof state === "string" && state.includes("US-")) {
+    let state_abbrev = state.substring(3);
+    state = getStateFromAbbreviation(state_abbrev);
+  }
+  const stateArg: string = getStateAbbreviation(state);
+  const districtArg: string =
+    (raceType !== RaceType.House || state === State.National) &&
+    !(
+      raceType === RaceType.Presidential &&
+      (state === State.Maine || state === State.Nebraska)
+    )
+      ? "0"
+      : district.toString();
+  let raceTypeArg = "";
+  switch (raceType) {
+    case RaceType.Gubernatorial:
+      raceTypeArg = "Governor";
+      break;
+    case RaceType.House:
+      raceTypeArg = "House";
+      break;
+    case RaceType.Senate:
+      raceTypeArg = "Senate";
+      break;
+    case RaceType.Presidential:
+      raceTypeArg = "President";
+      break;
+  }
+  const raceArg: string = `${stateArg}${districtArg}${raceTypeArg}`;
+  const fetchInput: string = `https://tr4evtbsi2.execute-api.us-east-1.amazonaws.com/Deployment/DynamoDBManager?race=${raceArg}-hist`;
+  const response = await axios.get(fetchInput);
+  // Fix the string by adding double quotes around the dates
+  const data: HistoricalData = {
+    historical_dem_percents: JSON.parse(
+      response.data["Item"]["historical_dem_percents"]["S"]
+    ),
+    historical_repub_percents: JSON.parse(
+      response.data["Item"]["historical_repub_percents"]["S"]
+    ),
+    historical_tie_percents: JSON.parse(
+      response.data["Item"]["historical_tie_percents"]["S"]
+    ),
+    historical_dates: JSON.parse(
+      response.data["Item"]["historical_dates"]["S"].replace(
+        /(\d{2}-\d{2})/g,
+        '"$1"'
+      )
+    ),
+  };
+  return data;
+}
+
 /**
  * The home page. This is the main page of the site, and is the first page that users see when they visit the site.
  * @returns {JSX.Element} The home page.
@@ -248,6 +313,19 @@ export default function Home(): JSX.Element {
   const [financeArray, setFinanceArray] = useState<number[]>([]);
   const [useFinance, setUseFinance] = useState<boolean>(false);
   const [firstRun, setFirstRun] = useState<boolean>(true);
+  const {
+    data: historicalData,
+    error,
+    isLoading,
+  } = useQuery(
+    ["histData", raceType, state, district],
+    () => fetchHistData(raceType, state, district),
+    {
+      enabled: raceType !== RaceType.Unset, // Only run the query if raceType and state are set
+    }
+  );
+  console.log(historicalData);
+
   useEffect(() => {
     let active = true;
     if (firstRun) {
@@ -366,7 +444,7 @@ export default function Home(): JSX.Element {
             />
           )}
           <ExplainerModule
-           raceType={raceType}
+            raceType={raceType}
             winner={winner}
             numDemWins={numDemWins}
             numRepWins={numRepWins}
@@ -375,7 +453,7 @@ export default function Home(): JSX.Element {
           />
         </div>
       )}
-      {weird === ""  && (
+      {weird === "" && (
         <SimulationsModule
           binBounds={binBounds}
           binEdges={binEdges}
@@ -388,18 +466,48 @@ export default function Home(): JSX.Element {
       {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}
+      {weird === "" && historicalData != undefined && (
+        <HistoricalModule
+          raceType={raceType}
+          state={state}
+          dates={historicalData.historical_dates}
+          demWinPercents={historicalData.historical_dem_percents}
+          repWinPercents={historicalData.historical_repub_percents}
+          tiePercents={historicalData.historical_tie_percents}
+        />
+      )}
       {state === State.National && raceType === RaceType.Presidential && (
-      <div className={styles.nationalMaps} id="likely-outcomes">
-        <NationalMapModule rank={1} probability={30} winner = {"Kamala Harris"} winnerEV = {319} />
-        <NationalMapModule rank={2} probability={9} winner = {"Donald Trump"} winnerEV = {272}/>
-      </div>
+        <div className={styles.nationalMaps} id="likely-outcomes">
+          <NationalMapModule
+            rank={1}
+            probability={30}
+            winner={"Kamala Harris"}
+            winnerEV={319}
+          />
+          <NationalMapModule
+            rank={2}
+            probability={9}
+            winner={"Donald Trump"}
+            winnerEV={272}
+          />
+        </div>
       )}
       {/* {weird === "" && state != State.National && (
         <FinanceModule raceType={raceType} std={std} margins={financeArray} useFinance={useFinance} />
       )} */}
-      {weird === "" && state != State.National && raceType != RaceType.Presidential && raceType != RaceType.Gubernatorial && (
-        <SliderModuleAlt raceType={raceType} winner={winner} std={std} currentMargin={margin} marginChanges={financeArray} useFinance={useFinance} />
-      )}
+      {weird === "" &&
+        state != State.National &&
+        raceType != RaceType.Presidential &&
+        raceType != RaceType.Gubernatorial && (
+          <SliderModuleAlt
+            raceType={raceType}
+            winner={winner}
+            std={std}
+            currentMargin={margin}
+            marginChanges={financeArray}
+            useFinance={useFinance}
+          />
+        )}
       <KeyRacesModule
         setRaceType={setRaceType}
         setState={setState}

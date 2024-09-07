@@ -280,10 +280,7 @@ async function fetchHistData(
       response.data["Item"]["historical_tie_percents"]["S"]
     ),
     historical_dates: JSON.parse(
-      response.data["Item"]["historical_dates"]["S"].replace(
-        /(\d{2}-\d{2})/g,
-        '"$1"'
-      )
+      response.data["Item"]["historical_dates"]["S"]
     ),
   };
   return data;

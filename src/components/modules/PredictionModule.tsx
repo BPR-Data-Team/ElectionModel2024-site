@@ -240,7 +240,7 @@ export default function PredictionModule(
       ) : (
         <>
           <div>
-            <h3>In an election held today...:</h3>
+            <h3>In an election held today...</h3>
           </div>
 
           <div className={styles.prediction}>

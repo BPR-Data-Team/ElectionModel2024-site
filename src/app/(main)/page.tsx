@@ -478,16 +478,6 @@ export default function Home(): JSX.Element {
           />
         </div>
       )}
-            {weird === "" && historicalData != undefined && (
-        <HistoricalModule
-          raceType={raceType}
-          state={state}
-          dates={historicalData.historical_dates}
-          demWinPercents={historicalData.historical_dem_percents}
-          repWinPercents={historicalData.historical_repub_percents}
-          tiePercents={historicalData.historical_tie_percents}
-        />
-      )}
       {/* {weird === "" && state != State.National && (
         <FinanceModule raceType={raceType} std={std} margins={financeArray} useFinance={useFinance} />
       )} */}
@@ -504,6 +494,16 @@ export default function Home(): JSX.Element {
             useFinance={useFinance}
           />
         )}
+      {weird === "" && historicalData != undefined && (
+        <HistoricalModule
+          raceType={raceType}
+          state={state}
+          dates={historicalData.historical_dates}
+          demWinPercents={historicalData.historical_dem_percents}
+          repWinPercents={historicalData.historical_repub_percents}
+          tiePercents={historicalData.historical_tie_percents}
+        />
+      )}
       <KeyRacesModule
         setRaceType={setRaceType}
         setState={setState}

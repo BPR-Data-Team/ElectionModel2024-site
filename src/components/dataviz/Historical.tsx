@@ -18,7 +18,6 @@ interface HistoricalProps {
 
 const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
   // Example data for each month from Jan to Jan 
-  console.log(props.dates);
   const dates = props.dates;
   const year = new Date().getFullYear(); // Get the current year
 

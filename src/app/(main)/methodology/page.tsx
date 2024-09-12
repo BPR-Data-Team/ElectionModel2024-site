@@ -1,9 +1,45 @@
 import styles from "./page.module.css";
 import type { Metadata } from "next";
+import 'katex/dist/katex.min.css';
+import Latex from 'react-latex-next';
 
 export const metadata: Metadata = {
   title: "Methodology | 24cast.org",
 };
+
+const textL = `<p>Let $X_i$, a random variable, be the margin of the $i$th poll for a given race. We can represent $X_i=X_i(\\vec a)$ where $\\vec{a}$ represents the different factors in a poll: methodology, time until the election, pollster, sample size, etc.</p>
+<p>Let $\\mu$ be the true margin of the race. Our goal is to get an unbiased estimate $\\hat{\\mu}$ with minimum variance. To do this, we need two things for $X_i$:</p>
+<ol>
+<li>Bias ($B_i$): $\\mathbf{E}\\left[X_i(\\vec{a}) - \\mu
+\\right]$</li>
+<li>Variance ($\\sigma^2_i$): $\\mathbf{E}\\left[(X_i(\\vec{a}) - \\mathbf{E}[X_i(\\vec{a})])^2 \\right]$
+</li>
+</ol>
+<p>We'd then use a tool called <b>bias-adjusted inverse-variance weighing</b>, and get the estimate via the following formula:</p>\\[
+\\hat{\\mu} = \\frac{\\sum_{i=1}^n \\frac{(X_i - B_i)}{\\sigma^2_i}}{\\sum_{i=1}^n \\frac{1}{\\sigma^2_i}}
+\\]
+<p>This formula finds <b>exactly</b> what we want: an unbiased, minimum-variance estimate for the margin of the race these polls are trying to predict. All that's left is to find a way to determine the bias and variance for every poll. This is... easier said than done.</p>
+<p>Bias is relatively simple: we create an algorithm (in this case, using SVM) that takes in $\\vec{a}$ and predicts $X_i - \\mu$ for each poll.</p>
+<p>Variance is more difficult. The variance of a poll does not depend on the true margin, but counterfactual worlds where the result of the poll is different due to pure randomness. Of course, some polls may have different variances, due to methodology, etc.</p>
+<p>Instead of creating an algorithm to predict the variance for each poll (an impossible task), we instead predicted the MSE (mean-squared error): $(X_i - \\mu)^2$.</p>
+<p>A well-known mathematical formula called <b>bias-variance decomposition</b> relates these formulas. In particular, it says that $MSE = B^2 + \\sigma^2$. We've got bias, and we've got MSE -- so we can easily calculate variance from each poll.</p>
+<p>With that done, we can use bias-adjusted inverse-variance weighing and get what is essentially the mathematically best possible polling average.</p>
+<p>There's a couple more specifics:</p>
+<ol>
+<li>We use squared-error for our loss function on these algorithms, since minimizing the MSE is equivalent to finding the mean (and that's exactly what we want, seeing as how the mean is merely a sample version of the expected value).</li>
+<li>For our variables, we use: sample size, partisanship of the pollster, methodology (one-hot), how long since the poll was conducted, and which pollster conducted the poll (one-hot, only including pollsters with more than 20 historical polls)</li>
+</ol>
+<p>Once we&apos;re done with all this math, we create a series of different variables related to polling. We create the following:</p>
+<ol>
+<li>Bias-adjusted inverse-variance weighted mean estimate</li>
+<li>Bias-adjusted inverse-variance weighted lower estimate (95% CI)</li>
+<li>Bias-adjusted inverse-variance weighted upper estimate (95% CI)</li>
+<li>Unweighted mean estimate (a simple average of the polls)</li>
+<li>Unweighted lower estimate </li>
+<li>Unweighted upper estimate</li>
+</ol>
+<p>Obviously, this polling methodology is not perfect. While it did reduce our average error by 10%, it&apos;s only as good as the data it is given. Each year, the political environment of America finds new ways to mess up polling&mdash;and there&apos;s effectively nothing aggregators can do about it. What we can do is look to the past and take every bit of knowledge we can glean, and that&apos;s exactly what this change does!</p>
+`
 
 const Methodology: React.FC = () => {
   return (
@@ -37,15 +73,6 @@ const Methodology: React.FC = () => {
             <h4>Data Used</h4>
             <p>We used data from FiveThirtyEight, Cook Political Report, Sabato&apos;s Crystal Ball, and FRED, among many others. A list of attributed data sources can be found in our <a className={styles.linkText} href="https://github.com/BPR-Data-Team/ElectionModel2024/blob/main/DataCitations.md">GitHub</a>. Our final dataset had more than 100 columns, with data ranging from polling averages to campaign finance to voting restrictions. The full list can be found <a className={styles.linkText} href="https://github.com/BPR-Data-Team/ElectionModel2024/tree/main/cleaned_data">here</a>, but there are a few specific columns that merit additional discussion on this page.</p>
 
-            <h3>Polls</h3>
-            <p>Below, we describe how we get pollster ratings. However, we must aggregate these ratings into a single number afterward for them to be useful in any way. We do so by conducting a meta-analysis of the polls, in two different ways: </p>
-            <ol>
-            <li>Unweighted average: In this average, we do not care about pollster ratings. We take the standard deviation of each poll (calculated by the sample size) and conduct a meta-analysis over all polls in that race, getting an unweighted estimate, as well as a lower and upper bound. </li>
-            <li>Weighted average: Here, we do care about pollster ratings. We translate the often-negative rating to a positive value via softmax, which means that each race has a set of weights that add to 1. Similarly to the unweighted average, we conduct a weighted meta-analysis based on the sample size and get a lower/upper bound</li>
-            </ol>
-            <p>Since online/phone polls often reach completely different results based on the age groups they contact more heavily, we conduct additional meta-analyses to get the expected online poll margin and phone poll margin. This allows our model to correct for any major discrepancies in young/old voters between different polling methods. 
-            
-            </p>
             <h3>Generic Ballot</h3>
             <p>The generic ballot (defined as the national Democratic % - Republican %) is a key feature in our predictions. Though it does not play a large role by itself, when added to past elections (for example, how much more Democratic a state is relative to the generic ballot), it becomes very useful. As such, we define a series of different generic ballots, allowing the model to decide which is more important. They are:</p>
             <ol>
@@ -55,19 +82,20 @@ const Methodology: React.FC = () => {
             <h3>Incumbent Differential</h3>
             <p>In addition to including incumbency in our model, we also include how much better a given incumbent performs than we&apos;d expect, given their jurisdictions Cook PVI and Generic Ballot. This allows us to more accurately predict races like Vermont&apos;s Gubernatorial where a Republican will almost certainly win despite the state itself being a safe Democratic seat for presidency.
             </p>
-            </div>
-            <div className={styles.main}>
+
             <h3>Pollster Ratings</h3>
-            <p>To analyze polls, we decided to create our own pollster ratings. If we created one pollster rating for 2024, we could not apply that rating to previous elections since we would be using the results of polls from those years to predict those same elections. In the data science world, this is called &ldquo;data leakage&rdquo; and it&apos;s a problem we faced at every stage of our work. We wanted to be as sure as possible that our predictions reflected the data we would have prior to the election, and data leakage would destroy that very important assumption.</p>
-            <p>To avoid data leakage here, we created a new set of pollster ratings for every election year, based on all polls within the last 12 years of that election. So, in our training data for the 2020 election, we used polls from 2008-2018 to get pollster ratings. We developed a 4-step process for determining pollster ratings for an election year.</p>
+            <p>After September 11, 2024 (<a href="#changelog" className={styles.linkText}>see details in our changelog</a>), our polling averaging methodology became significantly more accurate. It has also become significantly more complicated. We&apos;re providing both a high-level overview of our method and a low-level mathematical description for those who may be interested.</p>
+            <p><i>High-Level Overview:</i></p>
+            <p>Our main goal was to maximize the amount of information we can get out of every poll. Polls report a detailed methodology, sample size, conflicts of interest, etc. There is a significant amount of data for those who are willing to look&mdash;so that&apos;s exactly what we did!</p>
+            <p>Previously, we only took three things into account in our pollster averages:</p>
             <ol>
-            <li>For all polls of the previous 12 years, we first trained an XGBoost algorithm on all pollster-agnostic features (sample size, type of election, year, online/call, etc.) to predict how different methodologies affect pollster error (which we defined as |predicted margin - actual margin|).</li>
-            <li>We then used this algorithm to see how much error we&apos;d expect each poll to have, given the pollster-agnostic features. For example, our pollster-rating model might predict that a poll conducted (1) six weeks before an election, (2) using landlines, and (3) in a house race, would have 3.5 points of error on average.</li>
-            <li>For every poll, calculate how much better/worse that pollster was than what we would expect, given their methodology.</li>
-            <li>Combine these polls to get the standard deviation and average for each pollster, and construct confidence intervals for each pollster&apos;s differential. Since most pollsters did not conduct enough polls to assume normality in the distribution of errors, we used a t-distribution to find a 95% confidence interval. From there, we calculated the <b>lower bound</b> on each pollster&apos;s differential. In the case of pollsters with only 1 past poll, we cannot construct a confidence interval, so we do not include them in the list of ranked pollsters.</li>
+              <li>Sample size</li>
+              <li>Online/offline methodology</li>
+              <li>How good a pollster is, keeping all other factors constant (like methodology)</li>
             </ol>
-            <p>After all of this math, what we get is a <i>worst-case</i> guess for how a pollster fares compared to others using the same methodology. A positive value in this weight gives us confidence that the pollster has conducted enough high-quality polls that it will continue to perform better than other pollsters with the same methodology. For those who want to see who these pollsters are, check out our <a className={styles.linkText} href="https://github.com/BPR-Data-Team/ElectionModel2024/blob/main/cleaned_data/Pollster%20Ratings.csv">Pollster Ratings</a> file on our GitHub repository.</p>
-            <p>We then ran these models on every election going back to 2002. The pollster ratings used for our current predictions come from polls conducted between 2010-2022. </p>
+            <p>This creates a fairly good polling average! However, it leaves out key information (what about other methodologies, or partisanship in pollsters?) that we simply could not fit in our already-large model without significantly increasing error. We&apos;ve instead created machine learning models that predict how well each poll will perform, given their methodology, pollster history, sample size, time since poll conducted, and partisanship of the pollster. We then combine these polls to get what is effectively the most mathematically accurate pollster averages given the information we have.</p>
+            <p><i>Low-Level Math:</i></p>
+            <Latex>{textL}</Latex>
             </div>
             <div className={styles.main}>
             <h2>Backtesting</h2>

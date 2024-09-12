@@ -3,6 +3,7 @@ import { RaceType } from "@/types/RaceType";
 import Highcharts from "highcharts";
 import { useLayoutEffect, useEffect, useState } from "react";
 import { State } from "@/types/State";
+import styles from "../modules/PredictionModule.module.css";
 
 interface HistoricalProps {
   raceType: RaceType;
@@ -184,7 +185,24 @@ const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
     }
   }, [isClient, seriesData]);
 
-  return <div id="container6"></div>;
+  return (
+    <div id="historical_graph">
+      <div id="container6"></div>
+      <div id="historical-disclaimer">
+        <p className={styles.note} id="historical-disclaimer-text">
+          * Significant daily fluctuations are often linked to new campaign
+          finance information or updates in modeling approach (click to see{" "}
+          <a
+            href="https://24cast.org/methodology#changelog"
+            className={styles.linkText}
+          >
+            changelog
+          </a>
+          )
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default Historical;

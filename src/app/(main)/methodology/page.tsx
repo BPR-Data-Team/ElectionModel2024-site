@@ -15,18 +15,18 @@ const textL = `<p>Let $X_i$, a random variable, be the margin of the $i$th poll 
 <li>Variance ($\\sigma^2_i$): $\\mathbf{E}\\left[(X_i(\\vec{a}) - \\mathbf{E}[X_i(\\vec{a})])^2 \\right]$
 </li>
 </ol>
-<p>We'd then use a tool called <b>bias-adjusted inverse-variance weighing</b>, and get the estimate via the following formula:</p>\\[
+<p>We&apos;d then use a tool called <b>bias-adjusted inverse-variance weighing</b>, and get the estimate via the following formula:</p>\\[
 \\hat{\\mu} = \\frac{\\sum_{i=1}^n \\frac{(X_i - B_i)}{\\sigma^2_i}}{\\sum_{i=1}^n \\frac{1}{\\sigma^2_i}}
 \\]
-<p>This formula finds <b>exactly</b> what we want: an unbiased, minimum-variance estimate for the margin of the race these polls are trying to predict. All that's left is to find a way to determine the bias and variance for every poll. This is... easier said than done.</p>
+<p>This formula finds <b>exactly</b> what we want: an unbiased, minimum-variance estimate for the margin of the race these polls are trying to predict. All that&apos;s left is to find a way to determine the bias and variance for every poll. This is... easier said than done.</p>
 <p>Bias is relatively simple: we create an algorithm (in this case, using SVM) that takes in $\\vec{a}$ and predicts $X_i - \\mu$ for each poll.</p>
 <p>Variance is more difficult. The variance of a poll does not depend on the true margin, but counterfactual worlds where the result of the poll is different due to pure randomness. Of course, some polls may have different variances, due to methodology, etc.</p>
 <p>Instead of creating an algorithm to predict the variance for each poll (an impossible task), we instead predicted the MSE (mean-squared error): $(X_i - \\mu)^2$.</p>
-<p>A well-known mathematical formula called <b>bias-variance decomposition</b> relates these formulas. In particular, it says that $MSE = B^2 + \\sigma^2$. We've got bias, and we've got MSE -- so we can easily calculate variance from each poll.</p>
+<p>A well-known mathematical formula called <b>bias-variance decomposition</b> relates these formulas. In particular, it says that $MSE = B^2 + \\sigma^2$. We&apos;ve got bias, and we&apos;ve got MSE -- so we can easily calculate variance from each poll.</p>
 <p>With that done, we can use bias-adjusted inverse-variance weighing and get what is essentially the mathematically best possible polling average.</p>
-<p>There's a couple more specifics:</p>
+<p>There&apos;s a couple more specifics:</p>
 <ol>
-<li>We use squared-error for our loss function on these algorithms, since minimizing the MSE is equivalent to finding the mean (and that's exactly what we want, seeing as how the mean is merely a sample version of the expected value).</li>
+<li>We use squared-error for our loss function on these algorithms, since minimizing the MSE is equivalent to finding the mean (and that&apos;s exactly what we want, seeing as how the mean is merely a sample version of the expected value).</li>
 <li>For our variables, we use: sample size, partisanship of the pollster, methodology (one-hot), how long since the poll was conducted, and which pollster conducted the poll (one-hot, only including pollsters with more than 20 historical polls)</li>
 </ol>
 <p>Once we&apos;re done with all this math, we create a series of different variables related to polling. We create the following:</p>
@@ -124,6 +124,13 @@ const Methodology: React.FC = () => {
             </div>
             <div className={styles.main} id="changelog">
             <h2>Changelog</h2>
+            <p><b>September 11:</b> Consistent website visitors (or viewers of our new historical graphs) may notice a change of our predictions on September 11. In preparation for the final 50 days, we&apos;ve made 3 under-the-hood changes that have especially impacted our predictions for the Presidential and House elections. As a fully open-source model, we want to make sure everybody knows exactly what these changes are and why we made them. We&apos;re particularly proud of the first of these changes, which was a multi-month, combined effort of mathematics specialists designing a method to get the maximum value out of every single poll.</p>
+            <p><i>Poll Averaging:</i></p>
+            <p>We’ve completely revamped our polling averaging methodology. Read our Polling Average section in this methodology for a detailed explanation of our new methods and their mathematical underpinnings.</p>
+            <p><i>Generic Ballot (and regex…):</i></p>
+            <p>When we searched through our codebase again to remove any possible problems, we noticed a problem with one of our lines of regex that utilized 2020 generic ballot results instead of 2022 generic ballot results for some House races. This meant that we erroneously underestimated the strength of strong House incumbents. The combination of this and our improved polling averages pushed our predictions for some House races a few points to the left. We now think Democrats are clear favorites to take the House.</p>
+            <p><i>Candidates that dropped out:</i></p>
+            <p>Some candidates, such as Chris Sununu (NH-R), recently announced they would not seek reelection despite having the opportunity to. We&apos;ve removed incumbency status from these races. This affected around 20 total races across all Senate, House, and Governor races.</p>
             <p><b>August 20:</b> Our team identified that, though we had filtered Vice President Harris from state-specific polls before President Biden&apos;s withdrawal from candidacy, generic ballot polls for Harris pre-withdrawal remained in our dataset. We have updated our codebase to remove all pre-withdrawal presidential polls—both state-specific and generic. This change and an influx of new polls during and directly before the DNC have resulted in a significant shift leftward for congressional and presidential races.</p>
             <p><b>August 3: </b> Previously, our model predicted the outcome of the upcoming November 5 election by incorporating uncertainty into the polls to account for increased unpredictability as we move further from the election date. However, we have decided to eliminate this added uncertainty and instead predict the election results <b>as if the election were held today.</b> This change minimizes assumptions and more accurately reflects the output of our machine learning algorithm without adding uncertainty.</p>
             </div>

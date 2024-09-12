@@ -45,6 +45,7 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
       </head>
       <body className={inter.className}>
+      <Banner />
         <div className="wrapper">
           <Header />
           <div className="content">

@@ -15,7 +15,7 @@ interface HistoricalProps {
 }
 
 const Historical: React.FC<HistoricalProps> = (props: HistoricalProps) => {
-  const [isClient, setIsClient] = useState(false);
+const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     // This ensures the component renders only on the client side.

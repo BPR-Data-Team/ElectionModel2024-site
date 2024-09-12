@@ -321,7 +321,6 @@ export default function Home(): JSX.Element {
       enabled: raceType !== RaceType.Unset, // Only run the query if raceType and state are set
     }
   );
-  console.log(historicalData);
 
   useEffect(() => {
     let active = true;
@@ -463,16 +462,6 @@ export default function Home(): JSX.Element {
       {weird === "" && state !== State.National && (
         <SHAPModule SHAPPredictions={SHAPFactors} />
       )}
-      {weird === "" && historicalData != undefined && (
-        <HistoricalModule
-          raceType={raceType}
-          state={state}
-          dates={historicalData.historical_dates}
-          demWinPercents={historicalData.historical_dem_percents}
-          repWinPercents={historicalData.historical_repub_percents}
-          tiePercents={historicalData.historical_tie_percents}
-        />
-      )}
       {state === State.National && raceType === RaceType.Presidential && (
         <div className={styles.nationalMaps} id="likely-outcomes">
           <NationalMapModule
@@ -505,6 +494,16 @@ export default function Home(): JSX.Element {
             useFinance={useFinance}
           />
         )}
+      {weird === "" && historicalData != undefined && (
+        <HistoricalModule
+          raceType={raceType}
+          state={state}
+          dates={historicalData.historical_dates}
+          demWinPercents={historicalData.historical_dem_percents}
+          repWinPercents={historicalData.historical_repub_percents}
+          tiePercents={historicalData.historical_tie_percents}
+        />
+      )}
       <KeyRacesModule
         setRaceType={setRaceType}
         setState={setState}

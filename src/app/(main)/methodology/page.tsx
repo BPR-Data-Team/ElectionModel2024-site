@@ -19,7 +19,7 @@ const textL = `<p>Let $X_i$, a random variable, be the margin of the $i$th poll 
 \\hat{\\mu} = \\frac{\\sum_{i=1}^n \\frac{(X_i - B_i)}{\\sigma^2_i}}{\\sum_{i=1}^n \\frac{1}{\\sigma^2_i}}
 \\]
 <p>This formula finds <b>exactly</b> what we want: an unbiased, minimum-variance estimate for the margin of the race these polls are trying to predict. All that&apos;s left is to find a way to determine the bias and variance for every poll. This is... easier said than done.</p>
-<p>Bias is relatively simple: we create an algorithm (in this case, using SVM) that takes in $\\vec{a}$ and predicts $X_i - \\mu$ for each poll.</p>
+<p>Bias is relatively simple: we create an algorithm (in this case, using SVM, since it achieved lowest error and is quite good at predicting outside the training set) that takes in $\\vec{a}$ and predicts $X_i - \\mu$ for each poll.</p>
 <p>Variance is more difficult. The variance of a poll does not depend on the true margin, but counterfactual worlds where the result of the poll is different due to pure randomness. Of course, some polls may have different variances, due to methodology, etc.</p>
 <p>Instead of creating an algorithm to predict the variance for each poll (an impossible task), we instead predicted the MSE (mean-squared error): $(X_i - \\mu)^2$.</p>
 <p>A well-known mathematical formula called <b>bias-variance decomposition</b> relates these formulas. In particular, it says that $MSE = B^2 + \\sigma^2$. We&apos;ve got bias, and we&apos;ve got MSE -- so we can easily calculate variance from each poll.</p>
@@ -83,7 +83,7 @@ const Methodology: React.FC = () => {
             <p>In addition to including incumbency in our model, we also include how much better a given incumbent performs than we&apos;d expect, given their jurisdictions Cook PVI and Generic Ballot. This allows us to more accurately predict races like Vermont&apos;s Gubernatorial where a Republican will almost certainly win despite the state itself being a safe Democratic seat for presidency.
             </p>
 
-            <h3>Pollster Ratings</h3>
+            <h3>Polls</h3>
             <p>After September 11, 2024 (<a href="#changelog" className={styles.linkText}>see details in our changelog</a>), our polling averaging methodology became significantly more accurate. It has also become significantly more complicated. We&apos;re providing both a high-level overview of our method and a low-level mathematical description for those who may be interested.</p>
             <p><i>High-Level Overview:</i></p>
             <p>Our main goal was to maximize the amount of information we can get out of every poll. Polls report a detailed methodology, sample size, conflicts of interest, etc. There is a significant amount of data for those who are willing to look&mdash;so that&apos;s exactly what we did!</p>

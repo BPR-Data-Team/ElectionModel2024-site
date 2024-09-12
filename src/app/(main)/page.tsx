@@ -466,15 +466,15 @@ export default function Home(): JSX.Element {
         <div className={styles.nationalMaps} id="likely-outcomes">
           <NationalMapModule
             rank={1}
-            probability={30}
+            probability={36}
             winner={"Kamala Harris"}
-            winnerEV={319}
+            winnerEV={"319 or 320"}
           />
           <NationalMapModule
             rank={2}
-            probability={9}
+            probability={6}
             winner={"Donald Trump"}
-            winnerEV={272}
+            winnerEV={"272"}
           />
         </div>
       )}

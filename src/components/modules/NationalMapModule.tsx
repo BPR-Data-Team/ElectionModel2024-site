@@ -114,7 +114,7 @@ interface NationalMapModuleProps {
     rank: number;
     probability: number;
     winner: string;
-    winnerEV: number;
+    winnerEV: string;
 }
 const NationalMapModule: React.FC<NationalMapModuleProps> = ({ rank, probability, winner, winnerEV }) => {
     return (

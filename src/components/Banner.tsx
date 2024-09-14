@@ -4,10 +4,7 @@ export default function Banner(): JSX.Element {
   return (
     <div className={styles.banner}>
       <div className={styles.bannerText}>
-        Our predictive accuracy will be lowered for the presidential
-        race until polling data featuring Vice President Harris becomes substantial. 
-        {" "}<a href="https://www.instagram.com/p/C9stR0NPHAR/">Read our statement.</a>
-      </div>
+        September 11: We significantly upgraded our poll averaging methodology, and fixed some code relating to House races. Read more in our <a href="/methodology#changelog">changelog.</a>.</div>
     </div>
   );
 }

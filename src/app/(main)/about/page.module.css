@@ -152,7 +152,7 @@
   .prImage {
     scale: 0.8;
   }
-  .prGrid a:first-of-type img {
+  .prGrid a[href*="buzzsprout"] img {
     scale: 1;
   }
 }

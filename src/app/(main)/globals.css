@@ -173,3 +173,7 @@ footer a {
   }
 
 }
+
+.katex * {
+  font-family: unset;
+}

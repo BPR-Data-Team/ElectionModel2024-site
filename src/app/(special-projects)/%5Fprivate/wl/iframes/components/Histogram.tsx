@@ -105,6 +105,7 @@ function makeHistogram(
     chart: {
       type: "column",
       backgroundColor: "white",
+      height: 250,
     },
     title: {
       text: "",
@@ -116,8 +117,8 @@ function makeHistogram(
         text: xAxisTitle,
         style: {
           color: "black",
-          fontSize: "18px",
-          fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
+          fontSize: "1rem",
+          fontFamily: "var(--radioCanada), sans-serif",
         },
       },
       labels: {
@@ -135,7 +136,7 @@ function makeHistogram(
         },
         style: {
           color: "black",
-          fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
+          fontFamily: "var(--radioCanada), sans-serif",
         },
       },
     },
@@ -144,14 +145,14 @@ function makeHistogram(
         text: "Simulations",
         style: {
           color: "black",
-          fontSize: "18px",
-          fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
+          fontSize: "1rem",
+          fontFamily: "var(--radioCanada), sans-serif",
         },
       },
       labels: {
         style: {
           color: "black",
-          fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
+          fontFamily: "var(--radioCanada), sans-serif",
         },
       },
     },
@@ -191,8 +192,8 @@ function makeHistogram(
         return `<b>Tie</b><br />Simulations: <b>${formatNumber(this.y)}</b>`;
       },
       style: {
-        fontSize: "12px",
-        fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
+        fontSize: "0.8rem",
+        fontFamily: "var(--radioCanada), sans-serif",
       },
     },
     series: [

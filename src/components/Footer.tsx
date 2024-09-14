@@ -1,8 +1,12 @@
 import styles from "./Footer.module.css";
+/*
 import Image from "next/image";
 import InstaIcon from "image-assets/instagram.svg";
 import LinkedinIcon from "image-assets/linkedin.svg";
 import TwitterIcon from "image-assets/twitter.svg";
+import Github from "image-assets/github.svg"
+*/
+import { FaInstagram, FaLinkedinIn, FaTwitter, FaGithub } from "react-icons/fa6";
 
 export default function Footer(): JSX.Element {
   return (
@@ -12,18 +16,7 @@ export default function Footer(): JSX.Element {
           <a className={styles.footerText}>© 2024 Brown Political Review</a>
         </div>
         <div>
-          <span className={styles.footerText}>
-            A CC BY-SA 4.0 license applies to this website, and an MIT license
-            applies to this website and some of its underlying data. See more
-            information at our
-            <span> </span>
-            <a
-              className={styles.linkTextAlt}
-              href="https://github.com/BPR-Data-Team/ElectionModel2024"
-            >
-              Github
-            </a>.
-          </span>
+          <span className={styles.footerText}>25 George Street, Providence, RI 02912</span>
         </div>
         <div>
           <span className={styles.footerText}>
@@ -47,34 +40,16 @@ export default function Footer(): JSX.Element {
           </a>
           <span className={styles.betweenText}> | </span>
           <a className={styles.linkText} href="https://www.instagram.com/24castbrown/">
-          <Image
-              src={InstaIcon}
-              width={undefined}
-              height={13}
-              alt={"Instagram"}
-              priority={false}
-              className={styles.socialicon}
-            />
+            <FaInstagram className={styles.socialicon} title="Instagram" />
           </a>
           <a className={styles.linkText} href="https://twitter.com/Brown24cast">
-          <Image
-              src={TwitterIcon}
-              width={undefined}
-              height={13}
-              alt={"Twitter"}
-              priority={false}
-              className={styles.socialicon}
-            />
+            <FaTwitter className={styles.socialicon} title="Twitter" />
           </a>
           <a className={styles.linkText} href="https://www.linkedin.com/company/24castorg/">
-          <Image
-              src={LinkedinIcon}
-              width={undefined}
-              height={13}
-              alt={"LinkedIn"}
-              priority={false}
-              className={styles.socialicon}
-            />
+            <FaLinkedinIn className={styles.socialicon} title="LinkedIn" />
+          </a>
+          <a className={styles.linkText} href="https://github.com/BPR-Data-Team/ElectionModel2024">
+            <FaGithub className={styles.socialicon} title="GitHub" />
           </a>
         </div>
       </div>

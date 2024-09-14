@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
+import Providers from "../../providers/ReactQueryProviders";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,10 +45,12 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
       </head>
       <body className={inter.className}>
-        <Banner />
+        {/* <Banner /> */}
         <div className="wrapper">
           <Header />
-          <div className="content">{children}</div>
+          <div className="content">
+            <Providers>{children}</Providers>
+          </div>
         </div>
         <Footer />
       </body>

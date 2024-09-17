@@ -9,11 +9,16 @@ import jed from "image-assets/headshots/headshot5.webp";
 import alex from "image-assets/headshots/headshot6.webp";
 import asher from "image-assets/headshots/headshot7.webp";
 import devon from "image-assets/headshots/headshot8.webp";
-import nikhil from "image-assets/headshots/headshot9.webp";
+import nikhil from "image-assets/headshots/nikhilNew.webp";
 import chai from "image-assets/headshots/headshot10.webp";
 import john from "image-assets/headshots/headshot11.webp";
 import javier from "image-assets/headshots/headshot12.webp";
 import blank from "image-assets/icon-set/num-icon256.png";
+import louis from "image-assets/headshots/louis.webp";
+import emily from "image-assets/headshots/emily.webp";
+import stella from "image-assets/headshots/stella.webp";
+import zoey from "image-assets/headshots/zoey.webp";
+import tiziano from "image-assets/headshots/tiziano.webp";
 import poder from "image-assets/press-logos/poder.webp"
 import bizjournal from "image-assets/press-logos/bizjournal.svg"
 import marketwatch from "image-assets/press-logos/marketwatch.svg"
@@ -26,20 +31,32 @@ export const metadata: Metadata = {
 };
 
 const people = [
-  { id: "Asher", name: 'Asher Labovich, Founder', image: asher, year: "Brown '26", bio: "R is Asher's true love."},
-  { id: "Ariel", name: 'Ariel Shifrin, Head of Operations', image: blank, year: "Brown '27", bio: 'Ariel was the headshot photographer.'},
-  { id: "Akshay", name: 'Akshay Mehta, Technical Director', image: akshay, year: "Brown '26", bio: ''},
-  { id: "Alex", name: "Alex Wick, Frontend Lead", image: alex, year: "Brown '25", bio: "Alex is getting kind of alright at playing drums."},
-  { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: ''},
-  { id: "Amy", name: "Amy Qiao, Social Media/Data Lead", image: amy, year: "Brown '26", bio: ''},
-  { id: "Javier", name: 'Javier Niño-Sears, Data Contributor', image: javier, year: "Brown '25", bio: 'Javier is probably watching multiple soccer matches simultaneously.'},
-  { id: "Chai", name: 'Chai Harsha, Data Contributor', image: chai, year: "Brown '26", bio: "Don't tell Asher what Chai did to his model when he wasn't looking."},
-  { id: "Jed", name: 'Jed Morgan, Data Contributor', image: jed, year: "Brown '26", bio: 'Jed is concentrating in IAPA at Brown with a focus on national security.'},
-  { id: 'Nikhil', name: 'Nikhil Das, Data Contributor', image: nikhil, year: "Brown '27", bio: "In Nikhil's perfect world, it's all about boba, jazz and great banter!"},
-  { id: "John", name: 'John Huang, Web Developer', image: john, year: "Brown '27", bio: ''},
-  { id: 'Devon', name: 'Devon Kear-Leng, Web Developer', image: devon, year: "Brown '26", bio: ''},
-  { id: "Logan", name: 'Logan Rabe, Political Specialist', image: logan, year: "Brown '26", bio: ''},
-]
+  { id: "Asher", name: "Asher Labovich, Founder", image: asher, year: "Brown '26", bio: "R is Asher's true love." },
+  { id: "Ariel", name: "Ariel Shifrin, Head of Operations", image: blank, year: "Brown '27", bio: "Ariel was the headshot photographer." },
+  { id: "Akshay", name: "Akshay Mehta, Technical Director", image: akshay, year: "Brown '26", bio: "" },
+  { id: "Amy", name: "Amy Qiao, Comms Lead", image: amy, year: "Brown '26", bio: "Amy can not shut up about math." },
+  { id: "Alex", name: "Alex Wick, Core Web Ops Lead", image: alex, year: "Brown '25", bio: "Alex is getting kind of alright at playing drums." },
+  { id: "Logan", name: "Logan Rabe, Politics Director", image: logan, year: "Brown '26", bio: "" },
+  { id: "Ahad", name: "Ahad Bashir, Developer", image: blank, year: "Brown Grad '25", bio: "Ahad loves writing music and playing the guitar." },
+  { id: "Ben", name: "Ben Levy, Developer", image: blank, year: "Brown '27", bio: "You will not hear from Ben when the Yankees are playing." },
+  { id: "Chai", name: "Chai Harsha, Developer", image: chai, year: "Brown '26", bio: "Don't tell Asher what Chai did to his model when he wasn't looking." },
+  { id: "David", name: "David Chanin, Press Liason", image: blank, year: "Brown '27", bio: "David wishes they brought back nap time." },
+  { id: "Devon", name: "Devon Kear-Leng, Developer", image: devon, year: "Brown '26", bio: "" },
+  { id: "Emily", name: "Emily Hong, Developer", image: emily, year: "Brown '26.5", bio: "Emily enjoys following US politics while sitting safely at home in Canada." },
+  { id: "Isabelle", name: "Isabelle Shapiro, Developer", image: blank, year: "Brown '26", bio: "Isabelle budgets her paychecks as 'savings' and 'coffee.'" },
+  { id: "Javier", name: "Javier Niño-Sears, Developer", image: javier, year: "Brown '25", bio: "Javier is probably watching multiple soccer matches simultaneously." },
+  { id: "Jed", name: "Jed Morgan, Data Contributor", image: jed, year: "Brown '26", bio: "" },
+  { id: "Jo", name: "Jo Gasior-Kavishe, Comms", image: blank, year: "Brown '25", bio: "Jo wishes only for endless vanilla ice cream and endless cool math classes." },
+  { id: "John", name: "John Huang, Developer", image: john, year: "Brown '27", bio: "In his free time, you can find John enjoying the beautiful weather." },
+  { id: "Louis", name: "Louis Geer, Developer", image: louis, year: "Brown '27", bio: "" },
+  { id: "Milan", name: "Milan Capoor, Developer", image: blank, year: "Brown '26", bio: "Milan is probably either making a spreadsheet or ranting about colonialism." },
+  { id: "Nikhil", name: "Nikhil Das, Marketing/Events", image: nikhil, year: "Brown '27", bio: "Math, boba, and jazz—Nikhil lives to share and enjoy it all!" },
+  { id: "Noah", name: "Noah Kim, Developer", image: blank, year: "Brown '27", bio: "" },
+  { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: "" },
+  { id: "Stella", name: "Stella Tsogtjargal, Developer", image: stella, year: "Brown '26", bio: "Stella is probably watching a cartoon right now." },
+  { id: "Tiziano", name: "Tiziano Pardo, Events Coordinator", image: tiziano, year: "Brown '28", bio: "" },
+  { id: "Zoey", name: "Zoey Katzive, Developer", image: zoey, year: "Brown Grad '25", bio: "" }
+];
 
 const allpeople = [
   { id: "Ryan", name: 'Ryan Doherty', title: 'Data Director' },

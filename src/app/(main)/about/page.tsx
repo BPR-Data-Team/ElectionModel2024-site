@@ -19,6 +19,7 @@ import emily from "image-assets/headshots/emily.webp";
 import stella from "image-assets/headshots/stella.webp";
 import zoey from "image-assets/headshots/zoey.webp";
 import tiziano from "image-assets/headshots/tiziano.webp";
+import jo from "image-assets/headshots/jo.webp"
 import poder from "image-assets/press-logos/poder.webp"
 import bizjournal from "image-assets/press-logos/bizjournal.svg"
 import marketwatch from "image-assets/press-logos/marketwatch.svg"
@@ -46,7 +47,7 @@ const people = [
   { id: "Isabelle", name: "Isabelle Shapiro, Developer", image: blank, year: "Brown '26", bio: "Isabelle budgets her paychecks as 'savings' and 'coffee.'" },
   { id: "Javier", name: "Javier Niño-Sears, Developer", image: javier, year: "Brown '25", bio: "Javier is probably watching multiple soccer matches simultaneously." },
   { id: "Jed", name: "Jed Morgan, Data Contributor", image: jed, year: "Brown '26", bio: "" },
-  { id: "Jo", name: "Jo Gasior-Kavishe, Comms", image: blank, year: "Brown '25", bio: "Jo wishes only for endless vanilla ice cream and endless cool math classes." },
+  { id: "Jo", name: "Jo Gasior-Kavishe, Comms", image: jo, year: "Brown '25", bio: "Jo wishes only for endless vanilla ice cream and endless cool math classes." },
   { id: "John", name: "John Huang, Developer", image: john, year: "Brown '27", bio: "In his free time, you can find John enjoying the beautiful weather." },
   { id: "Louis", name: "Louis Geer, Developer", image: louis, year: "Brown '27", bio: "" },
   { id: "Milan", name: "Milan Capoor, Developer", image: blank, year: "Brown '26", bio: "Milan is probably either making a spreadsheet or ranting about colonialism." },

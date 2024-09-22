@@ -10,7 +10,7 @@ const TOSPage: React.FC = () => {
         <div className={styles.overall}>
             <div className={styles.main}>
                 <h2>Terms of Use</h2>
-                <p>Last Updated: July 26, 2024</p>
+                <p>Last Updated: September 22, 2024</p>
             </div>
             <div className={styles.main}>
                 <p>These terms and conditions (the &ldquo;Terms of Use&rdquo;) govern the use of https://24cast.org (&ldquo;24cast.org&rdquo;, the &ldquo;Site&rdquo;). This Site is owned and operated by The Brown Political Review (&ldquo;BPR&rdquo;). </p>
@@ -20,7 +20,7 @@ const TOSPage: React.FC = () => {
             </div>
             <div className={styles.main}>
                 <p><b>Intellectual Property</b></p>
-                <p>All content published and made available on our Site is under the copyright of The Brown Political Review and the Site&apos;s creators. This includes, but is not limited to images, text, logos, documents, downloadable files, and anything that contributes to the composition of our Site. The Site’s underlying codebase is open-source and is subject to a CC BY-SA 4.0 license.</p>
+                <p>All content published and made available on our Site is under the copyright of The Brown Political Review and the Site&apos;s creators. This includes, but is not limited to images, text, logos, documents, downloadable files, and anything that contributes to the composition of our Site. The Site&apos;s underlying codebase is open-source and is subject to a CC BY-SA 4.0 license.</p>
             </div>
             <div className={styles.main}>
                 <p><b>Acceptable Use</b></p>
@@ -28,13 +28,13 @@ const TOSPage: React.FC = () => {
                <ul>
                 <li>Violate the intellectual property rights of the Site owners or any third party to the Site</li>
                 <li>Attempt to reverse engineer components of the website that are not open-sourced</li>
-                <li>Make any financial decisions, including gambling, on the basis of predictions</li>
+                <li>Make any financial decisions, including gambling, on the basis of predictions, simulations, or other site content</li>
                </ul>
                <p>If we believe you are using our Site illegally or in a manner that violates these Terms of Use, we reserve the right to limit, suspend or terminate your access to our Site. We also reserve the right to take any legal steps necessary to prevent you from accessing our Site.</p>
             </div>
             <div className={styles.main}>
                 <p><b>Third-Party Content</b></p>
-                <p>By using the Site, you agree to have demographic and usage information collected through Google Analytics and Microsoft Clarity. You consent to the use of third-party cookies to collect this information and consent to the transmission of such data to third-party servers, as outlined in our Privacy Policy.</p>
+                <p>By using the Site, you agree to have demographic and usage information collected through Google Analytics and Microsoft Clarity. You consent to the use of third-party cookies to collect this information and consent to the transmission of such data to third-party servers, as outlined in our <a className={styles.linkText} href="/privacy">Privacy Policy</a>.</p>
                 <p>Any links to third-party services do not constitute endorsements of their content. 24cast.org is not responsible for any content linked on domains other than this one.</p>
             </div>
             <div className={styles.main}>
@@ -47,7 +47,7 @@ const TOSPage: React.FC = () => {
             </div>
             <div className={styles.main}>
                 <p><b>Intended Use</b></p>
-                <p>The site is intended for individuals within the United States. 24cast.org does not guarantee compliance with any laws in jurisdictions outside of the United States.</p>
+                <p>The site is intended for individuals within the United States of America. 24cast.org does not guarantee compliance with any laws in jurisdictions outside of the United States.</p>
             </div>
         </div>
 

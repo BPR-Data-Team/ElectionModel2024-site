@@ -55,7 +55,7 @@ const people = [
   { id: "Nikhil", name: "Nikhil Das, Marketing/Events", image: nikhil, year: "Brown '27", bio: "Math, boba, and jazz—Nikhil lives to share and enjoy it all!" },
   { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: "" },
   { id: "Stella", name: "Stella Tsogtjargal, Developer", image: stella, year: "Brown '26", bio: "Stella is probably watching a cartoon right now." },
-  { id: "Thomas", name: "Thomas Seeger, Comms", image: thomas, year: "Brown '27", bio: "Thomas spends his free time angrily tweeting at Elon Musk." },
+  { id: "Thomas", name: "Thomas Seeger, Digital Strategist", image: thomas, year: "Brown '27", bio: "Thomas spends his free time angrily tweeting at Elon Musk." },
   { id: "Tiziano", name: "Tiziano Pardo, Events Coordinator", image: tiziano, year: "Brown '28", bio: "" },
   { id: "Zoey", name: "Zoey Katzive, Developer", image: zoey, year: "Brown Grad '25", bio: "" }
 ];

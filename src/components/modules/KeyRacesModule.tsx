@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 
 export const races = [
-  'Washington District 3',
+  'Pennsylvania Presidential',
   'North Carolina Gubernatorial',
   'New Hampshire Gubernatorial',
   'Ohio Senate',
@@ -27,9 +27,9 @@ export default function KeyRacesModule(props: KeyRacesModuleProps): JSX.Element 
 
   function handleClick(race: string){
     if (race === races[0]){
-      props.setRaceType(RaceType.House);
-      props.setState(State.Washington);
-      props.setDistrict(3);
+      props.setRaceType(RaceType.Presidential);
+      props.setState(State.Pennsylvania);
+      props.setDistrict(0);
     }
     if (race === races[1]) {
       props.setRaceType(RaceType.Gubernatorial);

@@ -50,7 +50,7 @@ const people = [
   { id: "Jed", name: "Jed Morgan, Data Contributor", image: jed, year: "Brown '26", bio: "" },
   { id: "Jo", name: "Jo Gasior-Kavishe, Comms", image: jo, year: "Brown '25", bio: "Jo wishes only for endless vanilla ice cream and endless cool math classes." },
   { id: "John", name: "John Huang, Developer", image: john, year: "Brown '27", bio: "In his free time, you can find John enjoying the beautiful weather." },
-  { id: "Louis", name: "Louis Geer, Developer", image: louis, year: "Brown '27", bio: "" },
+  { id: "Louis", name: "Louis Geer, Development Lead", image: louis, year: "Brown '27", bio: "" },
   { id: "Milan", name: "Milan Capoor, Developer", image: blank, year: "Brown '26", bio: "Milan is probably either making a spreadsheet or ranting about colonialism." },
   { id: "Nikhil", name: "Nikhil Das, Marketing Strategist", image: nikhil, year: "Brown '27", bio: "Math, boba, and jazz—Nikhil lives to share and enjoy it all!" },
   { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: "" },

@@ -1,54 +1,53 @@
-
 .keyRaces {
-    max-width: 70%;
-    margin-block-end: 16px;
-    scroll-margin: 30px;
-  }
-  
+  max-width: 70%;
+  margin-block-end: 16px;
+  scroll-margin: 30px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.raceText {
+  color: var(--main-text-color);
+  margin-left: 5px;
+}
+
+.race {
+  display: flex;
+  align-items: center;
+  margin-right: 1.3rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1280px) {
   .grid {
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  .keyRaces {
+    max-width: 90%;
   }
 
-  .linkText {
-    color: var(--main-text-color);
-    text-decoration: none;
-    margin-left: 5px;
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .race {
-    display: flex;
-    align-items: center;
-    margin-right: 1.3rem;
-    cursor: pointer;
-  }
-  
-  @media screen and (max-width: 1280px) {
-    .grid {
-      grid-template-columns: repeat(3, 1fr); 
-    }
-  }
-  @media screen and (max-width: 768px) {
-    .keyRaces{
-      max-width:90%;
-    }
+}
 
-    .grid {
-      grid-template-columns: repeat(2, 1fr); 
-    }
+/* For Galaxy Fold */
+@media screen and (max-width: 370px) {
+  .keyRaces {
+    max-width: 100%;
   }
-  
-  /* For Galaxy Fold */
-  @media screen and (max-width: 370px){
-    .keyRaces{
-      max-width: 100%;
-    }
-    .grid {
-      grid-template-columns: repeat(1, 1fr); 
-    }
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
   }
-  
-  .exploreText {
-    margin-block-end: 12px;
-  }
+}
+
+.exploreText {
+  margin-block-end: 12px;
+}

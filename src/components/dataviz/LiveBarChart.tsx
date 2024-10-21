@@ -7,8 +7,8 @@ export const StackedBarChart = () => {
     // Define local test data
     //Add up to 100
     const testData: Record<string, number> = {
-      "Democrat": 45,
-      "Unknown": 15,
+      "Democrat": 55,
+      "Tie": 5,
       "Republican": 40,
     };
 
@@ -38,8 +38,10 @@ function createStackedBarChart(categories: string[], seriesData: { name: string;
   Highcharts.chart("container4", {
     chart: {
       type: "bar",
-      height:"150px",
-      backgroundColor:null,
+      height: "80px",
+      backgroundColor: null,
+      margin: [0, 0, 0, 0], // Remove external margins
+      spacing: [0, 0, 0, 0], // Ensure no extra spacing
     },
     credits: {
       enabled: false,
@@ -52,48 +54,38 @@ function createStackedBarChart(categories: string[], seriesData: { name: string;
         fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
       },
     },
-    colors: ["#595D9A","#505050", "#B83C2B"],
+    colors: ["#595D9A", "#505050", "#B83C2B"],
     legend: {
       enabled: false,
-      itemMarginTop:2,
     },
-    spacing: [0, 0, 0, 0],
     xAxis: {
-      categories: categories, // Single category for the stacked bar chart
-      title:null,
-      lineWidth: 0, // Remove the axis line
+      categories: categories,
+      title: null,
+      lineWidth: 0,
+      tickLength: 0, // Remove tick marks
       labels: {
-        enabled:false,
-        style: {
-          color: "black",
-          fontFamily: "Arial, sans-serif",
-        },
+        enabled: false,
       },
     },
     yAxis: {
       min: 0,
-      max: 100, // Set the maximum value to 100
-      gridLineWidth: 0, // Remove the grid lines
-      lineWidth: 0, // Remove the axis line
-      title:null,
-      stackLabels: {
-        enabled: false,
-        style: {
-          fontWeight: "bold",
-          color: "gray",
-        },
-      },
+      max: 100,
+      gridLineWidth: 0,
+      lineWidth: 0,
+      tickLength: 0, // Remove tick marks
+      title: null,
       labels: {
-        enabled:false,
-        style: {
-          fontSize: "12px",
-          fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
-        },
+        enabled: false,
       },
     },
     tooltip: {
-      // headerFormat: "<b>{point.x}</b><br/>",
       pointFormat: "{series.name}: {point.y}%",
+      formatter: function () {
+        if (this.y < 10) {
+          return this.series.name + ": " + this.y + "%";
+        }
+        return false;
+      },
       style: {
         fontSize: "12px",
         fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
@@ -101,15 +93,20 @@ function createStackedBarChart(categories: string[], seriesData: { name: string;
     },
     plotOptions: {
       series: {
-        stacking: "normal", // Enable stacking
+        stacking: "normal",
         dataLabels: {
           enabled: true,
-          // formatter: function() {
-          //   return this.y + '%'; // Add percentage sign to data labels
-          // },
+          padding: 0, // Remove padding from data labels
+          formatter: function () {
+            let label = "";
+            if (this.y >= 8) {
+              label = this.series.name + " " + this.y + "%";
+            }
+            return label;
+          },
           style: {
             color: "white",
-            fontSize:"18px",
+            fontSize: "18px",
             fontFamily: "gelica, book antiqua, georgia, times new roman, serif",
             textOutline: "none",
           },

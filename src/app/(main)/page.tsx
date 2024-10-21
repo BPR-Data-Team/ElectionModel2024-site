@@ -4,6 +4,8 @@ import styles from "./page.module.css";
 import WelcomeModule from "@/components/modules/WelcomeModule";
 import MapModule from "@/components/modules/MapModule";
 import SimulationsModule from "@/components/modules/SimulationsModule";
+import FrozenHeader from "@/components/modules/FrozenHeaderModule";
+import LiveElectionModule from "@/components/modules/LiveElectionModule";
 import HistoricalModule from "@/components/modules/HistoricalModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import NationalMapModule from "@/components/modules/NationalMapModule";
@@ -420,6 +422,13 @@ export default function Home(): JSX.Element {
           setDistrict={setDistrict}
         />
       </div>
+      <LiveElectionModule
+          bins={bins}
+          raceType={raceType}
+          state={state}
+          winner={winner}
+      />
+      <FrozenHeader/>
       <PredictionModule
         winner={winner}
         likelihood={likelihood}

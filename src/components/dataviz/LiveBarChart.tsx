@@ -1,24 +1,33 @@
-
-import Highcharts from "highcharts";
+import Highcharts, { pad } from "highcharts";
 import { useLayoutEffect } from "react";
 
-export const StackedBarChart = () => {
+interface LiveBarChartProps {
+  demPercent: number;
+  repPercent: number;
+  tiePercent: number;
+}
+
+const LiveBarChart: React.FC<LiveBarChartProps> = ({
+  demPercent,
+  repPercent,
+  tiePercent,
+}) => {
   useLayoutEffect(() => {
     // Define local test data
     //Add up to 100
-    const testData: Record<string, number> = {
-      "Democrat": 55,
-      "Tie": 5,
-      "Republican": 40,
+    const data: Record<string, number> = {
+      Democrat: demPercent,
+      Tie: tiePercent,
+      Republican: repPercent,
     };
 
     const categories: string[] = ["Live Prediction"]; // Single category for the stacked bar chart
     const seriesData: { name: string; data: number[] }[] = [];
 
     // Prepare data for the stacked bar chart using test data
-    for (const label in testData) {
-      if (Object.prototype.hasOwnProperty.call(testData, label)) {
-        const value = parseFloat(testData[label].toFixed(1));
+    for (const label in data) {
+      if (Object.prototype.hasOwnProperty.call(data, label)) {
+        const value = parseFloat(data[label].toFixed(1));
         seriesData.push({
           name: label,
           data: [value],
@@ -29,13 +38,16 @@ export const StackedBarChart = () => {
     createStackedBarChart(categories, seriesData);
   }, []);
 
-  return <div id="container4"></div>;
+  return <div id="container9"></div>;
 };
 
-export default StackedBarChart;
+export default LiveBarChart;
 
-function createStackedBarChart(categories: string[], seriesData: { name: string; data: number[] }[]) {
-  Highcharts.chart("container4", {
+function createStackedBarChart(
+  categories: string[],
+  seriesData: { name: string; data: number[] }[]
+) {
+  Highcharts.chart("container9", {
     chart: {
       type: "bar",
       height: "80px",

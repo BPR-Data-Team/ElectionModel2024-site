@@ -66,22 +66,22 @@ export default function PredictionModule(
       props.state === State.National &&
       props.margin === 50
     ) {
-      return "The Senate would be predicted to be a 50-50 split.";
+      return "The Senate is predicted to be a 50-50 split.";
     }
 
     let message: string = "";
 
     if (props.winner === Party.Democrat) {
       if (props.raceType === RaceType.Presidential) {
-        message = "Kamala Harris would be";
+        message = "Kamala Harris is";
       } else {
-        message = "Democrats would be";
+        message = "Democrats are";
       }
     } else {
       if (props.raceType === RaceType.Presidential) {
-        message = "Donald Trump would be";
+        message = "Donald Trump is";
       } else {
-        message = "Republicans would be";
+        message = "Republicans are";
       }
     }
 
@@ -175,8 +175,13 @@ export default function PredictionModule(
     }
 
     // Add conditional message for presidential and national races
-    if (props.raceType === RaceType.Presidential && props.state === State.National) {
-      message = `${props.winner === Party.Democrat ? "Kamala Harris" : "Donald Trump"} would have a ${props.likelihood}% chance of winning the presidency.`;
+    if (
+      props.raceType === RaceType.Presidential &&
+      props.state === State.National
+    ) {
+      message = `${
+        props.winner === Party.Democrat ? "Kamala Harris" : "Donald Trump"
+      } has a ${props.likelihood}% chance of winning the presidency.`;
     }
 
     return message;
@@ -202,7 +207,9 @@ export default function PredictionModule(
   useEffect(() => {
     const updateHoursToMidnight = () => {
       const now = new Date();
-      const midnightET = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+      const midnightET = new Date(
+        now.toLocaleString("en-US", { timeZone: "America/New_York" })
+      );
       midnightET.setHours(24, 0, 0, 0); // Set time to midnight
       const hours = (midnightET.getTime() - now.getTime()) / 1000 / 60 / 60;
       setHoursToMidnight(Math.ceil(hours));
@@ -217,29 +224,33 @@ export default function PredictionModule(
   return (
     <Module>
       <div>
-        <h3>In an election held today...</h3>
+        <h3>Our final prediction:</h3>
       </div>
-      
-      <div className={styles.prediction}>
-      {props.raceType === RaceType.Presidential && props.state === State.National ? (
-        <div className={styles.mainPredictionAlt}>
-          <span className={styles.mainPredictionIcon}>{icon}</span>
-          <span className={styles.mainPredictionTextAlt}>
-            {predictionMessage}
-            <br />
-            <a href="#likely-outcomes" className={styles.linkText}>
-              Scroll down to see likely electoral outcomes.
-            </a>
-          </span>
-        </div>
-      ) : (
-        <div className={styles.mainPrediction}>
-          <span className={styles.mainPredictionIcon}>{icon}</span>
-          <span className={styles.mainPredictionText}>{predictionMessage}</span>
-        </div>
-      )}
 
-        {props.raceType !== RaceType.Presidential || props.state !== State.National ? (
+      <div className={styles.prediction}>
+        {props.raceType === RaceType.Presidential &&
+        props.state === State.National ? (
+          <div className={styles.mainPredictionAlt}>
+            <span className={styles.mainPredictionIcon}>{icon}</span>
+            <span className={styles.mainPredictionTextAlt}>
+              {predictionMessage}
+              <br />
+              <a href="#likely-outcomes" className={styles.linkText}>
+                Scroll down to see likely electoral outcomes.
+              </a>
+            </span>
+          </div>
+        ) : (
+          <div className={styles.mainPrediction}>
+            <span className={styles.mainPredictionIcon}>{icon}</span>
+            <span className={styles.mainPredictionText}>
+              {predictionMessage}
+            </span>
+          </div>
+        )}
+
+        {props.raceType !== RaceType.Presidential ||
+        props.state !== State.National ? (
           props.weird == "" ? (
             <div className={styles.predictionInfo}>
               <div className={styles.predictionInfoItem}>
@@ -280,11 +291,11 @@ export default function PredictionModule(
         ) : null}
 
         <p className={styles.lastDataUpdate}>
-        <svg width="16" height="16" className={styles.liveSymbol}>
-          <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
-          <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
-        </svg>
-          Next update in {hoursToMidnight} hours
+          {/* <svg width="16" height="16" className={styles.liveSymbol}>
+            <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
+            <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
+          </svg>
+          Next update in {hoursToMidnight} hours */}
         </p>
         {props.state === State.Nebraska &&
         props.raceType === RaceType.Senate ? (

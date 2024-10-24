@@ -423,12 +423,12 @@ export default function Home(): JSX.Element {
         />
       </div>
       <LiveElectionModule
-          bins={bins}
-          raceType={raceType}
-          state={state}
-          winner={winner}
+        demPercent={50}
+        repPercent={50}
+        tiePercent={0}
+        updatedAt={new Date()}
       />
-      <FrozenHeader/>
+      {/* <FrozenHeader /> */}
       <PredictionModule
         winner={winner}
         likelihood={likelihood}

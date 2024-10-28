@@ -452,7 +452,7 @@ export default function Home(): JSX.Element {
           updatedAt={new Date()}
         />
       )}
-      {/* <FrozenHeader /> */}
+      <FrozenHeader />
       <PredictionModule
         winner={winner}
         likelihood={likelihood}

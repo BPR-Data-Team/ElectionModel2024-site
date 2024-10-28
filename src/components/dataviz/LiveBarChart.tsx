@@ -7,24 +7,17 @@ interface LiveBarChartProps {
   tiePercent: number;
 }
 
-const LiveBarChart: React.FC<LiveBarChartProps> = ({
-  demPercent,
-  repPercent,
-  tiePercent,
-}) => {
+export const LiveBarChart = (props: LiveBarChartProps) => {
   useLayoutEffect(() => {
-    // Define local test data
-    //Add up to 100
     const data: Record<string, number> = {
-      Democrat: demPercent,
-      Tie: tiePercent,
-      Republican: repPercent,
+      Democrat: props.demPercent,
+      Tie: props.tiePercent,
+      Republican: props.repPercent,
     };
 
     const categories: string[] = ["Live Prediction"]; // Single category for the stacked bar chart
     const seriesData: { name: string; data: number[] }[] = [];
 
-    // Prepare data for the stacked bar chart using test data
     for (const label in data) {
       if (Object.prototype.hasOwnProperty.call(data, label)) {
         const value = parseFloat(data[label].toFixed(1));
@@ -36,12 +29,10 @@ const LiveBarChart: React.FC<LiveBarChartProps> = ({
     }
 
     createStackedBarChart(categories, seriesData);
-  }, []);
+  }, [props.demPercent, props.repPercent, props.tiePercent]);
 
   return <div id="container9"></div>;
 };
-
-export default LiveBarChart;
 
 function createStackedBarChart(
   categories: string[],

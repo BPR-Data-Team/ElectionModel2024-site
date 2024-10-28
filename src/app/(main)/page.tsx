@@ -51,6 +51,9 @@ interface RaceData {
   financeArray: number[];
   useFinance: boolean;
   weird?: string;
+  livePredictionDemPercent: number;
+  livePredictionRepPercent: number;
+  livePredictionTiePercent: number;
 }
 
 /**
@@ -112,6 +115,10 @@ async function fetchRaceData(
         );
       }
       const data = await response.json();
+      // TODO: Remove this once these fields are added to the database
+      data["Item"]["live_prediction_dem_percent"] = { S: "40" };
+      data["Item"]["live_prediction_rep_percent"] = { S: "40" };
+      data["Item"]["live_prediction_tie_percent"] = { S: "20" };
       const responseItem: ResponseItem = parseItem(data);
       if (responseItem.weird) {
         return {
@@ -141,6 +148,9 @@ async function fetchRaceData(
           std: 0,
           financeArray: [],
           useFinance: false,
+          livePredictionDemPercent: 0,
+          livePredictionRepPercent: 0,
+          livePredictionTiePercent: 0,
         };
       }
       let winner: Party =
@@ -217,6 +227,9 @@ async function fetchRaceData(
         std: responseItem.std,
         financeArray: responseItem.finance_array,
         useFinance: responseItem.use_campaign,
+        livePredictionDemPercent: responseItem.live_prediction_dem_percent,
+        livePredictionRepPercent: responseItem.live_prediction_rep_percent,
+        livePredictionTiePercent: responseItem.live_prediction_tie_percent,
       };
       return predictions;
     } catch (error) {
@@ -312,6 +325,12 @@ export default function Home(): JSX.Element {
   const [financeArray, setFinanceArray] = useState<number[]>([]);
   const [useFinance, setUseFinance] = useState<boolean>(false);
   const [firstRun, setFirstRun] = useState<boolean>(true);
+  const [livePredictionDemPercent, setLivePredictionDemPercent] =
+    useState<number>(0);
+  const [livePredictionRepPercent, setLivePredictionRepPercent] =
+    useState<number>(0);
+  const [livePredictionTiePercent, setLivePredictionTiePercent] =
+    useState<number>(0);
   const {
     data: historicalData,
     error,
@@ -387,6 +406,9 @@ export default function Home(): JSX.Element {
             setStd(data.std);
             setFinanceArray(data.financeArray);
             setUseFinance(data.useFinance);
+            setLivePredictionDemPercent(data.livePredictionDemPercent);
+            setLivePredictionRepPercent(data.livePredictionRepPercent);
+            setLivePredictionTiePercent(data.livePredictionTiePercent);
             if (data.weird) {
               setWeird(data.weird);
             } else {
@@ -422,12 +444,14 @@ export default function Home(): JSX.Element {
           setDistrict={setDistrict}
         />
       </div>
-      <LiveElectionModule
-        demPercent={50}
-        repPercent={50}
-        tiePercent={0}
-        updatedAt={new Date()}
-      />
+      {weird === "" && (
+        <LiveElectionModule
+          demPercent={livePredictionDemPercent}
+          repPercent={livePredictionRepPercent}
+          tiePercent={livePredictionTiePercent}
+          updatedAt={new Date()}
+        />
+      )}
       {/* <FrozenHeader /> */}
       <PredictionModule
         winner={winner}

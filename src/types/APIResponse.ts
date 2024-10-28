@@ -30,8 +30,11 @@ export interface ItemJSON {
   demographics: { S: string };
   bin_bounds: { S: string };
   gas_prices: { S: string };
-  campaign: {S: string};
-  use_campaign: {BOOL: boolean};
+  campaign: { S: string };
+  use_campaign: { BOOL: boolean };
+  live_prediction_dem_percent: { S: string };
+  live_prediction_rep_percent: { S: string };
+  live_prediction_tie_percent: { S: string };
 }
 
 export interface ResponseMetadata {
@@ -78,6 +81,9 @@ export interface ResponseItem {
   gas_prices: number;
   finance_array: number[];
   use_campaign: boolean;
+  live_prediction_dem_percent: number;
+  live_prediction_rep_percent: number;
+  live_prediction_tie_percent: number;
 }
 
 export function parseItem(apiResponse: APIResponse): ResponseItem {
@@ -114,8 +120,11 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
     "demographics",
     "bin_bounds",
     "gas_prices",
-    "campaign", 
-    "use_campaign"
+    "campaign",
+    "use_campaign",
+    "live_prediction_dem_percent",
+    "live_prediction_rep_percent",
+    "live_prediction_tie_percent",
   ];
 
   const missingFields: string[] = requiredFields.filter(
@@ -208,10 +217,23 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
       apiResponse.Item.gas_prices.S === "nan"
         ? 0
         : parseFloat(apiResponse.Item.gas_prices.S),
-    finance_array: apiResponse.Item.campaign.S === "nan"
-        ? 0 
+    finance_array:
+      apiResponse.Item.campaign.S === "nan"
+        ? 0
         : JSON.parse(apiResponse.Item.campaign.S),
-    use_campaign: apiResponse.Item.use_campaign.BOOL
+    use_campaign: apiResponse.Item.use_campaign.BOOL,
+    live_prediction_dem_percent:
+      apiResponse.Item.live_prediction_dem_percent.S === "nan"
+        ? 0
+        : parseFloat(apiResponse.Item.live_prediction_dem_percent.S),
+    live_prediction_rep_percent:
+      apiResponse.Item.live_prediction_rep_percent.S === "nan"
+        ? 0
+        : parseFloat(apiResponse.Item.live_prediction_rep_percent.S),
+    live_prediction_tie_percent:
+      apiResponse.Item.live_prediction_tie_percent.S === "nan"
+        ? 0
+        : parseFloat(apiResponse.Item.live_prediction_tie_percent.S),
   };
 
   return responseItem;

@@ -1,4 +1,4 @@
-import LiveBarChart from "@/components/dataviz/LiveBarChart";
+import { LiveBarChart } from "@/components/dataviz/LiveBarChart";
 import Module from "../Module";
 
 import styles from "./LiveElectionModule.module.css";
@@ -17,6 +17,7 @@ export interface LiveElectionModuleProps {
 export default function LiveElectionModule(
   props: LiveElectionModuleProps
 ): JSX.Element {
+  console.log(props);
   return (
     <Module>
       <div className={styles.map}>

@@ -6,6 +6,7 @@
   .byText {
     margin-right: 3px;
     font-size: medium;
+    width: max-content;
   }
   
   .bprImage {

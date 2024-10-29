@@ -50,7 +50,7 @@ const AboutPage: React.FC = () => {
         </p>
       </div>
       <div className={styles.main}>
-        <iframe width="100%" height="400" src="https://www.youtube.com/embed/Gse1LKXuV2M?si=sdadUPxrehYwphH3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://brown.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=34e309c6-b726-448f-a2fe-b2180123a5bc&autoplay=false&offerviewer=true&showtitle=true&showbrand=true&captions=false&interactivity=all" height="300" width="100%" allowfullscreen allow="autoplay" aria-label="Panopto Embedded Video Player" aria-description="Election Night Decision Desk" ></iframe>
       </div>
 
       <div className={styles.main}>

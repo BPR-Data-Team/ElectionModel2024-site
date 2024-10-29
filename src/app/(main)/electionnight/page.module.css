@@ -6,6 +6,10 @@
   text-wrap: pretty;
 }
 
+.main iframe {
+  border: 0;
+}
+
 .overall {
   width: 95%;
   margin-inline: auto;

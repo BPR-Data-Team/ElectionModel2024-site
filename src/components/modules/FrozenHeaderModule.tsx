@@ -28,9 +28,9 @@ export default function FrozenHeader(
           <span className={styles.mainPredictionTextAlt}>
             Our election predictions below are frozen as of 12am on November 5th.
             <br />
-            <a href="#likely-outcomes" className={styles.linkText}>
+            {/* <a href="#likely-outcomes" className={styles.linkText}>
               Scroll down to see likely electoral outcomes from when we froze them.
-            </a>
+            </a> */}
           </span>
         </div>
       </div>

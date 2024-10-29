@@ -35,6 +35,7 @@ export interface ItemJSON {
   live_prediction_dem_percent: { S: string };
   live_prediction_rep_percent: { S: string };
   live_prediction_tie_percent: { S: string };
+  is_called: {S: string };
 }
 
 export interface ResponseMetadata {
@@ -84,6 +85,7 @@ export interface ResponseItem {
   live_prediction_dem_percent: number;
   live_prediction_rep_percent: number;
   live_prediction_tie_percent: number;
+  is_called: string;
 }
 
 export function parseItem(apiResponse: APIResponse): ResponseItem {
@@ -125,6 +127,7 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
     "live_prediction_dem_percent",
     "live_prediction_rep_percent",
     "live_prediction_tie_percent",
+    "is_called",
   ];
 
   const missingFields: string[] = requiredFields.filter(
@@ -234,6 +237,10 @@ export function parseItem(apiResponse: APIResponse): ResponseItem {
       apiResponse.Item.live_prediction_tie_percent.S === "nan"
         ? 0
         : parseFloat(apiResponse.Item.live_prediction_tie_percent.S),
+    is_called:
+      apiResponse.Item.is_called.S === "nan"
+        ? ""
+        : apiResponse.Item.is_called.S,
   };
 
   return responseItem;

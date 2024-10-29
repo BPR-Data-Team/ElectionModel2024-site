@@ -6,6 +6,7 @@ import MapModule from "@/components/modules/MapModule";
 import SimulationsModule from "@/components/modules/SimulationsModule";
 import FrozenHeader from "@/components/modules/FrozenHeaderModule";
 import LiveElectionModule from "@/components/modules/LiveElectionModule";
+import RaceCallModule from "@/components/modules/RaceCallModule";
 import HistoricalModule from "@/components/modules/HistoricalModule";
 import ExplainerModule from "@/components/modules/ExplainerModule";
 import NationalMapModule from "@/components/modules/NationalMapModule";
@@ -54,6 +55,7 @@ interface RaceData {
   livePredictionDemPercent: number;
   livePredictionRepPercent: number;
   livePredictionTiePercent: number;
+  isCalled: string;
 }
 
 /**
@@ -116,9 +118,10 @@ async function fetchRaceData(
       }
       const data = await response.json();
       // TODO: Remove this once these fields are added to the database
-      data["Item"]["live_prediction_dem_percent"] = { S: "40" };
-      data["Item"]["live_prediction_rep_percent"] = { S: "40" };
-      data["Item"]["live_prediction_tie_percent"] = { S: "20" };
+      data["Item"]["live_prediction_dem_percent"] = { S: "100" };
+      data["Item"]["live_prediction_rep_percent"] = { S: "0" };
+      data["Item"]["live_prediction_tie_percent"] = { S: "0" };
+      data["Item"]["is_called"] = { S: "Republican" };
       const responseItem: ResponseItem = parseItem(data);
       if (responseItem.weird) {
         return {
@@ -151,6 +154,7 @@ async function fetchRaceData(
           livePredictionDemPercent: 0,
           livePredictionRepPercent: 0,
           livePredictionTiePercent: 0,
+          isCalled: '',
         };
       }
       let winner: Party =
@@ -230,6 +234,7 @@ async function fetchRaceData(
         livePredictionDemPercent: responseItem.live_prediction_dem_percent,
         livePredictionRepPercent: responseItem.live_prediction_rep_percent,
         livePredictionTiePercent: responseItem.live_prediction_tie_percent,
+        isCalled: responseItem.is_called,
       };
       return predictions;
     } catch (error) {
@@ -331,6 +336,8 @@ export default function Home(): JSX.Element {
     useState<number>(0);
   const [livePredictionTiePercent, setLivePredictionTiePercent] =
     useState<number>(0);
+  const [isCalled, setIsCalled] =
+    useState<string>("");
   const {
     data: historicalData,
     error,
@@ -409,6 +416,7 @@ export default function Home(): JSX.Element {
             setLivePredictionDemPercent(data.livePredictionDemPercent);
             setLivePredictionRepPercent(data.livePredictionRepPercent);
             setLivePredictionTiePercent(data.livePredictionTiePercent);
+            setIsCalled(data.isCalled);
             if (data.weird) {
               setWeird(data.weird);
             } else {
@@ -444,12 +452,33 @@ export default function Home(): JSX.Element {
           setDistrict={setDistrict}
         />
       </div>
+      {/* {weird === "" && (
+        <RaceCallModule
+          winner={winner}
+          likelihood={likelihood}
+          margin={margin}
+          raceType={raceType}
+          state={state}
+          district={district}
+          weird={weird}
+          fetchComplete={fetchComplete}
+        />
+      )} */}
       {weird === "" && (
         <LiveElectionModule
           demPercent={livePredictionDemPercent}
           repPercent={livePredictionRepPercent}
           tiePercent={livePredictionTiePercent}
           updatedAt={new Date()}
+          isCalled={isCalled}
+          winner={winner}
+          likelihood={likelihood}
+          margin={margin}
+          raceType={raceType}
+          state={state}
+          district={district}
+          weird={weird}
+          fetchComplete = {fetchComplete}
         />
       )}
       <FrozenHeader />

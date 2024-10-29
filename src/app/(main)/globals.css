@@ -5,6 +5,7 @@
   --washington-white: #ffffff;
   --basic-black: #000000;
   --gubernatorial-gray: #505050;
+  --race-call-gray: #a19f9f;
 
   --main-bg-color: var(--gradient-descent-gray);
   --main-text-color: var(--basic-black);
@@ -200,4 +201,13 @@ footer a {
   height: 100%;
   border-bottom: 3px solid var(--alternate-bg-color);
   border-top: 8px solid var(--alternate-bg-color);
+}
+
+.raceCallModule {
+  background-color: var(--module-bg-color) !important;
+  color: var(--main-text-color) !important;
+  height: 100%;
+  border-bottom: 25px solid var(--module-bg-color);
+  border-top: 8px solid var(--module-bg-color);
+  box-shadow: 0 3px 4px 0px rgba(0,0,0,0.15);
 }

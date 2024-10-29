@@ -28,7 +28,7 @@ export default function LiveElectionModule(
           </svg>
           Live Win Likelihood
         </h3>
-        <p>Explanation about what this actually means</p>
+        <p>Current probability of victory, given the results of other races that we've called so far.</p>
         <LiveBarChart
           demPercent={props.demPercent}
           repPercent={props.repPercent}

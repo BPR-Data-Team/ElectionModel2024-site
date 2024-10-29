@@ -22,7 +22,7 @@ export default function FrozenHeader(
 ): JSX.Element {
 
   return (
-    <Module>
+    <Module className="frozenModule">
       <div className={styles.prediction}>
         <div className={styles.mainPredictionAlt}>
           <span className={styles.mainPredictionTextAlt}>

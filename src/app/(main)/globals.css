@@ -9,6 +9,7 @@
   --main-bg-color: var(--gradient-descent-gray);
   --main-text-color: var(--basic-black);
   --module-bg-color: var(--washington-white);
+  --alternate-bg-color: #692e84;
 }
 
 html {
@@ -191,4 +192,12 @@ footer a {
 
 .inverseColorModule path {
   fill: var(--main-bg-color) !important;
+}
+
+.frozenModule {
+  background-color: var(--alternate-bg-color) !important;
+  color: var(--main-text-color) !important;
+  height: 100%;
+  border-bottom: 3px solid var(--alternate-bg-color);
+  border-top: 8px solid var(--alternate-bg-color);
 }

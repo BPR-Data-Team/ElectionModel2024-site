@@ -16,7 +16,7 @@
 
 .mainPredictionAlt {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
 }

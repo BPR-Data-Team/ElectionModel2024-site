@@ -1,253 +1,34 @@
-/* CSS Format for Large Screens */
-/* Democrat image and prediction text, TODO: Format for small and medium */
-.prediction {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-}
-.map h3 {
-  margin-bottom: 0;
-}
-#container4{
-  margin:0;
-  padding:0;
-}
-.map p {
-  font-style: italic;
-  margin-top: 0;
-}
-.mainPrediction {
-  display: flex;
-  justify-content: left;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-.mainPredictionAlt {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  gap: 2rem;
-}
-
-.mainPredictionIcon {
-  flex-shrink: 0;
-  transform: scale(1);
-  margin-bottom: auto;
-  align-self: flex-start;
-}
-
-.mainPredictionText {
-  font-size: 1.625rem;
-  font-weight: 600;
-  margin-bottom: 70px;
-}
-
-.mainPredictionTextAlt {
-  font-size: 1.625rem;
-  font-weight: 600;
-  margin-bottom: 0px;
+.container {
+  scroll-margin-block-start: 70px;
+  text-align: center;
 }
 
 .linkText {
-  color: black;
+  color: var(--main-text-color);
+}
+
+.header {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.introText {
+  padding-top: 0.2em;
+  margin-top: 0;
   font-style: italic;
-  font-weight: 500;
-  font-size: 1rem;
 }
 
-/* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
-.predictionInfo {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 1rem;
-  margin: 0.5rem 0;
-  margin-top: -70px;
-}
-
-.predictionInfoItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.875rem;
-}
-
-.predictionInfoItemHeader {
-  margin: 0.25rem 0;
-}
-
-.predictionInfoItemContent {
-  font-size: 1.875rem;
-  font-weight: 500;
-}
-/* CSS Format for Medium Screens (ie iPad Screens) */
-@media (max-width: 1024px) {
-  .prediction {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: center;
-  }
-
-  .mainPrediction {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    gap: 2rem;
-  }
-  .mainPredictionAlt {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .mainPredictionIcon {
-    flex-shrink: 0;
-    transform: scale(1);
-    margin-bottom: auto;
-    align-self: flex-start;
-  }
-
-  .mainPredictionText {
-    font-size: 1.625rem;
-    font-weight: 600;
-    align-self: center;
-    margin-top: 16px;
-  }
-  .mainPredictionTextAlt {
-    font-size: 1.625rem;
-    font-weight: 600;
-    align-self: center;
-    margin-top: 16px;
-  }
-  /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
-  .predictionInfo {
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    gap: 1rem;
-    margin: 0.5rem 0;
-    margin-top: 20px;
-  }
-
-  .predictionInfoItemIcon {
-    align-self: center;
-  }
-
-  .predictionInfoItemText {
-    align-self: center;
-    justify-content: center;
-  }
-
-  .predictionInfoItem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.875rem;
-    margin-top: -50px;
-  }
-
-  .predictionInfoItemHeader {
-    margin: 0.25rem 0;
-  }
-
-  .predictionInfoItemContent {
-    font-size: 1.875rem;
-    font-weight: 500;
-  }
-}
-
-@media (max-width: 440px) {
-  .mainPredictionIcon {
-    display: none;
-  }
-}
-/* CSS Format for Small Screens */
-@media (max-width: 450px) {
-  /* Democrat image and prediction text, TODO: Format for small and medium */
-  .prediction {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .mainPrediction {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-  }
-  .mainPredictionAlt {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .mainPredictionIcon {
-    flex-shrink: 0;
-    transform: scale(1);
-    margin-bottom: auto;
-    align-self: flex-start;
-  }
-
-  .mainPredictionText {
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    align-self: center;
-  }
-  .mainPredictionTextAlt {
-    margin-top: 0px;
-    font-size: 20px;
-    font-weight: 600;
-    align-self: center;
-  }
-
-  .linkText {
-    font-size: 0.8rem;
-  }
-  /* Outcome Likelihood and Predicted Margin, TODO: Format for small and medium */
-  .predictionInfo {
-    display: flex;
-    gap: 1rem;
-    margin: 0.5rem 0;
-    margin-top: -30px;
-    flex-direction: column;
-    align-items: flex-start;
-    align-self: flex-start;
-  }
-
-  .predictionInfoItem {
-    display: flex;
-    justify-content: left;
-    gap: 0.875rem;
-    margin-top: -10px;
-    margin-right: 52px;
-    margin-left: 10px;
-  }
-
-  .predictionInfoItemIcon {
-    margin-right: 10px;
-  }
-
-  .predictionInfoItemHeader {
-    margin: 0.25rem 0;
-  }
-
-  .predictionInfoItemContent {
-    font-size: 1.875rem;
-    font-weight: 500;
-  }
+.mainText {
+  margin-block: 0em;
+  font-size: 1.5rem;
+  text-wrap: pretty;
 }
 
 .lastDataUpdate {
   text-align: right;
   font-style: italic;
   font-weight: 300;
+  margin-block-start: 0;
 }
 
 .liveSymbol {
@@ -285,9 +66,3 @@
     filter: blur(0.2px)
   }
 }
-
-.note {
-  font-style: italic;
-  font-weight: 300;
-}
-

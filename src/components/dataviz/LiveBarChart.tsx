@@ -42,6 +42,7 @@ function createStackedBarChart(
     chart: {
       type: "bar",
       height: "80px",
+      width: null,
       backgroundColor: null,
       margin: [0, 0, 0, 0], // Remove external margins
       spacing: [0, 0, 0, 0], // Ensure no extra spacing

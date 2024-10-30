@@ -1,19 +1,9 @@
 import { LiveBarChart } from "@/components/dataviz/LiveBarChart";
 import Module from "../Module";
-
-import styles from "./RaceCallModule.module.css";
-import DownloadThisCard from "../DownloadThisCard";
-
+import styles from "./LiveElectionModule.module.css";
 import { Party } from "@/types/Party";
 import { RaceType } from "@/types/RaceType";
-
-import DemocratD from "../svgs/DemocratD";
-import RepublicanR from "../svgs/RepublicanR";
-import Trophy from "../svgs/Trophy";
-import RingChart from "../svgs/RingChart";
 import { State, getNumDistricts } from "@/types/State";
-import TiedRace from "../svgs/TiedRace";
-import ExclamationMark from "../svgs/ExclamationMark";
 import { useEffect, useState } from "react";
 
 export interface LiveElectionModuleProps {
@@ -45,12 +35,15 @@ export default function LiveElectionModule(
   const [likelihood, setLikelihood] = useState<number>(0);
   const [margin, setMargin] = useState<number>(0);
   const [icon, setIcon] = useState<JSX.Element>(<></>);
+  const [loadTime, setLoadTime] = useState('');
 
   useEffect(() => {
     if (props.fetchComplete) {
       setPredictionMessage(getMessage());
       setLikelihood(props.likelihood);
       setMargin(getMargin());
+      const now = new Date();
+      setLoadTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     }
   }, [props.fetchComplete]);
 
@@ -176,34 +169,32 @@ export default function LiveElectionModule(
     }
   };
   return (
-    <Module className="raceCallModule">
-      <div className={styles.map}>
-        <h3>
-          <svg width="16" height="16" className={styles.liveSymbol}>
-            <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
-            <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
-          </svg>
-          Live Win Likelihood
+    <Module>
+      <div className={styles.container} id="likelihood">
+        <h3 className={styles.header}>
+          Current Win Likelihood
         </h3>
-        <p>Current probability of victory, given the results of other races that we've called so far.</p>
-        <br />
+        <p className={styles.introText}>The current probability of victory, given the results of other races that we've called so far.</p>
         <div className={styles.prediction}>
-          <div className={styles.mainPredictionAlt}>
-            <span className={styles.mainPredictionIcon}>{icon}</span>
-            <span className={styles.mainPredictionTextAlt}>
+            <h3 className={styles.mainText}>
               {predictionMessage}
-              <br />
               {/* <a href="#likely-outcomes" className={styles.linkText}>
                 Scroll down to see likely electoral outcomes.
               </a> */}
-            </span>
-          </div>
+            </h3>
         </div>
         <LiveBarChart
           demPercent={props.demPercent}
           repPercent={props.repPercent}
           tiePercent={props.tiePercent}
         />
+        <p className={styles.lastDataUpdate}>
+          <svg width="16" height="16" className={styles.liveSymbol}>
+            <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
+            <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
+          </svg>
+          As of {loadTime}. <a className={styles.linkText} href="#likelihood" onClick={() => window.location.reload()}>Reload</a> for updated likelihood data.
+        </p>
       </div>
     </Module>
   );

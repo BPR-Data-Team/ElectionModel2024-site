@@ -16,6 +16,10 @@
 .navBar{
   display: flex;
   margin-right: 2rem;
+  & ul {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
 }
 
 .mobileMenu{

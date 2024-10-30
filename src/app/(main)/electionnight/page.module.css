@@ -1,0 +1,169 @@
+.main {
+  margin-top: 1rem;
+  text-align: center;
+  width: 70%;
+  margin-inline: auto;
+  text-wrap: pretty;
+}
+
+.main iframe {
+  border: 0;
+}
+
+.overall {
+  width: 95%;
+  margin-inline: auto;
+}
+
+.header {
+  text-align: center;
+  margin-block-start: 3rem;
+}
+
+/* center text */
+.center {
+  text-align: center;
+  /* font-size: 1.5rem; */
+  margin-top: 1rem;
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.linkText {
+  color: var(--main-text-color);
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 3rem;
+  margin-block: inherit;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  gap: 3.5rem 0.3rem;
+  margin: 2rem 7rem;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 33%;
+}
+
+.minigrid {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem 2rem;
+  margin: 2rem;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.miniperson {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: auto;
+}
+
+@media (max-width: 1325px) {
+  .grid {
+    margin: 2rem 6rem;    
+  }
+  .person {
+    width: 30%;
+  }
+}
+
+@media (max-width: 1140px) {
+  .grid {
+    margin: 2rem 5rem;    
+  }
+  .person {
+    width: 40%;
+  }
+}
+
+@media (max-width: 850px) {
+  .grid {
+    margin: 2rem 4rem;    
+  }
+  .person {
+    width: 50%;
+  }
+}
+
+@media (max-width: 650px) {
+  .grid {
+    margin: 2rem;    
+  }
+  .person {
+    width: 50%;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.image {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.year {
+  margin: 0.5rem 0;
+  font-style: italic;
+}
+
+.bio {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.prImage {
+  filter: grayscale();
+  transition: filter 0.15s;
+  mix-blend-mode: multiply;
+
+  &:hover {
+    filter: none;
+  }
+
+}
+
+@media (max-width: 650px) {
+  .prImage {
+    scale: 0.8;
+  }
+}
+
+.prGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1rem 2rem;
+}

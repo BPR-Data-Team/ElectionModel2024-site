@@ -16,7 +16,7 @@ const firstpeople = [
   { id: "Ariel", name: 'Ariel Shifrin', title: 'Director' },
   { id: "LoganR", name: 'Logan Rabe', title: 'Decision Desk Lead' },
   { id: "Milan", name: 'Milan Capoor', title: 'Event Producer' },
-  { id: "Sita", name: 'Sita Pawar', title: 'Event Producer' },
+  { id: "Javier", name: 'Javier Niño-Sears', title: 'Event Producer' },
 ];
 
 const allpeople = [

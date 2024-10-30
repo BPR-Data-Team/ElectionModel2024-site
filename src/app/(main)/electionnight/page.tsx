@@ -43,7 +43,7 @@ const AboutPage: React.FC = () => {
   return (
     <div className={styles.overall} itemscope itemtype="https://schema.org/BroadcastEvent">
       <div className={styles.main}>
-        <h1 className={styles.header} itemprop="name">24cast.org's Election Night Event</h1>
+        <h1 className={styles.header} itemprop="name">24cast.org&apos;s Election Night Event</h1>
         <meta itemprop="eventStatus" content="https://schema.org/EventScheduled" />
         <meta itemprop="startDate" content="2024-11-05T19:00:00-05:00" />
         <meta itemprop="endDate" content="2024-11-05T23:59:59-05:00" />

@@ -50,7 +50,7 @@ const AboutPage: React.FC = () => {
         <meta itemProp="location" content="Providence, RI" />
         <link itemProp="isLiveBroadcast" href="https://schema.org/True" />
         <meta itemProp="isAccessibleForFree" content="true" />
-        <h3>Salomon Center, Providence, RI | 7:00 PM - 12:00 AM</h3>
+        <h3>Salomon Center, Providence, RI | 7:00 PM</h3>
 
       </div>
       <div className={styles.main} itemProp="workFeatured" itemScope itemType="https://schema.org/VideoObject">

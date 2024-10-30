@@ -41,16 +41,24 @@ const allpeople = [
 
 const AboutPage: React.FC = () => {
   return (
-    <div className={styles.overall}>
+    <div className={styles.overall} itemscope itemtype="https://schema.org/BroadcastEvent">
       <div className={styles.main}>
-        <h1 className={styles.header}>24cast.org's Election Night Event</h1>
+        <h1 className={styles.header} property="name">24cast.org's Election Night Event</h1>
+        <meta property="eventStatus" content="https://schema.org/EventScheduled" />
+        <meta property="startDate" content="2024-11-05T19:00:00-05:00" />
+        <meta property="endDate" content="2024-11-05T23:59:59-05:00" />
+        <meta property="location" content="Salomon Center, Providence, RI" />
+        <link property="isLiveBroadcast" href="https://schema.org/True" />
+        <meta property="isAccessibleForFree" content="true" />
         <h3>Salomon Center, Providence, RI | 7:00 PM - 12:00 AM</h3>
-        <p>
+        <p property="description">
           Join us in person or on our live broadcast for special guests, student & faculty commentary, political analysis using our custom Election Portal, and live race calls!
         </p>
       </div>
-      <div className={styles.main}>
+      <div className={styles.main} property="workFeatured" itemscope itemtype="https://schema.org/VideoObject">
         <iframe src="https://brown.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=34e309c6-b726-448f-a2fe-b2180123a5bc&autoplay=false&offerviewer=true&showtitle=true&showbrand=true&captions=false&interactivity=all" height="300" width="100%" allowfullscreen allow="autoplay" aria-label="Panopto Embedded Video Player" aria-description="Election Night Decision Desk" ></iframe>
+        <meta property="name" content="Election Night Decision Desk Live Stream" />
+        <meta property="thumbnailUrl" content="/live_thumb.png" />
       </div>
 
       <div className={styles.main}>

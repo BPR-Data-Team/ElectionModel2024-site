@@ -4,7 +4,7 @@ export default function Banner(): JSX.Element {
   return (
     <div className={styles.banner}>
       <div className={styles.bannerText}>
-        We&apos;re building lots of new technology for election night and one of our upgrades disrupted our data feeds. Please check back soon as we work to restore service.
+        Join our <a href="/electionnight">election night live stream</a> on 11/05 at 7 pm ET or see us live at Brown University&apos;s Salomon Center!
       </div>
     </div>
   );

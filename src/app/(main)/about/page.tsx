@@ -47,7 +47,7 @@ const people = [
   { id: "Ben", name: "Ben Levy, Developer", image: blank, year: "Brown '27", bio: "You will not hear from Ben when the Yankees are playing." },
   { id: "Caleb", name: "Caleb Ellenberg, Developer", image: caleb, year: "Brown '28", bio: "Data is Caleb's medicine for the Brewers repeated playoff debacles." },
   { id: "Chai", name: "Chai Harsha, Developer", image: chai, year: "Brown '26", bio: "Don't tell Asher what Chai did to his model when he wasn't looking." },
-  { id: "David", name: "David Chanin, Press Liason", image: blank, year: "Brown '27", bio: "David wishes they brought back nap time." },
+  { id: "David", name: "David Chanin, Marketing Strategist", image: blank, year: "Brown '27", bio: "David wishes they brought back nap time." },
   { id: "Devon", name: "Devon Kear-Leng, Developer", image: devon, year: "Brown '26", bio: "" },
   { id: "Emily", name: "Emily Hong, Developer", image: emily, year: "Brown '26.5", bio: "Emily enjoys following US politics while sitting safely at home in Canada." },
   { id: "Grace", name: "Grace Marshburn, Designer", image: grace, year: "Brown '25", bio: "Grace has too many tabs on her computer but at least they're color-coded." },

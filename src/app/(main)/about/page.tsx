@@ -57,10 +57,10 @@ const people = [
   { id: "Jo", name: "Jo Gasior-Kavishe, Comms", image: jo, year: "Brown '25", bio: "Jo wishes only for endless vanilla ice cream and endless cool math classes." },
   { id: "John", name: "John Huang, Developer", image: john, year: "Brown '27", bio: "In his free time, you can find John enjoying the beautiful weather." },
   { id: "Louis", name: "Louis Geer, Development Lead", image: louis, year: "Brown '27", bio: "" },
-  { id: "Milan", name: "Milan Capoor, Developer", image: blank, year: "Brown '26", bio: "Milan is probably either making a spreadsheet or ranting about colonialism." },
+  { id: "Milan", name: "Milan Capoor, Dashboard Development Lead", image: blank, year: "Brown '26", bio: "Milan is probably either making a spreadsheet or ranting about colonialism." },
   { id: "Nikhil", name: "Nikhil Das, Marketing Strategist", image: nikhil, year: "Brown '27", bio: "Math, boba, and jazz—Nikhil lives to share and enjoy it all!" },
   { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: "" },
-  { id: "Stella", name: "Stella Tsogtjargal, Developer", image: stella, year: "Brown '26", bio: "Stella is probably watching a cartoon right now." },
+  { id: "Stella", name: "Stella Tsogtjargal, Development Lead", image: stella, year: "Brown '26", bio: "Stella is probably watching a cartoon right now." },
   { id: "Thomas", name: "Thomas Seeger, Digital Strategist", image: thomas, year: "Brown '27", bio: "Thomas spends his free time angrily tweeting at Elon Musk." },
   { id: "Tiziano", name: "Tiziano Pardo, Events Coordinator", image: tiziano, year: "Brown '28", bio: "" },
   { id: "Zoey", name: "Zoey Katzive, Developer", image: zoey, year: "Brown Grad '25", bio: "" }

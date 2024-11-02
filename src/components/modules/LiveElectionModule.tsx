@@ -227,7 +227,7 @@ export default function LiveElectionModule(
         {props.state === State.National &&
           props.raceType === RaceType.Senate ? (
             <p className={styles.note}>
-              *We are not predicting Nebraska&apos;s regular Senate election because there is no Democratic candidate.
+              *We are not predicting Nebraska&apos;s regular Senate election, because an Independent candidate is running against a Republican candidate.
               This distribution assumes a Republican victory in this race, despite the race being considered a tossup.
             </p>
           ) : null}
@@ -269,7 +269,7 @@ export default function LiveElectionModule(
           {props.state === State.National &&
           props.raceType === RaceType.Senate ? (
             <p className={styles.note}>
-              *We are not predicting Nebraska&apos;s regular Senate election because there is no Democratic candidate.
+              *We are not predicting Nebraska&apos;s regular Senate election, because an Independent candidate is running against a Republican candidate.
               This distribution assumes a Republican victory in this race, despite the race being considered a tossup.
             </p>
           ) : null}

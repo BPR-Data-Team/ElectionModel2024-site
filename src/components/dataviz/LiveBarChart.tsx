@@ -101,6 +101,7 @@ function createStackedBarChart(
         dataLabels: {
           enabled: true,
           padding: 0, // Remove padding from data labels
+          overflow: "none",
           formatter: function () {
             let label = "";
             if (this.y >= 8) {

@@ -297,6 +297,13 @@ export default function PredictionModule(
           </svg>
           Next update in {hoursToMidnight} hours */}
         </p>
+        {/* {props.state === State.National &&
+          props.raceType === RaceType.Senate ? (
+            <p className={styles.note}>
+              *We are not predicting Nebraska&apos;s regular Senate election because there is no Democratic candidate.
+              This distribution assumes a Republican victory in this race, despite the race being considered a tossup.
+            </p>
+          ) : null} */}
         {props.state === State.Nebraska &&
         props.raceType === RaceType.Senate ? (
           <p className={styles.note}>

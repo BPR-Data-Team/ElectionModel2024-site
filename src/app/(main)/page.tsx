@@ -56,6 +56,7 @@ interface RaceData {
   livePredictionRepPercent: number;
   livePredictionTiePercent: number;
   isCalled: string;
+  numSimulations: number;
 }
 
 /**
@@ -118,10 +119,10 @@ async function fetchRaceData(
       }
       const data = await response.json();
       // TODO: Remove this once these fields are added to the database
-      data["Item"]["live_prediction_dem_percent"] = { S: "100" };
-      data["Item"]["live_prediction_rep_percent"] = { S: "0" };
-      data["Item"]["live_prediction_tie_percent"] = { S: "0" };
-      data["Item"]["is_called"] = { S: "Republican" };
+      // data["Item"]["live_prediction_dem_percent"] = { S: "60" };
+      // data["Item"]["live_prediction_rep_percent"] = { S: "40" };
+      // data["Item"]["live_prediction_tie_percent"] = { S: "0" };
+      // data["Item"]["is_called"] = { S: "" };
       const responseItem: ResponseItem = parseItem(data);
       if (responseItem.weird) {
         return {
@@ -155,6 +156,7 @@ async function fetchRaceData(
           livePredictionRepPercent: 0,
           livePredictionTiePercent: 0,
           isCalled: '',
+          numSimulations: 0,
         };
       }
       let winner: Party =
@@ -235,6 +237,7 @@ async function fetchRaceData(
         livePredictionRepPercent: responseItem.live_prediction_rep_percent,
         livePredictionTiePercent: responseItem.live_prediction_tie_percent,
         isCalled: responseItem.is_called,
+        numSimulations: numSimulations,
       };
       return predictions;
     } catch (error) {
@@ -337,7 +340,9 @@ export default function Home(): JSX.Element {
   const [livePredictionTiePercent, setLivePredictionTiePercent] =
     useState<number>(0);
   const [isCalled, setIsCalled] =
-    useState<string>("");
+    useState<string>("Loading");
+  const [numSimulations, setNumSimulations] =
+    useState<number>(0);
   const {
     data: historicalData,
     error,
@@ -417,6 +422,7 @@ export default function Home(): JSX.Element {
             setLivePredictionRepPercent(data.livePredictionRepPercent);
             setLivePredictionTiePercent(data.livePredictionTiePercent);
             setIsCalled(data.isCalled);
+            setNumSimulations(data.numSimulations);
             if (data.weird) {
               setWeird(data.weird);
             } else {
@@ -479,6 +485,7 @@ export default function Home(): JSX.Element {
           district={district}
           weird={weird}
           fetchComplete = {fetchComplete}
+          numSimulations = {numSimulations}
         />
       )}
       <FrozenHeader />

@@ -306,7 +306,7 @@ export default function LiveElectionModule(
               <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
               <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
             </svg>
-            As of {loadTime}. <a className={styles.linkText} href="#likelihood" onClick={() => window.location.reload()}>Reload</a> for updated likelihood data.
+            Loading...
           </p>
         </div>  
       )}

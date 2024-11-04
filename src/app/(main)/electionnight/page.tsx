@@ -15,7 +15,7 @@ const firstpeople = [
   { id: "Asher", name: 'Asher Labovich', title: 'Host' },
   { id: "Ariel", name: 'Ariel Shifrin', title: 'Director' },
   { id: "LoganR", name: 'Logan Rabe', title: 'Decision Desk Lead' },
-  { id: "Milan", name: 'Milan Capoor', title: 'Event Producer' },
+  { id: "Milan", name: 'Milan Capoor', title: 'Executive Producer' },
   { id: "Javier", name: 'Javier Niño-Sears', title: 'Event Producer' },
 ];
 

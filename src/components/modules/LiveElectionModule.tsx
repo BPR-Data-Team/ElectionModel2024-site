@@ -301,11 +301,6 @@ export default function LiveElectionModule(
             repPercent={props.repPercent / props.numSimulations * 100}
             tiePercent={props.tiePercent / props.numSimulations * 100}
           />
-          <LiveBarChart
-            demPercent={50}
-            repPercent={50}
-            tiePercent={0}
-          />
           <p className={styles.lastDataUpdate}>
             <svg width="16" height="16" className={styles.liveSymbol}>
               <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />

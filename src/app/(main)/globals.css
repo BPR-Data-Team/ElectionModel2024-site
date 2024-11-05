@@ -5,10 +5,12 @@
   --washington-white: #ffffff;
   --basic-black: #000000;
   --gubernatorial-gray: #505050;
+  --race-call-gray: #a19f9f;
 
   --main-bg-color: var(--gradient-descent-gray);
   --main-text-color: var(--basic-black);
   --module-bg-color: var(--washington-white);
+  --alternate-bg-color: #692e84;
 }
 
 html {
@@ -21,15 +23,11 @@ html {
   color: var(--gradient-descent-gray);
 }
 
-@media
-  (
-    prefers-reduced-motion: 
-    no-preference
-  ) {
-    html {
-      scroll-behavior: smooth;
-    }
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
+}
 
 body {
   margin: 0;
@@ -141,7 +139,11 @@ footer a {
 }
 
 .rangeSlider {
-  background: linear-gradient(-90deg, var(--bemocrat-blue), var(--republican-red));
+  background: linear-gradient(
+    -90deg,
+    var(--bemocrat-blue),
+    var(--republican-red)
+  );
 }
 
 .rangeSlider > .rangeHandle > .rangeNub {
@@ -151,12 +153,20 @@ footer a {
   transition: background-color 0.2s, box-shadow 0.1s;
 }
 
-.rangeSlider > .rangeHandle:hover >.rangeNub {
-  background-color: color-mix(in srgb, var(--handle-border) 20%, white) !important;
+.rangeSlider > .rangeHandle:hover > .rangeNub {
+  background-color: color-mix(
+    in srgb,
+    var(--handle-border) 20%,
+    white
+  ) !important;
 }
 
-.rangeSlider > .rangeHandle:active >.rangeNub {
-  background-color: color-mix(in srgb, var(--handle-border) 40%, white) !important;
+.rangeSlider > .rangeHandle:active > .rangeNub {
+  background-color: color-mix(
+    in srgb,
+    var(--handle-border) 40%,
+    white
+  ) !important;
   box-shadow: 0 0 0 6.5px var(--thumb-color) inset;
 }
 
@@ -165,15 +175,25 @@ footer a {
 }
 
 @media (max-width: 350px) {
-
   .pipVal {
     display: none !important;
     visibility: hidden !important;
     opacity: 0;
   }
-
 }
 
 .katex * {
   font-family: unset;
 }
+
+.inverseColorModule {
+  background-color: var(--main-text-color) !important;
+  color: var(--main-bg-color) !important;
+}
+
+.inverseColorModule path {
+  fill: var(--main-bg-color) !important;
+}
+
+
+

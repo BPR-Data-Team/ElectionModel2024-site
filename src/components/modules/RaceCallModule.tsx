@@ -1,7 +1,7 @@
 import DemocratD from "../svgs/DemocratD";
 import RepublicanR from "../svgs/RepublicanR";
 import Module from "../Module";
-import styles from "./PredictionModule.module.css";
+import styles from "./RaceCallModule.module.css";
 import Trophy from "../svgs/Trophy";
 import RingChart from "../svgs/RingChart";
 import DownloadThisCard from "../DownloadThisCard";
@@ -66,47 +66,34 @@ export default function PredictionModule(
       props.state === State.National &&
       props.margin === 50
     ) {
-      return "The Senate is predicted to be a 50-50 split.";
+      return "24cast.org is projecting the Senate to be a 50-50 split.";
     }
 
-    let message: string = "";
+    let message: string = "24cast.org is projecting ";
 
     if (props.winner === Party.Democrat) {
-      if (props.raceType === RaceType.Presidential) {
-        message = "Kamala Harris is";
-      } else {
-        message = "Democrats are";
-      }
+        if (props.raceType === RaceType.Presidential) {
+            message += "Kamala Harris to win the presidency"
+        } else {
+            message += "the Democrat to win the ";
+        }
     } else {
-      if (props.raceType === RaceType.Presidential) {
-        message = "Donald Trump is";
-      } else {
-        message = "Republicans are";
-      }
+        if (props.raceType === RaceType.Presidential) {
+            message += "Donald Trump to win the presidency"
+        } else {
+            message += "the Republican to win the ";
+        }
     }
-
-    if (props.likelihood < 60) {
-      message += " slightly";
-    } else if (props.likelihood > 80 && props.likelihood < 98) {
-      message += " heavily";
-    } else if (props.likelihood >= 98) {
-      message += " overwhelmingly";
-    }
-
-    message += " favored to win the";
 
     switch (props.raceType) {
       case RaceType.Gubernatorial:
         message += " gubernatorial election";
         break;
       case RaceType.House:
-        message += " House";
+        message += "House";
         break;
       case RaceType.Senate:
-        message += " Senate";
-        break;
-      case RaceType.Presidential:
-        message += " presidency";
+        message += "Senate";
         break;
     }
 
@@ -174,16 +161,6 @@ export default function PredictionModule(
       message += "*";
     }
 
-    // Add conditional message for presidential and national races
-    if (
-      props.raceType === RaceType.Presidential &&
-      props.state === State.National
-    ) {
-      message = `${
-        props.winner === Party.Democrat ? "Kamala Harris" : "Donald Trump"
-      } has a ${props.likelihood}% chance of winning the presidency.`;
-    }
-
     return message;
   };
 
@@ -202,54 +179,50 @@ export default function PredictionModule(
     }
   };
 
-  const [hoursToMidnight, setHoursToMidnight] = useState(0);
+//   const [hoursToMidnight, setHoursToMidnight] = useState(0);
 
-  useEffect(() => {
-    const updateHoursToMidnight = () => {
-      const now = new Date();
-      const midnightET = new Date(
-        now.toLocaleString("en-US", { timeZone: "America/New_York" })
-      );
-      midnightET.setHours(24, 0, 0, 0); // Set time to midnight
-      const hours = (midnightET.getTime() - now.getTime()) / 1000 / 60 / 60;
-      setHoursToMidnight(Math.ceil(hours));
-    };
+//   useEffect(() => {
+//     const updateHoursToMidnight = () => {
+//       const now = new Date();
+//       const midnightET = new Date(
+//         now.toLocaleString("en-US", { timeZone: "America/New_York" })
+//       );
+//       midnightET.setHours(24, 0, 0, 0); // Set time to midnight
+//       const hours = (midnightET.getTime() - now.getTime()) / 1000 / 60 / 60;
+//       setHoursToMidnight(Math.ceil(hours));
+//     };
 
-    updateHoursToMidnight();
-    const interval = setInterval(updateHoursToMidnight, 60 * 60 * 1000); // Update every hour
+//     updateHoursToMidnight();
+//     const interval = setInterval(updateHoursToMidnight, 60 * 60 * 1000); // Update every hour
 
-    return () => clearInterval(interval);
-  }, []);
+//     return () => clearInterval(interval);
+//   }, []);
 
   return (
-    <Module>
+    <Module className="raceCallModule">
       <div>
-        <h3>Our final prediction:</h3>
+        <h3>
+        <svg width="16" height="16" className={styles.liveSymbol}>
+            <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
+            <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
+          </svg>
+          RACE CALLED </h3>
       </div>
 
       <div className={styles.prediction}>
-        {props.raceType === RaceType.Presidential &&
-        props.state === State.National ? (
           <div className={styles.mainPredictionAlt}>
             <span className={styles.mainPredictionIcon}>{icon}</span>
             <span className={styles.mainPredictionTextAlt}>
               {predictionMessage}
               <br />
-              <a href="#likely-outcomes" className={styles.linkText}>
+              {/* <a href="#likely-outcomes" className={styles.linkText}>
                 Scroll down to see likely electoral outcomes.
-              </a>
+              </a> */}
             </span>
           </div>
-        ) : (
-          <div className={styles.mainPrediction}>
-            <span className={styles.mainPredictionIcon}>{icon}</span>
-            <span className={styles.mainPredictionText}>
-              {predictionMessage}
-            </span>
-          </div>
-        )}
+        
 
-        {props.raceType !== RaceType.Presidential ||
+        {/* {props.raceType !== RaceType.Presidential ||
         props.state !== State.National ? (
           props.weird == "" ? (
             <div className={styles.predictionInfo}>
@@ -288,22 +261,9 @@ export default function PredictionModule(
               </div>
             </div>
           ) : null
-        ) : null}
+        ) : null} */}
 
-        <p className={styles.lastDataUpdate}>
-          {/* <svg width="16" height="16" className={styles.liveSymbol}>
-            <circle cx="8" cy="8" r="5" fill="var(--republican-red)" />
-            <circle cx="8" cy="8" r="5" className={styles.pulsingCircle} />
-          </svg>
-          Next update in {hoursToMidnight} hours */}
-        </p>
-        {/* {props.state === State.National &&
-          props.raceType === RaceType.Senate ? (
-            <p className={styles.note}>
-              *We are not predicting Nebraska&apos;s regular Senate election because there is no Democratic candidate.
-              This distribution assumes a Republican victory in this race, despite the race being considered a tossup.
-            </p>
-          ) : null} */}
+
         {props.state === State.Nebraska &&
         props.raceType === RaceType.Senate ? (
           <p className={styles.note}>

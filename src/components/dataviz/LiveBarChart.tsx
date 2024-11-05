@@ -102,10 +102,10 @@ function createStackedBarChart(
           enabled: true,
           padding: 0, // Remove padding from data labels
           overflow: "none",
-          formatter: function (): string {
+          formatter: function (this: Highcharts.Point): string | false {
             let label = "";
-            if (this.point.y >= 8) {
-              label = this.series.name + " " + this.point.y + "%";
+            if (this.y !== undefined && this.y >= 8) {
+              label = this.series.name + " " + this.y + "%";
             }
             return label;
           },

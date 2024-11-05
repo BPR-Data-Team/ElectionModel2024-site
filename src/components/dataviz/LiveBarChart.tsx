@@ -84,9 +84,9 @@ function createStackedBarChart(
     },
     tooltip: {
       pointFormat: "{series.name}: {point.y}%",
-      formatter: function (): string {
-        if (this.point.y < 10) {
-          return this.series.name + ": " + this.point.y + "%";
+      formatter: function (this: Highcharts.Point):  string | false {
+        if (this.y !== undefined && this.y < 10) {
+          return this.series.name + ": " + this.y + "%";
         }
         return false;
       },

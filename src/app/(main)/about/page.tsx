@@ -21,6 +21,9 @@ import zoey from "image-assets/headshots/zoey.webp";
 import tiziano from "image-assets/headshots/tiziano.webp";
 import thomas from "image-assets/headshots/thomas.webp"
 import jo from "image-assets/headshots/jo.webp"
+import amber from "image-assets/headshots/amber.webp";
+import grace from "image-assets/headshots/grace.webp";
+import caleb from "image-assets/headshots/caleb.webp";
 import poder from "image-assets/press-logos/poder.webp"
 import bizjournal from "image-assets/press-logos/bizjournal.svg"
 import marketwatch from "image-assets/press-logos/marketwatch.svg"
@@ -40,21 +43,24 @@ const people = [
   { id: "Alex", name: "Alex Wick, Core Web Ops Lead", image: alex, year: "Brown '25", bio: "Alex is getting kind of alright at playing drums." },
   { id: "Logan", name: "Logan Rabe, Politics Director", image: logan, year: "Brown '26", bio: "" },
   { id: "Ahad", name: "Ahad Bashir, Developer", image: blank, year: "Brown Grad '25", bio: "Ahad loves writing music and playing the guitar." },
+  { id: "Amber", name: "Amber Zhao, Designer", image: amber, year: "Brown '27", bio: "Brown University’s shopping period: Amber’s favorite form of retail therapy." },
   { id: "Ben", name: "Ben Levy, Developer", image: blank, year: "Brown '27", bio: "You will not hear from Ben when the Yankees are playing." },
+  { id: "Caleb", name: "Caleb Ellenberg, Developer", image: caleb, year: "Brown '28", bio: "Data is Caleb's medicine for the Brewers repeated playoff debacles." },
   { id: "Chai", name: "Chai Harsha, Developer", image: chai, year: "Brown '26", bio: "Don't tell Asher what Chai did to his model when he wasn't looking." },
-  { id: "David", name: "David Chanin, Press Liason", image: blank, year: "Brown '27", bio: "David wishes they brought back nap time." },
+  { id: "David", name: "David Chanin, Marketing Strategist", image: blank, year: "Brown '27", bio: "David wishes they brought back nap time." },
   { id: "Devon", name: "Devon Kear-Leng, Developer", image: devon, year: "Brown '26", bio: "" },
   { id: "Emily", name: "Emily Hong, Developer", image: emily, year: "Brown '26.5", bio: "Emily enjoys following US politics while sitting safely at home in Canada." },
-  { id: "Isabelle", name: "Isabelle Shapiro, Developer", image: blank, year: "Brown '26", bio: "Isabelle budgets her paychecks as 'savings' and 'coffee.'" },
+  { id: "Grace", name: "Grace Marshburn, Designer", image: grace, year: "Brown '25", bio: "Grace has too many tabs on her computer but at least they're color-coded." },
+  { id: "Isabelle", name: "Isabelle Shapiro, Lead Backend Developer", image: blank, year: "Brown '26", bio: "Isabelle budgets her paychecks as 'savings' and 'coffee.'" },
   { id: "Javier", name: "Javier Niño-Sears, Developer", image: javier, year: "Brown '25", bio: "Javier is probably watching multiple soccer matches simultaneously." },
   { id: "Jed", name: "Jed Morgan, Data Contributor", image: jed, year: "Brown '26", bio: "" },
   { id: "Jo", name: "Jo Gasior-Kavishe, Comms", image: jo, year: "Brown '25", bio: "Jo wishes only for endless vanilla ice cream and endless cool math classes." },
   { id: "John", name: "John Huang, Developer", image: john, year: "Brown '27", bio: "In his free time, you can find John enjoying the beautiful weather." },
   { id: "Louis", name: "Louis Geer, Development Lead", image: louis, year: "Brown '27", bio: "" },
-  { id: "Milan", name: "Milan Capoor, Developer", image: blank, year: "Brown '26", bio: "Milan is probably either making a spreadsheet or ranting about colonialism." },
+  { id: "Milan", name: "Milan Capoor, Dashboard Development Lead", image: blank, year: "Brown '26", bio: "Milan is probably either making a spreadsheet or ranting about colonialism." },
   { id: "Nikhil", name: "Nikhil Das, Marketing Strategist", image: nikhil, year: "Brown '27", bio: "Math, boba, and jazz—Nikhil lives to share and enjoy it all!" },
   { id: "Sita", name: "Sita Pawar, Data Viz Lead", image: sita, year: "Brown '25", bio: "" },
-  { id: "Stella", name: "Stella Tsogtjargal, Developer", image: stella, year: "Brown '26", bio: "Stella is probably watching a cartoon right now." },
+  { id: "Stella", name: "Stella Tsogtjargal, Development Lead", image: stella, year: "Brown '26", bio: "Stella is probably watching a cartoon right now." },
   { id: "Thomas", name: "Thomas Seeger, Digital Strategist", image: thomas, year: "Brown '27", bio: "Thomas spends his free time angrily tweeting at Elon Musk." },
   { id: "Tiziano", name: "Tiziano Pardo, Events Coordinator", image: tiziano, year: "Brown '28", bio: "" },
   { id: "Zoey", name: "Zoey Katzive, Developer", image: zoey, year: "Brown Grad '25", bio: "" }

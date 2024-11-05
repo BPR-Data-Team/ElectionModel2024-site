@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: 'https://24cast.org/electionnight',
+      lastModified: new Date(),
+      changeFrequency: 'always',
+      priority: 1,
+    },
+    {
         url: 'https://24cast.org/tos',
         lastModified: new Date(),
         changeFrequency: 'monthly',

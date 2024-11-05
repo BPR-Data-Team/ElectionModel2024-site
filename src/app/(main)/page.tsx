@@ -563,7 +563,7 @@ export default function Home(): JSX.Element {
             useFinance={useFinance}
           />
         )}
-      {weird === "" && historicalData != undefined && (
+        {weird === "" && historicalData != undefined && (
         <HistoricalModule
           raceType={raceType}
           state={state}

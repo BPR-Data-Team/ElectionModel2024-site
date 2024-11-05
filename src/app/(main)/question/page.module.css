@@ -1,0 +1,7 @@
+.main a {
+  color: var(--main-text-color);
+}
+
+.main {
+  margin-block: 3rem;
+}

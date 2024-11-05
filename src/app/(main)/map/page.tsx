@@ -13,6 +13,7 @@ const SitemapPage: React.FC = () => {
                 <li><a className={styles.linkText} href="/">Predictions</a></li>
                 <li><a className={styles.linkText} href="/methodology">Methodology</a></li>
                 <li><a className={styles.linkText} href="/about">About</a></li>
+                <li><a className={styles.linkText} href="/electionnight">Election Night</a></li>
                 <li><a className={styles.linkText} href="/tos">Terms of Use</a></li>
                 <li><a className={styles.linkText} href="/privacy">Privacy Policy</a></li>
             </ul>

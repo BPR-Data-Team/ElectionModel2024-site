@@ -203,7 +203,7 @@ export default function LiveElectionModule(
               Current Win Likelihood
             </h3>
           )}
-        <p className={styles.introText}>The current probability of victory, given the results of other races that we've called so far.</p>
+        <p className={styles.introText}>The current probability of victory, given the results of other races that we&apos;ve called so far.</p>
         <div className={styles.prediction}>
             <h3 className={styles.mainText}>
               {predictionMessage}

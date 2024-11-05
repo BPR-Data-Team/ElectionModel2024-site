@@ -104,8 +104,8 @@ function createStackedBarChart(
           overflow: "none",
           formatter: function (): string {
             let label = "";
-            if (this.y >= 8) {
-              label = this.series.name + " " + this.y + "%";
+            if (this.point.y >= 8) {
+              label = this.series.name + " " + this.point.y + "%";
             }
             return label;
           },

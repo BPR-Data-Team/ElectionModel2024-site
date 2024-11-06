@@ -470,7 +470,7 @@ export default function Home(): JSX.Element {
           fetchComplete={fetchComplete}
         />
       )} */}
-      {weird === "" && (
+      {/*weird === "" && (
         <LiveElectionModule
           demPercent={livePredictionDemPercent}
           repPercent={livePredictionRepPercent}
@@ -487,7 +487,7 @@ export default function Home(): JSX.Element {
           fetchComplete = {fetchComplete}
           numSimulations = {numSimulations}
         />
-      )}
+      )*/}
       <FrozenHeader />
       <PredictionModule
         winner={winner}

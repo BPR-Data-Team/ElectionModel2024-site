@@ -17,6 +17,11 @@ const firstpeople = [
   { id: "LoganR", name: 'Logan Rabe', title: 'Decision Desk Lead' },
   { id: "Milan", name: 'Milan Capoor', title: 'Executive Producer' },
   { id: "Javier", name: 'Javier Niño-Sears', title: 'Event Producer' },
+  { id: "Akshay", name: 'Akshay Mehta', title: 'Election Portal Ringmaster' },
+  { id: "Isabelle", name: 'Isabelle Shapiro', title: 'On-Call Developer' },
+  { id: "Louis", name: 'Louis Geer', title: 'On-Call Developer' },
+  { id: "John", name: 'John Huang', title: 'On-Call Developer' },
+
 ];
 
 const allpeople = [

@@ -23,7 +23,7 @@ const [isClient, setIsClient] = useState(false);
   }, []);
 
   const dates = props.dates;
-  const year = new Date().getFullYear();
+  const year = 2024;
   const dateTimeStamps = dates.map((date) =>
     new Date(`${year}-${date}`).getTime()
   );

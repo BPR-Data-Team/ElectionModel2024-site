@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repo is defunct and archival as of November 5, 2024. Thanks to all who contributed, visited our site, and came to our live election night event.
+
 # [24cast.org](https://24cast.org) Website Repository
 
 ### The complete collection of code underlying [24cast.org](https://24cast.org). 
